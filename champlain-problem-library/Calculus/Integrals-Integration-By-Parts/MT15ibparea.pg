@@ -1,0 +1,55 @@
+##KEYWORDS('integrals', 'integration by parts','area under curve')
+##DESCRIPTION
+## Use integration by parts to evaluate a definite integral to find area under a curve.
+##ENDDESCRIPTION
+
+
+## DBsubject(Calculus - single variable)
+## DBchapter('Techniques of Integration')
+## DBsection('Integration by Parts')
+## Date('2015/02/26')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Calculus: Early Transcendentals')
+## EditionText1('7')
+## AuthorText1('Stewart')
+## Section1('7.1')
+## Problem1('57,58')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PGbasicmacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+Context("Numeric");
+
+$a = random(1,4,1);
+$b = random(5,9,1);
+$c = random(2,55,1);
+$fun = Compute("ln (x^$c)");
+$soln = Compute("$c*( $b*ln($b)-$b -($a*ln($a)-$a) )");
+
+Context()->texStrings;
+BEGIN_TEXT
+Find the area under the curve \( y = $fun \) on the interval \( [$a, $b]\).
+$BR$BR
+Answer: \{ans_rule(60) \}
+$BR
+END_TEXT
+BEGIN_HINT
+1. Use a property of logarithms to rewrite \(  $fun \) without the exponent.$BR
+2. You will need integration by parts to evaluate the definite integral that represents the area.
+END_HINT
+
+Context()->normalStrings;
+
+ANS($soln->cmp());
+
+COMMENT('MathObjects version.');
+ENDDOCUMENT();        # This should be the last executable line in the problem.

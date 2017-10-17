@@ -1,0 +1,77 @@
+## DESCRIPTION
+##   Evaluate the hexadecimal sum.
+## ENDDESCRIPTION
+
+## DBsubject('Arithmetic')
+## DBchapter('Other bases')
+## DBsection('Converting')
+## Institution('Champlain College Saint-Lambert')
+## Date('2015/09/14')
+## Author('Michele Titcombe')
+## TitleText1('Essential Computer Mathematics')
+## AuthorText1('Lipschutz')
+## Section1('2.4')
+## Problem1('')
+## KEYWORDS('Integer', 'hexadecimal', 'addition', 'sum')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl"
+);
+
+TEXT(beginproblem());
+
+#String Answer
+@a = ();
+$a[0] = random(223040,225540,1);
+$a[1] = random(10000,16000,1);
+$a[2] = random(28500,30540,1);
+$a[3] = random(116000,122000,1);
+
+# Display as hexadecimal
+@ax = ();
+foreach my $i (0..3) {
+    $ax[$i] = sprintf "%lX", $a[$i];
+}
+$sum1 = $a[0] + $a[1];
+$sum2 = $a[2] + $a[3];
+
+$sum1x = sprintf "%lX", $sum1;
+$sum2x = sprintf "%lX", $sum2;
+
+BEGIN_TEXT
+Evaluate the hexadecimal sums:  $PAR
+$BBOLD (a) $EBOLD \( $ax[0]_{16} + $ax[1]_{16}  \) $BR
+Answer: \{ ans_rule(20) \} 
+$PAR
+$BBOLD (b) $EBOLD \( $ax[2]_{16} + $ax[3]_{16}  \) $BR
+Answer: \{ ans_rule(20) \} 
+END_TEXT
+
+BEGIN_HINT
+Hexadecimal addition: The sum of two hexadecimal digits, or the sum of two hexadecimal digits plus 1, can be obtained by (i) finding their decimal sum and (ii) modifying the decimal sum, if it exceeds 15, by subtracting 16 and carrying 1 to the next column. $PAR
+Example:  \( A_{16} + 9_{16} \) $BR
+The decimal sum of \( A \) and 9 is 19, which exceeds 15.$BR
+The modification is to subtract 16 from 19, giving 3, and carrying the 1 to the next column.$BR
+Thus, \(A_{16} + 9_{16} = 13_{16}\).$PAR
+Example:  \( 2_{16} + C_{16} \) $BR
+The decimal sum of 2 and \( C\) is 14, which does not exceed 15.$BR
+There is no modification (except to convert 14 to hex), and no 1 is carried.$BR
+Thus, \(2_{16} + C_{16} = E_{16}\).$PAR
+END_HINT
+
+BEGIN_SOLUTION
+Align the two numbers in the usual way and apply separately to each column the rule for addition of hexadecimal digits (as explained in the Hint). The answers are: $BR
+(a) \( $ax[0]_{16} + $ax[1]_{16} = $sum1x \) $BR
+(b)  \( $ax[2]_{16} + $ax[3]_{16} = $sum2x \)
+END_SOLUTION
+
+ANS(str_cmp( "$sum1x") );
+ANS(str_cmp( "$sum2x") );
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.;

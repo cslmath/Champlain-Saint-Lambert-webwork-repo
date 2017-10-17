@@ -1,0 +1,93 @@
+# DESCRIPTION
+# Application of integration - business/economics context.
+# Find the producers' surplus (formula given in the question) at market
+# equilibrium given the demand function and the supply function.
+# M. Titcombe 10/21/2009
+# ENDDESCRIPTION
+
+## DBsubject('Calculus - single variable')
+## DBchapter('Applications of integration')
+## DBsection('Economics')
+## Author('Michele Titcombe')
+## Date('2009/10/21')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Applied Calculus')
+## EditionText1('7')
+## AuthorText1('Tan')
+## Section1('6.7')
+## Problem1('5')
+## KEYWORDS('calculus', 'integral', 'economics', 'producers surplus')
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+);
+
+Context("Numeric");
+$m1 = random(2,8,2);
+$k1 = random(1,3,1);
+$n1 = Compute("$m1 + 2*$k1");
+$s1 = random(1,3,1);
+$s2 = random(51,61,2);
+$d1 = Compute("$s1-1.5*($n1-$m1)")->reduce;
+$d2 = Compute("$s2+1.5*$m1*$n1")->reduce;
+
+$as = Compute("0.5");
+$bs = Compute("$s1");
+$cs = Compute("$s2");
+$ad = Compute("-1");
+$bd = Compute("$d1");
+$cd = Compute("$d2");
+$xbar = Compute("$m1");
+$pbar = Compute("$as*($xbar)**2 + $bs*$xbar + $cs")->reduce;
+$deq = Compute("$ad x^2 + $bd x + $cd")->reduce();
+$seq = Compute("$as x^2 + $bs x + $cs")->reduce();
+$ansint = Compute("($pbar-$cs)*$xbar - $as/3*($xbar)**3 - $bs/2*($xbar)**2");
+$ans = Compute("1000*$ansint");
+
+TEXT(beginproblem());
+Context()->texStrings;
+$showpartialcorrectanswers = 1;
+BEGIN_TEXT
+The demand function for a certain brand of e-reader is given by 
+\[
+   p = D(x) = - x^2 + $bd x + $cd 
+\]
+where \( p \) is the wholesale unit price in dollars and  \( x \)  is the quantity demanded each week, measured in units of a ${BBOLD}thousand${EBOLD}.
+The supply function for these e-readers is given by
+\[
+   p = S(x)  = $seq
+\]
+where here \( p \) stands for the unit price in dollars and \( x\) stands for the number of e-readers that the supplier will put on the market, in units of a ${BBOLD}thousand${EBOLD}.$BR
+Determine the producers' surplus, \( PS \), if the wholesale market price is set at the equilibrium price.
+$PAR
+The producers' surplus is given by
+\( PS = \bar{p}\bar{x} - \int_0^{\bar{x}} S(x) dx \), where \( \bar{p} \) and \( \bar{x} \) are the price and quantity at market equilibrium.
+Note: At market equilibrium, \( \bar{p} = D(\bar{x}) = S(\bar{x}) \).
+$PAR
+\( PS \) =  ${DOLLAR}\{ans_rule(40) \} 
+$BR
+END_TEXT
+Context()->normalStrings;
+ANS($ans->cmp());
+
+Context()->texStrings;
+BEGIN_HINT
+Remember that \( x \) is measured in units of a thousand.
+END_HINT
+
+BEGIN_SOLUTION
+To find the equilibrium price, set \( D(x) = S(x) \) and solve for \( x \), which gives \( x = $xbar \). (Reject the negative solution: \( x = -$n1 \).)$BR
+The equilibrium price is then \( p = D($xbar) = S($xbar) = $pbar \).$BR
+The producers' surplus is
+\[
+   PS = ($pbar)($xbar) - \int_0^{$xbar} (0.5 x^2 + $bs x + $cs) dx 
+   = ($pbar)($xbar) - \left. \left( 0.5 \cdot \frac{x^3}{3} + $bs\cdot \frac{x^2}{2} + $cs x \right) \right|_0^{$xbar} = $ansint
+\]
+or ${DOLLAR}\($ans\) (since \( x\) is measured in units of a thousand).
+END_SOLUTION
+Context()->normalStrings;
+
+COMMENT('MathObjects version.');
+ENDDOCUMENT();

@@ -1,0 +1,53 @@
+# DESCRIPTION
+# Integration application to business/economics.
+# Integrate marginal revenue to 
+# (a) find revenue at a production level of 200 units
+# (b) find extra revenue when production increased from 200 to 250 units
+# M. Titcombe 10/21/2009
+# ENDDESCRIPTION
+
+## DBsubject('Calculus')
+## DBchapter('Integration')
+## DBsection('Applications')
+## TitleText1('Applied Calculus')
+## EditionText1('7')
+## AuthorText1('Tan')
+## Section1('6.4')
+## Problem1('42')
+## KEYWORDS('integrals', 'economics', 'marginal revenue')
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+);
+
+Context("Numeric");
+$a = random(50, 150, 10);
+$b = random(.1, .15, .01);
+$mr = Formula("$a - $b x");
+
+TEXT(beginproblem());
+$showpartialcorrectanswers = 1;
+Context()->texStrings;
+BEGIN_TEXT
+The daily marginal revenue (in dollars per unit) associated with selling  \(x\) toasters is
+\[ R'(x) = $mr \]
+$BR
+(a) Evaluate the daily total revenue realized from the sale of \( 200 \) units of the toaster. 
+$BR
+  Answer (a) = ${DOLLAR} \{ans_rule(40) \} 
+$PAR
+(b) Find the additional revenue realized when the production (and sales) level is increased from \( 200 \) to \( 250 \) units.
+$BR
+  Answer (b) = ${DOLLAR} \{ans_rule(40) \} 
+END_TEXT
+Context()->normalStrings;
+
+$rf = Formula("$a x - $b/2 x^2");
+$ans_a = $rf->eval(x=>200);
+$ans_b = $rf->eval(x=>250) - $ans_a;
+ANS(num_cmp($ans_a,tol=>.01));
+ANS(num_cmp($ans_b,tol=>.01));
+
+ENDDOCUMENT();

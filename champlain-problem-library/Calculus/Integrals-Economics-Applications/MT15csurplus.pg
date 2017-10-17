@@ -1,0 +1,109 @@
+# DESCRIPTION
+# Application of integration - business/economics context.
+# Find the consumers' surplus (formula stated in the question) given
+# the demand function and the fixed market price.
+# M. Titcombe 2015-Feb-13
+# ENDDESCRIPTION
+
+## DBsubject('Calculus - single variable')
+## DBchapter('Applications of integration')
+## DBsection('Economics')
+## TitleText1('Applied Calculus')
+## Author('Michele Titcombe')
+## Date('2015/02/13')
+## Institution('Champlain College Saint-Lambert')
+## EditionText1('7')
+## AuthorText1('Tan')
+## Section1('6.7')
+## Problem1(3)
+## KEYWORDS('calculus', 'integral', 'economics', 'consumers surplus')
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+);
+
+Context("Numeric");
+
+$p1 = list_random(4,5,6,7,8);
+$pbar = Compute("$p1");
+if ($p1==4)
+{
+$k = Compute("9");
+$c = Compute("5");
+}
+if ($p1==5)
+{
+$k = Compute("10");
+$c = Compute("3");
+}
+if ($p1==6)
+{
+$k = Compute("9");
+$c = Compute("5");
+}
+if ($p1==7)
+{
+$k = Compute("10");
+$c = Compute("3");
+}
+if ($p1==8)
+{
+$k = Compute("10");
+$c = Compute("6");
+}
+
+$xbar = Compute("($k+$pbar)*($k-$pbar)/$c"); 
+
+$ksq = Compute("($k)**2");
+
+$ua = Compute("$ksq");
+$ub = Compute("$ksq- $c*$xbar")->reduce;
+
+$ansint = Compute("2/(3*$c)*($k)**3 - 2/(3*$c)*(sqrt($ksq-$c*$xbar))**3 - $pbar*$xbar");
+$ans = Compute("100*$ansint");
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+Context()->texStrings;
+BEGIN_TEXT
+It is known that the quantity demanded of a certain make of battery is \( x \) ${BBOLD}hundred${EBOLD} units/week and the corresponding 
+wholesale unit price, in dollars, is
+\[
+   p = \sqrt{$ksq - $c x} 
+\]
+$BR
+Determine the consumers' surplus, \( CS \), if the wholesale market price is ${DOLLAR}\( $pbar \)  per unit.
+
+$PAR
+The consumers' surplus is given by
+\( CS =  \int_0^{\bar{x}} D(x) dx - \bar{p}\bar{x} \), where \( p=D(x) \) is the demand function, \( \bar{p} \) is the fixed market price and \( \bar{x} \) is the corresponding quantity sold.$BR
+$BR
+$PAR
+\( CS \) =  ${DOLLAR}\{ans_rule(40) \}
+$BR
+$BR
+END_TEXT
+BEGIN_HINT
+Remember that \( x \) is measured in units of a hundred.
+END_HINT
+BEGIN_SOLUTION
+To find \( \bar{x} \), solve \( $pbar = \sqrt{$ksq - $c x\,} \) for \( x \), which gives  \( \bar{x} = $xbar \).$BR
+The consumers' surplus is then
+\[
+  CS = \int_0^{$xbar} \sqrt{$ksq - $c x} \,dx - ($pbar)($xbar)  
+\]
+Using the substitution method on the integral, with \( u = $ksq - $c x \), gives
+\[
+  CS =- \frac{1}{$c} \int_{$ua}^{$ub} \sqrt{u} \, du - ($pbar)($xbar) =  \frac{1}{$c} \int_{$ub}^{$ua} \sqrt{u} \,du - ($pbar)($xbar) = \frac{1}{$c} \cdot \left. \frac{2}{3}u^{3/2} \right|_{$ub}^{$ua} - ($pbar)($xbar) = $ansint
+\]
+or ${DOLLAR}$ans (since \( x \) is measured in units of a hundred).
+END_SOLUTION
+Context()->normalStrings;
+
+ANS($ans->cmp());
+
+COMMENT('MathObjects version.');
+ENDDOCUMENT();

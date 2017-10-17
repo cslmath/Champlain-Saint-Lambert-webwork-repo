@@ -1,0 +1,70 @@
+## DESCRIPTION
+## Vector Calculus. Tangent vector.
+## ENDDESCRIPTION
+
+## DBsubject(Calculus - multivariable)
+## DBchapter(Calculus of vector valued functions)
+## DBsection(Derivatives)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Level(2)
+## TitleText1('Calculus')
+## AuthorText1('Stewart')
+## EditionText1('5')
+## Section1('14.2')
+## Problem1('')
+## KEYWORDS('derivative' 'vector function','tangent vector','unit vector')
+
+DOCUMENT();
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "PGcourse.pl",
+    "PGML.pl",
+);
+
+TEXT(beginproblem());
+Context("Vector"); 
+Context()->variables->are(t=>"Real");
+# Set limits of variable t so that they lie within domain of vector function
+#  and its derivative.
+Context()->variables->set(t=>{limits=>[1,2]});
+
+$showPartialCorrectAnswers = 0;
+
+# Define variables.
+$a = random(5,23);
+$b = random(2,20);
+$c = non_zero_random(-9,9);
+$d = non_zero_random(-9,9);
+
+$ft = Compute("ln($a - t^2)");
+$gt = Compute("sqrt($b + t)");
+$ht = Compute("$c e^($d t)");
+$fprime = $ft -> D('t');
+$gprime = $gt -> D('t');
+$hprime = $ht -> D('t');
+$rprime = Vector([$fprime,$gprime,$hprime])->reduce();
+
+Context()->texStrings;
+BEGIN_PGML
+Find the derivative of the vector function:
+>> [` \mathbf r(t) = [$ft] \,\mathbf i + [$gt] \, \mathbf j + [$ht] \,\mathbf k `] <<
+
+[` \mathbf r'(t) = `][___________________________________]{$rprime}
+END_PGML
+BEGIN_PGML_SOLUTION
+If [` \mathbf r(t) = \langle f(t),\, g(t),\, h(t) \rangle `] , then
+[` \mathbf r'(t) = \langle f'(t),\, g'(t),\, h'(t) \rangle`].  
+ 
+Thus, [` \mathbf r'(t) = [$rprime] `]
+END_PGML_SOLUTION
+Context()->normalStrings;
+#ANS($rprime->cmp());
+
+#ANS(fun_cmp("-2*t/($a - t*t)", vars=>["t"], limits=>[[1,2]]));
+#ANS(fun_cmp("1/(2*sqrt($b + t))", vars=>["t"], limits=>[[1,2]]));
+#ANS(fun_cmp("$c * $d * exp($d * t)", vars=>["t"], limits=>[[1,2]]));
+
+COMMENT('MathObjects version.');
+ENDDOCUMENT();

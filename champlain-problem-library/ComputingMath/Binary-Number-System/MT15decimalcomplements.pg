@@ -1,0 +1,118 @@
+## DESCRIPTION
+##   Complements in decimal number system: nines and tens complements.
+## ENDDESCRIPTION
+
+## DBsubject(Arithmetic)
+## DBchapter(Other bases)
+## DBsection(Addition/Subtraction)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2015/09/07)
+## Level(2)
+## TitleText1('Essential Computer Mathematics')
+## AuthorText1('Seymour Lipschutz')
+## YearText1('1987')
+## Section1('1.6')
+## Problem1('')
+## KEYWORDS('nines complement', 'tens complement', 'complements')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+"contextLimitedNumeric.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+Context()->flags->set(
+      tolerance => 0.00000001,
+      tolType => "absolute",
+);
+Context()->{format}{number} = "%8u";
+
+$showPartialCorrectAnswers = 0;
+
+#   Random numbers:
+#   a[0] 4-digit
+#   a[1] use sprintf to print leading zeroes to display as 6-digit 
+#   a[2] use sprintf to print leading zeroes to display as 8-digit
+#   a[3] 5-digit
+$a[0] = random(3216,7299,3);
+$c1 = random(4227,7299,3);
+$a[1] = sprintf("%06d", $c1);
+$c2 = random(63513,3118811,3);
+$a[2] = sprintf("%08d", $c2);
+$a[3] = random(32103,69813,3);
+
+$nines[0] = Compute("9999 - $a[0]");
+$nines[1] = Compute("999999 - $a[1]");
+$nines[2] = Compute("99999999 - $a[2]");
+$nines[3] = Compute("99999 - $a[3]");
+
+foreach my $i (0..3) {
+    $tens[$i] = Compute("$nines[$i] + 1");
+}
+
+@header=("$BCENTER \( N \) $ECENTER",
+"$BCENTER \( $a[0] \) $ECENTER",
+"$BCENTER \( $a[1]  \) $ECENTER",
+"$BCENTER \( $a[2] \) $ECENTER",
+"$BCENTER \( $a[3] \) $ECENTER");
+
+
+@header = map {EV2($_) } @header;
+
+Context()->texStrings;
+BEGIN_TEXT
+Determine the nines and tens complements of the given decimal numbers.
+$PAR
+END_TEXT
+
+TEXT(
+
+begintable(1+scalar(@header)), 
+	row(@header),
+	row("9s complement",ans_rule(10),ans_rule(10),ans_rule(13),ans_rule(10)),
+	row("10s complement",ans_rule(10),ans_rule(10),ans_rule(13),ans_rule(10)),
+endtable() 
+);
+
+BEGIN_HINT
+Let \( N \) be a decimal number. The nines complement of \( N \) is obtained by subtracting each digit of \( N \) from 9. The tens complement of \( N \) is its nines complement plus one.$BR
+For example:$BR
+If \( N = 004328 \). Note that it is a 6-digit number. Then the nines complement of \( N \) is a 6-digit number and is 
+\[
+     999999 - 004328 = 995671 ,
+\]
+and the tens complement of \( N \) is also a 6-digit number and is 
+\[
+     995671+1 = 995672 .
+\]
+END_HINT
+BEGIN_SOLUTION
+The nines complement of \( N = $a[0] \) is \( 9999 - $a[0] = $nines[0] \) and its tens complement is \( $nines[0]+1 = $tens[0] \).$BR
+
+The nines complement of \( N = $a[1] \) is \( 999999 - $a[1] = $nines[1] \) and its tens complement is \( $nines[1]+1 = $tens[1] \).$BR
+
+The nines complement of \( N = $a[2] \) is \( 99999999 - $a[2] = $nines[2] \) and its tens complement is \( $nines[2]+1 = $tens[2] \).$BR
+
+The nines complement of \( N = $a[3] \) is \( 99999 - $a[3] = $nines[3] \) and its tens complement is \( $nines[3]+1 = $tens[3] \).
+END_SOLUTION
+Context()->normalStrings;
+
+foreach my $i (0..3) {
+     ANS($nines[$i]->cmp() );
+}
+
+foreach my $i (0..3) {
+     ANS($tens[$i]->cmp());
+}
+
+COMMENT("MathObjects version.");
+ENDDOCUMENT();        # This should be the last executable line in the problem.;

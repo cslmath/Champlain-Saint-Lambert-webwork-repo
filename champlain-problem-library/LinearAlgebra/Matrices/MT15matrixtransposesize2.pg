@@ -1,0 +1,102 @@
+## DESCRIPTION
+## Finding the size of a random matrix, including transpose.
+##
+## ENDDESCRIPTION
+
+
+
+##Tagged by ynw2d
+
+
+## DBsubject(Linear algebra)
+## DBchapter(Matrices)
+## DBsection(Transpose and trace)
+## Date('2015/09/23')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Essential Computer Mathematics')
+## AuthorText1('Lipschutz')
+## Section1('10.5')
+## KEYWORDS('algebra', 'matrix operation', 'matrix','transpose')
+DOCUMENT() ;
+
+loadMacros(
+    "PG.pl",
+    "PGbasicmacros.pl",
+    "PGchoicemacros.pl",
+    "PGanswermacros.pl",
+    "PGauxiliaryFunctions.pl",
+    "PGmatrixmacros.pl",
+) ;
+############
+#TEXT($BEGIN_ONE_COLUMN,beginproblem()) ;
+TEXT(beginproblem());
+$Arows = random(1,4,1);
+$Acols = random(1,4,1);
+$A = new Matrix($Arows,$Acols);
+foreach my $i (1..$Arows) {
+    foreach my $j (1..$Acols) {
+        $A->assign($i,$j,random(-9,9,1) );
+    }
+}
+$Brows = random(1,4,1);
+$Bcols = random(1,4,1);
+$B = new Matrix($Brows,$Bcols);
+foreach my $i (1..$Brows) {
+    foreach my $j (1..$Bcols) {
+        $B->assign($i,$j,random(-9,9,1) );
+    }
+}
+$Crows = random(1,4,1);
+$Ccols = random(1,4,1);
+$C = new Matrix($Crows,$Ccols);
+foreach my $i (1..$Crows) {
+    foreach my $j (1..$Ccols) {
+        $C->assign($i,$j,random(-9,9,1) );
+    }
+}
+if ($Arows==$Bcols and $Acols == $Brows) {$AplusBT = 'yes';} else {$AplusBT = 'no';}
+if ($Acols==$Crows and $Arows == $Ccols) {$ATplusC = 'yes';} else {$ATplusC = 'no';}
+if ($Crows==$Brows and $Ccols == $Bcols) {$BplusC = 'yes';} else {$BplusC = 'no';}
+if ($Acols==$Brows) {$AB = 'yes';} else {$AB = 'no';}
+if ($Bcols==$Acols) {$BAT = 'yes';} else {$BAT = 'no';}
+if ($Acols==$Crows) {$AC = 'yes';} else {$AC = 'no';}
+if ($Crows==$Arows) {$CTA = 'yes';} else {$CTA = 'no';}
+if ($Bcols==$Crows) {$BC = 'yes';} else {$BC = 'no';}
+if ($Crows==$Bcols) {$CTBT = 'yes';} else {$CTBT = 'no';}
+
+$showPartialCorrectAnswers = 0 ;
+
+BEGIN_TEXT
+
+If
+\[ A = \{ display_matrix_mm($A)\}\] 
+\[ B = \{display_matrix_mm($B)\}\]
+\[ C = \{display_matrix_mm($C)\}\]
+$BR 
+then decide if each of the following operations is defined (answer yes or no)
+$BR
+\(A + B^T\) \{ans_rule(5)\}$BR
+\(A^T + C\) \{ans_rule(5)\}$BR
+\(B + C\) \{ans_rule(5)\}$BR
+\(AB\) \{ans_rule(5)\}$BR
+\(BA^T\) \{ans_rule(5)\}$BR
+\(AC\) \{ans_rule(5)\}$BR
+\(C^TA\) \{ans_rule(5)\}$BR
+\(BC\) \{ans_rule(5)\}$BR
+\(C^TB^T\) \{ans_rule(5)\}$BR
+
+END_TEXT
+ANS(str_cmp($AplusBT));
+ANS(str_cmp($ATplusC));
+ANS(str_cmp($BplusC));
+ANS(str_cmp($AB));
+ANS(str_cmp($BAT));
+ANS(str_cmp($AC));
+ANS(str_cmp($CTA));
+ANS(str_cmp($BC));
+ANS(str_cmp($CTBT));
+
+
+#TEXT($END_ONE_COLUMN);
+ENDDOCUMENT() ;

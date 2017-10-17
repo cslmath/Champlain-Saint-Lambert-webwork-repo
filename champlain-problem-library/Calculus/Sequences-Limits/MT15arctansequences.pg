@@ -1,0 +1,85 @@
+## DESCRIPTION
+## Calculus
+## Determine convergence/divergence of infinite sequences involving arctan.
+## ENDDESCRIPTION
+
+## KEYWORDS('sequence' 'converge' 'diverge' 'limit' 'arctan')
+
+## DBsubject(Calculus - single variable)
+## DBchapter('Infinite sequences and series')
+## DBsection('Limit of a sequence')
+## Date('2015/03/25')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Calculus')
+## EditionText1('5')
+## AuthorText1('Stewart')
+## Section1('12.1')
+## Problem1('')
+
+DOCUMENT();
+loadMacros("PG.pl",
+           "PGbasicmacros.pl",
+           "PGchoicemacros.pl",
+           "PGanswermacros.pl",
+           "PGauxiliaryFunctions.pl",
+           "PGgraphmacros.pl",
+           "Dartmouthmacros.pl",
+           "MathObjects.pl",);
+ 
+TEXT(beginproblem());
+Context("Numeric");
+Context()->strings->add(y=>{},n=>{});
+
+## Do NOT show partial correct answers
+$showPartialCorrectAnswers = 0;
+
+$a = random(2,20);
+$b = random(2,20);
+$c = non_zero_random(-9,19);
+
+$ans1=Compute("$c*pi/2");
+$ans2=Compute("-pi/2");
+$ans3=Compute("$a");
+$ansy=Compute("y");
+
+Context()->texStrings;
+BEGIN_TEXT
+$BR
+For each sequence, determine whether it converges or diverges. If the sequence converges, find the limit.
+$BR$BR
+(a)     \(\displaystyle a_n = $c\arctan($a n^{$b}) \)
+$BR
+Converges (y/n): \{ans_rule()\}
+$BR
+Limit (if it exists, blank otherwise): \{ ans_rule(40)\}
+$PAR
+$BR
+(b)  \(\displaystyle a_n =  \arctan($c-$b n) \)
+$BR
+Converges (y/n): \{ans_rule()\}
+$BR
+Limit (if it exists, blank otherwise): \{ ans_rule(40)\}
+$PAR
+(c)  \(\displaystyle a_n = $a + $b\arctan(\frac{1}{n}) \)
+$BR
+Converges (y/n): \{ans_rule()\}
+$BR
+Limit (if it exists, blank otherwise): \{ ans_rule(40)\}
+$PAR
+END_TEXT
+Context()->normalStrings;
+
+ANS($ansy->cmp());
+ANS($ans1->cmp());
+ANS($ansy->cmp());
+ANS($ans2->cmp());
+ANS($ansy->cmp());
+ANS($ans3->cmp());
+
+COMMENT('MathObjects version.');
+ENDDOCUMENT();
+
+
+
+

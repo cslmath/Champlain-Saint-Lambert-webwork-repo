@@ -1,0 +1,87 @@
+# DESCRIPTION
+# Multivariable Calculus. Find the limit of a vector function in R^4.
+# ENDDESCRIPTION
+
+## DBsubject(Calculus - multivariable)
+## DBchapter(Vector Functions)
+## DBsection(Vector Functions and Space Curves)
+## Author('Michele Titcombe')
+## Date(' 2015/02/13')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Multivariable Calculus')
+## AuthorText1('Stewart')
+## EditionText1('7')
+## Section1('13.1')
+## Problem1('')
+## KEYWORDS('limit' 'vector function')
+
+DOCUMENT();
+loadMacros("PG.pl",
+           "PGbasicmacros.pl",
+           "PGanswermacros.pl",
+           "Parser.pl",
+           "MathObjects.pl",
+);
+ 
+Context("Numeric");
+## Do NOT show partial correct answers
+$showPartialCorrectAnswers = 0;
+
+$a = random(2,5,1);
+$b = random(8,15,1);
+$c = Compute("$b-$a");
+$bsq = Compute("($b)^2");
+$ans1 = Compute("-$c*pi/2");
+$ans2 = Compute("0");
+$ans3 = Compute("2*$b");
+$ans4 = Compute("1/sqrt($a)");
+
+Context("Vector");
+$ansvec = Vector("<$ans1,$ans2,$ans3,$ans4>");
+
+
+TEXT(beginproblem());
+Context()->texStrings;
+BEGIN_TEXT
+Find the following limit of the vector function given in \( \mathbb{R}^4\): 
+\[
+\lim_{t\rightarrow 0^{+}} \left\langle 
+$c \arctan(\ln t), 
+$a\sqrt{t}e^{\sin(\pi/t)}, 
+\frac{t}{\sqrt{$bsq+t}-$b}, 
+\frac{\sqrt{$a+t}-\sqrt{$a-t}}{t} \right\rangle
+\]
+$BR$BR
+Answer:  \{ans_rule(50)\}
+END_TEXT
+BEGIN_HINT
+1. For the first component limit, consider the horizontal asymptotes of the inverse tangent function.$BR
+2. For the second component limit, begin with the range of the sine function and use the Squeeze Theorem.$BR
+3. For the third component limit, rationalize the denominator.$BR
+4. For the fourth component limit, rationalize the numerator.
+END_HINT
+BEGIN_SOLUTION
+The limit of the vector function is a vector whose components are the limits of each function:$PAR
+1. As \( t\rightarrow 0^+\), \( \ln t \rightarrow -\infty \) and so \( \arctan(\ln t) \rightarrow -\pi/2 \), and thus the answer for the first component is \( $ans1 \)$PAR
+2. Begin with the range of the sine function:
+\( -1 \le \sin(\pi/2) \le 1 \), and then use a property of exponentials to get  \( e^{-1} \le e^{\sin(\pi/2)} \le e \). Multiply the inequality by \(\sqrt{t}\), which is a positive quantity, to get 
+\( \sqrt{t}e^{-1} \le \sqrt{t}e^{\sin(\pi/2)} \le \sqrt{t}e \). As \( t\rightarrow 0^+ \), the outside two limits are both 0, and so by the Squeeze Theorem, the answer for the second component is \( $ans2 \)$PAR
+3. Rationalize the denominator to obtain
+\[
+\frac{t(\sqrt{$bsq+t}+$b)}{(\sqrt{$bsq+t}-$b)(\sqrt{$bsq+t}+$b)} = \frac{t(\sqrt{$bsq+t}+$b)}{$bsq+t-$bsq} = 
+\frac{t(\sqrt{$bsq+t}+$b)}{t} = \sqrt{$bsq+t}+$b
+\]
+then, taking the limit, we get that the answer to the third component is \( $ans3 \).
+$PAR
+4. Following the same idea as for the third component, except in this case, rationalizing the numerator, we get that the answer to the fourth component is \( $ans4 \).
+END_SOLUTION
+Context()->normalStrings;
+
+ANS($ansvec->cmp());
+
+COMMENT("MathObjects version.");
+ENDDOCUMENT();
+
+
+
+

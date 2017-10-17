@@ -1,0 +1,74 @@
+## DESCRIPTION
+##   Binary Numbers and One's Complement Representations
+## ENDDESCRIPTION
+
+## Tagged by nhamblet
+
+## DBsubject(Arithmetic)
+## DBchapter(Other bases)
+## DBsection(Converting)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2016/09/22)
+## Level(2)
+## TitleText1('Essential Computing Mathematics')
+## AuthorText1('Lipschutz')
+## EditionText1('')
+## Chapter1('3')
+## Problem1('3.11')
+## KEYWORDS('Integer', 'Binary', 'Twos Complement')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl"
+);
+
+TEXT(beginproblem());
+
+#String Answer
+
+
+@a=(0,0,0,0);
+$a[0] = random(256,511);
+$a[1] = random(1024,2047);
+do {
+  $a[2] = random(256,511);
+} until $a[2] != $a[0];
+do {
+  $a[3] = random(1024,2047);
+} until $a[3] != $a[1];
+
+for($i = 0; $i < 4; $i++) {
+	$numberb[$i] = sprintf "%lb", $a[$i];
+}
+
+# Compute the twos complement of the last two numbers (which will be displayed as negative):
+$b2=2**(32)-$a[2];
+$c2 = sprintf "%lb", $b2;
+$b3 = 2**(32)-$a[3];
+$c3 = sprintf "%lb", $b3;
+
+BEGIN_TEXT
+Find the internal representation of each signed integer, if a computer uses a 32-bit memory location to store each number.
+$BR
+$BR 
+(a) \( $a[0] \) is stored as \{ ans_rule(50) \} 
+$PAR
+(b) \( $a[1] \) is stored as \{ ans_rule(50) \} 
+$PAR
+(c) \( -$a[2] \) is stored as \{ ans_rule(50) \} 
+$PAR
+(d) \( -$a[3] \) is stored as \{ ans_rule(50) \} 
+END_TEXT
+
+ANS(str_cmp( "00000000000000000000000$numberb[0]") );
+ANS(str_cmp( "000000000000000000000$numberb[1]") );
+ANS(str_cmp( "$c2") );
+ANS(str_cmp( "$c3") );
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.;

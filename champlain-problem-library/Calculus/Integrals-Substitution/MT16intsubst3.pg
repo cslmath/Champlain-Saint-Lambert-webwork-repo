@@ -1,0 +1,102 @@
+##DESCRIPTION
+##  Definite integral. Substitution method.
+##ENDDESCRIPTION
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Techniques of integration)
+## DBsection(Substitution (without trigonometric functions))
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Level(2)
+## KEYWORDS('definite integral','substitution')
+
+DOCUMENT();
+
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGML.pl",
+"PGcourse.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+# define some perl scalars
+$a = random(2,9,1);
+$b = 2 * $a;
+$c = random(11,21,2);
+$n = random(3,6,1);
+
+Context("Numeric");
+Context()->variables->are(
+  t=>"Real",
+  dt=>"Real",
+);
+
+$u = Compute("$a t^2 + $b t + $c");
+$uprime = $u->D('t');
+$du = Compute("$uprime dt");
+$u0 = $u->eval(t=>0);
+$u1 = $u->eval(t=>1);
+
+
+BEGIN_PGML
+Use the method of u-substitution to evaluate the following definite integral:
+
+[`` \int_{0}^{1} \frac{t+1}{\sqrt[[$n]]{[$u]}} \; dt = \int_{a}^{b} f(u) \; du ``]
+
+where 
+
+[` u =`][____________________________]{$u} (enter a function of [`t`])
+
+[` du = `][____________________________]{$du} (enter a function of [`t`] and [`dt`] ) 
+
+[`a =`][_________________________]{$u0} (enter a number)
+
+[`b =`][_________________________]{$u1} (enter a number)
+END_PGML
+
+# completely reset the context with only the variable u:
+# use Context("Numeric")->...
+# not Context()->...
+Context("Numeric")->variables->are('u'=>'Real');
+$f = Compute("1/(2*$a*u^(1/$n))");
+$intf = Compute("(u^(1 - 1/$n))/(2*$a*(1 - 1/$n))");
+$Fb = $intf ->eval(u=>$u1);
+$Fa = $intf->eval(u=>$u0);
+$ans = Compute("$Fb - $Fa")->reduce;
+
+BEGIN_PGML
+[$PAR]*
+[`f(u) =`][_________________________]{$f} (enter a function of [`u`]).
+
+
+The value of the original integral is 
+[_________________________]{$ans}.
+END_PGML
+
+BEGIN_PGML_HINT
+* If [`u=g(t)`], then the differential is [`du=g'(t)dt`]. 
+* To find the limits of integration, [`a`] and [`b`], evaluate [`u`] at [`t=0`] and at [`t=1`]. 
+END_PGML_HINT
+
+BEGIN_PGML_SOLUTION
+[` u = [$u]`]
+
+[` du = [$du] `]
+
+[`a = [$u0]`]
+
+[` b = [$u1]`]
+
+[`f(u) = 1/([$b]u^{1/[$n]}) `]
+
+The value of the original integral is 
+
+>> [`` \frac{1}{[$b]} \int_[$u0]^[$u1] u^{-1/[$n]} \,du = \frac{1}{[$b]} \left. \frac{u^{-\frac{1}{[$n]}+1}}{-\frac{1}{[$n]} + 1}\right|_[$u0]^[$u1] \approx [$ans] ``] <<
+END_PGML_SOLUTION
+
+COMMENT('Uses MathObjects / PGML.');
+ENDDOCUMENT(); 
+

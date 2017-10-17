@@ -1,0 +1,65 @@
+# DESCRIPTION
+# Multivariable Calculus
+# ENDDESCRIPTION
+
+## DBsubject(Calculus - multivariable)
+## DBchapter(Vector Functions)
+## DBsection(Vector Functions and Space Curves)
+## Author('Michele Titcombe')
+## Date('2015/02/13')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Multivariable Calculus')
+## AuthorText1('Stewart')
+## EditionText1('7')
+## Section1('13.1')
+## Problem1('')
+## KEYWORDS('domain' 'vector function')
+
+DOCUMENT();
+loadMacros("PG.pl",
+           "PGbasicmacros.pl",
+           "PGanswermacros.pl",
+           "Parser.pl",
+           "MathObjects.pl",
+);
+ 
+Context("Numeric");
+## Do NOT show partial correct answers
+$showPartialCorrectAnswers = 0;
+
+$a = random(2,5,1);
+$b = random(2,15,1);
+$c = Compute("$b+$a");
+$bsq = Compute("($b)^2");
+$ans = Compute("(-inf,-$c)U(-$c,-$b]U[$b,$c)");
+
+TEXT(beginproblem());
+Context()->texStrings;
+BEGIN_TEXT
+Find the domain of the vector function in \( \mathbb{R}^4\): 
+\[
+ \mathbf r(t) = \left\langle \ln($c - t), \sqrt{t^2 - $bsq}, e^{t-$a}, \frac{1}{t+$c} \right\rangle
+\]
+using \{ helpLink('interval notation')\}.
+$BR$BR
+Domain: \{ans_rule(50)\}
+END_TEXT
+BEGIN_SOLUTION
+The domain of the vector function in \( \mathbb{R}^4 \) is the intersection of domains of each of its four component functions.$BR
+1. \( \ln($c-t) \) has domain \( (-\infty, $c) \) $BR
+2. \( \sqrt{t^2 - $bsq} \) has domain \( (-\infty, -$b]\cup[$b,\infty) \) $BR
+3. \( e^{t-$a} \) is defined for all \( t \) $BR
+4. \( 1/(t+$c) \) is defined for all \( t \) except \( t = -$c \) $BR
+Thus, the domain of the vector function is: \( $ans \)
+END_SOLUTION
+
+Context()->normalStrings;
+Context("Interval");
+ANS($ans->cmp(showEndpointHints => 0, showEndTypeHints=>0));
+
+COMMENT("MathObjects version.");
+ENDDOCUMENT();
+
+
+
+

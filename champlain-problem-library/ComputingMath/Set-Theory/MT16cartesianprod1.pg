@@ -1,0 +1,201 @@
+# DESCRIPTION
+# Determine the cartesian product of three sets
+#
+# ENDDESCRIPTION
+
+## DBsubject(Set theory and logic)
+## DBchapter(Operations on sets)
+## DBsection(Products)
+## Institution(Champlain College Saint Lambert)
+## Author(Michele Titcombe)
+## Date(2016/10/04)
+## Level(2)
+## MO(1)
+
+
+############################
+# Initialization
+
+DOCUMENT();
+
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+);
+
+TEXT(beginproblem());
+
+############################
+# Setup
+
+$showPartialCorrectAnswers = 0;
+
+$var1 = "A";
+$var2 = "B";
+$var3 = "C";
+
+Context()->strings->add(a=>{},b=>{},c=>{},u=>{},v=>{},w=>{},s=>{},t=>{});
+# set1: choose any 2 of a, b, c:
+@p1 = NchooseK (3,2);
+@values1 = ("a","b","c");
+@set1 = @values1 [@p1];
+
+# set2: choose any 2 of 1, 2, 3, 4, 5:
+@p2 = NchooseK (3,2);
+@values2 = ("1","2","3","4","5");
+@set2 = @values2 [@p2];
+
+# set3: choose andy 3 of u,v,w,s,t:
+@p3 = NchooseK (5,3);
+@values3 = ("u","v","w","s","t");
+@set3 = @values3 [@p3];
+
+$num1 = scalar(@set1);
+$num2 = scalar(@set2);
+$num3 = scalar(@set3);
+
+$pretty1 = join(",",@set1);
+$pretty2 = join(",",@set2);
+$pretty3 = join(",",@set3); 
+
+$answer1 = Compute($num1*$num2*$num3);
+@answer2 = cartesianTriple(~~@set1,~~@set2,~~@set3);
+$prettyans = join(",",@answer2);
+
+$questnum = new_checkbox_multiple_choice();
+$questnum -> qa (
+"How many elements are in the Cartesian triple product \(A \times B \times C \)?",
+"\( 2 \times 2 \times 3 = 12\)"
+);
+
+#Some incorrect answers
+$questnum -> extra(
+"\( 2 + 2 + 3 = 7\)",
+"\( 3 \times 3 \times 3 = 27\)",
+"\( 3! = 3 \times 2 \times 1 = 6 \)",
+);
+
+$questnum -> makeLast("None of the above");
+
+sub setCheck {
+	my ($correct, $student, $anshash) = @_;
+	my @tmp1 = @$correct;
+	my @tmp2 = @$student;
+	return (isEqual(~~@tmp1,~~@tmp2));
+}
+
+# takes parameters cartesianTriple(\@set1,\@set2,\@set3)
+# returns array
+sub cartesianTriple {
+	my $ref1 = shift;
+	my $ref2 = shift;
+        my $ref3 = shift;
+	
+	my @seta = @$ref1;
+	my @setb = @$ref2;
+        my @setc = @$ref3;
+	
+	my @result = ();
+	foreach my $i (@seta) {
+		foreach my $j (@setb) {
+                        foreach my $k (@setc) {
+                              push(@result,"($i,$j,$k)");
+    			}
+		}
+	}
+	return @result;
+}
+
+# takes parameters difference(\@set1,\@set2)
+# returns @set1 - @set2
+# returns array
+sub difference {
+	my $tmp1 = shift;
+	my $tmp2 = shift;
+#        my $tmp3 = shift;
+	
+	my @a = @{$tmp1};
+	my @b = @{$tmp2};
+#        my @c = @{$tmp3};
+	my @result = ();
+	
+	foreach my $i (0..scalar(@a)-1) {
+		foreach my $j (0..scalar(@b)-1) {
+#                        foreach my $k (0..scalar(@c)-1) {
+			     if ($a[$i] eq $b[$j]) {
+				last;
+			}
+			if ($j == scalar(@b)-1) {
+				push(@result,$a[$i]);
+			}
+		}
+	}
+	return @result;
+}
+
+# takes parameters isEqual(\@set1,\@set2)
+# uses difference function
+# returns boolean (0,1)
+sub isEqual {
+	my $ref1 = shift;
+	my $ref2 = shift;
+	my @seta = @$ref1;
+	my @setb = @$ref2;
+	if (scalar @seta == scalar @setb) {
+		return (scalar(difference(\@seta,\@setb)) == 0);
+	}
+	return 0;
+}
+
+############################
+# Main Text
+
+Context()->texStrings;
+BEGIN_TEXT
+$BR
+Let \($var1 = \lbrace $pretty1\rbrace\), \($var2 = \lbrace $pretty2\rbrace\), and \($var3 = \lbrace $pretty3\rbrace\)
+$BR
+$BR
+$BR
+(a) \{ $questnum-> print_q() \}
+$BR
+\{ $questnum-> print_a() \}
+$PAR
+(b) Determine \($var1\times $var2 \times $var3 \) $BR
+[Note: Enter your answer as a comma-separated list. Triples should be denoted with parentheses.] $BR
+\(\lbrace\)\{ans_rule(60)\}\(\rbrace\)
+$BR
+END_TEXT
+Context()->normalStrings;
+
+############################
+# Answer Evaluation
+
+#ANS($answer1->cmp());
+
+ANS(checkbox_cmp( $questnum -> correct_ans ) );
+# ANS(@answer2->cmp(checker=>~~&setCheck));
+ANS(Compute($prettyans)->cmp());
+
+############################
+# Solution
+
+Context()->texStrings;
+SOLUTION(EV3(<<'END_SOLUTION'));
+$PAR Solution: $PAR
+\($var1 = \lbrace $pretty1\rbrace\) $BR
+\($var2 = \lbrace $pretty2\rbrace\) $BR
+\($var3 = \lbrace $pretty3\rbrace\) $PAR
+The number of elements in a Cartesian triple product is simply \(N(A)\cdot N(B) \cdot N(C) \) for any sets \(A, B, C\). $BR
+Thus, the number of elements in \($var1\times $var2 \times $var3\) is $BR
+\(N(A)\cdot N(B) \cdot N(C) = $num1 \cdot $num2 \cdot $num3 = $answer1\) $PAR
+The Cartesian product \(A\times B \times C \) is defined as the set of all ordered triples whose first component is a member of \(A\), whose second component is a member of \(B\), and whose third component is a member of \(C\). $BR
+More formally, \(A\times B \times C= \lbrace (a,b,c) \vert a\in A \textbf{ and } b\in B \textbf{ and } c\in C\rbrace\) $PAR
+Thus, \($var1\times $var2 \times $var3\) is $BR
+\(\lbrace $prettyans\rbrace\) $BR
+END_SOLUTION
+Context()->normalStrings;
+
+ENDDOCUMENT();

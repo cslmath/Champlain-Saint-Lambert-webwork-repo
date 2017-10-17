@@ -1,0 +1,68 @@
+## DESCRIPTION
+## Marginal Analysis
+#  Original problem: /Library/ASU-topics/setDerivativeBasicFunctions/3-7-05.pg 
+## ENDDESCRIPTION
+
+## KEYWORDS('integrals', 'economics', 'marginal revenue')
+## Tagged by YL
+
+## DBsubject('Calculus')
+## DBchapter('Integration')
+## DBsection('Economics')
+## Date('')
+## Author('Titcombe')
+## Institution('Champlain College Saint Lambert')
+## TitleText1('Applied Calculus')
+## EditionText1('7')
+## AuthorText1('Tan')
+## Section1('6.4')
+## Problem1('')
+## TitleText2('')
+## EditionText2('')
+## AuthorText2('')
+## Section2('')
+## Problem2('')
+
+
+
+DOCUMENT();
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl"
+);
+
+TEXT(beginproblem());
+$showpartialcorrectanswers = 1;
+
+$a = random(50, 150, 10);
+$b = random(.1, .15, .01);
+
+TEXT(EV2(<<EOT));
+The daily marginal revenue (in dollars per unit) associated with selling  \(x\) toasters is
+\[ R'(x) = $a  - $b x. \]
+$BR
+(a) Evaluate the daily total revenue realized from the sale of \( 200 \) units of the toaster. 
+$BR
+  Answer (a) = \{ans_rule(40) \} dollars
+$BR
+(b) Find the additional revenue realized when the production (and sales) level is increased from \( 200 \) to \( 250 \) units.
+$BR
+EOT
+
+$ans = $a * 200 - $b/2*200**2;
+ANS(num_cmp($ans));
+
+TEXT(EV2(<<EOT));
+  Answer (b) = \{ans_rule(40) \} dollars
+$BR
+EOT
+
+$ans = $a * 250 - $b/2*250**2 - $a * 200 + $b/2*200**2;
+ANS(num_cmp($ans));
+
+
+ENDDOCUMENT();

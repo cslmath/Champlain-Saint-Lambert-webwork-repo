@@ -1,0 +1,68 @@
+## DBsubject(Arithmetic)
+## DBchapter(Other Bases)
+## DBsection(IEEE-754 Floating Point)
+## Institution(Champlain College Saint-Lambert)
+## Author(Brendan Cordy)
+## Date(2016/09/13)
+## KEYWORDS('floating point', 'IEEE-754')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"niceTables.pl",
+);
+
+TEXT(beginproblem());
+
+$showPartialCorrectAnswers = 1;
+
+#Pick mantissa (eleven bits), exponent, and sign.
+$m = random(1023,2047,1);
+$e = random(3,7,1);
+$s = random(-1,1,2);
+
+#Compute the number being represented in decimal.
+$n =$s*(1 + $m*2**(-11))*2**($e);
+
+#Change mantissa, exponent, and sign to IEEE-754 binary 
+#representation using annoying perl tricks. =P
+$mIEEE = sprintf "%b",$m;
+$mIEEE .= '0' x (23 - length $mIEEE);
+$eIEEE = sprintf "%08b",$e+127;
+$sIEEE = 0.5*(-$s+1);
+
+BEGIN_TEXT
+Encode the decimal number $n as an IEEE-754 single precision floating point number.
+$PAR
+\{
+DataTable(
+   [
+       ['Sign', 'Exponent', 'Mantissa'],
+       [ans_rule(1),ans_rule(7),ans_rule(27) ],
+   ],
+  midrules => 1,
+  align => '|c|c|c|',
+);
+\}
+END_TEXT
+
+BEGIN_HINT
+The exponent is in offset-127, which means that if the exponent is \(n\), then \(n+127\) is stored in the exponent bits. The mantissa bits represent the portion of the mantissa which follows a leading one and decimal point, padded on the right with zeros.
+END_HINT
+BEGIN_SOLUTION
+Sign Bits: $sIEEE, 
+Exponent Bits: $eIEEE, 
+Mantissa Bits: $mIEEE
+END_SOLUTION
+
+# String answer:
+ANS(str_cmp($sIEEE) );
+ANS(str_cmp($eIEEE) );
+ANS(str_cmp($mIEEE) );
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.;

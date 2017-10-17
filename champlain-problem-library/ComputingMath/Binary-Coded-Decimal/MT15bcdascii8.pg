@@ -1,0 +1,83 @@
+##DESCRIPTION
+##  Binary-coded decimal (BCD): ASCII-8
+##ENDDESCRIPTION
+
+##KEYWORDS('binary-coded decimal', 'BCD', 'ascii')
+
+## DBsubject('Computer Mathematics')
+## DBchapter('Computer Codes')
+## DBsection('4-bit BCD Codes')
+## Date('2015/09/21')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Essential Computer Mathematics')
+## AuthorText1('Lipschutz')
+## Section1('2.7')
+## Problem1('')
+
+########################################################################
+
+DOCUMENT();      
+
+loadMacros(
+   "PGstandard.pl",     # Standard macros for PG language
+   "MathObjects.pl",
+   #"source.pl",        # allows code to be displayed on certain sites.
+   #"PGcourse.pl",      # Customization file for the course
+);
+
+# Print problem number and point value (weight) for the problem
+TEXT(beginproblem());
+
+# Show which answers are correct and which ones are incorrect
+$showPartialCorrectAnswers = 1;
+
+Context("Numeric");
+@dec = ();
+@hex = ();
+foreach my $i (0..7) {
+   $dec[$i] = random(33,122,1);
+   $asc[$i] = sprintf("%X",$dec[$i]);
+   $a[$i] = chr($dec[$i]);
+}
+
+$asciistring = sprintf("%s %s %s %s %s %s %s %s", $asc[0], $asc[1], $asc[2], $asc[3], $asc[4], $asc[5], $asc[6], $asc[7]);
+$ansstring = "$a[0]$a[1]$a[2]$a[3]$a[4]$a[5]$a[6]$a[7]"; 
+
+Context()->texStrings;
+BEGIN_TEXT
+\{ image( "ascii8chart.jpg", width=>200, height=>200,  
+tex_size=>700, extra_html_tags=>'alt="ASCII-8 chart."' ) \}
+$PAR
+The following is an eight-character password encoded in ASCII-8:
+$BCENTER
+ $asciistring
+$ECENTER
+$BR
+Use the ASCII-8 table above to decode the password. 
+You can click on the table to make it larger.
+$PAR
+
+Password: \{ ans_rule(20) \}
+$BR
+$BBOLD Note 1. $EBOLD The answer is case-sensitive (capital B is not the same as small b). 
+$BR
+$BBOLD Note 2. $EBOLD Do not put any spaces between characters in your answer.
+$EITALIC
+
+END_TEXT
+
+BEGIN_HINT
+How to read the ASCII-8 chart:$BR
+The zone bits (shortened in hex) are in the first column on the left. The numeric bits (shortened in hex) are in the top row. For example: the character Z in ASCII-8 is 01011010, or 57 in short-form with each 4-bit part written in hex. 
+END_HINT
+BEGIN_SOLUTION
+The encoded password $asciistring is decoded as: $ansstring
+END_SOLUTION
+Context()->normalStrings;
+
+# Case sensitive standard string compare:
+ANS(std_cs_str_cmp("$ansstring"));
+
+COMMENT('Math Objects version');
+ENDDOCUMENT();        

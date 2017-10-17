@@ -1,0 +1,70 @@
+#DESCRIPTION
+#  Calculus. Convergence / divergence of geometric series.
+#ENDDESCRIPTION
+
+#Keywords('geometric series ' ,'convergence', 'divergence', 'sum')
+
+## DBsubject('Calculus - single variable')
+## DBchapter('Infinite Sequences and Series')
+## DBsection('Geometric')
+## Date('2015/08/12')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Calculus: Early Transcendentals')
+## EditionText1('7')
+## AuthorText1('Stewart')
+## Section1('11.2')
+## Problem1('17-26,31,32')
+
+DOCUMENT();
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+"parserAutoStrings.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+AutoStrings();
+
+$showPartialCorrectAnswers = 0;
+$a=random(2,3);
+$b=random(4,10);
+$c=random(4,10);
+$d=Compute("$c+1");
+$e=random(3,9);
+
+$ans0=String("DIV");
+$ans1=Compute("(1/($a**2))/(1-(1/$a))");
+$ans2=Compute("(1/$b)/(1-($a/($b**2)))");
+$ans3=Compute("($c**5/$d**5)/(1-($c/$d))");
+$ans5=Compute("($c/$d)/(1-($c/$d))+ ($a/$d)/(1-($a/$d))");
+
+BEGIN_TEXT
+The following series are all geometric series.  
+$BR Determine whether each series converges or not.  
+$BR For the series that converge, enter the sum of the series.
+For the series that diverge, enter DIV.
+
+$BR (a)  \( \displaystyle \sum_{n=1}^{\infty} \frac{$d^n}{$c^n} = \) \{ans_rule(20)\},
+$PAR (b)  \( \displaystyle \sum_{n=2}^{\infty} \frac{1}{$a^n} = \) \{ans_rule(20)\},
+$PAR (c)  \( \displaystyle \sum_{n=0}^{\infty} \frac{$a^n}{$b^{2n+1}} = \) \{ans_rule(20)\},
+$PAR (d)  \( \displaystyle \sum_{n=5}^{\infty} \frac{$c^n}{$d^n} = \) \{ans_rule(20)\},
+$PAR (e)  \( \displaystyle \sum_{n=1}^{\infty} \frac{$e^n}{$e^{n+4}} = \) \{ans_rule(20)\},
+$PAR (f)  \( \displaystyle \sum_{n=1}^{\infty} \frac{$c^n +$a^n}{$d^n} = \) \{ans_rule(20)\}.
+END_TEXT
+
+ANS($ans0->cmp());
+ANS($ans1->cmp());
+ANS($ans2->cmp());
+ANS($ans3->cmp());
+ANS($ans0->cmp());
+ANS($ans5->cmp());
+
+COMMENT('Math Objects version.');
+ENDDOCUMENT;
+		  	

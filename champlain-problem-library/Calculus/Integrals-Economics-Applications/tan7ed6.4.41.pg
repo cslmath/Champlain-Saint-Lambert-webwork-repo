@@ -1,0 +1,48 @@
+# DESCRIPTION
+# Integration application to business/economics.
+# Integrate marginal cost to find cost at a production level of 300 units.
+# M. Titcombe 10/21/2009
+# ENDDESCRIPTION
+
+## DBsubject('Calculus')
+## DBchapter('Integration')
+## DBsection('Applications')            
+## AuthorText1('Tan')
+## TitleText1('Applied Calculus')
+## EditionText1('7')
+## Section1('6.4')
+## Problem1('41')
+## KEYWORDS('calculus', 'integrals', 'economics', 'marginal cost')
+## TYPE('word problem')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+);
+
+Context("Numeric");
+$a1 = random(.0002,.0006,.0001);
+$b1 = random(.06,.12,.01);
+$c1 = random(450,850,100);
+$fc = random(600,900,100);    # Fixed cost
+$mf = Formula("$a1 x^2 + $b1 x + $c1");
+
+TEXT(beginproblem());
+Context()->texStrings;
+BEGIN_TEXT
+The daily marginal cost, in dollars/unit, of producing \( x \) units of toys is 
+\( C'(x) = $mf \). 
+The daily fixed cost incurred in production is  ${DOLLAR}\( $fc \). 
+Find the total cost in producing the first  \( 300 \) units of these toys per day.
+$PAR
+Total cost = ${DOLLAR}\{ans_rule(40) \}
+$BR
+END_TEXT
+Context()->normalStrings;
+
+$cf = Formula("$a1/3 x^3 + $b1/2 x^2 + $c1 x + $fc");
+$ans = $cf->eval(x=>300);
+ANS(std_num_cmp($ans,tol>=.01));
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.

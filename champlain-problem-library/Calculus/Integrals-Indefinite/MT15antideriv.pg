@@ -1,0 +1,71 @@
+## DESCRIPTION
+## Calculus
+## ENDDESCRIPTION
+
+## KEYWORDS('integrals','trig')
+
+## DBsubject('Calculus - single variable')
+## DBchapter('Integrals')
+## DBsection('Indefinite integrals (with trigonometric functions)')
+## Date('2015/08/11')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+"parserFormulaUpToConstant.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$a=random(2, 9, 1);
+$b=random(2, 9, 1);
+$c=random(2, 9, 1);
+$b1 = Compute("$b+1");
+while ($a == $c){
+       $c=random(2, 9, 1)
+}
+$f = Compute("$a x^($b) + $c sec(x) tan(x)");
+$answer=FormulaUpToConstant("$a/($b+1)*x**($b+1)+$c*sec(x)");
+
+Context()->texStrings;
+BEGIN_TEXT
+Compute the indefinite integral$PAR
+\( \int ($f) dx \) = \{ans_rule(40)\}
+$PAR
+$BITALIC Remember to include the constant of integration.$EITALIC
+END_TEXT
+
+BEGIN_SOLUTION
+Recall that the derivative with respect to \(x\) of \(\sec(x)\) is
+\(\sec(x)\tan(x)\).  Thus the problem is solved as follows:
+\[
+\begin{array}{rcl}
+   \int ($f) dx
+&=&	$a \int x^{$b} dx + $c \int \sec(x)\tan(x) dx	\\
+&=&	\frac{$a}{$b1}x^{$b1} + $c \sec(x) + C
+\end{array}
+\]
+where \( C \) is a constant of integration.
+END_SOLUTION
+Context()->normalStrings;
+
+ANS($answer->cmp());
+
+COMMENT('Math Objects version.');
+ENDDOCUMENT();        # This should be the last executable line in the problem.
+

@@ -1,0 +1,147 @@
+##DESCRIPTION
+##  Inverse relation on set: pictorial representation graph.
+##ENDDESCRIPTION
+
+## DBsubject(Set Theory)
+## DBchapter(Relations on Sets)
+## DBsection(Graphs)
+## Date(2016/10/18)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Level(2)
+## MO(1)
+## TitleText1('Essential Computing Mathematics')
+## AuthorText1('Seymour Lipschutz')
+## EditionText1('')
+## Section1('.')
+## Problem1('')
+## KEYWORDS('relation','inverse','set','coordinate graph')
+
+########################################################################
+
+DOCUMENT();      
+
+loadMacros(
+   "PGstandard.pl",     # Standard macros for PG language
+   "MathObjects.pl",
+   "AnswerFormatHelp.pl",
+   "PGchoicemacros.pl",
+   "PGgraphmacros.pl",
+   "problemRandomize.pl",
+   #"source.pl",        # allows code to be displayed on certain sites.
+   #"PGcourse.pl",      # Customization file for the course
+);
+
+TEXT(beginproblem());
+$refreshCachedImages = 1;
+
+#  Allow for the user to try another version of the problem once they get it correct.
+ProblemRandomize(when=>"Correct",onlyAfterDue=>0);
+
+# Show which answers are correct and which ones are incorrect
+$showPartialCorrectAnswers = 1;
+
+##############################################################
+#
+#  Setup
+#
+#
+
+Context("Point");
+ 
+##   Create a random point in each quadrant
+$p1x = random(1,2,1);
+$p1y = random(1,2,1);
+$P1 = Point($p1x,$p1y);
+$Pi1 = Point($p1y,$p1x);
+
+$p2x = random(3,4,1);
+$p2y = random(1,2,1);
+$P2 = Point($p2x,$p2y);
+$Pi2 = Point($p2y,$p2x);
+
+
+$p3x = 5;
+$p3y = random(1,2,1);
+$P3 = Point($p3x,$p3y);
+$Pi3 = Point($p3y,$p3x);
+
+$p4x = random(1,2,1);
+$p4y = random(3,5,1);
+$P4 = Point($p4x,$p4y);
+$Pi4 = Point($p4y,$p4x);
+
+$p5x = random(3,4,1);
+$p5y = random(3,5,1);
+$P5 = Point($p5x,$p5y);
+$Pi5 = Point($p5y,$p5x);
+
+$p6x = 5;
+$p6y = random(3,5,1);
+$P6 = Point($p6x,$p6y);
+$Pi6 = Point($p6y,$p6x);
+
+$ans = List("$P1,$P2,$P3,$P4,$P5,$P6");
+$ansi = List("$Pi1,$Pi2,$Pi3,$Pi4,$Pi5,$Pi6");
+
+
+
+#######       Draw the points on a coordinate plane
+$gr = init_graph(-1,-1,6,6, 
+size=>[490,490],
+axes=>[0,0],
+grid=>[7,7]
+);
+
+# suppress default labels
+$gr->lb('reset');
+
+# tick marks every step
+$gr -> h_ticks(0,"black",1,2,3,4,5);
+$gr -> v_ticks(0,"black",1,2,3,4,5);
+
+# labels for tickmarks only every 5th tick
+
+foreach my $j (1,2,3,4,5) {
+  $gr->lb( new Label($j,-0.15,$j, 'black','center','middle'));
+ $gr->lb( new Label(-0.15,$j,$j, 'black','center','middle'));
+}
+
+$gr -> stamps( closed_circle($p1x,$p1y,'blue') );
+$gr -> stamps( closed_circle($p2x,$p2y,'blue') );
+$gr -> stamps( closed_circle($p3x,$p3y,'blue') );
+$gr -> stamps( closed_circle($p4x,$p4y,'blue') );
+$gr -> stamps( closed_circle($p5x,$p5y,'blue') );
+$gr -> stamps( closed_circle($p6x,$p6y,'blue') );
+
+######################################
+#  Main text
+
+Context()->texStrings;
+BEGIN_TEXT
+Let \( R \) be the relation on \( A = \lbrace 1, 2, 3, 4, 5 \rbrace \) consisting of those points which are displayed in the coordinate graph below.
+$BR
+List the elements the relation \( R \) and of the inverse relation \(R^{-1} \) separated by commas.
+Each ordered pair is in the form \( (a,b) \).
+$PAR
+$BCENTER
+\{ image(insertGraph($gr), width=>400, height=>400, tex_size=>250); \}
+$PAR
+\( R  = \lbrace \) \{ans_rule(60)\} \( \rbrace \)
+$PAR
+\( R^{-1}  = \lbrace \) \{ans_rule(60)\} \( \rbrace \)
+$ECENTER
+END_TEXT
+Context()->normalStrings;
+
+
+####################################
+#  Answer evaluation
+
+$showPartialCorrectAnswers = 0;
+
+ANS( $ans->cmp() );
+ANS( $ansi->cmp() );
+
+
+ENDDOCUMENT();

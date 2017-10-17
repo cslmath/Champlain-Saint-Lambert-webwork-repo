@@ -1,0 +1,252 @@
+## DESCRIPTION
+## Calculus: How derivatives affect the shape of a graph
+## ENDDESCRIPTION
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Applications of differentiation)
+## DBsection(Summary of curve sketching)
+## Date(2015/11/18)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Level(4)
+## TitleText1('Calculus: Early Transcendentals')
+## AuthorText1('Stewart')
+## EditionText1('5')
+## Section1('4.5')
+## Problem1('')
+## KEYWORDS('calculus', 'derivatives')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"extraAnswerEvaluators.pl",
+"unionLists.pl",
+"MathObjects.pl",
+);
+
+
+TEXT(beginproblem());
+Context("Numeric");
+
+$showPartialCorrectAnswers = 1;
+
+$a=random(2,6,1);
+$const = Compute("- $a*$a");
+$max = Compute("- sqrt(3)*$a");
+$min = Compute("sqrt(3)*$a");
+
+
+# the function and its derivatives
+$ftex = "\frac{x^3}{x^2 + $const }";
+$f = Compute("x^3/(x^2 + $const)");
+$fp = $f -> D;
+$fpp = $fp -> D;
+$ymax = $f->eval(x=>$max);
+$ymin = $f->eval(x=>$min);
+
+$MYEMPTYSET = MODES(TeX=>'\mbox{\ensuremath{\lbrace}\,\ensuremath{\rbrace}}', HTML=>'<nobr>{&nbsp;}</nobr>');
+
+Context("Point");
+$xint = Point(0,0);
+$yint = Point(0,0);
+$infpt = Point(0,0);
+$maxpt = Point($max,$ymax);
+$minpt = Point($min,$ymin);
+
+Context()->texStrings;
+BEGIN_TEXT
+Please find the following information about the function
+$BR
+$BR
+\[ f(x) = $ftex.  \]
+$BR
+$BBOLD I.$EBOLD Domain.
+$BR
+Use \{ helpLink('interval notation') \}.  
+$BR
+Domain of \( f \): \{ans_rule(40)\} 
+$BR
+$BR
+
+$BBOLD II. $EBOLD Intercepts. 
+$BR
+Enter either a point \( (a,b) \) or a list of points separated by commas.  If there are no solutions, enter ${BITALIC}None${EITALIC}.  
+$BR
+\( y \)-intercept:  \{ ans_rule(40) \}
+$BR
+\( x \)-intercept(s):  \{ans_rule(40)\}  
+$BR
+$BR
+
+$BBOLD III. $EBOLD Limits at infinity. Horizontal Asymptote(s).
+$BR
+Find the following limits at infinity to determine any horizontal asymptotes.
+$BR
+$BR
+$BCENTER
+\( \displaystyle \lim_{x \rightarrow -\infty} $ftex = \) 
+\{pop_up_list(
+['?','DNE','+ infinity','6','5','4','3','2','1','0','-1','-2','-3','-4','-5','-6','- infinity']
+) \}
+$SPACE $SPACE $SPACE $SPACE $SPACE
+\( \displaystyle \lim_{x \rightarrow +\infty} $ftex = \) 
+\{pop_up_list(
+['?','DNE','+ infinity','6','5','4','3','2','1','0','-1','-2','-3','-4','-5','-6','- infinity']
+) \}
+$ECENTER
+$BR
+$BR
+
+$BBOLD IV. $EBOLD Infinite limits. Vertical Asymptote(s).
+$BR
+(a) Find the following left- and right-hand limits at the vertical asymptote \( x = $a \).
+$BR
+$BCENTER
+\( \displaystyle \lim_{x \rightarrow $a^{-}} $ftex = \) 
+\{pop_up_list(
+['?','DNE','+ infinity','6','5','4','3','2','1','0','-1','-2','-3','-4','-5','-6','- infinity']
+) \}
+$SPACE $SPACE $SPACE $SPACE $SPACE
+\( \displaystyle \lim_{x \rightarrow $a^{+}} $ftex = \) 
+\{pop_up_list(
+['?','DNE','+ infinity','6','5','4','3','2','1','0','-1','-2','-3','-4','-5','-6','- infinity']
+) \}
+$ECENTER
+$BR
+
+(b) Find the following left- and right-hand limits at the vertical asymptote \( x = -$a \).
+$BR
+$BCENTER
+\( \displaystyle \lim_{x \rightarrow -$a^{-}} $ftex = \) 
+\{pop_up_list(
+['?','DNE','+ infinity','6','5','4','3','2','1','0','-1','-2','-3','-4','-5','-6','- infinity']
+) \}
+$SPACE $SPACE $SPACE $SPACE $SPACE
+\( \displaystyle \lim_{x \rightarrow -$a^{+}} $ftex = \) 
+\{pop_up_list(
+['?','DNE','+ infinity','6','5','4','3','2','1','0','-1','-2','-3','-4','-5','-6','- infinity']
+) \}
+$ECENTER
+$BR
+$BR
+
+$BBOLD V. $EBOLD Intervals of increase / decrease and relative extrema.
+$BR
+
+(a) Calculate the first derivative of \( f \).  
+$BR
+\( f'(x) = \)  \{ans_rule(40)\} 
+$BR
+$BR
+
+(b) Find the critical numbers of \( f \). $BR
+Enter either a number or a list of numbers separated by commas.  If there are no solutions, enter ${BITALIC}None${EITALIC}. 
+$BR
+Critical numbers at \( x = \) \{ans_rule(40)\} 
+$BR
+$BR
+
+(c) Find where \(f\) is increasing and decreasing. Use \{ helpLink('interval notation') \}. Enter $MYEMPTYSET if an interval is empty. 
+$BR
+Union of the intervals where \(f(x)\) is increasing \{ans_rule(40)\} 
+$BR
+Union of the intervals where \(f(x)\) is decreasing \{ans_rule(40)\} 
+$BR
+$BR
+
+$BBOLD VI. $EBOLD Relative extrema.
+$BR
+Enter either a point \( (a,b) \) or a list of points separated by commas.  If there are no solutions, enter ${BITALIC}None${EITALIC}. 
+$BR
+
+Relative maxima of \(f \): \{ans_rule(40)\}
+$BR
+Relative minima of \( f \): \{ans_rule(40)\}
+$BR
+$BR
+
+$BBOLD VII. $EBOLD Intervals of concavity. 
+$BR
+(a) Calculate the second derivative of \( f \).  
+$BR
+\( f''(x) = \)  \{ans_rule(60)\} 
+$BR
+$BR
+(b) Find where \( f \) is concave up and concave down. Use \{ helpLink('interval notation') \}. Enter $MYEMPTYSET if an interval is empty. 
+$BR
+Union of the intervals where \(f(x)\) is concave up \{ans_rule(40)\} 
+$BR
+Union of the intervals where \(f(x)\) is concave down \{ans_rule(40)\} 
+$BR
+$BR
+
+$BBOLD VIII. $EBOLD Inflection points. 
+$BR
+Enter either a point \( (a,b) \) or a list of points separated by commas.  If there are no solutions, enter ${BITALIC}None${EITALIC}. 
+$BR 
+Inflection point(s) of \(f\): \{ans_rule(40)\}
+$BR
+$BR
+
+$BBOLD IX. $EBOLD Sketch a neat, well-labelled graph of the function \( f \) using the information that you gathered above. Do not use a graphing calculator. 
+$BR
+$BR
+Tips:$BR
+- Plot the \(y\)-intercept and the \(x\)-intercepts, if any.$BR
+- Draw dashed lines for any horizontal or vertical asymptotes.$BR
+- Plot the points where \( f \) has relative maxima, relative minima, and inflection points.$BR
+- Summarize the information from parts V-VIII in sign charts of \( f' \) and \( f''\) and use them to sketch the remaining parts of the graph of \( f \). $BR
+
+END_TEXT
+Context()->normalStrings;
+
+# domain
+ANS(interval_cmp("(-inf,-$a)U(-$a,$a)U($a,inf)", strings=>['None']));
+
+# y-intercepts, x-intercepts
+ANS(List($yint) -> cmp());
+ANS(List($xint) -> cmp());
+#ANS(number_list_cmp("0", strings=>['None']));
+#ANS(number_list_cmp("0", strings=>['None']));
+
+# horizontal asymptotes
+ANS(str_cmp("- infinity"));
+ANS(str_cmp("+ infinity"));
+
+# left- and right-hand limits at vertical asymptote x = $b
+ANS(str_cmp("- infinity"));
+ANS(str_cmp("+ infinity"));
+
+# left- and right-hand limits at vertical asymptote x = -$b
+ANS(str_cmp("- infinity"));
+ANS(str_cmp("+ infinity"));
+
+# first derivative, critical numbers
+ANS(fun_cmp($fp));
+ANS(number_list_cmp( "0,$max,$min", strings=>["none"] ));
+
+# interval of increase
+ANS(interval_cmp("(-inf,$max)U($min,inf)"));
+
+# interval of decrease
+ANS(interval_cmp("($max,- $a)U(- $a,0)U(0,$a)U($a,$min)"));
+
+# relative max / min
+ANS(List($maxpt) -> cmp());
+ANS(List($minpt) -> cmp());
+#ANS(number_list_cmp( "$max" , strings=>["none"] ));
+#ANS(number_list_cmp( "$min" , strings=>["none"] ));
+
+# second derivative, concave up, concave down, inflection points
+ANS(fun_cmp($fpp));
+ANS(interval_cmp("(- $a,0)U($a,inf)"));
+ANS(interval_cmp("(-inf,- $a)U(0,$a)"));
+ANS(List($infpt) -> cmp());
+#ANS(number_list_cmp( "0" , strings=>["None"] ));
+
+COMMENT('MathObjects version');
+ENDDOCUMENT();

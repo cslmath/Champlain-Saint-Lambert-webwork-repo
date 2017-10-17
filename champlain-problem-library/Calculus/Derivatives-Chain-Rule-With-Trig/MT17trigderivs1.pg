@@ -1,0 +1,59 @@
+## DBsubject(Calculus - single variable)
+## DBchapter(Differentiation)
+## DBsection(Derivatives of trigonometric functions)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2017/08/17)
+## Level(2)
+## TitleText1('Calculus: Early Transcendentals')
+## AuthorText1('Stewart')
+## EditionText1('5')
+## Section1('3.4')
+## Problem1('6')
+## KEYWORDS('Differentiation','Trigonometric','Transcendental','Derivative')
+## MO(1)
+
+DOCUMENT();
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"PGstandard.pl",
+"MathObjects.pl"           # Math Object Macro
+);
+
+TEXT(&beginproblem);
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+$a=random(1,10,1)*random(-1,1,2);
+$b=random(1,10,1)*random(-1,1,2);
+$c=random(1,10,1)*random(-1,1,2);
+$ansa=Compute("($a)*(sec(x))*(tan(x))+($b)*(sec(x))^2");
+$ansb =Compute("($c)*(sec($c*x))*(tan($c*x))-($a)*($b)*(sec($b*x))^2")->reduce;
+
+# Insert problem text between the $PAR, and space for the
+# answer, like this   \(y =\) \{ans_rule(50)\(}
+# just before the END_TEXT.
+
+Context()->texStrings;
+BEGIN_TEXT
+
+$PAR
+(a) If  \(g(x) =$a \sec{x} +$b  \tan{x}\), then 
+$BR
+\(g'(x) =\) \{ans_rule(50)\}
+$PAR
+(b) If \( h(x) =  \sec({$c x}) - $a \tan({$b x}) \), then
+$BR 
+\( h'(x) = \) \{ans_rule(50)\}
+END_TEXT
+Context()->normalStrings;
+
+ANS($ansa->cmp);
+ANS($ansb->cmp);
+
+COMMENT('MathObject version.');
+ENDDOCUMENT();

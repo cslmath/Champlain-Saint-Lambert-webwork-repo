@@ -1,0 +1,72 @@
+#DESCRIPTION
+##  Calculus:
+## Determine convergence/divergence of infinite sequences involving
+## quotients of factorials.
+##ENDDESCRIPTION
+
+##KEYWORDS('calculus', 'sequences','factorial')
+
+## DBsubject(Calculus - single variable)
+## DBchapter('Infinite sequences and series')
+## DBsection('Limit of a sequence')
+## Date('2015/03/25')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1()
+## EditionText1()
+## AuthorText1()
+## Section1()
+## Problem1()
+
+#####################################################################
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGcourse.pl", 
+);
+#####################################################################
+
+TEXT(beginproblem());
+
+$showPartialCorrectAnswers = 0;
+
+#####################################################################
+
+Context("Numeric");
+Context()->strings->add(Diverges=>{},D=>{alias=>'Diverges'});
+Context()->variables->add(n=>"Real");
+$a = random(2,5,1);
+
+$ansa1 = Compute("$a*n ($a*n + 1)");
+$ansa2 = Compute("Diverges");
+$ansb1 = Compute("1/($a*n ($a*n + 1))");
+$ansb2 = Compute("0");
+
+
+###############################################################
+Context()->texStrings;
+BEGIN_TEXT
+(a) Let \(\displaystyle a_n = \frac{($a n+1)!}{($a n-1)!}\)$BR$BR
+Simplify the expression for \(\displaystyle a_n \): \{ans_rule(20)\}$BR
+Find the limit of the sequence \(\displaystyle a_n = \frac{($a n+1)!}{($a n-1)!}.\) If the limit does not exist, type "Diverges" or "D".$PAR
+Limit: \{ans_rule(20)\}$PAR
+
+(b) Let \(\displaystyle a_n = \frac{($a n-1)!}{($a n+1)!}\)$BR$BR
+Simplify the expression for \(\displaystyle a_n \): \{ans_rule(20)\}$BR
+Find the limit of the sequence \(\displaystyle a_n = \frac{($a n-1)!}{($a n+1)!}.\) If the limit does not exist, type "Diverges" or "D".$PAR
+Limit: \{ans_rule(20)\}$PAR
+
+END_TEXT
+
+#####################################################################
+Context()->normalStrings;
+
+ANS(($ansa1)->cmp());
+ANS(($ansa2)->cmp());
+ANS(($ansb1)->cmp());
+ANS(($ansb2)->cmp());
+
+COMMENT('MathObjects version.');
+ENDDOCUMENT();        # This should be the last executable line in the problem.

@@ -1,0 +1,79 @@
+#DESCRIPTION
+#  Integration
+#  Average Value. Economics application
+#ENDDESCRIPTION
+
+#KEYWORDS('Integration', 'Economics', 'Applications','business and economics')
+## DBsubject(Calculus - single variable)
+## DBchapter('Applications of Integration')
+## DBsection('Average Value of a Function')
+## Date('2015/02/13')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Applied Calculus')
+## EditionText1('7')
+## AuthorText1('Tan')
+## Section1('6.5')
+## Problem1('53')
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+TEXT(beginproblem());
+
+Context("Numeric");
+Context()->variables->are(t=>"Real");
+
+$showPartialCorrectAnswers = 1;
+
+$a = random(17,37,2);
+$b =  random(2,6,2);
+$c = random(6,9,1);
+$n = random(4,7,1);
+$d = random(1,2,1);
+$t1 = Compute("$d");
+$t2 = Compute("$t1+$n");
+$peq = Compute("$a - $b e^{-0.2t} - $c e^{-0.1t}");
+$F = Compute("$a*t + $b/(0.2)*e^{-0.2*t} + $c/(0.1)*e^{-0.1*t}");
+$Ft1= $F->eval(t=>$t1);
+$Ft2 = $F->eval(t=>$t2);
+$ans = Compute("($Ft2 - $Ft1)/($t2-$t1)")->with(tolerance => .01);
+
+Context()->texStrings;
+BEGIN_TEXT
+The price of a certain commodity in dollars per unit at time \(t\) (measured in weeks) is 
+\[ p = $peq 
+\]
+What is the average price of the commodity over the \($n\) week period from \(t=$t1\) to \(t=$t2\)?
+$BR
+Answer = ${DOLLAR}\{ ans_rule(30) \}
+
+END_TEXT
+BEGIN_HINT
+The average value of a function \(f(t)\) 
+over the interval \([a,b]\) is
+\[
+    f_{avg} = \frac{1}{b-a} \int_a^b f(t)\,dt
+\] 
+END_HINT
+BEGIN_SOLUTION
+The average price of the commodity over the interval \( [$t1,$t2] \) is
+\[
+    p_{avg} = \frac{1}{$t2-$t1} \int_{$t1}^{$t2} ($peq) \,dt = \frac{1}{$t2-$t1} \left. \left($F\right) \right|_{$t1}^{$t2}
+ = $ans
+\] 
+END_SOLUTION
+
+Context()->normalStrings;
+
+ANS($ans->cmp());
+
+COMMENT('MathObjects version.');
+ENDDOCUMENT();        # This should be the last executable line in the problem.

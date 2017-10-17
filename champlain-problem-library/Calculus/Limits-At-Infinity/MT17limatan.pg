@@ -1,0 +1,64 @@
+## DBsubject(Calculus - single variable)
+## DBchapter(Limits and continuity)
+## DBsection(Limits at infinity, horizontal and oblique asymptotes)
+## Institution('Champlain College Saint-Lambert')
+## Date('2017/01/19')
+## Author('Michele Titcombe')
+## Level(2)
+## Static(1)
+## TitleText1('Calculus: Early Transcendentals')
+## AuthorText1('Stewart')
+## EditionText1('5')
+## Section1('2.6')
+## Problem1('32')
+## KEYWORDS('Product','Quotient','Differentiation')
+
+DOCUMENT();
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+Context()->texStrings;
+BEGIN_TEXT
+$PAR
+Evaluate the following limits. If the answer is positive infinite, enter $BBOLD inf $EBOLD; if negative infinite, enter $BBOLD -inf $EBOLD; and if the limit does not exist, enter $BBOLD dne$EBOLD. $PAR
+
+(a) \[\displaystyle\lim_{x \to \infty} \tan^{-1}x \]
+$BR
+Answer = \{ans_rule(10)\}
+$PAR
+
+(b) \[\displaystyle\lim_{x \to \infty} \tan^{-1}(-x) \]
+$BR
+Answer = \{ans_rule(10)\}
+$PAR
+
+(c) \[\displaystyle\lim_{x \to \infty} \tan^{-1}(x^2-x^4)\]
+$BR
+Answer = \{ans_rule(10)\}
+
+END_TEXT
+BEGIN_SOLUTION
+The lines \( y = \pi/2 \) and \( y= -\pi/2\) are the horizontal asymptotes of the graph of inverse tangent function, \( \tan^{-1} x \), as obtained from the limits at \(\infty\) and \(-\infty\) respectively.  
+$BR
+Thus, the answers are (a) \( \pi/2 \), (b) \( -\pi/2 \), and (c) \( -\pi/2 \).
+Note: In part (c) above, the values of \( (x^2 - x^4) \) grow negatively without bound as \(x\) tends to \(\infty\), and thus the \( y \) values get arbitrarily close to \( - \pi/2 \). 
+
+END_SOLUTION
+Context()->normalStrings;
+
+ANS(Compute("pi/2")->cmp());
+ANS(Compute("-pi/2")->cmp());
+ANS(Compute("-pi/2")->cmp());
+
+ENDDOCUMENT();

@@ -1,0 +1,119 @@
+## DESCRIPTION
+##   Application of octal: Linux (unix) file permissions.
+## ENDDESCRIPTION
+
+## DBsubject('Arithmetic')
+## DBchapter('Other bases')
+## DBsection('Application')
+## Institution('Champlain College Saint-Lambert')
+## Date('2016/09/13')
+## Author('Michele Titcombe')
+## TitleText1('Essential Computer Mathematics')
+## AuthorText1('Lipschutz')
+## Section1('2.4')
+## Problem1('')
+## KEYWORDS('Integer', 'octal', 'application', 'linux', 'unix')
+
+
+DOCUMENT();  
+
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGchoicemacros.pl",
+"PGgraders.pl",
+"unionTables.pl",
+);
+
+TEXT(beginproblem());
+
+#
+#  Create a matching list and use popups
+#
+$ml = new_match_list();
+$ml->rf_print_q(~~&pop_up_list_print_q);
+$ml->ra_pop_up_list([
+"No answer" => "?",
+"A" => "A", "B" => "B", "C" => "C", 
+"D" => "D", "E" => "E", "F" => "F",
+"G" => "G", "H" => "H", "I" => "I","J" => "J",
+]);
+
+#
+#  Add correct questions and answers
+#
+$ml->qa(
+"rwx rwx rwx", "777",
+"rwx r-- r--", "744",
+"rw- r-- r--", "644",
+"r-- r-- r--", "444",
+"rw- rw- rw-", "666",
+"rwx rw- ---", "760",
+);
+$ml->choose(6);
+
+#
+#  Add extra incorrect answers
+#
+$ml->extra(
+"555", 
+"633",
+"333",
+"544",
+"433",
+"650",
+"540",
+"000",
+);
+$ml->choose_extra(3);
+  
+$ml->makeLast("None of the above");
+
+Context()->texStrings;
+BEGIN_TEXT
+Match the read-write-execute file permissions with the corresponding octal code.
+\{ ColumnMatchTable($ml, valign=>'TOP') \}
+END_TEXT
+Context()->normalStrings;
+
+$showPartialCorrectAnswers = 0;
+
+#
+#  Incremental grader
+#
+install_problem_grader(~~&custom_problem_grader_fluid);
+$ENV{'grader_numright'} = [2,4,6];
+$ENV{'grader_scores'} = [0.3,0.6,1];
+$ENV{'grader_message'} = "You can earn " .
+"30% partial credit for 2 - 3 correct answers, and ".
+"60% partial credit for 4 - 5 correct answers.";
+
+#
+#  All or nothing grader
+#  
+# install_problem_grader(~~&std_problem_grader);
+
+ANS( str_cmp( $ml->ra_correct_ans ) );
+
+@correct = @{$ml->ra_correct_ans()};
+$answerstring = join(", ", @correct);
+Context()->texStrings;
+BEGIN_HINT
+1. Convert each group of three read-write-execute file permissions into its binary equivalent: put a 1 if the letter appears, or put a 0 if no letter appears.$BR
+Example: r-x-w--wx has r-x (read-execute for Owner), -w- (write only for Group), and -wx (write-execute for Other).$BR
+    r-x would be 101 (the w does not appear so put a 0 in the middle) $BR
+    -w- would be 010 $BR
+   and -wx would be 011.
+$PAR
+2. Then, convert each three-bit binary number to its octal equivalent. Example r-x-w--wx gives 101 010 011 in step 1, and converting each group of three to octal, gives 523. $BR
+(Warning: in this example, Other has greater permissions than Group!)
+END_HINT
+BEGIN_SOLUTION
+${PAR}SOLUTION:$PAR
+The correct answers are $answerstring
+END_SOLUTION
+Context()->normalStrings;
+
+COMMENT('MathObject version.');
+
+ENDDOCUMENT();

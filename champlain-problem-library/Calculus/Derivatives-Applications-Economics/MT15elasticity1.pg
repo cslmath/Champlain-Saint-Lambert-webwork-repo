@@ -1,0 +1,82 @@
+## DESCRIPTION
+## Calculus: Elasticity of Demand
+## ENDDESCRIPTION
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Applications of differentiation)
+## DBsection(Elasticity of demand)
+## Author(Michele Titcombe)
+## Date(2015/10/22)
+## Institution(Champlain College Saint-Lambert)
+## Level(3)
+## KEYWORDS('calculus','elasticity','economics')
+
+DOCUMENT();
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"scaffold.pl",
+"parserPopUp.pl",
+"MathObjects.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+
+$a = random(1.3,1.7,0.1);
+$b = random(8.7,9.3,0.1);
+#   with the demand function f(p) = -a*p+b, the elasticity will be undefined 
+#   at p=b/a, so set pmax to be the integer just less than b/a
+$pmax = floor($b/$a - .01);
+$price = random(2,$pmax,1);
+$Ep = Compute("$a*$price/($b - $a*$price)");
+if ($Ep > 1) {
+    $demand = "elastic";
+    $elast = ">1";
+}
+$tol = 0.0001;
+if ( abs($Ep - 1) < $tol ){
+    $demand = "unitary";
+    $elast = "=1";
+}
+if ($Ep < 1){
+    $demand = "inelastic";
+    $elast = "<1";
+}
+$popup = PopUp(["?", "elastic", "inelastic", "unitary"], $demand);
+$popup2 = PopUp(["?", "=1", "<1", ">1"], $elast);
+
+Scaffold::Begin();
+Section::Begin("Part (i)");
+BEGIN_TEXT
+Suppose that the demand of a certain item is
+\( \displaystyle {x = - $a p + $b} \).
+$BR         
+Evaluate the elasticity at \( p = $price \):
+$BR
+$BR
+\( E($price) \) = \{ans_rule(10) \}
+$PAR
+Note: Part (ii) will open below as soon as you have answered Part (i) correctly.
+END_TEXT
+
+ANS($Ep->cmp());
+Section::End();
+
+Section::Begin("Part (ii)");
+BEGIN_TEXT
+Is the demand elastic, unitary or inelastic at this price?
+$BR
+Demand is \{ $popup->menu() \} because \( E($price) \) \{ $popup2->menu() \}
+END_TEXT
+ANS($popup->cmp() );
+ANS($popup2->cmp() );
+Section::End();
+
+Scaffold::End();
+COMMENT('MathObjects version.');
+ENDDOCUMENT();

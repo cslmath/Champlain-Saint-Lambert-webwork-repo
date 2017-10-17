@@ -1,0 +1,71 @@
+## DESCRIPTION
+## Marginal Analysis
+## ENDDESCRIPTION
+
+## KEYWORDS('integrals', 'economics', 'marginal revenue')
+
+## DBsubject('Calculus - single variable')
+## DBchapter('Applications of integration')
+## DBsection('Economics')
+## Date('2015/08/11')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Applied Calculus')
+## EditionText1('7')
+## AuthorText1('Tan')
+## Section1('6.4')
+## Problem1('42')
+
+DOCUMENT();
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+$showpartialcorrectanswers = 1;
+
+$a = random(50, 150, 10);
+$b = random(0.1, 0.15, 0.01);
+$Rprime = Compute("$a - ($b)*x");
+$ansa = Compute("$a * 200 - ($b)/2*200**2");
+$ansb = Compute("$a * 250 - ($b)/2*250**2 - ($a) * 200 + $b/2*200**2");
+
+Context()->texStrings;
+BEGIN_TEXT
+The daily marginal revenue (in dollars per unit) associated with selling  \(x\) toasters is
+\[ R'(x) = $Rprime . \]
+$BR
+(a) Evaluate the daily total revenue realized from the sale of \( 200 \) units of the toaster. 
+$BR
+  Answer (a) = \{ans_rule(40) \} dollars
+$BR
+(b) Find the additional revenue realized when the production (and sales) level is increased from \( 200 \) to \( 250 \) units.
+$BR
+  Answer (b) = \{ans_rule(40) \} dollars
+$BR
+END_TEXT
+Context()->normalStrings;
+
+ANS($ansa->cmp());
+ANS($ansb->cmp());
+
+BEGIN_HINT
+The net change in a function \( f \) over an interval \( [a,b] \) is given by
+\[
+   f(b) - f(a) = \int_a^b f '(x) dx  
+\]
+provided \( f' \) is continuous on \( [a,b] \).
+$BR
+For part (a), you want to find \( R(200) \). Note that \( R(0) = 0 \).
+END_HINT
+
+
+COMMENT('Math Objects version.');
+ENDDOCUMENT();

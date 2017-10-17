@@ -1,0 +1,128 @@
+## DESCRIPTION
+## Rounding rules (including odd-add rule) versus truncation.
+## ENDDESCRIPTION
+
+## DBsubject('Arithmetic')
+## DBchapter('Decimals')
+## DBsection('Rounding')
+## Institution('Champlain College Saint-Lambert')
+## Date('2016/09/20')
+## Author('Michele Titcombe')
+## TitleText1('Essential Computing Mathematics')
+## AuthorText1('Lipschutz')
+## EditionText1('')
+## Section1('3.1')
+## Problem1('3.1,3.5')
+## Keywords('rounding','truncation','odd-add rule')
+
+DOCUMENT();  
+
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGchoicemacros.pl",
+"PGgraders.pl",
+"unionTables.pl",
+);
+
+TEXT(beginproblem());
+
+#
+#  Create a matching list and use popups
+#
+$ml1 = new_match_list();
+$ml1->rf_print_q(~~&pop_up_list_print_q);
+$ml1->ra_pop_up_list([
+"No answer" => "?",
+"A" => "A", "B" => "B", "C" => "C", 
+"D" => "D", "E" => "E", "F" => "F",
+"G" => "G", "H" => "H", "I" => "I","J" => "J",
+]);
+
+#
+#  Add correct questions and answers
+#
+$ml1->qa(
+"Round 1.739154 to three decimal places.", "1.739",
+"Round 1.745000 to two decimal places.", "1.74",
+"Round 1.755000 to two decimal places.", "1.76",
+"Round 1.72981 to four significant digits.", "1.730",
+"Round 1.73451 to three decimal places.", "1.735",
+"Truncate 1.739124 to three significant digits.", "1.73",
+);
+$ml1->choose(6);
+
+#
+#  Add extra incorrect answers
+#
+$ml1->extra(
+"1.734", 
+"1.735",
+"1.736",
+"1.739",
+"1.73",
+"1.74",
+"1.75",
+"1.730",
+"1.740",
+"1.750",
+);
+$ml1->choose_extra(3);
+  
+$ml1->makeLast("None of the above");
+
+Context()->texStrings;
+BEGIN_TEXT
+$BCENTER
+$BBOLD Rules for Rounding Numbers
+$EBOLD 
+$ECENTER
+$BR
+Let \( t \) be the test digit: the first (leftmost) digit to be dropped.
+$BR
+1. Rounding down. If \( t < 5 \), then the digits preceding the test digit remain unchanged.
+$BR
+2. Rounding up. If \(t \ge 5 \) or $BITALIC if \( t = 5 \) and is followed by at least one nonzero digit$EITALIC, then the preceding digit is increased by 1 (with a carry of 1 if the preceding 
+
+digit is 9).
+$BR
+3. Round-to-even rule. If $BITALIC \( t = 5 \) with only 0s following$EITALIC, then the preceding digit is unchanged if even but increased by 1 if odd.
+$PAR
+
+Use the rounding rules given above:
+
+ \{ ColumnMatchTable($ml1, valign=>'TOP') \}
+END_TEXT
+Context()->normalStrings;
+
+$showPartialCorrectAnswers = 0;
+
+#
+#  Incremental grader
+#
+install_problem_grader(~~&custom_problem_grader_fluid);
+$ENV{'grader_numright'} = [2,4,6];
+$ENV{'grader_scores'} = [0.3,0.6,1];
+$ENV{'grader_message'} = "You can earn " .
+"30% partial credit for 2 - 3 correct answers, and ".
+"60% partial credit for 4 - 5 correct answers.";
+
+#
+#  All or nothing grader
+#  
+# install_problem_grader(~~&std_problem_grader);
+
+ANS( str_cmp( $ml1->ra_correct_ans ) );
+
+@correct = @{$ml1->ra_correct_ans()};
+$answerstring = join(", ", @correct);
+Context()->texStrings;
+BEGIN_SOLUTION
+${PAR}SOLUTION:$PAR
+The correct answers are $answerstring
+END_SOLUTION
+Context()->normalStrings;
+
+COMMENT('MathObject version.');
+
+ENDDOCUMENT();

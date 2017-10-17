@@ -1,0 +1,69 @@
+# DESCRIPTION
+# Find a linear combination of a linear and a power function 
+# to model a Lorentz curve given a Gini index
+# WeBWorK problem written by Charles Fortin, 
+# <cfortin(at)champlaincollege.qc.ca(dot)ca>
+# ENDDESCRIPTION
+
+## DBsubject('WeBWorK')
+## DBchapter('Demos')
+## DBsection('Problem')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Author('Charles Fortin')
+## Institution('ChamplainCollege')
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGchoicemacros.pl",
+"PGgraphmacros.pl",
+);
+
+# make sure we're in the context we want
+Context("Numeric");
+
+$gini = random(0.2,0.4,0.01); # gini index of a country
+$a = random(0.2,0.6,0.1);
+$b = 1-$a;
+$p = Real("2*(1-$a)/(1-$a-$gini)-1");
+$percentage = Formula("100 * (1-$a*x - (1-$a)*x**$p)");
+$percentagetop5 = $percentage->eval(x=>0.95); #100*(1-f(0.95));
+
+TEXT(beginproblem());
+Context()->texStrings;
+BEGIN_TEXT
+Suppose a country has a coefficient of inequality (Gini index) of \($gini\) and that the 
+Lorentz curve for this country is of the form \(y=f(x)=$a x + $b x^p\), where p is a constant.
+$BR
+(a) The value of p is \{ ans_rule(10) \}
+$BR
+(b) According to this model the percentage of the total income earned by the top 5
+ % of families  is \{ ans_rule(6) \} %.
+
+END_TEXT
+Context()->normalStrings;
+
+ANS( $p->cmp() );
+ANS( $percentagetop5->cmp() );
+
+Context()->texStrings;
+SOLUTION(EV3(<<'END_SOLUTION'));
+$PAR SOLUTION $PAR
+We need to solve
+\[$gini = 1-2\int_0^1 $a x + $b x^p dx = 1-2\left( \frac{$a}{2} + \frac{$b}{p+1}\right).\]
+Therefore 
+\[p = \frac{2(1-$a)}{1-$a - $gini}-1 = $p.\]
+To obtain the percentage of the total income earned by the top 5
+ % of families, we calculate \(100 \cdot (1-f(0.95)) =100 \cdot (1-($a \cdot 0.95 + $b \cdot 0.95^{$p})) = $percentagetop5\).
+
+END_SOLUTION
+Context()->normalStrings;
+
+ENDDOCUMENT();
+

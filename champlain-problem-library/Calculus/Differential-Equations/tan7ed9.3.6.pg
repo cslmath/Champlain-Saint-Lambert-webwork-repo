@@ -1,0 +1,58 @@
+# DESCRIPTION
+# Differential equations - business/economics context.
+# Savings account compounded continuously: A'(t)=rA(t)
+# M. Titcombe 10/23/2009
+# ENDDESCRIPTION
+
+## DBsubject('Calculus')
+## DBchapter('Integration')
+## DBsection('Applications')            
+## AuthorText1('S. Tan')
+## TitleText1('Applied Calculus')
+## EditionText1('7')
+## Section1('9.3')
+## Problem1('6')
+## KEYWORDS('calculus','economics', 'differential equations')
+## TYPE('word problem')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+);
+
+Context("Numeric");
+$rate = random(3,10,1);
+$r = 0.01*$rate;
+$term = random(4,9,1);
+$init_amt = random(8000,15000,1000);
+
+TEXT(beginproblem());
+Context()->texStrings;
+$showpartialcorrectanswers = 1;
+BEGIN_TEXT
+An amount of money deposited in a savings account grows at a rate proportional to the amount present, obeying the rule
+\[
+    \frac{dA}{dt} = rA
+\]
+where \(r\) is the yearly interest rate compounded continuously, and \(A\) is the amount in the savings account at any time \(t\) (in years).
+$BR
+If ${DOLLAR}\( $init_amt\) is deposited in a fixed account earning interest at the rate of \($rate\)${PERCENT} per year compounded continuously, find the accumulated amount after \( $term \) years.
+$BR
+Accumulated amount \(A\) =  ${DOLLAR}\{ans_rule(40) \}
+$PAR
+Determine how long it would take for the original deposit to triple in value.
+$BR
+Time = \{ans_rule(40)\} years.
+END_TEXT
+Context()->normalStrings;
+
+$ans1 = Compute("$init_amt*exp($r*$term)")->with(
+  tolType=>'absolute', tolerance=>'.005');
+#$ans1 = Compute("$init_amt*exp($r*$term)");
+ANS($ans1->cmp());
+
+$ans2 = Compute("ln(3)/$r");
+ANS($ans2->cmp());
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.

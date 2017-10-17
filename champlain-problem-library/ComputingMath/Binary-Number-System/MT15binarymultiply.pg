@@ -1,0 +1,68 @@
+## DESCRIPTION
+##   Evaluate the binary products.
+## ENDDESCRIPTION
+
+## DBsubject('Arithmetic')
+## DBchapter('Other bases')
+## DBsection('Converting')
+## Institution('Champlain College Saint-Lambert')
+## Date('2015/08/31')
+## Author('Michele Titcombe')
+## KEYWORDS('Integer', 'Binary', 'Multiplication')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl"
+);
+
+TEXT(beginproblem());
+
+$a[0] = random(100,1000,1);
+$a[1] = random(1001,2000,1);
+$a[2] = random(200,900,1);
+$a[3] = random(4000,5000,1);
+$sum[0] = $a[0]+$a[1];
+$sum[1] = $a[2]+$a[3];
+
+$number[0] = sprintf "%b.%b", $a[0], $a[1];
+$number[1] = sprintf "%lb", $a[1];
+$number[2] = sprintf "%lb", $a[2];
+$number[3] = sprintf "%lb", $a[3];
+$ans[0] = sprintf "%lb", $sum[0];
+$ans[1]= sprintf "%lb", $sum[1];
+
+BEGIN_TEXT
+
+Evaluate the binary sums: $BR
+(a) \( $number[0] + $number[1] \) \{ ans_rule(30) \}
+$PAR
+(b) \( $number[2] + $number[3] \) \{ ans_rule(30) \}
+END_TEXT
+BEGIN_HINT
+Rules of addition in binary:$BR
+\[
+     0 + 0 = 0
+\]
+\[
+     0 + 1 = 1
+\]
+\[
+     1 + 0 = 1
+\]
+\[
+     1 + 1 = 10  \quad ( 0 \text{, carry 1} )
+\]
+\[
+     1 + 1 + 1 = 11 \quad ( 1 \text{, carry 1} )
+\]
+END_HINT
+
+ANS(num_cmp( $ans[0] ));
+ANS(num_cmp( $ans[1] ));
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.;

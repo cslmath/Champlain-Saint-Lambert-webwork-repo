@@ -1,0 +1,47 @@
+# DESCRIPTION
+# Integration application to business/economics.
+# Integrate marginal profit to find profit at a production level of 150 units.
+# M. Titcombe 10/21/2009
+# ENDDESCRIPTION
+
+## DBsubject('Calculus')
+## DBchapter('Integrals')
+## DBsection('Applications')            
+## AuthorText1('Tan')
+## TitleText1('Applied Calculus')
+## EditionText1('7')
+## Section1('6.4')
+## Problem1('43')
+## KEYWORDS('calculus', 'integrals', 'economics', 'marginal profit')
+##TYPE('word problem')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+);
+
+Context("Numeric");
+$a1 = random(.0001,.0004,.0001);
+$b1 = random(.02,.05,.01);
+$c1 = random(10,40,10);
+$f1 = random(600,900,100);
+$mp = Formula("-$a1 x^2 + $b1 x + $c1");
+
+TEXT(beginproblem());
+Context()->texStrings;
+BEGIN_TEXT
+The daily marginal profit, in dollars/unit, of producing \( x \) units of toys is
+\( P'(x) = $mp \). The daily fixed cost incurred in the production of these toys is ${DOLLAR}\( $f1 \).   Find the total profit realizable from the manufacture and sale of  \( 150 \) units of these toys per day. [Hint: \( P(0) = - $f1 \). ]
+$BR
+Total profit = ${DOLLAR}\{ans_rule(40) \}
+$BR
+END_TEXT
+Context()->normalStrings;
+
+$pf = Formula("-$a1/3 x^3 + $b1/2 x^2 + $c1 x - $f1");
+$ans = $pf->eval(x=>150);
+#$ans = -$a1/3*150**3 + $b1/2*150**2 + $c1*150 - $f1;
+ANS(std_num_cmp($ans,tol>=0.01));
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.

@@ -1,0 +1,113 @@
+## DESCRIPTION
+## Linear Algebra. Solve by back substitution. Scaffolding problem.
+## ENDDESCRIPTION
+
+## DBsubject(Linear algebra)
+## DBchapter(Systems of linear equations)
+## DBsection(Systems with 4 or more variables)
+## Date('2015/09/19')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Essential Computer Mathematics')
+## AuthorText1('Lipschutz')
+## Section1('10.5')
+## Problem1('9')
+## Level(2)
+## MO(1)
+
+DOCUMENT();
+
+loadMacros(
+"PGstandard.pl",
+"PGML.pl",
+"MathObjects.pl",
+"parserMultiAnswer.pl",
+"MatrixCheckers.pl",
+"PGcourse.pl",
+"scaffold.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+Context("Numeric");
+Context()->variables->add(y=>"Real",z=>"Real",t=>"Real");
+
+$c1 = random(2,5,1);
+$c2 = random(3,6,1);
+$c3 = random(4,9,1);
+$x0 = non_zero_random(-9,9,1);
+$y0 = non_zero_random(-5,5,1);
+$z0 = non_zero_random(-8,6,2);
+$t0 = non_zero_random(-5,9,2);
+$line1 = Compute("2x - 3y + $c1 z - 2t");
+$line2 = Compute("$c2 y - z + 3t");
+$line3 = Compute("6 z - t");
+$line4 = Compute("$c3 t");
+$b1 = $line1->eval(x=>$x0,y=>$y0,z=>$z0,t=>$t0);
+$b2 = $line2->eval(y=>$y0,z=>$z0,t=>$t0);
+$b3 = $line3->eval(z=>$z0,t=>$t0);
+$b4 = $line4->eval(t=>$t0);
+
+Context('Matrix');
+
+$NO_SPACE = '@{}';
+
+Scaffold::Begin();
+
+Context()->texStrings;
+BEGIN_TEXT
+Solve the system using back substitution:
+\[ \left\lbrace \begin{array}{r${NO_SPACE}r${NO_SPACE}r${NO_SPACE}r${NO_SPACE}r${NO_SPACE}r}
+2x & - \hspace{2ex} 3y &  + \hspace{2ex} $c1 z  & - \hspace{2ex} 2t      & = & $b1 \\
+    &   $c2 y & - \hspace{2ex} z &  + \hspace{2ex} 3t     & = & $b2 \\ 
+    &       &   6z & - \hspace{2ex} t & = & $b3 \\
+ &       &       & $c3 t & = & $b4 
+\end{array} \right. \]
+END_TEXT
+Context()->normalStrings;
+
+Section::Begin("Step 1: solve the last equation");
+BEGIN_PGML
+The last equation gives [` t  = `] [__________]{"$t0"}
+END_PGML
+Section::End();
+
+Section::Begin("Step 2: solve the third equation");
+BEGIN_PGML
+Substituting  [` t = [$t0] `] in the third equation gives 
+[` z = `] [__________]{"$z0"}
+END_PGML
+Section::End();
+
+Section::Begin("Step 3: solve the second equation");
+BEGIN_PGML
+Substituting [` t = [$t0] `] and [`z = [$z0] `] in the second equation gives 
+[` y = `] [__________]{"$y0"}
+END_PGML
+Section::End();
+
+Section::Begin("Step 4: solve the first equation");
+BEGIN_PGML
+Finally, substituting the values for [`t = [$t0] `], [`z = [$z0] `] and [`y = [$y0]`] in the first equation gives 
+[` x = `] [__________]{"$x0"}
+
+Thus, the unique solution to the system is [` (x, y, z, t ) = `] [_______________]{"($x0,$y0,$z0,$t0)"}. _Enter your answer as an ordered quadruple in the form [`(a,b,c,d)`]._
+END_PGML
+BEGIN_PGML_HINT
+Make sure that the ordered quadruple is in the *correct* order.
+END_PGML_HINT
+
+Section::End();
+
+Scaffold::End();
+
+BEGIN_PGML_SOLUTION
+Back solving gives [` t = [$t0] `], [` z = [$z0] `], [` y = [$y0] `],  and finally [` x = [$x0] `].
+
+Thus, the unique solution is  [` (x,y,z,t) = ([$x0],[$y0],[$z0],[$t0]) `] 
+END_PGML_SOLUTION
+
+COMMENT('MathObject version');
+COMMENT('Scaffold problem.');
+ENDDOCUMENT();

@@ -1,0 +1,63 @@
+# DESCRIPTION
+# Circuit diagram to logic expression.
+# ENDDESCRIPTION
+
+## DBsubject(Set theory and logic)
+## DBchapter(Propositional logic)
+## DBsection(Boolean circuits)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2017-Sep-7)
+## Level(2)
+
+############################
+# Initialization
+
+DOCUMENT();
+
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGchoicemacros.pl"
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+############################
+# Setup
+
+# image width and height
+$width = 300;
+$height = 300;
+$image = image("circuit2.gif",width=>$width,height=>$height);
+
+$radio = new_multiple_choice();
+$radio->qa("Which of the following is the correct logical statement?","\( p^\prime  +  q\)");
+$radio->extra("\( p^\prime \cdot q\)","\(p \cdot q^\prime\)","\( (p  +  q)^\prime \)");
+
+############################
+# Main Text and Solution
+
+Context()->texStrings;
+BEGIN_TEXT
+Determine the correct logical statement based on the following circuit diagram.
+$BR
+$image $PAR
+\{$radio->print_q()\}
+\{$radio->print_a()\}
+END_TEXT
+BEGIN_SOLUTION
+$image $PAR
+The correct logical statement for this diagram is $BR
+\( p^\prime  +  q\) $BR
+END_SOLUTION
+
+Context()->normalStrings;
+############################
+# Answer Evaluation
+
+$showPartialCorrectAnswers = 0;
+
+ANS(radio_cmp($radio->correct_ans()));
+
+ENDDOCUMENT();

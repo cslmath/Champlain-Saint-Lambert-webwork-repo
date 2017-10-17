@@ -1,0 +1,74 @@
+# DESCRIPTION
+# Solids of revolution with trigonometry
+# Commerce-Cal2 Volume-Trig
+# WeBWorK problem written by Charles Fortin, 
+# <cfortin(at)champlaincollege.qc.ca(dot)ca>
+# ENDDESCRIPTION
+
+## DBsubject('WeBWorK')
+## DBchapter('Demos')
+## DBsection('Problem')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Author('Charles Fortin')
+## Institution('ChamplainCollege')
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGchoicemacros.pl",
+"PGgraphmacros.pl",
+);
+
+# make sure we're in the context we want
+Context("Numeric");
+
+$a = random(2,6,1);
+$b = Real("2*$a");
+$c = Real("4 * $a");
+
+$volume = Real("pi/$a*(pi/4 - 1/2*log(2))");
+
+
+TEXT(beginproblem());
+Context()->texStrings;
+BEGIN_TEXT
+Find the volume of the solid of revolution obtained by rotating the region bounded
+ by the curves 
+\[x=0\;,\;y=\sqrt{\tan ($a x)},\;\textrm{and}\; y=1 \] 
+about the \(x\)-axis.
+$BR
+$BR
+The volume of the solid of revolution obtained is \{ ans_rule(20) \}.
+
+END_TEXT
+Context()->normalStrings;
+
+ANS( $volume->cmp() );
+
+Context()->texStrings;
+SOLUTION(EV3(<<'END_SOLUTION'));
+$PAR SOLUTION $PAR
+The two curves \(y=\sqrt{\tan ($a x)}\) and \(y=1\) intersect when 
+\(\sqrt{\tan($a x)} = 1\). Therefore \(\tan($a x) = 1\) and \($a x = \pi/4\).
+The volume is obtained by calculating the integral
+\[\pi \int_0^{\pi/$c} 1 - \tan ($a x)\; dx.\]
+The substitution \(u=$a x\) gives
+\[\frac{\pi}{$a} \int_0^{\pi/4} 1-\tan u\; du = \left. \frac{\pi}{$a}(u- \ln |\sec u|)\right|_0^{\pi/4}
+=\frac{\pi}{$a} \left( \left(\frac{\pi}{4} - \ln \sqrt{2} \right) - (0- \ln 1) \right) = \frac{\pi}{$a} \left(\frac{\pi}{4} - \ln \sqrt{2} \right).\]
+END_SOLUTION
+Context()->normalStrings;
+
+ENDDOCUMENT();
+
+
+
+
+
+
+

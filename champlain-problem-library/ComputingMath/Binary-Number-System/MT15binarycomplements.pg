@@ -1,0 +1,161 @@
+## DESCRIPTION
+##   Complements in binary number system: ones and twos complements.
+## ENDDESCRIPTION
+
+## DBsubject(Arithmetic)
+## DBchapter(Other bases)
+## DBsection(Addition/Subtraction)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2015/09/07)
+## Level(2)
+## TitleText1('Essential Computer Mathematics')
+## AuthorText1('Seymour Lipschutz')
+## YearText1('1987')
+## Section1('1.6')
+## Problem1('')
+## KEYWORDS('ones complement', 'twos complement', 'complements')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+);
+
+TEXT(beginproblem());
+
+$showPartialCorrectAnswers = 1;
+
+#   Random numbers:
+$c0 = random(8,14,1);      # 4-bit binary (1000 -> 1110) with first bit 1; exclude 15
+$c1 = random(32,62,1);    # 6-bit binary (100000 -> 111110) with first bit 1 (not 63)
+$c2 = random(128,254,1);  # 8-bit binary (1000000 -> 11111110)
+
+# Display random numbers in binary:
+$a[0] = sprintf "%lb", $c0 ;
+$a[1] = sprintf "%lb", $c1 ;
+$a[2] = sprintf "%lb", $c2 ;
+
+# Compute answers in decimal values:
+$oned[0] = 15 - $c0;
+$oned[1] =  63 - $c1;
+$oned[2] =  255 - $c2 ;
+
+foreach my $i (0..3) {
+   $twod[$i] = $oned[$i] + 1 ;
+}
+
+# Display answers in binary using sprintf:
+foreach my $i (0..3) {
+   $onestr[$i] = sprintf "%lb", $oned[$i] ;
+   $twostr[$i] = sprintf "%lb", $twod[$i] ;
+}
+
+# Determine if leading zeroes need to be printed for 4-bit:
+$ansones0 = "$onestr[0]";
+$length = length($onestr[0]) ;
+if ($length == 3) {$ansones0 = "0$onestr[0]";}
+if ($length == 2) {$ansones0 =  "00$onestr[0]";} 
+if ($length == 1) {$ansones0 = "000$onestr[0]";}
+
+$anstwos0 = "$twostr[0]";
+$length = length($twostr[0]);
+if ($length == 3) {$anstwos0 = "0$twostr[0]";}
+if ($length == 2) {$anstwos0 =  "00$twostr[0]";} 
+if ($length == 1) {$anstwos0 = "000$twostr[0]";}
+
+# Determine if leading zeroes need to be printed for 6-bit:
+$ansones1 = "$onestr[1]";
+$length = length($onestr[1]) ;
+if ($length == 5) {$ansones1 = "0$onestr[1]"; }
+if ($length == 4) {$ansones1 = "00$onestr[1]"; }
+if ($length == 3) {$ansones1 = "000$onestr[1]"; }
+if ($length == 2) {$ansones1 = "0000$onestr[1]"; }
+if ($length == 1) {$ansones1 = "00000$onestr[1]"; }
+
+$anstwos1 = "$twostr[1]";
+$length = length($twostr[1]) ;
+if ($length == 5) {$anstwos1 = "0$twostr[1]"; }
+if ($length == 4) {$anstwos1 = "00$twostr[1]"; }
+if ($length == 3) {$anstwos1 = "000$twostr[1]"; }
+if ($length == 2) {$anstwos1 = "0000$twostr[1]"; }
+if ($length == 1) {$anstwos1 = "00000$twostr[1]"; }
+
+# Determine if leading zeroes need to be printed for 8-bit:
+$ansones2 = "$onestr[2]";
+$length = length($onestr[2]) ;
+if ($length == 7) {$ansones2 = "0$onestr[2]"; }
+if ($length == 6) {$ansones2 = "00$onestr[2]"; }
+if ($length == 5) {$ansones2 = "000$onestr[2]"; }
+if ($length == 4) {$ansones2 = "0000$onestr[2]"; }
+if ($length == 3) {$ansones2 = "00000$onestr[2]"; }
+if ($length == 2) {$ansones2 = "000000$onestr[2]"; }
+if ($length == 1) {$ansones2 = "0000000$onestr[2]"; }
+
+$anstwos2 = "$twostr[2]";
+$length = length($twostr[2]) ;
+if ($length == 7) {$anstwos2 = "0$twostr[2]"; }
+if ($length == 6) {$anstwos2 = "00$twostr[2]"; }
+if ($length == 5) {$anstwos2 = "000$twostr[2]"; }
+if ($length == 4) {$anstwos2 = "0000$twostr[2]"; }
+if ($length == 3) {$anstwos2 = "00000$twostr[2]"; }
+if ($length == 2) {$anstwos2 = "000000$twostr[2]"; }
+if ($length == 1) {$anstwos2 = "0000000$twostr[2]"; }
+
+@header=("$BCENTER \( N \) $ECENTER",
+"$BCENTER \( $a[0] \) $ECENTER",
+"$BCENTER \( $a[1]  \) $ECENTER",
+"$BCENTER \( $a[2] \) $ECENTER",
+"$BCENTER \( $a[3] \) $ECENTER");
+
+
+@header = map {EV2($_) } @header;
+
+BEGIN_TEXT
+Determine the ones and two complements of the given binary numbers. $BR
+$BITALIC 
+Note: Your answers should have the same number of bits as \( N \). For example, in the first column, \( N \) is a 4-bit number; in the second column, \( N \) is a 6-bit number, etc.
+$EITALIC
+$PAR
+END_TEXT
+
+TEXT(
+
+begintable(1+scalar(@header)), 
+	row(@header),
+	row("1s complement",ans_rule(10), ans_rule(10) ,  ans_rule(13)) ,
+	row("2s complement", ans_rule(10), ans_rule(10) , ans_rule(13)) ,
+endtable() 
+);
+
+
+BEGIN_HINT
+Let \( N \) be a binary number. The ones complement of \( N \) is obtained by replacing each 0 bit by 1 and each 1 bit by 0 (this is equivalent to subtracting each digit of \( N \) from 1). The twos complement of \( N \) is its ones complement plus one.$BR
+For example:$BR
+If \( N = 001100 \). Note that it is a 6-bit number. Then the ones complement of \( N \) is a 6-bit number and is \( 110011 \), and the twos complement of \( N \) is also a 6-bit number and is 
+\[
+     110011+1 = 110100 .
+\]
+END_HINT
+BEGIN_SOLUTION
+The ones complement of \( N = $a[0] \) is \( $ansones0 \) and its twos complement is \( $ansones0+1 = $anstwos0 \).$BR
+
+The ones complement of \( N = $a[1] \) is \( $ansones1 \) and its twos complement is \( $ansones1+1 = $anstwos1 \).$BR
+
+The ones complement of \( N = $a[2] \) is \( $ansones2 \) and its twos complement is \( $ansones2+1 = $anstwos2 \).$BR
+
+END_SOLUTION
+
+# String answer:
+ANS(str_cmp($ansones0) );
+ANS(str_cmp($ansones1) );
+ANS(str_cmp($ansones2) );
+ANS(str_cmp($anstwos0) );
+ANS(str_cmp($anstwos1) );
+ANS(str_cmp($anstwos2) );
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.;

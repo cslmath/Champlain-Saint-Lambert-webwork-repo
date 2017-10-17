@@ -1,0 +1,107 @@
+##DESCRIPTION
+##  Relations on sets: pictorial representation matrix
+##ENDDESCRIPTION
+
+ 
+## Author1(Michele Titcombe)
+## DBsubject(Set Theory)
+## DBchapter(Relations on Sets)
+## DBsection(Graphs)
+## Date(2016/10/18)
+## Institution(Champlain College Saint-Lambert)
+## Level(2)
+## KEYWORDS('set', 'relation', 'matrix')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+"contextLimitedPoint.pl",
+"niceTables.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+$num = random(5,9,1);
+
+Context("LimitedPoint");
+# array of elements of Cartesian product AxA and of the relation R:
+@AcrossB = (  Point("(1,1)"), Point("(1,2)"), Point("(1,3)"), Point("(1,4)"), Point("
+(2,1)"), Point("(2,2)"), Point("(2,3)"), Point("(2,4)"), Point("(3,1)"), Point("(3,2)"), Point("
+(3,3)"), Point("(3,4)"), Point("(4,1)"), Point("(4,2)"), Point("
+(4,3)"), Point("(4,4)") );
+@slice = NchooseK(16,$num);
+@R = @AcrossB[@slice];
+$Rlist = List(@R);
+
+Context("Numeric");
+Context()->strings->add(1=>{},0=>{});
+
+# matrix entry is 1 if ordered pair is in R and 0 if not:
+foreach my $i (0..15) {
+     $ans[$i]=String("0"); 
+     $ansd[$i]=0;
+}
+foreach my $j (0..$num-1) {
+     $ans[$slice[$j]] = String("1");
+     $ansd[$slice[$j]] = 1;
+}
+
+$showPartialCorrectAnswers = 0;
+
+############################################
+Context()->texStrings;
+BEGIN_TEXT
+Given the following relation \( R \) on the set \(A = \lbrace 1, 2, 3, 4 \rbrace\):
+$BR
+\[
+   R = \lbrace $Rlist \rbrace
+\]
+$PAR
+The matrix of the relation \(R \) is:
+$BR
+\{
+DataTable(
+    [
+       ['       ', '1', '2', '3', '4'],
+       ['1', ans_rule(3),ans_rule(3),ans_rule(3), ans_rule(3) ],
+       ['2', ans_rule(3),ans_rule(3),ans_rule(3), ans_rule(3) ],
+       ['3', ans_rule(3),ans_rule(3),ans_rule(3), ans_rule(3) ],
+       ['4', ans_rule(3),ans_rule(3),ans_rule(3), ans_rule(3) ]
+   ],
+  midrules => 1,
+  align => '|c|c|c|c|c|',
+);
+\}
+$BR
+Hint: In the matrix element corresponding to \( (a,b) \), enter \( 1 \) if \( a \in A \) is related to \( b \in B\) or enter \( 0 \) if \( a \in A \) is not related to \( b \in B\). 
+END_TEXT
+BEGIN_SOLUTION
+The matrix of the relation \(R \) is:
+$BR
+\{
+LayoutTable(
+    [
+       ['       ', '1', '2', '3', '4'],
+       ['1', $ansd[0], $ansd[1],$ansd[2],$ansd[3] ],
+       ['2', $ansd[4], $ansd[5],$ansd[6],$ansd[7] ],
+       ['3', $ansd[8], $ansd[9],$ansd[10],$ansd[11] ],
+       ['4', $ansd[12], $ansd[13],$ansd[14],$ansd[15] ],
+   ],
+  midrules => 1,
+  align => '|c|c|c|c|c|',
+);
+\}
+END_SOLUTION
+Context()->normalStrings;
+
+foreach my $i (0..15) {
+     ANS($ans[$i]->cmp() );
+}
+
+ENDDOCUMENT();        

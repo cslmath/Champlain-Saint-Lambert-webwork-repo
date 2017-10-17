@@ -1,0 +1,72 @@
+# DESCRIPTION
+# Solids of revolution with trigonometry
+# Commerce-Cal2 Volume-Trig
+# WeBWorK problem written by Charles Fortin, 
+# <cfortin(at)champlaincollege.qc.ca(dot)ca>
+# ENDDESCRIPTION
+
+## DBsubject('WeBWorK')
+## DBchapter('Demos')
+## DBsection('Problem')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Author('Charles Fortin')
+## Institution('ChamplainCollege')
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGchoicemacros.pl",
+"PGgraphmacros.pl",
+);
+
+# make sure we're in the context we want
+Context("Numeric");
+
+$a = random(2,6,1);
+$c = Real("2*$a");
+$b = Real("2*$a/4");
+$d = Real("4 * $a");
+
+$volume = Real("pi/$c");
+
+
+TEXT(beginproblem());
+Context()->texStrings;
+BEGIN_TEXT
+Find the volume of the solid of revolution obtained by rotating the region in the first quadrant bounded
+ by the curves 
+\[x=0\;,\;y=\sin ($a x),\;\textrm{and}\; y=\cos ($a x) \] 
+about the \(x\)-axis.
+$BR
+$BR
+The volume of the solid of revolution obtained is \{ ans_rule(20) \}.
+$PAR
+Hint: \(\displaystyle \cos (2\theta) = \cos^2 \theta - \sin^2 \theta\). 
+
+END_TEXT
+Context()->normalStrings;
+
+ANS( $volume->cmp() );
+
+Context()->texStrings;
+SOLUTION(EV3(<<'END_SOLUTION'));
+$PAR SOLUTION $PAR
+The two curves intersect when \($a x = \pi/4\). Therefore
+the volume is obtained by calculating the integral
+\[\pi \int_0^{\pi/$d} \cos^2 ($a x) - \sin^2 ($a x) dx\]
+which gives (using the hint)
+\[\pi \int_0^{\pi/$d} \cos ($c x) dx = \left. \frac{\pi \sin ($c x)}{$c} \right|_0^{\pi/$d}
+ = \frac{\pi \sin (\pi/2)}{$c} = \frac{\pi}{$c}.\]
+END_SOLUTION
+Context()->normalStrings;
+
+ENDDOCUMENT();
+
+
+

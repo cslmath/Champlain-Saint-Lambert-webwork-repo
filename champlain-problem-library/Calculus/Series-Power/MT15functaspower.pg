@@ -1,0 +1,68 @@
+##DESCRIPTION
+## Calculus. Represent a rational function as a power series.
+##ENDDESCRIPTION
+
+##KEYWORDS('Power Series', 'Radius of Convergence', 'Interval of Convergence')
+
+## DBsubject(Calculus - single variable)
+## DBchapter('Infinite Sequences and Series')
+## DBsection('Representations of Functions as Power Series')
+## Date('2015/04/29')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Calculus: Early Transcendentals')
+## EditionText1('2')
+## AuthorText1('Rogawski')
+## Section1('10.6')
+## Problem1('35')
+
+DOCUMENT();
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl", 
+"MathObjects.pl",
+);
+
+TEXT(beginproblem());
+Context()->variables->add(n=>'Real');
+
+$constant = random(2, 9);
+$sign = list_random(-1, 1);
+$coef = $constant*$sign;
+$denominator = Formula("1 - $coef*x")->reduce;
+
+$answer= Compute("($coef*x)^n");
+$answer->{test_points}=[[1,0.1],[2,0.2],[3,0.3]];
+
+#Compute the interval of convergence:
+$leftendpoint = -1/($constant);
+$rightendpoint= 1/($constant);
+
+Context()->texStrings;
+BEGIN_TEXT
+Expand the function into a power series with centre \( a= 0 \) 
+and determine the set of \( x \) for which the expansion is valid.
+$PAR
+\[ f(x) = \frac{1}{$denominator} \]
+$PAR
+\(\frac{1}{$denominator} = \sum\limits_{n=0}^{\infty} \) \{ans_rule() \}
+$PAR
+The interval of convergence is: \{ans_rule() \}
+END_TEXT
+
+Context()->normalStrings;
+
+ANS($answer->cmp);
+ANS(Interval("($leftendpoint, $rightendpoint)")->cmp);
+
+Context()->texStrings;
+BEGIN_HINT
+Use the power series representation for \( 1/(1-x) \) and its interval of convergence:
+\[
+   \frac{1}{1-x} = 1 + x + x^2 + x^3 + \cdots + x^n + \cdots \quad\quad (-1< x < 1)
+\]
+END_HINT
+
+COMMENT('Math Objects version.');
+ENDDOCUMENT()

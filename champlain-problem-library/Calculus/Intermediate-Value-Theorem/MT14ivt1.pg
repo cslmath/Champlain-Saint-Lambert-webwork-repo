@@ -1,0 +1,91 @@
+# DESCRIPTION
+# Intermediate Value Theorem
+# ENDDESCRIPTION
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Applications of differentiation)
+## DBsection(Mean value theorem)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Level(2)
+## TitleText1('Calculus')
+## AuthorText1('')
+## EditionText1('')
+## Section1('')
+## Problem1('')
+
+## KEYWORDS('calculus','continuity')
+
+DOCUMENT();
+
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGchoicemacros.pl",
+# "parserNumberWithUnits.pl",
+# "parserFormulaWithUnits.pl",
+# "parserFormulaUpToConstant.pl",
+# "PGcourse.pl",
+"parserPopUp.pl",
+);
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$k1 = random(1,2,1);
+$k2 = Compute("$k1+1");
+$f = Compute("x^4 + $k1 x - $k2")->reduce();
+$a = random(-1,0,1);
+$fa = Compute("($a)^4 + $k1*$a - $k2");
+do {$b= $a + non_zero_random(2,5,1);
+      $fb = Compute("($b)^4 + $k1*$b - $k2");
+       } until ($fb > 0);
+$lessthan = PopUp( ["?", "<", "=", ">"], "<");
+$greaterthan = PopUp( ["?", "<", "=", ">"], ">" );
+
+TEXT(beginproblem());
+
+Context()->texStrings;
+
+BEGIN_TEXT
+Use the Intermediate Value Theorem to show that there is a root of 
+
+\(
+
+   $f = 0
+
+\)
+in the interval \( ($a,$b) \).$PAR
+
+
+Let \( f(x) = \) \{ ans_rule(30) \} $PAR
+
+The conditions of the theorem:$BR
+
+$BBOLD (1)$EBOLD Is the function continuous on the interval \( [a,b] \)?  $BR
+    \( f \ \) is continuous on its domain, which in interval notation, is: \{ ans_rule(30) \}. Thus, the function is continuous on \( [$a,$b] \). $BR$BR
+$BBOLD (2)$EBOLD  Is there an \( M \) between the values of \( f(a) \) and \( f(b) \)?  To show an equation has a root, we set \( M = \) \{ ans_rule(5) \}$BR
+    \( f($a) = \) \{ ans_rule(20) \} \{ $lessthan->menu \}  \{ ans_rule(5) \} and \( f($b) = \) \{ ans_rule(20) \} \{ $greaterthan->menu \} \{ ans_rule(5) \}. $BR $BR
+
+The conclusion of the theorem:$BR
+
+There is at least one number \( c \) in the interval \( ($a,$b) \) such that \( f(c) = \) \{ ans_rule(5) \}.
+
+END_TEXT
+
+Context()->normalStrings;
+ANS($f->cmp() );
+ANS(Interval("(-inf,inf)")->cmp() );
+ANS(Compute( 0 )->cmp() );
+ANS($fa->cmp() );
+ANS($lessthan->cmp() );
+ANS(Compute( 0 )->cmp() );
+ANS($fb->cmp() );
+ANS($greaterthan->cmp() );
+ANS(Compute( 0 )->cmp() );
+ANS(Compute( 0 )->cmp() );
+
+COMMENT('MathObject version');
+
+ENDDOCUMENT();
+

@@ -1,0 +1,54 @@
+##DESCRIPTION
+## Evaluate an indefinite integral. Substitution method, inverse trig.
+##ENDDESCRIPTION
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Techniques of integration)
+## DBsection(Substitution (with trigonometric functions))
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2016/02/14)
+## Level(2)
+## TitleText1('Calculus: Early Transcendentals')
+## AuthorText1('Stewart')
+## EditionText1('6')
+## Section1('7.5')
+## Problem1('1 2')
+## KEYWORDS('Integrals', 'Substitution','inverse trigonometric function')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGML.pl",
+"parserFormulaUpToConstant.pl",
+);
+
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+Context("Numeric");
+$g = random(2,9,1);
+$ans = FormulaUpToConstant("arctan(sin($g*x))/$g");
+
+Context()->texStrings;
+BEGIN_PGML
+Evaluate the indefinite integral.  Use C for the constant of integration.
+>> [` \displaystyle \int \frac{ \cos([$g] x) }{ 1+\sin^2 ([$g] x) } dx `] <<
+
+Answer: [____________________]{$ans}
+END_PGML
+BEGIN_PGML_HINT
+Substitute: [` u = \sin ([$g] x) `] 
+END_PGML_HINT
+BEGIN_PGML_SOLUTION
+Let [` u = \sin ([$g] x) `]. The differential is then [` du = [$g] \cos ([$g] x) dx `].
+Substituting gives
+[`\displaystyle\int  \frac{ \cos([$g] x) }{ 1+\sin^2 ([$g] x) } dx = \frac{1}{[$g]}\displaystyle \int \frac{1}{1+u^2}\, du = \frac{1}{[$g]} \arctan u + C = \frac{1}{[$g]} \arctan(\sin ([$g] x)) + C`]
+END_PGML_SOLUTION
+Context()->normalStrings;
+
+COMMENT('Uses MathObjects / PGML.');
+ENDDOCUMENT();        # This should be the last executable line in the problem.

@@ -1,0 +1,87 @@
+##DESCRIPTION
+##  Calculus: Integration, substitution method
+##ENDDESCRIPTION
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Techniques of integration)
+## DBsection(Substitution (without trigonometric functions))
+## Institution(Champlain College Saint-Lamber)
+## Author(Michele Titcombe)
+## Level(2)
+## TitleText1('')
+## AuthorText1('')
+## EditionText1('')
+## Section1('')
+## Problem1('')
+## KEYWORDS('integrals', 'substitution')
+
+DOCUMENT();
+
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGML.pl",
+"parserFormulaUpToConstant.pl",
+"PGcourse.pl",
+);
+
+$showPartialCorrectAnswers = 1;
+
+TEXT(beginproblem());
+Context("Numeric");
+Context()->variables->add(u=>"Real",dx=>"Real");
+
+$a = random(3,7,1);
+$b = random(4,15,1);
+$m = random(3,7,1);
+$m1 = Compute("$m+1");
+$n = random(8,12,1);
+$integrand = Compute("x^{$m}($a+$b x^{$m1})^{$n}");
+$uf = Compute("$a+$b*x^($m+1)");
+$uprime = $uf->D('x');
+$du = Compute("$uprime dx");
+$gu = Compute("u^$n/($b*($m+1))");
+$ansu = FormulaUpToConstant("u^($n+1)/($b*($m+1)*($n+1))");
+$ansx = FormulaUpToConstant("($a+$b*x^($m+1))^($n+1)/($b*($m+1)*($n+1))");
+
+Context()->texStrings;
+BEGIN_PGML
+Consider the indefinite integral:  
+>> [` \displaystyle \int [$integrand] \, dx `]  <<
+
+a. The most appropriate substitution to simplify this integral is:  
+[`u =`][_______________]{$uf}
+
+b. The differential [`du`] is  
+[`du =`][_______________]{$du}
+
+c. After making the substitution, we obtain the integral [` \int g(u)\,du `] where  
+[`g(u) =`][_______________]{$gu}
+
+d. Evaluating this integral in terms of [`u`] gives (use C for the constant of integration):  
+[`\int g(u)\,du =`][____________________________]{$ansu}
+
+e. After substituting back for [`u`] we obtain the following final form of the answer in terms of the original variable (use C for the constant of integration):  
+[` \int [$integrand]\,dx`] = [____________________________]{$ansx}
+END_PGML
+BEGIN_PGML_HINT
+Part b. If [`u = f(x)`], then the differential is [`du=f'(x)dx`].
+END_PGML_HINT
+BEGIN_PGML_SOLUTION
+a. Let [`u =[$uf] `]
+
+b. The differential is [`du = [$du]`]
+
+c. After making the substitution, we obtain the integral [` \int g(u)\,du `] where  
+[`g(u) = [$gu]`]
+
+d. Evaluating this integral in terms of [`u`] gives:
+[`\int g(u)\,du =[$ansu]`]
+
+e. After substituting back for [`u`] we obtain the following final form of the answer in terms of the original variable:  
+[` \int [$integrand]\,dx = [$ansx]`]
+END_PGML_SOLUTION
+Context()->normalStrings;
+
+COMMENT('Uses MathObjects / PGML.');
+ENDDOCUMENT();

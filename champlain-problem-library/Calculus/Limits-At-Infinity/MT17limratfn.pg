@@ -1,0 +1,59 @@
+## DBsubject(Calculus - single variable)
+## DBchapter(Limits and continuity)
+## DBsection(Limits at infinity, horizontal and oblique asymptotes)
+## Institution('Champlain College Saint-Lambert')
+## Date('2017/01/19')
+## Author('Michele Titcombe')
+## Level(2)
+## Static(1)
+## TitleText1('Calculus: Early Transcendentals')
+## AuthorText1('Stewart')
+## EditionText1('5')
+## Section1('2.6')
+## Problem1('51')
+## KEYWORDS('degree','rational function')
+
+DOCUMENT();
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+"parserPopUp.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$popup1 = PopUp(["?", "positive infinite", "negative infinite", "positive or negative infinite","zero","nonzero and finite"], "zero");
+$popup2 = PopUp(["?", "positive infinite", "negative infinite", "positive or negative infinite","zero","nonzero and finite"], "positive or negative infinite");
+$popup3 = PopUp(["?", "positive infinite", "negative infinite", "positive or negative infinite","zero","nonzero and finite"], "nonzero and finite");
+
+Context()->texStrings;
+BEGIN_TEXT
+$PAR
+Let \(P\) and \(Q\) be polynomials. $PAR
+Find \(\displaystyle \lim_{x \to \infty} \frac{P(x)}{Q(x)}\) $PAR
+(a) if the degree of \(P\) is  less than the degree of \(Q\):
+$BR
+Answer is \{ $popup1->menu() \}$PAR
+
+(b) if the degree of \(P\) is greater than the degree of \(Q\). 
+$BR
+Answer is \{ $popup2->menu() \}$PAR
+
+(c) if the degree of \(P\) is equal to the degree of \(Q\):
+$BR
+Answer is \{ $popup3->menu() \}
+END_TEXT
+
+ANS( $popup1->cmp() );
+ANS( $popup2->cmp() );
+ANS( $popup3->cmp() );
+
+
+ENDDOCUMENT();

@@ -1,0 +1,75 @@
+##DESCRIPTION
+# Modified by M. Titcombe 10/13/2009
+# Original WeBWorK problem:  Utah 1220s17p3.pg 
+# (Limits L'Hopitals Rule and Numerical Methods)
+##ENDDESCRIPTION
+## Author('Utah ww group')
+## Institution('Univeristy of Utah')
+## DBsubject('Calculus')
+## DBchapter('Techniques of Integration')
+## DBsection('Improper Integrals')
+## AuthorText1('Jerrold Marsden and Alan Weinstein')
+## TitleText1('Calculus II')
+## EditionText1('2')
+## Section1('Limits, L'Hopital's Rule, and Numerical Methods')
+## Problem1('')
+## KEYWORDS('calculus')
+
+
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl"
+);
+
+
+TEXT(&beginproblem); 
+
+##SHORTCUT COMMANDS
+$ds = "\displaystyle";
+
+TEXT(EV2(<<EOT));
+The present value \( PV \) of a perpetual stream of income that flows continually at the rate of \( P(t) \) dollars per year can be expressed 
+as an improper integral, in the formula below, 
+where \( r  \) is the interest rate compounded continuously. If 
+\(r =0.08 \) and \(P(t) = 100,000 + 1000t\), find the present value:
+\[ PV = $ds\int_{0}^{\infty} e^{-rt}P(t) \hbox{d}t \] 
+
+
+$PAR
+The present value is  \{ans_rule(30)\} dollars.
+EOT
+$ans = "1406250";
+&ANS(std_num_cmp($ans,.08));
+
+TEXT(EV3(<<'EOT'));
+$PAR $BBOLD Hint:$EBOLD Use L'Hopital's Rule for the limit of \( b/e^{rb}\) as \( b\) tends to \( \infty \).
+EOT
+
+SOLUTION(EV3(<<'EOT')); 
+
+$PAR $BBOLD Solution:$EBOLD
+
+
+\[ FP =  $ds\int_{0}^{\infty} e^{-0.08t} (100,000+1000t) \hbox{d}t \]
+
+Using integration by parts:
+
+\[ 
+  = \lim_{b\to \infty} (-1,250,000 e^{-0.08t} - 12,5000te^{-0.08t} - 156,250e^{-0.08t} )
+  |_{0}^{b} 
+  = 
+\]
+$DOLLAR 1,406,250 
+
+EOT
+
+
+
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.

@@ -1,0 +1,49 @@
+# DESCRIPTION
+# Application of integration.
+# Find the present value of an income stream given the constant rate of
+# income generation and the annual interest rate compounded continuously.
+# M. Titcombe 10/19/2009
+# ENDDESCRIPTION
+
+## DBsubject('Calculus')
+## DBchapter('Integrals')
+## DBsection('Applications')            
+## AuthorText1('Tan')
+## TitleText1('Applied Calculus')
+## EditionText1('7')
+## Section1('6.4')
+## Problem1('9')
+##KEYWORDS('calculus', 'integrals', 'economics', 'present value')
+##TYPE('word problem')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+);
+
+Context("Numeric");
+$a1 = random(200000,600000,100000);
+$b1 = random(4,8,1);
+$c1 = random(2,10,1);
+$r1 = $b1 * .01;
+
+TEXT(beginproblem());
+Context()->texStrings;
+BEGIN_TEXT
+An investment is expected to generate income at the rate of 
+\( R(t) =\) ${DOLLAR}\($a1\) 
+per year for the next \( $c1 \) years. Find the present value, \(PV\), of this investment if the prevailing interest rate is \( $b1 \) ${PERCENT} per year compounded continuously. 
+$PAR
+The present value of an income stream of \( R(t) \) dollars per year, earning interest at the rate of \( r \) per year compounded continuously for \( T \) years , is given by \( PV = \int_0^T R(t)e^{-rt} dt \) .
+$BR
+$BR
+\(PV\) = ${DOLLAR}\{ans_rule(40) \}
+$BR
+END_TEXT
+Context()->normalStrings;
+
+$ans = $a1/$r1 - $a1/$r1*exp(-$c1*$r1);
+ANS(num_cmp($ans,tol => .011));
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.

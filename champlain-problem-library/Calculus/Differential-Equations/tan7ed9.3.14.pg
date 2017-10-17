@@ -1,0 +1,52 @@
+# DESCRIPTION
+# Differential equation - business/economics context
+# First-order d.e. to model a sinking fund: A'(t) = rA(t) + P
+# where A( is the size of the fund, r is annual interest compounded
+# continuously, and P is the amount paid into fund per year.
+# M. Titcombe 10/23/2009
+# ENDDESCRIPTION
+
+## DBsubject('Calculus')
+## DBchapter('Differential Equations')
+## DBsection('Modeling with Differential Equations')
+## TitleText1('Applied Calculus')
+## EditionText1('7')
+## AuthorText1('Tan')
+## Section1('9.3')
+## Problem1('14')
+## KEYWORDS('calculus', 'differential equation', 'application')
+
+DOCUMENT() ;        # This should be the first executable line in the problem.
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+);
+
+Context("Numeric");
+$term = random(2,5,1);
+$rate = random(3,10,1);
+$r = .01*$rate;
+$final_amt = random(20000,90000,10000);
+
+TEXT(beginproblem()) ;
+$showPartialCorrectAnswers = 1 ;
+Context()->texStrings;
+BEGIN_TEXT
+The owner of a hardware store has decided to set up a sinking fund for the purpose of purchasing a computer \( $term \) years from now. It is expected that the purchase will involve a sum of ${DOLLAR}\($final_amt\). 
+The fund grows at the rate of
+\[
+    \frac{dA}{dt} = rA + P 
+\]
+where \(A\) denotes the size of the fund at any time \(t\), \(r\) is the annual interest rate earned by the fund compounded continuously, and \(P\) is the amount (in dollars) paid into the fund by the store owner per year (assume this is done on a frequent basis in small deposits over the year so that it is essentially continuous). 
+$BR
+If the fund earns \($rate\) ${PERCENT} interest per year compounded continuously, determine the size of the yearly investment the store owner should pay into the fund.
+$BR
+Yearly investment \(P\) =  ${DOLLAR}\{ ans_rule(60) \} 
+$BR
+END_TEXT
+Context()->texStrings;
+
+$ans = $r*$final_amt/(exp($r*$term) -1);
+ANS(std_num_cmp($ans));
+
+ENDDOCUMENT() ; 

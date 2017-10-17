@@ -1,0 +1,81 @@
+## DESCRIPTION
+## Linear Algebra. Evaluate a 2x2 matrix polynomial. 
+## ENDDESCRIPTION
+
+## DBsubject(Linear algebra)
+## DBchapter(Systems of linear equations)
+## DBsection(Matrix-vector forms)
+## Date(2015/12/02)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Level(3)
+## MO(1)
+## KEYWORDS('polynomial','matrix')
+
+DOCUMENT(); 
+
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"parserMultiAnswer.pl",
+"AnswerFormatHelp.pl",
+"PGcourse.pl",
+"PGnauGraphics.pl",
+"PGgraphmacros.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+Context('Matrix');
+
+{
+
+{
+$a=non_zero_random(2,4,2);
+$b=non_zero_random(3,5,2);
+$c=non_zero_random(-5,-2,1);
+$d=non_zero_random(-4,4,2);
+$A = Matrix([[$a,$b],[$c,$d]]);
+redo if ($c == $d);
+# redo if ($A->det != -1);
+}
+$Asq = Matrix($A*$A);
+
+{
+$k=random(2,4,1);
+$h=random(3,7,1);
+$n=random(2,9,1);
+redo if ($h==$n);
+}
+
+}
+$I = Value::Matrix->I(2);
+$f = Compute("$k x^2 - $h x + $n");
+
+$fA = Matrix($k*$Asq - $h*$A + $n*$I);
+
+Context()->texStrings;
+BEGIN_TEXT
+Given:
+\[ A = $A\]
+$BR
+Find \( f(A) \) where \( f(x) = $f \).
+$BR
+$BR
+\( f(A) =\) \{ $fA->ans_array(3)\}
+END_TEXT
+BEGIN_HINT
+1. \( f(A) = $k A^2 - $h A + $n I \), where \( I \) is the identity matrix. $BR
+2. \( A^2 = A A \), which is a $BBOLD matrix  product$EBOLD.
+END_HINT
+BEGIN_SOLUTION
+ \[ f(A) = $k $A $A - $h $A + $n $I \]
+\[ = $k $Asq - $h $A + $n $I = $fA \] 
+END_SOLUTION
+Context()->normalStrings;
+
+ANS($fA->cmp());
+
+COMMENT('MathObjects version.');
+ENDDOCUMENT();   
+

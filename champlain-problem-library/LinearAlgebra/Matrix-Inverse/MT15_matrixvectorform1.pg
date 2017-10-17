@@ -1,0 +1,129 @@
+## DESCRIPTION
+## Linear Algebra. Solve 2x2 system using inverse of coefficient matrix
+## ENDDESCRIPTION
+
+## DBsubject(Linear algebra)
+## DBchapter(Systems of linear equations)
+## DBsection(Matrix-vector forms)
+## Date(2015/12/02)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Level(3)
+## MO(1)
+## KEYWORDS('inverse','matrix')
+
+DOCUMENT(); 
+
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"parserMultiAnswer.pl",
+"AnswerFormatHelp.pl",
+"PGcourse.pl",
+"PGnauGraphics.pl",
+"PGgraphmacros.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+Context('Matrix');
+
+{
+
+{
+$a=non_zero_random(2,10,1);
+$b=non_zero_random(2,10,1);
+$c=non_zero_random(-10,-2,1);
+$d=non_zero_random(2,10,1);
+$A = Matrix([[$a,$b],[$c,$d]]);
+# redo if ($A->det != -1);
+}
+$Ai = $A->inverse;
+$A1C = Matrix([[$a],[$c]]);
+$A2C = Matrix([[$b],[$d]]);
+
+{
+$x=random(2,8,1);
+$y=random(-8,-2,1);
+redo if ($x==$y);
+}
+
+$XX=Matrix([[Formula("x")],[Formula("y")]]);
+$X=Matrix([[$x],[$y]]);
+$Y=Matrix($A*$X);
+
+$p=$Y->element(1,1);
+$q=$Y->element(2,1);
+
+redo if ($p/$a>9);
+redo if ($p/$a<-9);
+redo if ($q/$c>9);
+redo if ($q/$c<-9);
+redo if ($p/$b>9);
+redo if ($p/$b<-9);
+redo if ($q/$d>9);
+redo if ($q/$d<-9);
+}
+
+$Aug=Matrix([[$a,$b,$p],[$c,$d,$q]]);
+
+
+
+Context()->texStrings;
+BEGIN_TEXT
+You are given the system of linear equations:
+\[ $a x + $b y = $p\] \[ $c x + $d y = $q\]
+$PAR
+Determine the following equivalent representations of the system of equations given above:
+$BR
+a. Find the augmented matrix of the system.
+$BR
+\{ $Aug->ans_array(3) \}
+$BR
+
+b. Find the matrix-vector form of the system. 
+$BR
+\{ $A->ans_array(3) \} \( $XX = \) \{ $Y->ans_array(3) \}
+$BR
+
+c. Use the inverse of the coefficient matrix to solve the linear system. 
+$BR
+\( $XX = \) \{ $Ai->ans_array(3) \}  \( $Y = \) \{ $X->ans_array(3) \}
+$BR
+Thus, the solution to the system is \( x = \) \{ ans_rule(10) \} and \( y = \) \{ ans_rule(10) \}.
+END_TEXT
+BEGIN_HINT
+1. The matrix-vector form is \( Ax = b \) where \( A \) is the coefficient matrix. $BR
+2.  Given an invertible square matrix \(A\) of size \( n \times n \) and column matrices \( x \) and \( b\) of size \( n \times 1 \).$BR
+ \( Ax = b  \Rightarrow A^{-1} A x = A^{-1}b \Rightarrow I x = A^{-1}b \Rightarrow x = A^{-1}b \)
+
+END_HINT
+Context()->normalStrings;
+
+# answer to part a.
+ANS($Aug->cmp);
+
+# answer to part b.
+ANS($A->cmp);
+ANS($Y->cmp);
+
+# answer to part c.
+ANS($Ai->cmp);
+ANS($X->cmp);
+ANS(Formula("$x")->cmp);
+ANS(Formula("$y")->cmp);
+
+# answer to part d.
+#ANS($A1C->cmp);
+#ANS($A2C->cmp);
+#ANS($Y->cmp);
+
+# answer to part e.
+#ANS(Formula("$x")->cmp);
+#ANS(Formula("$y")->cmp);
+#ANS(Formula("$p/$b")->cmp);
+#ANS(Formula("$q/$c")->cmp);
+
+COMMENT('MathObjects version.');
+ENDDOCUMENT();   
+

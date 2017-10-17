@@ -1,0 +1,105 @@
+## DESCRIPTION
+## Optimization
+## ENDDESCRIPTION
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Applications of differentiation)
+## DBsection(Optimization - general)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2015/11/26)
+## Level(5)
+## KEYWORDS('Optimization' 'Maximum' 'Minimum')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros("PG.pl",
+           "PGbasicmacros.pl",
+           "PGchoicemacros.pl",
+           "PGanswermacros.pl",
+           "PGauxiliaryFunctions.pl",
+"extraAnswerEvaluators.pl",
+"MathObjects.pl",
+"PGML.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+Context()->variables->add(y=>"Real");
+$showPartialCorrectAnswers = 1;
+
+$V = random(250,1000,250);
+$ps = random(3,9,2);
+$pt = random(2,8,2);
+$pb = random(3,9,2);
+while ($pb == $ps){
+         $pb = random(3,9,2);
+}
+$a = Compute("$ps*0.01");
+$b = Compute("$pb*0.01");
+$c = Compute("$pt*0.01");
+$Cx = Compute("2 $a $V/x + pi x^2 ($b + $c)");
+$Cxp = $Cx -> D;
+$Cxpp = $Cxp -> D;
+$Cxy = Compute(" 2*pi*x*y*$a + pi*x^2 $b + pi*x^2 $c");
+$xcrit = Compute("($a*$V/(pi*($b + $c)))^(1/3)");
+$ycrit = Compute("$V/(pi*$xcrit^2)");
+$Cxpxcrit = $Cxp -> eval(x=>$xcrit);
+$Cppxcrit = $Cxpp -> eval(x=>$xcrit);
+$Cmin = $Cx -> eval(x=>$xcrit);
+
+BEGIN_PGML
+A container is to have the shape of a right circular cylinder with radius [` x `] cm and height [` y `] cm and a volume of  [$V]  cm[`^3`]. Suppose also that the material for the circular base costs  [$pb]  cents per square centimetre, the material for the circular top costs  [$pt]  cents per square centimetre, and the material for the side of the container costs  [$ps]  cents per square centimetre.
+
+Find the dimensions of the container that will minimize the cost of material and
+find the minimum cost. Justify your conclusion by answering
+the following questions.
+
+a) To solve this problem, we need to minimize the cost (in *dollars*) as a function of the radius [` x `]:  
+Cost [` C(x) = `][________________________________________]{$Cx} dollars
+
+b) Give the domain of [` C(x) `] in interval notation.  (Use the fact that length must be positive.)  
+Domain: [_______________]{Interval(0,inf)}
+
+c) The function [` C(x) `] has a critical point at:  
+[` x = `] [_______________]{$xcrit}
+
+d) To verify that [` C(x) `] has a minimum at this critical point, we evaluate the second derivative [` C''(x) `] at this point:  
+[` C''`](critical point) is [______________]{$Cppxcrit}, which is a positive number. (Thus, the function [` C(x) `] is concave upward at this point.)
+
+e) In conclusion, the dimensions of the container that minimizes the cost and the minimum cost (in *dollars*) are:  
+Radius [`x `] = [_______________]{$xcrit} cm  
+Height [`y `] = [_______________]{$ycrit} cm  
+Minimum cost =  [_________________________]{$Cmin} dollars.  
+END_PGML
+
+BEGIN_PGML_HINT
+1. Area of the side of the container = (circumference)(height) = ([` 2 \pi `] radius)(height).
+2. Volume of a right circular cylinder = (area of base)(height) = ([`\pi`] radius[`^2`])(height).
+3. Remember to convert the cost of the material from cents to *dollars*.
+END_PGML_HINT
+
+BEGIN_PGML_SOLUTION
+a) The cost as a function of the radius [` x`] and height [`y`] is:  
+Cost = [`[$Cxy]`]  
+The volume of the container is [$V] cubic centimetres: [` \pi x^2 y = [$V]`], which gives [` y = \frac{[$V]}{\pi x^2}`].  
+Substituting this expression for [`y`] in the cost gives the cost function in terms of the radius [`x`] only.  
+Thus, the function to minimize is:  
+Cost [` C(x) `] = [`[$Cx]`] 
+
+b) The domain is [`(0,\infty)`].
+
+c) [`C'(x) = [$Cxp] = 0`]. Solving [`C'(x)=0`] gives [` x = [$xcrit]`] as the critical point. (Note that [`x=0`] is not a critical point, since it is not in the domain of [`C(x)`].)
+
+d) [`C''(x) = [$Cxpp]`]. Evaluating the second derivative at the critical point gives
+[`C''([$xcrit]) = [$Cppxcrit]`], which is a positive number. 
+
+e) In conclusion, the dimensions of the container that minimize the cost are:  
+Radius [`x=[$xcrit]`]  
+Height [`y=[$ycrit]`]  
+and the minimum cost is [`[$Cmin]`] dollars.
+
+END_PGML_SOLUTION
+
+COMMENT('MathObjects version.');
+ENDDOCUMENT();        # This should be the last executable line in the problem.

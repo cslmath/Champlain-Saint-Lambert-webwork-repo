@@ -1,0 +1,80 @@
+## DESCRIPTION
+##   Evaluate the binary differences.
+## ENDDESCRIPTION
+
+## DBsubject('Arithmetic')
+## DBchapter('Other bases')
+## DBsection('Converting')
+## Institution('Champlain College Saint-Lambert')
+## Date('2015/08/31')
+## Author('Michele Titcombe')
+## KEYWORDS('Integer', 'Binary', 'Subtraction')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl"
+);
+
+TEXT(beginproblem());
+
+$a[0] = random(700,1500,1);
+$a[1] = random(100,499,1);
+$a[2] = random(600,1000,1);
+$a[3] = random(50,300,1);
+$c = random(5,10,1);
+$a[4] = $a[0] + $c;
+$a[5] = $a[2] + $c;
+$diffr[0] = $a[0] - $a[1];
+$diffr[1] = $a[2] - $a[3];
+$diffr[2] = $a[4] - $a[3];
+$diffr[3] = $a[5] - $a[1];
+
+$number[0] = sprintf "%lb", $a[0];
+$number[1] = sprintf "%lb", $a[1];
+$number[2] = sprintf "%lb", $a[2];
+$number[3] = sprintf "%lb", $a[3];
+$number[4] = sprintf "%lb", $a[4];
+$number[5] = sprintf "%lb", $a[5];
+$ans[0] = sprintf "%lb", $diffr[0];
+$ans[1]= sprintf "%lb", $diffr[1];
+$ans[2]= sprintf "%lb", $diffr[2];
+$ans[3]= sprintf "%lb", $diffr[3];
+
+BEGIN_TEXT
+
+Evaluate the binary differences: $BR
+(a) \( $number[0] - $number[1] \) \{ ans_rule(30) \}
+$PAR
+(b) \( $number[2] - $number[3] \) \{ ans_rule(30) \}
+$PAR
+(c) \( $number[4] - $number[3] \) \{ ans_rule(30) \}
+$PAR
+(d) \( $number[5] - $number[1] \) \{ ans_rule(30) \}
+END_TEXT
+BEGIN_HINT
+Rules of subtraction in binary:$BR
+\[
+     0 - 0 = 0
+\]
+\[
+     1 - 0 = 1
+\]
+\[
+     1 -1 = 0
+\]
+\[
+     0 - 1 = 1 \text{, borrow 1}
+\]
+END_HINT
+
+ANS(str_cmp( $ans[0] ));
+ANS(str_cmp( $ans[1] ));
+ANS(str_cmp( $ans[2] ));
+ANS(str_cmp( $ans[3] ));
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.;

@@ -1,0 +1,128 @@
+## DESCRIPTION
+##   Logic gates OR, AND, and NOT on input sequences.
+## ENDDESCRIPTION
+
+## DBsubject(Set Theory and Logic)
+## DBchapter(Propositional Logic)
+## DBsection(Operations on Propositions)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2015/10/22)
+## Level(2)
+## TitleText1('Essential Computer Mathematics')
+## AuthorText1('Seymour Lipschutz')
+## YearText1('1987')
+## Section1('7.6')
+## Problem1('')
+## KEYWORDS('logic gate','OR gate','AND gate','NOT gate','Boolean')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+
+$showPartialCorrectAnswers = 1;
+
+$nbits = 8;
+
+@row0 = ();
+@row1 = ();
+@row2 = ();
+@inseq = ();  # random sequence (of length $nbits) of digits from 0 to 7 inclusively
+
+my @outseq1 = (0)x$nbits;  #initialize output sequences to contain all 0s
+my @outseq2 = (1)x$nbits;  #initialize to contain all 1s
+my @outseq3 = (0)x$nbits;
+
+foreach my $i (0..$nbits - 1){
+	$rannum = random(0,7,1);   
+	$inseq[$i] = $rannum;
+        # output for A*(B+C) is 1 for 111, 110 and 101 only (7, 6 and 5)
+        if (($inseq[$i] == 7) || ($inseq[$i] == 6) || ($inseq[$i] == 5)){
+              $outseq1[$i] = 1;
+        }
+        # output for A*B + C is 0 for 100, 010 and 000 only (4 and 2 and 0)
+        if (($inseq[$i] == 4) || ($inseq[$i] == 2) || ($inseq[$i] == 0)){
+              $outseq2[$i] = 0;
+        }
+        # output for (A+B)*C' is 1 for 110, 100 and 010 only (6, 4 and 2)
+        if (($inseq[$i] == 6) || ($inseq[$i] == 4) || ($inseq[$i] == 2)){
+              $outseq3[$i] = 1;
+        }
+	#if $rannum is even, output digit 0; if $rannum is odd, output digit 1
+	$row2[$i] = $rannum % 2;   
+	$rannum = ($rannum - $row2[$i]) / 2;
+	# 
+	$row1[$i] = $rannum % 2;
+	$rannum = ($rannum - $row1[$i]) / 2;
+	$row0[$i] = $rannum % 2;
+	$rannum = ($rannum - $row0[$i]) / 2;	
+}
+$a = join('',@row0);
+$b = join('',@row1);
+$c = join('',@row2);
+$ans1 = join('',@outseq1);
+$ans2 = join('',@outseq2);
+$ans3 = join('',@outseq3);
+
+Context()->texStrings;
+BEGIN_TEXT
+Given the input sequences:
+\[
+    \begin{array}{rl}
+       A & = $a \\
+       B & = $b \\
+       C & = $c
+     \end{array}
+\]
+Find the output sequence for each of the following expressions involving logic gates (OR gate, AND gate, NOT gate):
+$PAR
+$BBOLD(a)$EBOLD \( A \cdot (B + C) \) = \{ ans_rule(10) \}
+$BR
+$BBOLD(b)$EBOLD \( A \cdot B + C \) = \{ ans_rule(10) \}
+$BR
+$BBOLD(c)$EBOLD \( (A + B) \cdot \overline{C} \) = \{ ans_rule(10) \}
+$PAR
+Note: the output sequence will be the same length as the input sequences.
+END_TEXT
+
+
+BEGIN_HINT
+Let \( Y \) be the output of the logic gates.
+$PAR
+OR gate: \( A + B = Y \)
+$BR
+0 occurs as an output of an OR gate only when both inputs are 0.
+$PAR
+AND gate: \( A \cdot B = Y \)
+$BR
+1 occurs as an output of an AND gate only when both inputs are 1.
+$PAR
+NOT gate: \( \overline{A} = Y \)
+$BR
+If the input is 1, the output is 0; if the input is 0, the output is 1.
+END_HINT
+BEGIN_SOLUTION
+(a) The output of the Boolean expression \( A \cdot (B + C) \) is 1 only when the input combination for \(ABC\) is 111, 110 or 101. Otherwise, the output is 0. So, the output sequence is $ans1. $BR
+
+(b) For \( A \cdot B + C \), the output is 1 for input combinations of 111, 110, 101, 011 or 001. So, the output sequence is $ans2. $BR
+
+(c) For \( (A + B)\cdot \overline{C} \), the output is 1 for input combinations of 110, 100 or 010. So, the output sequence is $ans3. $BR
+END_SOLUTION
+Context()->normalStrings;
+
+ANS(str_cmp("$ans1"));
+ANS(str_cmp("$ans2"));
+ANS(str_cmp("$ans3"));
+
+COMMENT("MathObjects version.");
+ENDDOCUMENT();        # This should be the last executable line in the problem.;

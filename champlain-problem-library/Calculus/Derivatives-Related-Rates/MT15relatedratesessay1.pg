@@ -1,0 +1,93 @@
+## DESCRIPTION
+## Related Rates. Students must answer in a sentence.
+## ENDDESCRIPTION
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Applications of differentiation)
+## DBsection(Related rates)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2015/11/06)
+## Level(4)
+## TitleText1('Applied Calculus')
+## TitleText2('For the Managerial, Life, and Social Sciences')
+## AuthorText1('Soo Tan')
+## EditionText1('9')
+## Section1('3.6')
+## Problem1('')
+## KEYWORDS('calculus', 'derivative', 'implicit', 'related rates')
+
+DOCUMENT();
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"PGessaymacros.pl",
+"MathObjects.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+install_problem_grader(~~&std_problem_grader);
+
+$a = random(50000,70000,10000);
+$b = random(300000,450000,10000);
+$c = random(0.0003,0.0010,0.0001);
+$x0 = random(2000,2500,50);
+$dxdt = random(200,400,50);
+
+$ans = Compute("$b*$c*$dxdt*exp(-($c)*$x0)")->reduce();
+if ($ans < 0){
+   $change = 'decreasing';
+}
+else {$change = 'increasing';
+}
+$abans = abs($ans);
+
+Context()->texStrings;
+BEGIN_TEXT
+A retail store estimates that weekly sales \(s\) and weekly
+advertising costs \(x\) (both in dollars) are related by the equation 
+\[
+    s = $a - $b e^{-$c x}.
+\]
+The current weekly advertising costs are $x0 dollars and these
+costs are increasing at the rate of $dxdt dollars per week.  
+Find at what rate the current weekly sales are changing.
+$BR
+$BR
+Rate of change of sales = \{ans_rule(20) \}
+$PAR
+$BBOLD Answer in a sentence!$EBOLD Type your sentence in the space below  (don't forget to include units):
+$BR
+\{ essay_box(3,60) \}
+$BR
+Note: Your sentence answer will be read and graded manually at a later time.
+END_TEXT
+BEGIN_HINT
+Remember: differentiate both sides of the equation with respect to $BBOLD time$EBOLD, i.e., the variable \( t\) 
+END_HINT
+BEGIN_SOLUTION
+Given values:$BR
+\( \frac{dx}{dt} = $dxdt \) when \( x = $x0 \).$BR
+Unknown rate:$BR
+\( \frac{ds}{dt} = \) ? $PAR
+Differentiating both sides of the equation with respect to time \( t \) gives:$BR
+\( \frac{ds}{dt} = -$b \left( -$c e^{-$c x}\cdot \frac{dx}{dt} \right)  \)$BR
+At the given values,$BR
+\( \frac{ds}{dt} = ($b) ($c) (e^{-($c)($x0) })($dxdt) = $ans   \)
+$PAR
+Sentence: Currently, the sales are $change at a rate of $abans dollars per week.
+END_SOLUTION
+Context()->normalStrings;
+
+ANS($ans->cmp());
+ANS( essay_cmp() );
+
+COMMENT('MathObjects version.');
+ENDDOCUMENT();

@@ -1,0 +1,89 @@
+## DESCRIPTION
+##   Given an input sequence, determine the output of the logic gates.
+## ENDDESCRIPTION
+
+## DBsubject(Set theory and logic)
+## DBchapter(Propositional logic)
+## DBsection(Operations on propositions)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2015/10/20)
+## Level(2)
+## Static(1)
+## TitleText1('Computing Mathematics')
+## AuthorText1('Lipschutz')
+## Section1('7.6')
+## Problem1('')
+## KEYWORDS('Logic', 'Boolean', 'Operation','input sequence')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"niceTables.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 0; 
+
+#Numerical Answer
+@Avalue = ('11000', '11001','01001','10110');
+@Bvalue = ('01011','01110','11100','00010');
+@Cvalue = ('10101','00011','01011','10011');
+@ansparta = ('11000','01001','01001','10010');
+@anspartb = ('11101','01011','01011','10011');
+@anspartc = ('01010','11100','10100','00100');
+$i = random(0,3,1);
+$A = $Avalue[$i];
+$B = $Bvalue[$i];
+$C = $Cvalue[$i];
+$ansa = $ansparta[$i];
+$ansb = $anspartb[$i];
+$ansc = $anspartc[$i];
+
+BEGIN_TEXT
+Given the input sequences:
+\[
+\begin{array}{rl}
+    A & =  $A \\
+    B & =  $B \\
+    C & =  $C
+\end{array}
+\]
+Find the output sequence for each of the following expressions involving logic gates (OR gate, AND gate, NOT gate):
+$PAR
+$BBOLD(a)$EBOLD \( A \cdot (B + C) \) = \{ ans_rule(10) \}
+$BR
+$BBOLD(b)$EBOLD \( A \cdot B + C \) = \{ ans_rule(10) \}
+$BR
+$BBOLD(c)$EBOLD \( (A + B) \cdot \overline{C} \) = \{ ans_rule(10) \}
+$PAR
+Note: the output sequence will be the same length as the input sequences.
+END_TEXT
+
+ANS(str_cmp("$ansa"));
+ANS(str_cmp("$ansb"));
+ANS(str_cmp("$ansc"));
+
+BEGIN_HINT
+Let \( Y \) be the output of the logic gates.
+$PAR
+OR gate: \( A + B = Y \)
+$BR
+0 occurs as an output of an OR gate only when both inputs are 0.
+$PAR
+AND gate: \( A \cdot B = Y \)
+$BR
+1 occurs as an output of an AND gate only when both inputs are 1.
+$PAR
+NOT gate: \( \overline{A} = Y \)
+$BR
+If the input is 1, the output is 0; if the input is 0, the output is 1.
+END_HINT
+
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.;

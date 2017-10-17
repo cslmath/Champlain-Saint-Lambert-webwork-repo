@@ -1,0 +1,104 @@
+# DESCRIPTION
+#   Multivariable Calculus. Second order partial derivatives. Clairaut's theorem.
+# ENDDESCRIPTION
+
+## KEYWORDS('Second-order partial derivatives')
+
+## DBsubject(Calculus - multivariable)
+## DBchapter(Differentiation of multivariable functions)
+## DBsection(Partial derivatives)
+## Date('2015/03/25')
+## Institution('Champlain College Saint-Lambert')
+## Author('Michele Titcombe')
+## TitleText1('Multivariable Calculus')
+## EditionText1('7')
+## AuthorText1('Stewart')
+## Section1('14.3')
+## Problem1('59-62')
+
+DOCUMENT();        
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGcourse.pl",
+  "PGchoicemacros.pl",
+);
+
+TEXT(beginproblem());
+
+##############################################
+#  Setup
+
+Context("Numeric")->variables->are(x=>"Real",y=>"Real");
+Context()->strings->add(yes=>{},no=>{});
+
+#
+#  The functions
+#
+
+$a = random(2,5,1);
+$b = random(2,5,1);
+
+$f = Formula("($a * x + $b * y) * e**(y)");
+
+$fx = $f -> D('x') -> reduce;
+$fy = $f -> D('y') -> reduce;
+
+$fxx = $fx -> D('x') -> reduce;
+$fxy = $fx -> D('y') -> reduce;
+$fyx = $fy -> D('x') -> reduce;
+$fyy = $fy -> D('y') -> reduce;
+
+$ansy=Compute("yes");
+
+##############################################
+#  Main text
+
+Context()->texStrings;
+Context()->flags->set(reduceConstants=>0);
+BEGIN_TEXT
+Calculate all four second-order partial derivatives
+of \( \displaystyle f(x,y) = $f \).
+$BR
+$BR
+\( f_{xx} \, (x,y) = \) \{ans_rule(80)\}
+$BR
+$BR
+\( f_{xy} \, (x,y) = \) \{ans_rule(80)\}
+$BR
+$BR
+\( f_{yx} \, (x,y) = \) \{ans_rule(80)\}
+$BR
+$BR
+\( f_{yy} \, (x,y) = \) \{ans_rule(80)\}
+$BR
+$BR
+Does Clairaut's theorem hold? (yes/no) \{ans_rule(10)\}
+(Ensure that you know how to justify your answer.)
+END_TEXT
+#
+BEGIN_HINT
+Clairaut's theorem: Suppose \( f \) is defined on a disk \( D \) that contains the point \( (a,b) \). If the functions \( f_{xy}(x,y) \) and \( f_{yx}(x,y) \) are both continuous on \( D \), then
+\[
+      f_{xy}(a,b) = f_{yx}(a,b) 
+\]
+END_HINT
+Context()->normalStrings;
+
+
+##################################################
+#  Answers
+
+ANS($fxx->cmp);
+ANS($fxy->cmp);
+ANS($fyx->cmp);
+ANS($fyy->cmp);
+ANS($ansy->cmp);
+
+
+$showPartialCorrectAnswers = 1;
+
+
+COMMENT('MathObject version');
+ENDDOCUMENT();

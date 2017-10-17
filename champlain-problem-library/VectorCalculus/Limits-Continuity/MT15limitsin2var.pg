@@ -1,0 +1,77 @@
+# DESCRIPTION
+# Multivariable Calculus. Find the limit of a sine function of two variables. 
+# ENDDESCRIPTION
+
+## KEYWORDS('continuity', 'limits', 'multivariable', 'functions')
+
+## DBsubject('Calculus - multivariable')
+## DBchapter('Calculus of vector valued functions')
+## DBsection('Limits and continuity')
+## Date('2015/08/12')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Multivariable Calculus')
+## EditionText1('7')
+## AuthorText1('Stewart')
+## Section1('14.2')
+## Problem1('')
+
+DOCUMENT();
+
+loadMacros(
+"PGstandard.pl",
+"PGchoicemacros.pl",
+"MathObjects.pl",
+);
+
+Context("Numeric");
+Context()->variables->add( r=>'Real', y=>'Real' );
+$showPartialCorrectAnswers = 1;
+
+$whichR = list_random(0,1);
+$coeff = random(1,5,1);
+$a = random(2,6,1);
+
+if ( $whichR ) {
+    $rexpr = Compute( "$coeff*(x^2 + y^2)" )->reduce();
+    $r2expr = Compute( "$coeff*r^2" )->reduce();
+} else {
+    $rexpr = Compute( "$coeff*sqrt(x^2 + y^2)" )->reduce();
+    $r2expr = Compute( "$coeff*r" )->reduce();
+}
+
+Context()->texStrings;
+TEXT(beginproblem());
+BEGIN_TEXT
+Find the limit of the function
+\[ f(x,y) = \frac{$a\sin($rexpr)}{$rexpr} \]
+as  \( (x,y) \to (0,0) \). Assume that polynomials, exponentials,
+logarithmic, and trigonometric functions are continuous.
+$PAR
+\( \lim\limits_{(x,y)\to(0,0)} \frac{$a\sin($rexpr)}{$rexpr} = \)
+\{ ans_rule(35) \}
+$BR
+${BITALIC}(Enter ${BBOLD}DNE$EBOLD if the limit does not exist.)$EITALIC
+END_TEXT
+# 
+BEGIN_HINT
+Use the trigonometric limit:
+ \[ \lim_{t\to 0}\frac{\sin t}{t}=1 \]
+END_HINT
+#
+BEGIN_SOLUTION
+We want to compute
+\[ \lim_{(x,y)\to(0,0)} f(x,y) =
+   \lim_{(x,y)\to(0,0)}\frac{$a\sin($rexpr)}{$rexpr}.\]
+As \(r=\sqrt{x^2+y^2}\) is the distance from \((x,y)\) to \((0,0)\)
+we have that \((x,y) \to (0,0)\) is equivalent to \(r \to 0\).  Hence
+the limit becomes:
+\[ \lim_{(x,y)\to(0,0)}f(x,y) =
+  $a \lim _{r\to0}\frac{\sin $r2expr}{$r2expr} = ($a)(1) = $a .\]
+END_SOLUTION
+
+Context()->normalStrings;
+ANS(Compute("$a")->cmp() );
+
+COMMENT('MathObject version');
+ENDDOCUMENT();

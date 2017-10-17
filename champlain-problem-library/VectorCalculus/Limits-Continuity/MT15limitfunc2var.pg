@@ -1,0 +1,65 @@
+# DESCRIPTION
+# Multivariable Calculus. Limit of a function of two variables. 
+# Rationalize the denominator.
+# ENDDESCRIPTION
+
+## KEYWORDS('limit')
+
+## DBsubject('Calculus - multivariable')
+## DBchapter('Calculus of vector valued functions')
+## DBsection('Limits and continuity')
+## Date('2015/08/12')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Multivariable Calculus')
+## EditionText1('7')
+## AuthorText1('Stewart')
+## Section1('14.2')
+## Problem1('17')
+
+DOCUMENT();
+loadMacros("PG.pl",
+           "PGbasicmacros.pl",
+           "PGchoicemacros.pl",
+           "PGanswermacros.pl",
+           "PGauxiliaryFunctions.pl",
+           "PGgraphmacros.pl",
+#           "Dartmouthmacros.pl",
+            "MathObjects.pl",);
+ 
+TEXT(beginproblem());
+Context("Numeric");
+Context()->strings->add(dne=>{});
+## Do NOT show partial correct answers
+$showPartialCorrectAnswers = 0;
+
+$a = random(2,9)*non_zero_random(-1,1);
+$b = random(2,9)*non_zero_random(-1,1);
+$c = random(2,9);
+
+Context()->texStrings;
+BEGIN_TEXT
+$BR
+Find the limit 
+\[
+    \lim_{(x,y) \to (0, 0)}
+\frac{$c($a x^2 + $b y^2)}{\sqrt{($a x^2 + $b y^2 +1)} -1}
+\]
+    \{ans_rule()\} 
+$BR
+$BITALIC(Enter $EITALIC $BBOLD DNE $EBOLD  $BITALIC if the limit does not exist.)$EITALIC
+$PAR
+END_TEXT
+BEGIN_HINT
+Rationalize the denominator.
+END_HINT
+Context()->normalStrings;
+
+ANS(Compute("2*$c")->cmp());
+
+COMMENT('MathObjects version');
+ENDDOCUMENT();
+
+
+
+

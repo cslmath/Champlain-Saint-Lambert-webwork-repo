@@ -1,0 +1,105 @@
+## DESCRIPTION
+##   Subtraction using (twos) complements in binary number system.
+## ENDDESCRIPTION
+
+## DBsubject(Arithmetic)
+## DBchapter(Other bases)
+## DBsection(Addition/Subtraction)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2015/09/07)
+## Level(2)
+## TitleText1('Essential Computer Mathematics')
+## AuthorText1('Seymour Lipschutz')
+## YearText1('1987')
+## Section1('1.6')
+## Problem1('')
+## KEYWORDS('subtraction', 'twos complement', 'complements', 'binary')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+);
+
+TEXT(beginproblem());
+
+$showPartialCorrectAnswers = 1;
+
+#   Random numbers:
+$Bd = random(199,250,1); # 8-bit binary 
+$Ad = random(128,189,1); # 8-bit binary smaller than Bb
+
+# Display random numbers in binary:
+$Bb = sprintf "%lb", $Bd ;
+$Ab = sprintf "%lb", $Ad ;
+
+# Compute answers in decimal:
+$onesAd = 255 - $Ad;
+$twosAd = $onesAd + 1;
+$diffd = $Bd - $Ad;
+
+# Display answers in binary using sprintf:
+$tmptwosAd = sprintf "%lb", $twosAd ;
+
+# Pad with leading zeroes if necessary:
+$length = length($tmptwosAd);
+if ($length == 7)  {$twosAb = "0$tmptwosAd"} ;
+if ($length == 6)  {$twosAb = "00$tmptwosAd"} ;
+if ($length == 5)  {$twosAb = "000$tmptwosAd"} ;
+if ($length == 4)  {$twosAb = "0000$tmptwosAd"} ;
+if ($length == 3)  {$twosAb = "00000$tmptwosAd"} ;
+if ($length == 2)  {$twosAb = "000000$tmptwosAd"} ;
+if ($length == 1)  {$twosAb = "0000000$tmptwosAd"} ;
+
+$tmpdiffb = sprintf "%lb", $diffd ; 
+
+# Pad with leading zeroes if necessary
+
+$length = length($tmpdiffb);
+if ($length == 7)  {$diffb = "0$tmpdiffb"} ;
+if ($length == 6)  {$diffb = "00$tmpdiffb"} ;
+if ($length == 5)  {$diffb = "000$tmpdiffb"} ;
+if ($length == 4)  {$diffb = "0000$tmpdiffb"} ;
+if ($length == 3)  {$diffb = "00000$tmpdiffb"} ;
+if ($length == 2)  {$diffb = "000000$tmpdiffb"} ;
+if ($length == 1)  {$diffb = "0000000$tmpdiffb"} ;
+
+BEGIN_TEXT
+Evaluate the difference of the given binary numbers using (twos) complements:
+$PAR
+\( B - A = $Bb - $Ab  = $Bb + \) \{ ans_rule(10)\} (and deleting the leading 1) \( = \)
+ \{ans_rule(10)\}  
+$PAR
+$BITALIC In the first answer blank, enter the twos complement of \( A \). (Note that deleting the leading 1 is equivalent to the overflow in an 8-bit register.) In the second answer blank, enter the final answer. $EITALIC
+$PAR
+$BBOLD Important: $EBOLD Your answers must all be 8-bit (pad with leading zeroes as necessary). 
+END_TEXT
+
+
+BEGIN_HINT
+To evaluate the difference \( B - A \) where \( A \) and \( B \) are binary numbers with \( A < B \) and \( B\) is an \(n\)-bit number (pad the number \( A \) with leading zeroes so that it too has \( n \) bits):$BR
+\[
+    B - A = B + \text{ (twos complement of A) and delete the leading 1}
+\]
+For example: Evaluate \(111100 - 1010 \). $BR
+First pad \(1010\) with leading zeroes to make it a 6-bit number: \(001010\).$BR
+Then find the 1's complement of \(001010\) which is \(110101\). $BR
+Then the 2's complement of \(110101\) is \( 110101+1 = 110110 \). $BR
+Finally, \(111100 - 1010 = 111100 + 110110 \) (and deleting the leading 1)  = \(110010\).$BR
+(Note: The leading 1 would be the overflow in a 6-bit register.)
+END_HINT
+BEGIN_SOLUTION
+\( B - A = $Bb - $Ab = $Bb + $twosAb\)  (the twos complement of  \( A \) ) and deleting the leading 1 =   \($diffb \) (the final answer)$BR
+Note: The leading 1 would be the overflow in an 8-bit register.
+END_SOLUTION
+
+ANS(str_cmp($twosAb) );
+ANS(str_cmp($diffb) );
+
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.;

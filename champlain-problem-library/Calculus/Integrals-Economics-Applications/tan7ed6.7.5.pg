@@ -1,0 +1,63 @@
+# DESCRIPTION
+# Application of integration - business/economics context.
+# Find the producers' surplus (formula given in the question) at market
+# equilibrium given the demand function and the supply function.
+# Note: the coefficients are constant (i.e. same question for all students)
+# M. Titcombe 10/21/2009
+# ENDDESCRIPTION
+
+## DBsubject('Calculus')
+## DBchapter('Integration')
+## DBsection('Applications')
+## TitleText1('Applied Calculus')
+## EditionText1('7')
+## AuthorText1('Tan')
+## Section1('6.7')
+## Problem1('5')
+## KEYWORDS('calculus', 'integral', 'economics', 'producers surplus')
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+);
+
+Context("Numeric");
+$as = 0.01;
+$bs = 0.06;
+$cs = 1.2;
+$ad = -0.01;
+$bd = -0.1;
+$cd = 6;
+$xb = 12; #depends on the previous values
+$pb = $as*$xb**2 + $bs*$xb + $cs;
+
+TEXT(beginproblem());
+Context()->texStrings;
+$showpartialcorrectanswers = 1;
+BEGIN_TEXT
+The demand function for a certain brand of DVDs is given by 
+\[
+   p = D(x) = $ad x^2 + $bd x + $cd
+\]
+where \( p \) is the wholesale unit price in dollars and  \( x \)  is the quantity demanded each week, measured in units of a ${BBOLD}thousand${EBOLD}.
+The supply function for these DVDs is given by
+\[
+   p = S(x) = $as x^2 + $bs x + $cs
+\]
+where here \( p \) stands for the unit price in dollars and \( x\) stands for the number of DVDs that the supplier will put on the market, in units of a ${BBOLD}thousand${EBOLD}.$BR
+Determine the producers' surplus, \( PS \), if the wholesale market price is set at the equilibrium price.
+$PAR
+The producers' surplus is given by
+\( PS = \bar{p}\bar{x} - \int_0^{\bar{x}} S(x) dx \), where \( \bar{p} \) and \( \bar{x} \) are the price and quantity at market equilibrium.
+Note: At market equilibrium, \( \bar{p} = D(\bar{x}) = S(\bar{x}) \).
+$PAR
+\( PS \) =  ${DOLLAR}\{ans_rule(40) \} 
+$BR
+END_TEXT
+Context()->normalStrings;
+
+$ans = 1000*(($pb-$cs)*$xb - $as/3*($xb)**3 - $bs/2*($xb)**2);
+ANS(num_cmp($ans, tol => .01));
+
+ENDDOCUMENT();

@@ -1,0 +1,83 @@
+## DESCRIPTION
+##   Evaluate the octal difference.
+## ENDDESCRIPTION
+
+## DBsubject('Arithmetic')
+## DBchapter('Other bases')
+## DBsection('Converting')
+## Institution('Champlain College Saint-Lambert')
+## Date('2016/09/13')
+## Author('Michele Titcombe')
+## TitleText1('Essential Computer Mathematics')
+## AuthorText1('Lipschutz')
+## Section1('2.3')
+## Problem1('')
+## KEYWORDS('Integer', 'octal', 'subtraction', 'difference')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl"
+);
+
+TEXT(beginproblem());
+
+#String Answer
+@a = ();
+$a[0] = random(23040,25540,1);
+$a[1] = random(10000,16000,1);
+$a[2] = random(28500,30540,1);
+$a[3] = random(16000,22000,1);
+
+# Display as octal
+@ao = ();
+foreach my $i (0..3) {
+    $ao[$i] = sprintf "%lo", $a[$i];
+}
+$sum1 = $a[0] + $a[1];
+$sum2 = $a[2] + $a[3];
+
+$sum1o = sprintf "%lo", $sum1;
+$sum2o = sprintf "%lo", $sum2;
+
+#for ($i = 0; $i < 3; $i++) {
+#	$a[$i] = random(200,2000,1);
+#	$numberb[$i] = sprintf "%lb", $a[$i];
+#	$numberx[$i] = sprintf "%lx", $a[$i];
+#	$numbero[$i] = sprintf "%lo", $a[$i];
+#}
+
+BEGIN_TEXT
+Evaluate the octal differences using complements:  $PAR
+$BBOLD (a) $EBOLD \( {$sum1o}_8 - $ao[0]_8  \) $BR
+Answer: \{ ans_rule(20) \} 
+$PAR
+$BBOLD (b) $EBOLD \( {$sum2o}_8 - $ao[2]_8  \) $BR
+Answer: \{ ans_rule(20) \} 
+END_TEXT
+
+ANS(str_cmp( "$ao[1]") );
+ANS(str_cmp( "$ao[3]") );
+
+BEGIN_HINT
+Octal subtraction \( A - B \) using complements, where \( B < A \):$BR
+Add the eights complement of \( B \) to \(A\) and drop the leading 1 (overflow).
+$PAR
+Example: \( 532_8 - 15_8\). 
+$BR 
+Write the number \(B \) as \(015\) so that it has the same number of digits as \(A\). The sevens complement of \(015\) is \(762\). Thus, the eights complement of \(015\) is \(763\). Add \(532_8 + 763_8\), which gives \(1515_8\). After dropping the leading 1, we obtain the answer: \(515_8\). 
+$PAR
+END_HINT
+
+BEGIN_SOLUTION
+Add the eights complement of \( B \) to \(A\) and drop the leading 1 (overflow). Note: the eights complement of \(B\) must have the same number of digits as \(A\). 
+Align the two numbers, \(A\) and the eights complement of \(B\), in the usual way and apply separately to each column the rule for addition of octal digits. The answers are: $BR
+(a) \( {$sum1o}_8 - $ao[0]_8 = $ao[1]_8 \) $BR
+(b)  \( {$sum2o}_8 - $ao[2]_8 = $ao[3]_8  \)
+END_SOLUTION
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.;

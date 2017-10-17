@@ -1,0 +1,88 @@
+#DESCRIPTION
+#  Calculus: Interpreting Riemann sums in terms of area
+#ENDDESCRIPTION
+
+#KEYWORDS('Area and Distance','Riemann sums','Area','midpoints')
+
+# Modified by M.Titcombe 10/08/2009 
+# Original WeBWorK problem: Rochester sc5_2_2a.pg
+
+
+## DBsubject('Calculus - single variable')
+## DBchapter('Integrals')
+## DBsection('Riemann sums')
+## Date('2009/10/08')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert)
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$j= random(3, 5, 1);
+$k= random(0,2,1);
+$a =Compute("-.5-$k");
+$b = Compute("$j+.5");
+$f = Compute("x^3");
+# Choose n, the number of subintervals, so that the subinterval width is 1:
+$n = Compute("1+$k+$j");
+# Find the Riemann sum (remember that the subinterval width is 1):
+$sum = 0;
+foreach my $i (1..$n) {
+  $xi = $a + (2*$i - 1)/2;
+  $fxi = ($xi)**3;
+  $sum = $sum + $fxi;
+}
+$ansapp = Compute("$sum");
+
+# I don't remember where I got the following formula, so I commented it out, 
+# but it is equivalent to the Riemann sum:
+# $ansapp = Compute(".25*($j**4 + 2*$j**3 + $j**2 - $k**4 -2*$k**3 -$k**2)");
+
+# Determine the exact value of the integral:
+$g = Compute("x^4/4");
+$ga = $g->eval(x=>$a);
+$gb = $g->eval(x=>$b);
+$ansex = Compute("$gb - $ga ");
+
+
+Context()->texStrings;
+BEGIN_TEXT
+Find an approximation of the integral  
+\[ 
+\int_{$a}^{$b} x^3 dx\] 
+$BR
+using a Riemann sum with midpoints as the representative points and 
+with \( n= $n \) subintervals.
+$BR
+Approximation = \{ans_rule(40)\}
+
+$PAR
+Compare to the exact value of the integral above.
+$BR
+Exact  = \{ans_rule(40)\}
+END_TEXT
+Context()->normalStrings;
+
+
+ANS($ansapp->cmp());
+ANS($ansex->cmp());
+
+COMMENT('Math Objects version.');
+ENDDOCUMENT();        # This should be the last executable line in the problem.

@@ -1,0 +1,61 @@
+# DESCRIPTION
+# State the Intermediate Value Theorem
+# ENDDESCRIPTION
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Applications of differentiation)
+## DBsection(Mean value theorem)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Level(2)
+## TitleText1('Calculus')
+## AuthorText1('')
+## EditionText1('')
+## Section1('')
+## Problem1('')
+
+## KEYWORDS('calculus','continuity')
+
+DOCUMENT();
+
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGchoicemacros.pl",
+"parserAutoStrings.pl",
+# "parserNumberWithUnits.pl",
+# "parserFormulaWithUnits.pl",
+# "parserFormulaUpToConstant.pl",
+# "PGcourse.pl",
+"parserPopUp.pl",
+);
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+AutoStrings();
+
+$sgn = list_random("<",">");
+$adj = String("CONTINUOUS");
+$m = String("M");
+$inegal = PopUp( ["?", "at most one", "at least one", "exactly one", "no"],"at least one");
+
+TEXT(beginproblem());
+Context()->texStrings;
+BEGIN_TEXT
+
+$BBOLD The Intermediate Value Theorem:$EBOLD $PAR
+
+If  \( f \) is \{ans_rule(20)\} on the closed interval \( [a,b] \), and if \( M \) is a number between \( f(a) \) and \( f(b) \), where \( f(a) \neq f(b) \), $BR
+then
+there is \{ $inegal->menu() \} number \( c \) in the open interval \( (a,b) \) such that \( f(c) = \) \{ ans_rule(5) \}.
+
+END_TEXT
+Context()->normalStrings;
+
+
+ANS($adj->cmp() );
+ANS($inegal->cmp() );
+ANS($m->cmp() );
+
+COMMENT('MathObject version');
+ENDDOCUMENT();

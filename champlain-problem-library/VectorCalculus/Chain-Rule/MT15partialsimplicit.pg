@@ -1,0 +1,76 @@
+# DESCRIPTION
+#   Multivariable Calculus. Find Partial Derivatives using implicit differentiation.
+# ENDDESCRIPTION
+
+## DBsubject('Calculus - multivariable')
+## DBchapter('Differentiation of multivariable functions')
+## DBsection('Partial derivatives')
+## Date('2015/08/12')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Multivariable Calculus')
+## EditionText1('7')
+## AuthorText1('Stewart')
+## Section1('14.3')
+## Problem1('')
+
+## KEYWORDS('Multivariable', 'Partial Derivative', 'Implicit differentiation')
+
+DOCUMENT();
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$a = non_zero_random(-5, 5);
+$b = non_zero_random(-5, 5);
+
+$dzdx = Compute("- $a");
+$dzdy = Compute("- $b");
+
+TEXT(beginproblem());
+Context()->texStrings;
+BEGIN_TEXT
+$PAR
+If \( \sin(${a}x + ${b}y + z) = 0 \), use implicit differentiation to find the first partial derivatives \(
+\frac{\partial z}{\partial x} \) and \( \frac{\partial z}{\partial y} \) at the point (0, 0, 0).
+$PAR
+A. \( \frac{\partial z}{\partial x}(0, 0, 0) = \) \{ ans_rule(30) \}
+$PAR
+B. \( \frac{\partial z}{\partial y}(0, 0, 0) = \) \{ ans_rule(30) \}
+END_TEXT
+#
+BEGIN_SOLUTION
+A. Differentiating both sides with respect to \( x \) (and holding \( y \) constant):
+\[
+   \frac{\partial}{\partial x} ( \sin($a x + $b y + z) ) = \frac{\partial}{\partial x} (0)
+\]
+\[
+     \cos($a x + $b y + z)  \left( $a +  0 + \frac{\partial z}{\partial x} \right)= 0
+\]
+At the point \( (0,0,0) \), we have
+\[
+     \cos(0)  \left( $a +  0 + \frac{\partial z}{\partial x}(0,0,0) \right)= 0
+\]
+and thus
+\[
+  \frac{\partial z}{\partial x}(0,0,0) = -$a
+\]
+$BR
+B. The method is similar to that for part A.
+END_SOLUTION
+Context()->normalStrings;
+
+ANS($dzdx->cmp());
+ANS($dzdy->cmp());
+
+COMMENT('Math Objects version.');
+ENDDOCUMENT();

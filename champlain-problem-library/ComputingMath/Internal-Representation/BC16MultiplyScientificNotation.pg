@@ -1,0 +1,53 @@
+## DBsubject(Arithmetic)
+## DBchapter(Scientific Notation)
+## DBsection(Addition and Multiplication)
+## Institution(Champlain College Saint-Lambert)
+## Author(Brendan Cordy)
+## Date(2016/09/13)
+## KEYWORDS('scientific notation', 'addition')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"niceTables.pl",
+);
+
+TEXT(beginproblem());
+
+$showPartialCorrectAnswers = 1;
+
+#Pick two numbers in scientific notation.
+$a_big = random(111,999,1);
+$a_dec = $a_big/100;
+$b_big = random(111,999,1);
+$b_dec = $b_big/100;
+
+$a_exp = random(-4,-2,1);
+$b_exp = random(6,9,1);
+
+$a = $a_dec*(10**($a_exp));
+$b = $b_dec*(10**($b_exp));
+
+$ans_dec = $a*$b;
+$ans_pow = 0;
+while($ans_dec >= 10){
+$ans_pow++;
+$ans_dec = $ans_dec / 10;
+}
+
+BEGIN_TEXT
+Multiply the two values in scientific notation: \($a_dec \times 10^{$a_exp} \cdot  $b_dec \times 10^{$b_exp} \).
+$PAR
+The result is \{ans_rule(7)\} times 10 to the power \{ans_rule(7)\}.
+END_TEXT
+
+# String answer:
+ANS(num_cmp($ans_dec, tol => 0.00000000000000001));
+ANS(num_cmp($ans_pow, tol => 0.00000000000000001));
+
+ENDDOCUMENT(); 

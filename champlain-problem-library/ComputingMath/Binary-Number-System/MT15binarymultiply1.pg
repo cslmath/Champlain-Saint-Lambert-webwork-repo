@@ -1,0 +1,65 @@
+## DESCRIPTION
+##   Evaluate the binary products.
+## ENDDESCRIPTION
+
+## DBsubject('Arithmetic')
+## DBchapter('Other bases')
+## DBsection('Converting')
+## Institution('Champlain College Saint-Lambert')
+## Date('2015/08/31')
+## Author('Michele Titcombe')
+## KEYWORDS('Integer', 'Binary', 'Multiplication')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl"
+);
+
+TEXT(beginproblem());
+
+$a[0] = random(50,100,1);
+$a[1] = random(5,25,1);
+$a[2] = random(49,99,1);
+$a[3] = random(6,20,1);
+$product[0] = $a[0]*$a[1];
+$product[1] = $a[2]*$a[3];
+
+$number[0] = sprintf "%lb", $a[0];
+$number[1] = sprintf "%lb", $a[1];
+$number[2] = sprintf "%lb", $a[2];
+$number[3] = sprintf "%lb", $a[3];
+$ans[0] = sprintf "%lb", $product[0];
+$ans[1]= sprintf "%lb", $product[1];
+
+BEGIN_TEXT
+
+Evaluate the binary products: $BR
+(a) \( $number[0] \times $number[1] \) \{ ans_rule(30) \}
+$PAR
+(b) \( $number[2] \times $number[3] \) \{ ans_rule(30) \}
+END_TEXT
+BEGIN_HINT
+Rules of multiplication in binary:$BR
+\[
+     0 \times 0 = 0
+\]
+\[
+     0 \times 1 = 0
+\]
+\[
+     1 \times 0 = 0
+\]
+\[
+     1 \times 1 = 1  
+\]
+END_HINT
+
+ANS(str_cmp( $ans[0] ));
+ANS(str_cmp( $ans[1] ));
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.;

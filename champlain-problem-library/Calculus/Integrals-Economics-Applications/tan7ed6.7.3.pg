@@ -1,0 +1,51 @@
+# DESCRIPTION
+# Application of integration - business/economics context.
+# Find the consumers' surplus (formula stated in the question) given
+# the demand function and the fixed market price.
+# Note: coefficients are constant (i.e. same question for all students)
+# M. Titcombe 10/21/2009 
+# ENDDESCRIPTION
+
+## DBsubject('Calculus')
+## DBchapter('Integration')
+## DBsection('Applications')
+## TitleText1('Applied Calculus')
+## EditionText1('7')
+## AuthorText1('Tan')
+## Section1('6.7')
+## Problem1(3)
+## KEYWORDS('calculus', 'integral', 'economics', 'consumers surplus')
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+);
+
+Context("Numeric");
+$a1 = 144;
+$b1 = ($a1-64)/4;
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+BEGIN_TEXT
+It is known that the quantity demanded of a certain make of calculator is \( x \) ${BBOLD}hundred${EBOLD} units/week and the corresponding wholesale unit price, in dollars, is
+\[
+   p = \sqrt{$a1 - 4x} 
+\]
+$BR
+Determine the consumers' surplus, \( CS \), if the wholesale market price is ${DOLLAR}\( 8 \)  per unit.
+$PAR
+The consumers' surplus is given by
+\( CS =  \int_0^{\bar{x}} D(x) dx - \bar{p}\bar{x} \), where \( p=D(x) \) is the demand function, \( \bar{p} \) is the fixed market price and \( \bar{x} \) is the corresponding quantity sold.$BR
+$BR
+$PAR
+\( CS \) =  ${DOLLAR}\{ans_rule(40) \}
+$BR
+$BR
+END_TEXT
+
+$ans = 50/3*(sqrt($a1))**3 - 50/3*(sqrt($a1-4*$b1))**3 - 800*$b1;
+ANS(num_cmp($ans, tol => .01));
+
+ENDDOCUMENT();

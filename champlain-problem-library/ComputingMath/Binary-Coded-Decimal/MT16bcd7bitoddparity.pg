@@ -1,0 +1,100 @@
+##DESCRIPTION
+##  Binary-coded decimal (BCD): 6-bit BCD with odd parity check
+##ENDDESCRIPTION
+
+##KEYWORDS('binary', 'binary-coded decimal', 'BCD', '6-bit', 'odd parity')
+
+## DBsubject('Computer Mathematics')
+## DBchapter('Computer Codes')
+## DBsection('4-bit BCD Codes')
+## Date('2015/09/19')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Essential Computer Mathematics')
+## AuthorText1('Lipschutz')
+## Section1('2.6')
+## Problem1('40')
+
+########################################################################
+
+DOCUMENT();      
+
+loadMacros(
+   "PGstandard.pl",     # Standard macros for PG language
+   "MathObjects.pl",
+   "niceTables.pl",
+);
+
+# Print problem number and point value (weight) for the problem
+TEXT(beginproblem());
+
+# Show which answers are correct and which ones are incorrect
+$showPartialCorrectAnswers = 1;
+
+Context("Numeric");
+
+#
+@zone = ();
+foreach my $i (0..4) {
+    $z = random(1,3,1);
+    $n = random(0,9,1);
+    $zone[$i] = sprintf"%02b", $z;
+    $num[$i] = sprintf"%04b", $n;
+    $nsix[$i] = sprintf"%s%s", $zone[$i], $num[$i];
+}
+
+@nseven = ();  # initialize seven-bit code array
+# use regex to count how many 1s in the 6-bit code:
+foreach my $i (0..4) {
+   $count = () = $nsix[$i] =~ /1/g;
+   if ($count % 2 == 0) {
+      $nseven[$i] = "1$nsix[$i]";  # parity even - set check bit to 1
+   } else {
+      $nseven[$i] = "0$nsix[$i]";
+   }
+}
+
+Context()->texStrings;
+BEGIN_TEXT
+In the table below, you are given several 6-bit BCD codes. $BR
+If the computer uses an $BBOLD odd parity check$EBOLD, how would the computer encode the check bit for each character? Enter the 7-bit code for each.
+$PAR
+\{
+DataTable(
+   [
+       ['6-bit:','$nsix[0]','$nsix[1]','$nsix[2]','$nsix[3]','$nsix[4]'],
+       ['7-bit:',ans_rule(9),ans_rule(9),ans_rule(9),ans_rule(9),ans_rule(9) ]
+   ],
+  midrules => 1,
+  align => '|c|c|c|c|c|c|',
+);
+\}
+END_TEXT
+
+BEGIN_HINT
+For an $BBOLD odd parity $EBOLD machine: 
+$BR
+Count the number of 1s in each 6-bit code. $BR
+Let \( a \) be the number of 1s in the 6-bit code: $BR
+- set the check bit to 1 if \( a \) is even, or $BR
+- set the check bit to 0 if \( a \) is odd. $BR
+Precede each code with its check bit to form the 7-bit code.
+END_HINT
+BEGIN_SOLUTION
+For a computer that uses $BBOLD odd parity$EBOLD, the value of the check bit (0 or 1) is such as to make the sum of the bits, including the check bit, an odd number. $PAR
+For the 6-bit code $nsix[0], the 7-bit code is $nseven[0].$BR
+For the 6-bit code $nsix[1], the 7-bit code is $nseven[1].$BR
+For the 6-bit code $nsix[2], the 7-bit code is $nseven[2].$BR
+For the 6-bit code $nsix[3], the 7-bit code is $nseven[3].$BR
+For the 6-bit code $nsix[4], the 7-bit code is $nseven[4].$BR
+END_SOLUTION
+Context()->normalStrings;
+
+ANS(str_cmp("$nseven[0]"));
+ANS(str_cmp("$nseven[1]"));
+ANS(str_cmp("$nseven[2]"));
+ANS(str_cmp("$nseven[3]"));
+ANS(str_cmp("$nseven[4]"));
+
+COMMENT('Math Objects version');
+ENDDOCUMENT();        

@@ -1,0 +1,103 @@
+##DESCRIPTION
+##  Binary-coded decimal (BCD): 4-bit BCD
+##ENDDESCRIPTION
+
+##KEYWORDS('binary', 'binary-coded decimal', 'BCD', '4-bit')
+
+## DBsubject('Computer Mathematics')
+## DBchapter('Computer Codes')
+## DBsection('4-bit BCD Codes')
+## Date('2015/09/19')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Essential Computer Mathematics')
+## AuthorText1('Lipschutz')
+## Section1('2.5')
+## Problem1('31')
+
+########################################################################
+
+DOCUMENT();      
+
+loadMacros(
+   "PGstandard.pl",     # Standard macros for PG language
+   "MathObjects.pl",
+   #"source.pl",        # allows code to be displayed on certain sites.
+   #"PGcourse.pl",      # Customization file for the course
+);
+
+# Print problem number and point value (weight) for the problem
+TEXT(beginproblem());
+
+# Show which answers are correct and which ones are incorrect
+$showPartialCorrectAnswers = 1;
+
+Context("Numeric");
+# Define each digit separately, with first digit nonzero.
+$d1 = random(1,9,1);
+$d2 = random(0,9,1);
+$d3 = random(0,9,1);
+$d4 = random(0,9,1);
+
+$a1 = random(1,9,1);
+$a2 = random(0,9,1);
+$a3 = random(0,9,1);
+
+$b1 = random(1,9,1);
+$b2 = random(0,9,1);
+$b3 = random(0,9,1);
+
+$d1b = sprintf"%04b", $d1;
+$d2b = sprintf"%04b", $d2;
+$d3b = sprintf"%04b", $d3;
+$d4b = sprintf"%04b", $d4;
+
+$num1 =  sprintf "%s%s%s%s", $d1, $d2, $d3, $d4;
+$num1b = sprintf"%04b %04b %04b %04b", $d1, $d2, $d3, $d4;
+
+$num2 =  sprintf "%s%s%s", $a1, $a2, $a3;
+$num2b = sprintf"%04b %04b %04b", $a1, $a2, $a3;
+
+$num3 =  sprintf "%s%s%s", $b1, $b2, $b3;
+$num3b = sprintf"%04b %04b %04b", $b1, $b2, $b3;
+
+Context()->texStrings;
+BEGIN_TEXT
+Decode each numeric, expressed in the weighted 8-4-2-1 BCD code:$BR
+(a) $num1b $BR
+The number encoded is: \{ans_rule(20)\}
+$PAR
+(b) $num2b $BR
+The number encoded is: \{ans_rule(20)\}
+$PAR
+(c) $num3b $BR
+The number encoded is: \{ans_rule(20)\}
+END_TEXT
+BEGIN_HINT
+ Add up the weights of the 1 bits (i.e., evaluate the expanded binary notation): $BR
+ Ex. 0101 0111 encodes the number 57 since 0101 \( \to 4+1 = 5 \) and 0111 \( \to 4+2+1 = 7 \). 
+END_HINT
+BEGIN_SOLUTION
+(a) $num1b $BR
+The number encoded is: $num1. Looking at each set of 4 bits: 
+$d1b is the 4-bit binary notation for $d1, 
+$d2b is the 4-bit binary notation for $d2,
+$d3b is the 4-bit binary notation for $d3,
+and $d4b is the 4-bit binary notation for $d4.
+$PAR
+(b) $num2b $BR
+The number encoded is: $num2
+$PAR
+(c) $num2c $BR
+The number encoded is $num3
+END_SOLUTION
+Context()->normalStrings;
+
+
+ANS(str_cmp("$num1"));
+ANS(str_cmp("$num2"));
+ANS(str_cmp("$num3"));
+
+
+COMMENT('Math Objects version');
+ENDDOCUMENT();        

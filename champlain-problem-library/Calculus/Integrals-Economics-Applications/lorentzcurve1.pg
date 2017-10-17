@@ -1,0 +1,66 @@
+# DESCRIPTION
+# Find a power function to model a Lorentz curve with a given Gini index
+# WeBWorK problem written by Charles Fortin, 
+# <cfortin(at)champlaincollege.qc.ca(dot)ca>
+# ENDDESCRIPTION
+
+## DBsubject('WeBWorK')
+## DBchapter('Demos')
+## DBsection('Problem')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Author('Charles Fortin')
+## Institution('ChamplainCollege')
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGchoicemacros.pl",
+"PGgraphmacros.pl",
+);
+
+# make sure we're in the context we want
+Context("Numeric");
+
+$gini = random(0.2,0.4,0.01); # gini index of a country
+$p = Real("2/(1-$gini)-1");
+$percentage = Formula("100 * (1-x**$p)");
+$percentagetop5 = $percentage->eval(x=>0.95); #100*(1-f(0.95));
+
+TEXT(beginproblem());
+Context()->texStrings;
+BEGIN_TEXT
+Suppose a country has a coefficient of inequality (Gini index) of \($gini\) and that the 
+Lorentz curve for this country is of the form \(y=f(x)=x^p\), where p is a constant.
+$BR
+(a) The value of p is \{ ans_rule(10) \}
+$BR
+(b) According to this model the percentage of the total income earned by the top 5
+ % of families  is \{ ans_rule(6) \} %.
+
+END_TEXT
+Context()->normalStrings;
+
+ANS( $p->cmp() );
+ANS( $percentagetop5->cmp() );
+
+Context()->texStrings;
+SOLUTION(EV3(<<'END_SOLUTION'));
+$PAR SOLUTION $PAR
+We need to solve
+\[$gini = 1-2\int_0^1 x^p dx = 1-\frac{2}{p+1}.\]
+Therefore 
+\[p = \frac{2}{1-$gini}-1 = $p.\]
+To obtain the percentage of the total income earned by the top 5
+ percent of families, we calculate \(100 \cdot (1-f(0.95)) =100 \cdot (1-0.95^{$p}) = $percentagetop5\).
+
+END_SOLUTION
+Context()->normalStrings;
+
+ENDDOCUMENT();
+

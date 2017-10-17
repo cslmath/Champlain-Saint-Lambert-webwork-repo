@@ -1,0 +1,74 @@
+## DESCRIPTION
+##   Evaluate the hexadecimal difference.
+## ENDDESCRIPTION
+
+## DBsubject('Arithmetic')
+## DBchapter('Other bases')
+## DBsection('Converting')
+## Institution('Champlain College Saint-Lambert')
+## Date('2016/09/13')
+## Author('Michele Titcombe')
+## TitleText1('Essential Computer Mathematics')
+## AuthorText1('Lipschutz')
+## Section1('2.4')
+## Problem1('')
+## KEYWORDS('Integer', 'hexadecimal', 'difference', 'subtraction')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl"
+);
+
+TEXT(beginproblem());
+
+#String Answer
+@a = ();
+$a[0] = random(223040,225540,1);
+$a[1] = random(10000,16000,1);
+$a[2] = random(28500,30540,1);
+$a[3] = random(116000,122000,1);
+
+# Display as hexadecimal
+@ax = ();
+foreach my $i (0..3) {
+    $ax[$i] = sprintf "%lX", $a[$i];
+}
+$sum1 = $a[0] + $a[1];
+$sum2 = $a[2] + $a[3];
+
+$sum1x = sprintf "%lX", $sum1;
+$sum2x = sprintf "%lX", $sum2;
+
+BEGIN_TEXT
+Evaluate the hexadecimal differences using complements:  $PAR
+$BBOLD (a) $EBOLD \( {$sum1x}_{16} - $ax[0]_{16}  \) $BR
+Answer: \{ ans_rule(20) \} 
+$PAR
+$BBOLD (b) $EBOLD \( {$sum2x}_{16} - $ax[2]_{16}   \) $BR
+Answer: \{ ans_rule(20) \} 
+END_TEXT
+
+BEGIN_HINT
+Hexadecimal subtraction \( X - Y \) using complements, where \( Y < X \):$BR
+Add the sixteens complement of \( Y \) to \(X\) and drop the leading 1 (overflow).
+$PAR
+Example: \( ABC_{16} - DE_{16}\). 
+$BR 
+Write the number \(Y \) as \(0DE\) so that it has the same number of digits as \(X\). The fifteens complement of \(0DE\) is \(F21\). Thus, the sixteens complement of \(0DE\) is \(F22\). Add \(ABC_{16} + F22_{16}\), which gives \(19DE_{16}\). After dropping the leading 1, we obtain the answer: \(9DE_{16}\). 
+$PAR
+END_HINT
+BEGIN_SOLUTION
+The answers are: $BR
+(a) \( {$sum1x}_{16} - $ax[0]_{16} = $ax[1]_{16}   \) $BR
+(b)  \( {$sum2x}_{16} - $ax[2]_{16} = $ax[3]_{16}  \)
+END_SOLUTION
+
+ANS(str_cmp( "$ax[1]") );
+ANS(str_cmp( "$ax[3]") );
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.;

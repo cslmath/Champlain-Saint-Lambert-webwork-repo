@@ -1,0 +1,53 @@
+## DESCRIPTION
+## Linear Algebra. Finding the size of a random matrix
+## ENDDESCRIPTION
+
+## DBsubject(Linear algebra)
+## DBchapter(Matrices)
+## DBsection(Transpose and trace)
+## Date('2015/09/23')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Essential Computer Mathematics')
+## AuthorText1('Lipschutz')
+## Section1('9')
+## Problem1('9.11')
+## KEYWORDS('algebra', 'matrix operation', 'matrix','transpose', 'size')
+
+DOCUMENT() ;
+
+loadMacros(
+    "PG.pl",
+    "PGbasicmacros.pl",
+    "PGchoicemacros.pl",
+    "PGanswermacros.pl",
+    "PGauxiliaryFunctions.pl",
+    "PGmatrixmacros.pl",
+) ;
+############
+TEXT(beginproblem());
+$Arows = random(1,5,1);
+$Acols = random(1,5,1);
+$A = new Matrix($Arows,$Acols);
+foreach my $i (1..$Arows) {
+    foreach my $j (1..$Acols) {
+        $A->assign($i,$j,random(-9,9,1) );
+    }
+}
+
+$showPartialCorrectAnswers = 0 ;
+
+BEGIN_TEXT
+Let
+\[ A = \{ display_matrix_mm($A)\}\]
+Then the size of \(A\) is \{ans_rule(10)\} and the size of \( A^T \) is \{ans_rule(10)\}.$BR
+$BITALIC Enter your answers in the form \(m\)x\(n\) (without spaces around the x).$EITALIC
+END_TEXT
+$ans1 = $Arows."x".$Acols;
+$ans2 = $Acols."x".$Arows;
+ANS(str_cmp($ans1));
+ANS(str_cmp($ans2));
+
+
+ENDDOCUMENT() ;
+

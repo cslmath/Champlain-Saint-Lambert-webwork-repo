@@ -1,0 +1,84 @@
+## DESCRIPTION
+##   Evaluate the octal sum.
+## ENDDESCRIPTION
+
+## DBsubject('Arithmetic')
+## DBchapter('Other bases')
+## DBsection('Converting')
+## Institution('Champlain College Saint-Lambert')
+## Date('2015/09/14')
+## Author('Michele Titcombe')
+## TitleText1('Essential Computer Mathematics')
+## AuthorText1('Lipschutz')
+## Section1('2.3')
+## Problem1('')
+## KEYWORDS('Integer', 'octal', 'addition', 'sum')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl"
+);
+
+TEXT(beginproblem());
+
+#String Answer
+@a = ();
+$a[0] = random(23040,25540,1);
+$a[1] = random(10000,16000,1);
+$a[2] = random(28500,30540,1);
+$a[3] = random(16000,22000,1);
+
+# Display as octal
+@ao = ();
+foreach my $i (0..3) {
+    $ao[$i] = sprintf "%lo", $a[$i];
+}
+$sum1 = $a[0] + $a[1];
+$sum2 = $a[2] + $a[3];
+
+$sum1o = sprintf "%lo", $sum1;
+$sum2o = sprintf "%lo", $sum2;
+
+#for ($i = 0; $i < 3; $i++) {
+#	$a[$i] = random(200,2000,1);
+#	$numberb[$i] = sprintf "%lb", $a[$i];
+#	$numberx[$i] = sprintf "%lx", $a[$i];
+#	$numbero[$i] = sprintf "%lo", $a[$i];
+#}
+
+BEGIN_TEXT
+Evaluate the octal sums:  $PAR
+$BBOLD (a) $EBOLD \( $ao[0]_8 + $ao[1]_8  \) $BR
+Answer: \{ ans_rule(20) \} 
+$PAR
+$BBOLD (b) $EBOLD \( $ao[2]_8 + $ao[3]_8  \) $BR
+Answer: \{ ans_rule(20) \} 
+END_TEXT
+
+ANS(str_cmp( "$sum1o") );
+ANS(str_cmp( "$sum2o") );
+
+BEGIN_HINT
+Octal addition: The sum of two octal digits, or the sum of two octal digits plus 1, can be obtained by (i) finding their decimal sum and (ii) modifying the decimal sum, if it exceeds 7, by subtracting 8 and carrying 1 to the next column. $PAR
+Example:  \( 6_8 + 7_8 \) $BR
+The decimal sum of 6 and 7 is 13, which exceeds 7.$BR
+The modification is to subtract 8 from 13, giving 5, and carrying the 1 to the next column.$BR
+Thus, \(6_8 + 7_8 = 15_8\).$PAR
+Example:  \( 4_8 + 3_8 \) $BR
+The decimal sum of 4 and 3 is 7, which does not exceed 7.$BR
+There is no modification, and no 1 is carried.$BR
+Thus, \(4_8 + 3_8 = 7_8\).$PAR
+END_HINT
+
+BEGIN_SOLUTION
+Align the two numbers in the usual way and apply separately to each column the rule for addition of octal digits (as explained in the Hint). The answers are: $BR
+(a) \( $ao[0]_8 + $ao[1]_8 = $sum1o \) $BR
+(b)  \( $ao[2]_8 + $ao[3]_8 = $sum2o \)
+END_SOLUTION
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.;

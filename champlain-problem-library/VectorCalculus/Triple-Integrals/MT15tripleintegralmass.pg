@@ -1,0 +1,128 @@
+# DESCRIPTION
+# Multivariable Calculus. Evaluating triple integrals to find the mass of an object.
+# ENDDESCRIPTION
+
+## KEYWORDS('Triple Integral Mass')
+
+## DBsubject('Calculus - multivariable')
+## DBchapter('Integration of multivariable functions')
+## DBsection('Triple integrals')
+## Date('2015/08/12')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Multivariable Calculus')
+## EditionText1('7')
+## AuthorText1('Stewart')
+## Section1('15.7')
+## Problem1('42')
+
+DOCUMENT();        
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGcourse.pl",
+  "weightedGrader.pl",
+);
+
+install_weighted_grader();
+
+TEXT(beginproblem());
+
+##############################################
+#  Setup
+
+Context("Numeric")->variables->are(x=>"Real",y=>"Real",z=>"Real");
+
+$a = random(2,5,1);
+$b = $a++;
+$ab = Compute("$a * $b");
+
+$integrand = Formula("x*y");
+$A = Formula("0");
+$B = Formula("$a");
+$C = Formula("0");
+$D = Formula("$b - ($b / $a) * x");
+$E = Formula("0") -> reduce;
+$F = Formula("$ab - $b * x - $a * y") -> reduce;
+$intz = Formula("$a*$b*x*y - $b*x^2*y - $a*x*y^2")->reduce;
+$intzy = Formula("1/6*($a - x)^3*($b)^3*x/($a)^2")->reduce;
+$mass = Formula("1/120*($a)^3*($b)^3")->reduce;
+
+##############################################
+#  Main text
+
+Context()->texStrings;
+Context()->flags->set(reduceConstants=>0);
+BEGIN_TEXT
+
+Set up a triple integral to find the mass of the solid 
+tetrahedron bounded by the xy-plane, the yz-plane, the xz-plane, and 
+the plane \( x/$a + y/$b + z/$ab = 1\), if the density 
+function is given by \( \delta(x,y,z) = xy \).  
+Write an iterated integral in the form below 
+to find the mass of the solid.
+$BR
+$BR
+\( \displaystyle
+\iiint\limits_R f(x,y,z) \, dV
+=
+\int_A^B \!\! \int_C^D \!\! \int_E^F  
+\)
+\{ans_rule(30)\}
+\( \, dz \, dy \, dx
+\)
+$BR
+with limits of integration
+$BR$BR
+A = \{ans_rule(20)\} $BR
+B = \{ans_rule(20)\} $BR
+C = \{ans_rule(20)\} $BR
+D = \{ans_rule(20)\} $BR
+E = \{ans_rule(20)\} $BR
+F = \{ans_rule(20)\} $BR
+
+$BR
+$BR
+Evaluate the triple integral in stages: $BR
+\( \displaystyle
+\iiint\limits_R f(x,y,z) \, dV
+=
+\int_A^B \!\! \int_C^D   
+\)
+\{ans_rule(30)\}
+\( \,  dy \, dx
+=\displaystyle
+\int_A^B    
+\)
+\{ans_rule(30)\}
+\( \,   dx
+\)
+$BR
+$BR
+Finally, obtaining the mass of the solid tetrahedron:
+$BR
+Mass = \{ans_rule(30)\}
+
+END_TEXT
+Context()->normalStrings;
+
+
+##################################################
+#  Answers
+
+WEIGHTED_ANS(($integrand)->cmp, 10);
+WEIGHTED_ANS(($A)->cmp, 10);
+WEIGHTED_ANS(($B)->cmp, 10);
+WEIGHTED_ANS(($C)->cmp, 10);
+WEIGHTED_ANS(($D)->cmp, 10);
+WEIGHTED_ANS(($E)->cmp, 10);
+WEIGHTED_ANS(($F)->cmp, 10);
+WEIGHTED_ANS(($intz)->cmp, 10);
+WEIGHTED_ANS(($intzy)->cmp, 10);
+WEIGHTED_ANS(($mass)->cmp, 10);
+
+$showPartialCorrectAnswers = 1;
+
+COMMENT('MathObject version');
+ENDDOCUMENT();

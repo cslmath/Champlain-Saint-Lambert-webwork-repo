@@ -1,0 +1,96 @@
+## DESCRIPTION
+## Linear Algebra: Solve linear system using back substitution.
+## ENDDESCRIPTION
+
+## DBsubject(Linear algebra)
+## DBchapter(Systems of linear equations)
+## DBsection(Systems with 4 or more variables)
+## Date('2015/09/19')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Essential Computer Mathematics')
+## AuthorText1('Lipschutz')
+## Section1('10.5')
+## Problem1('9')
+## Level(2)
+## MO(1)
+
+DOCUMENT();
+
+loadMacros(
+"PGstandard.pl",
+"PGML.pl",
+"MathObjects.pl",
+"parserMultiAnswer.pl",
+"MatrixCheckers.pl",
+"PGcourse.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+Context("Numeric");
+Context()->variables->add(y=>"Real",z=>"Real",t=>"Real");
+
+$c1 = random(2,5,1);
+$c2 = random(3,6,1);
+$c3 = random(4,9,1);
+$x0 = non_zero_random(-5,5,1);
+$y0 = random(-5,5,1); #y-coordinate can be zero.
+$z0 = non_zero_random(-5,5,1);
+$t0 = non_zero_random(-5,5,1);
+$line1 = Compute("2x - 3y + $c1 z - 2t");
+$line2 = Compute("$c2 y - z + 3t");
+$line3 = Compute("6 z - t");
+$line4 = Compute("$c3 t");
+$b1 = $line1->eval(x=>$x0,y=>$y0,z=>$z0,t=>$t0);
+$b2 = $line2->eval(y=>$y0,z=>$z0,t=>$t0);
+$b3 = $line3->eval(z=>$z0,t=>$t0);
+$b4 = $line4->eval(t=>$t0);
+
+Context('Matrix');
+
+$NO_SPACE = '@{}';
+
+Context()->texStrings;
+BEGIN_TEXT
+Solve the system
+\[ \left\lbrace \begin{array}{r${NO_SPACE}r${NO_SPACE}r${NO_SPACE}r${NO_SPACE}r${NO_SPACE}r}
+2x & - \hspace{2ex} 3y &  +\hspace{2ex} $c1 z  & -\hspace{2ex} 2t      & = & $b1 \\
+    &   $c2 y & - \hspace{2ex}z &  + \hspace{2ex} 3t     & = & $b2 \\ 
+    &       &   6z & - \hspace{2ex}t & = & $b3 \\
+ &       &       & $c3 t & = & $b4 
+\end{array} \right. \]
+END_TEXT
+Context()->normalStrings;
+
+BEGIN_PGML
+Solving by back-substitution:
+
+The last equation gives [` t  = `] [__________]{"$t0"}
+
+Substituting the value for [` t `] in the third equation gives 
+[` z = `] [__________]{"$z0"}
+
+Substituting the values for [` t `] and [` z `] in the second equation gives 
+[` y = `] [__________]{"$y0"}
+
+Finally, substituting the values for [` t `], [` z `] and [` y `] in the first equation gives 
+[` x = `] [__________]{"$x0"}
+
+Thus, the unique solution to the linear system is [` (x,y,z,t ) = `] [_______________]{"($x0,$y0,$z0,$t0)"} _Enter your answer as an ordered quadruple in the form [` (a,b,c,d) `]._
+END_PGML
+
+BEGIN_PGML_HINT
+Make sure that the ordered quadruple is in the *correct* order.
+END_PGML_HINT
+
+BEGIN_PGML_SOLUTION
+Back solving gives [` t = [$t0] `], [` z = [$z0] `], [` y = [$y0] `],  and finally [` x = [$x0] `].
+
+Thus, the unique solution is  [` (x,y,z,t) = ([$x0],[$y0],[$z0],[$t0]) `] 
+END_PGML_SOLUTION
+
+COMMENT('MathObject version');
+COMMENT('y-coordinate can be zero. All others are non-zero.');
+ENDDOCUMENT();

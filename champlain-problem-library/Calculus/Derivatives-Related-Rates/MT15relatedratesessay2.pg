@@ -1,0 +1,102 @@
+## DESCRIPTION
+## Related Rates. Students must answer in a sentence.
+## ENDDESCRIPTION
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Applications of differentiation)
+## DBsection(Related rates)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2015/11/06)
+## Level(4)
+## TitleText1('Applied Calculus')
+## TitleText2('For the Managerial, Life, and Social Sciences')
+## AuthorText1('Soo Tan')
+## EditionText1('9')
+## Section1('3.6')
+## Problem1('')
+## KEYWORDS('calculus', 'derivative', 'implicit', 'related rates')
+
+
+DOCUMENT();
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"PGessaymacros.pl",
+"MathObjects.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+install_problem_grader(~~&std_problem_grader);
+
+$p = random(10,20,10);
+$x0 = random(10,80,10);
+$x1 = random(10,80,10);
+while ($x0 == $x1)
+{
+$x1 = random(10,80,10);
+}
+$a = Compute("2*($x1 - $x0)/$p");
+$b = Compute("50*$p**2 + 2*$x0*$x1");
+$ans = Compute("(-2)*(100*$p + $a*$x0)/($a*$p + 4*$x0)");
+
+if ($ans < 0){
+   $change = 'decreasing';
+}
+else {$change = 'increasing';
+}
+$abans = abs($ans);
+
+Context()->texStrings;
+BEGIN_TEXT
+Suppose the quantity demanded monthly of a certain commodity is related to its unit price by the equation 
+\[
+    2 x^2 ? {$a} x p + 50 p^2 = $b.
+\]
+where \(x\) is the quantity demanded and where the unit price, \(p\), is measured in dollars.
+$BR
+If the price is increasing at a rate of 2 dollars per month when the
+price is $p dollars, at what rate is the monthly demand changing?
+
+$BR
+$BR
+Rate of change of demand = \{ans_rule(20) \}
+$PAR
+$BBOLD Answer in a sentence!$EBOLD Type your sentence in the space below  (don't forget to include units):
+$BR
+\{ essay_box(3,60) \}
+$BR
+Note: Your sentence answer will be read and graded manually at a later time.
+END_TEXT
+BEGIN_HINT
+Hint 1. Remember to differentiate both sides of the price-demand equation with respect to $BBOLD time$EBOLD, i.e., the variable \( t\) $BR
+Hint 2. To find the value of \(x\) when \(p=$p\), solve the price-demand equation 
+\(   2 x^2 ? {$a} x p + 50 p^2 = $b \) for \(x\) when \(p=$p\).
+END_HINT
+BEGIN_SOLUTION
+Given values:$BR
+\( \frac{dp}{dt} = 2 \) when \( p = $p \).$BR
+Unknown rate:$BR
+\( \frac{dx}{dt} = \) ? $PAR
+Differentiating both sides of the equation with respect to time \( t \) gives:$BR
+\( 4x \frac{dx}{dt} ? {$a}\left( \frac{dx}{dt} \cdot p + x \cdot \frac{dp}{dt} \right) + 100p\frac{dp}{dt} = 0  \)$BR
+To find \(x \) when \(p=$p\), solve \(   2 x^2 ? {$a}\cdot{$p} x  + 50 \cdot{$p}^2 = $b \) for \(x\), which gives \(x=$x0\) (reject the negative answer).$BR
+Replace the given values in the equation that relates the rates:$BR
+\( 4\cdot{$x0} \frac{dx}{dt} ? {$a}\left( \frac{dx}{dt} \cdot {$p} + {$x0} \cdot 2 \right) + 100\cdot{$p}\cdot 2 = 0  \)$BR
+which gives \( \frac{dx}{dt} = $ans \) $PAR
+Sentence: The demand is $change at a rate of $abans units per month.
+END_SOLUTION
+Context()->normalStrings;
+#@ans = (num_cmp(-2*(100*$p + $a*$x0)/($a*$p + 4*$x0)));
+ANS($ans->cmp());
+ANS( essay_cmp() );
+
+COMMENT('MathObjects version.');
+ENDDOCUMENT();

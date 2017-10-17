@@ -1,0 +1,75 @@
+## DESCRIPTION
+##   Subtraction using (tens) complements in decimal number system.
+## ENDDESCRIPTION
+
+## DBsubject(Arithmetic)
+## DBchapter(Other bases)
+## DBsection(Addition/Subtraction)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2015/09/07)
+## Level(2)
+## TitleText1('Essential Computer Mathematics')
+## AuthorText1('Seymour Lipschutz')
+## YearText1('1987')
+## Section1('1.6')
+## Problem1('')
+## KEYWORDS('subtraction', 'tens complement', 'complements')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+Context()->flags->set(
+    tolerance=>0.0000001,
+    tolType=>"absolute",);
+
+$showPartialCorrectAnswers = 0;
+
+#   Random numbers:
+$b1 = random(4116,7299,3);
+$a1 = random(1110,3996,3);
+
+$nines1 = Compute("9999 - $a1");
+$tens1 = Compute("$nines1 + 1");
+$diff1 = Compute("$b1 + $tens1-10^4");
+
+Context()->texStrings;
+BEGIN_TEXT
+Evaluate the difference of the given decimal numbers using (tens) complements:
+$PAR
+\( B - A = $b1 - $a1  = $b1 + \) \{ ans_rule(10)\} \( - \) \{ ans_rule(10)\}  \( = \)
+ \{ans_rule(10)\}  
+$PAR
+$BITALIC In the first answer blank, enter the tens complement of \( A \). In the second answer blank, enter the number that must be subtracted (the equivalent of dropping the leading 1). In the third answer blank, enter the final answer. $EITALIC
+END_TEXT
+
+
+BEGIN_HINT
+To evaluate the difference \( B - A \) where \( A \) and \( B \) are decimal numbers with \( A < B \) and \( B\) has \( n \) digits (pad the number \( A \) with leading zeroes so that it too has \( n \) digits):$BR
+\[
+    B - A = B + \text{ (tens complement of A)} - 10^n
+\]
+For example:  \(72463 - 892 = 72463 + 99108 - 100000 = 71571\).$BR
+(Note: Subtracting \( 10^5 \) is equivalent to dropping the leading 1.)
+END_HINT
+BEGIN_SOLUTION
+\( B - A = $b1 - $a1 = $b1 + $tens1  \text{ (the tens complement of }  A  ) - 10000 =   $diff1 \) (the final answer)
+END_SOLUTION
+Context()->normalStrings;
+
+ANS($tens1->cmp() );
+ANS(Compute("10000")->cmp() );
+ANS($diff1->cmp() );
+
+COMMENT("MathObjects version.");
+ENDDOCUMENT();        # This should be the last executable line in the problem.;
