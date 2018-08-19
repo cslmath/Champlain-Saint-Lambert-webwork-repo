@@ -1,22 +1,22 @@
-webwork-CSL-problem-library
+Champlain-Saint-Lambert-webwork-repo
 
-This is the WeBWorK CSL Problem Library. Here you will find all WeBWorK problems contributed by the Champlain Saint-Lambert (CSL) community.
+This is the Champlain-Saint-Lambert-webwork-repo. Here you will find WeBWorK problems contributed by the Champlain Saint-Lambert math department.
 
 This repository has three parts:
 
     1) champlain-problem-library
-    2) Contrib
-    3) Pending
+    2) CPL-Contrib
+    3) CPL-Pending
 
 1) champlain-problem-library:
-The contents of champlain-problem-library are the problems one can browse via the Library Browser in webwork by clicking on the Champlain button and browsing through dropdown menus (see the end of this file**). While this entire repository is named webwork-CSL-problem-library, we will use CPL to refer to just the part called champlain-problem-library.
+The contents of champlain-problem-library are the problems one can browse via the Library Browser in WeBWorK by clicking on the Champlain button and browsing through dropdown menus**(see the end of this README file). While this entire repository is named Champlain-Saint-Lambert-webwork-repo, we will use CPL to refer to just the part called champlain-problem-library.
 
-2) Contrib:
-New contributions should go into Contrib in a subdirectory whose prefix is the contributors initials, e.g. JD_Contrib contains Jane Doe's contributions.
+2) CPL-Contrib:
+New contributions should go into CPL-Contrib in a subdirectory whose prefix is the contributors initials, e.g. JD-Contrib contains Jane Doe's contributions.
 The original contributors retain control of these files, both in style and content. Problems are automatically considered for being added to the CPL unless the contributor specifically asks that they not be. So, this can be an avenue for sharing webwork problems with the Champlain community exactly as the author has created them. End users can browse and use problems directly from Contrib by making symbolic links from the templates directories of their courses.
 
-3) Pending:
-Problems from Contrib will be reviewed and tested before inclusion in the CPL. Those files will be copied temporarily into Pending. General users should ignore the contents of Pending since files will come and go.
+3) CPL-Pending:
+Problems from Contrib will be reviewed and tested before inclusion in the CPL. Those files will be copied temporarily into CPL-Pending. General users should ignore the contents of CPL-Pending since files will come and go.
 
 **Dropdown menus:
   Calculus
