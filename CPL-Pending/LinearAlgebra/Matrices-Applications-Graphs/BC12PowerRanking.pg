@@ -1,0 +1,153 @@
+## DESCRIPTION
+## Linear Algebra
+## MT Aug 2018 tagged and renamed
+## ENDDESCRIPTION
+
+## KEYWORDS('matrix' 'inverse')
+
+## DBsubject('Linear Algebra')
+## DBchapter('Matrices')
+## DBsection('The Inverse of a Matrix')
+## Date('2012')
+## Author('Brendan Cordy')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## RESOURCES('Tourney.gif')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl", 
+"PGgraphmacros.pl", 
+"PGmatrixmacros.pl"
+);
+
+install_problem_grader(~~&std_problem_grader);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 0;
+
+$a11 = 0;
+$a12 = 1;
+$a13 = 0;
+$a14 = 1;
+$a15 = 1;
+
+$a21 = 0;
+$a22 = 0;
+$a23 = 1;
+$a24 = 0;
+$a25 = 0;
+
+$a31 = 1;
+$a32 = 0;
+$a33 = 0;
+$a34 = 0;
+$a35 = 1;
+
+$a41 = 0;
+$a42 = 1;
+$a43 = 1;
+$a44 = 0;
+$a45 = 1;
+
+$a51 = 0;
+$a52 = 1;
+$a53 = 0;
+$a54 = 0;
+$a55 = 0;
+
+BEGIN_TEXT
+
+$PAR
+\{image("Tourney.gif", tex_size=>500,
+  height=>300, width=>400,)\}$PAR
+
+Suppose that the dominance-directed graph shown above represents the results of a round-robin tournament between five teams: The Alligators(A), the Bears(B), the Coyotes(C), the Dolphins(D), and the Eagles(E).
+$BR
+$BR
+Find the adjacency matrix for this directed graph.
+
+$BR
+\{ mbox( '\(A(G)=\)', answer_matrix(5,5,1) ) \} 
+
+$BR
+
+Calculate \({A(G)+(A(G))}^2\), and find the power of each vertex.
+
+$BR
+$BR
+
+Power of A: \{ans_rule(1)\}
+Power of B: \{ans_rule(1)\}
+Power of C: \{ans_rule(1)\}
+Power of D: \{ans_rule(1)\}
+Power of E: \{ans_rule(1)\}
+
+$BR
+$BR
+
+Give the final results of the tournament. The winning team should have a 1 next to their name, the team that finished in second place should have a 2, and so on.
+
+$BR
+$BR
+
+Alligators: \{ans_rule(1)\},
+Bears: \{ans_rule(1)\},
+Coyotes: \{ans_rule(1)\},
+Dolphins: \{ans_rule(1)\},
+Eagles: \{ans_rule(1)\} $BR
+
+END_TEXT
+
+ANS(num_cmp($a11));
+ANS(num_cmp($a12));
+ANS(num_cmp($a13));
+ANS(num_cmp($a14));
+ANS(num_cmp($a15));
+
+ANS(num_cmp($a21));
+ANS(num_cmp($a22));
+ANS(num_cmp($a23));
+ANS(num_cmp($a24));
+ANS(num_cmp($a25));
+
+ANS(num_cmp($a31));
+ANS(num_cmp($a32));
+ANS(num_cmp($a33));
+ANS(num_cmp($a34));
+ANS(num_cmp($a35));
+
+ANS(num_cmp($a41));
+ANS(num_cmp($a42));
+ANS(num_cmp($a43));
+ANS(num_cmp($a44));
+ANS(num_cmp($a45));
+
+ANS(num_cmp($a51));
+ANS(num_cmp($a52));
+ANS(num_cmp($a53));
+ANS(num_cmp($a54));
+ANS(num_cmp($a55));
+
+ANS(num_cmp(8));
+ANS(num_cmp(3));
+ANS(num_cmp(6));
+ANS(num_cmp(7));
+ANS(num_cmp(2));
+
+ANS(num_cmp(1));
+ANS(num_cmp(4));
+ANS(num_cmp(3));
+ANS(num_cmp(2));
+ANS(str_cmp(5));
+
+ENDDOCUMENT();       # This should be the last executable line in the problem.

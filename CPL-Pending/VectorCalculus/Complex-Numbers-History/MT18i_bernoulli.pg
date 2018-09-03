@@ -1,0 +1,105 @@
+## DESCRIPTION
+##   History of Complex Numbers. Written in PGML.
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(History)
+## DBsection()
+## Date(2018-Apr-20)
+## Institution(Champlain College Saint-Lambert)
+## Author(M. Titcombe)
+## Level()
+## MO()
+## TitleText1()
+## AuthorText1()
+## EditionText1()
+## Section1()
+## Problem1()
+## KEYWORDS('Complex','Imaginary','complex number')
+
+DOCUMENT();
+
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGcourse.pl",
+  "PGchoicemacros.pl",
+  "PGML.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+Context('Numeric');
+
+$mc = new_multiple_choice();
+
+# syntax for qa
+# qa("question","correct answer")
+$mc -> qa ("When expressed in standard form of complex numbers, what are \(A\) and \(B\)?", 
+"\(A=-\frac{\sqrt{-1}}{2}\) and \(B=\frac{\sqrt{-1}}{2}\) $BR",
+);
+
+# syntax... add other choices than correct answer above
+$mc -> extra(
+"\(A=\frac{\sqrt{-1}}{2}\) and \(B=\frac{\sqrt{-1}}{2}\) $BR",
+"\(A=-\frac{\sqrt{-1}}{2}\) and \(B=-\frac{\sqrt{-1}}{2}\) $BR",
+"\(A=-2\sqrt{-1}\) and \(B=2\sqrt{-1}\) $BR",
+);
+
+$mc -> makeLast("None of the above");
+
+#    _"...entre deux v[`\acute{\it{e}}`]rit[`\acute{\it{e}}`]s du domaine r[`\acute{\it{e}}`]el, le chemin le plus #facile et le plus court passe bien souvent par le domaine complexe."_  --- Paul #Painlev[`\acute{\rm{e}}`] (1900)
+
+
+
+BEGIN_PGML
+  
+>>*Bernoulli Complex Idea*<<
+
+
+In 1702, Johann Bernoulli wrote a paper whose title, roughly translated, is _"Solution of a problem concerning the integral calculation with some abbreviations with respect to this computation,"_ in which he expressed [`\arctan x`] as a logarithm of a function in the complex domain.
+
+Complex numbers appeared in Bernoulli's work when he expressed the inverse tangent as an indefinite integral:
+
+>>[` \arctan x = \displaystyle \int \frac{1}{x^2+1}\,dx `]<<
+
+and then used a partial fraction decomposition to rewrite the integrand in terms of two complex functions.
+
+One possible decomposition is of the form:
+
+>>[`` \frac{1}{x^2+1} = \frac{A}{x-\sqrt{-1}} + \frac{B}{x+\sqrt{-1}} ``]<<
+
+In this decomposition, the coefficients [`A`] and [`B`] are complex numbers. To determine [`A`] and [`B`], multiply both sides of the equation by [`x^2+1`] and simplify to obtain
+>>[`  1 = A(x+\sqrt{-1}) + B(x-\sqrt{-1}) `]<<
+
+First, to solve for [`A`], let [`x=\sqrt{-1}`]. Then, to solve for [`B`], let [`x=-\sqrt{-1}`]. This gives
+>>[` A = \displaystyle\frac{1}{2\sqrt{-1}} \text{ and } 
+     B = \displaystyle -\frac{1}{2\sqrt{-1}} `] <<
+
+To express [`A`] and [`B`] in standard form of a complex number [`a+b\sqrt{-1}`], "rationalize the denominator" by multiplying both numerator and denominator by [`\sqrt{-1}`], and when simplifying, recall that [`(\sqrt{-1})^2=-1`]. Note: rationalizing the denominator in this way is one case of how to *divide complex numbers* (see the general rule below).
+
+
+[@ $mc -> print_q() @]***
+[@ $mc -> print_a() @]***
+
+>> ----- <<
+*Division of Complex Numbers*
+
+To divide a complex number [`a+b\sqrt{-1}`] by another complex number [`c+d\sqrt{-1}`], multiply both numerator and denominator by the _complex conjugate_ of the denominator, which is [`c-d\sqrt{-1}`]:    
+[` \displaystyle\frac{a+b\sqrt{-1}}{c+d\sqrt{-1}} = 
+\frac{a+b\sqrt{-1}}{c+d\sqrt{-1}}\cdot \frac{c-d\sqrt{-1}}{c-d\sqrt{-1}}
+= \frac{(ac+bd)+(bc-ad)\sqrt{-1}}{c^2+d^2}
+`]
+END_PGML
+
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( checkbox_cmp( $mc->correct_ans() ) );
+
+
+COMMENT('Written in PGML.');
+ENDDOCUMENT();
+

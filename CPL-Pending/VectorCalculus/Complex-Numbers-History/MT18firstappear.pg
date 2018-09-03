@@ -1,0 +1,81 @@
+## DESCRIPTION
+##   History of Complex Numbers. Written in PGML.
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(History)
+## DBsection()
+## Date(2018-Apr-20)
+## Institution(Champlain College Saint-Lambert)
+## Author(M. Titcombe)
+## Level()
+## MO()
+## TitleText1()
+## AuthorText1()
+## EditionText1()
+## Section1()
+## Problem1()
+## KEYWORDS('Complex','Imaginary','complex number')
+
+DOCUMENT();
+
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGcourse.pl",
+  "PGchoicemacros.pl",
+  "PGML.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+Context('Numeric');
+
+$mc = new_multiple_choice();
+
+# syntax for qa
+# qa("question","correct answer 1","correct answer 2",...)
+$mc -> qa ("Complex numbers arose in Cardano's solution to:", 
+"A cubic equation of the form \( x^3 = 3px + 2q \) if \( q^2 - p^3 < 0 \) $BR",
+);
+
+$mc -> extra(
+"A cubic equation of the form \( x^3 = 3px + 2q \) if \( q^2 - p^3 < 0 \) $BR",
+"A quadratic equation of the form \( x^2 = 3px + 2q \) if \( p^2 - 4q < 0 \) $BR",
+"A cubic equation of the form \( x^3 = 3px + 2q  \) if \( q^2 - p^3 > 0 \) $BR",
+"A linear equation of the form \(3px + 2q = 0 \) if \( p = q \) $BR",
+);
+
+$mc -> makeLast("None of the above");
+
+
+BEGIN_PGML
+  
+>>*Cardano's Solution*<<
+
+In the year 1545, Girolamo Cardano published _Ars Magna_, which is conventionally believed to be the first publication in which complex numbers arose.  
+
+For a certain type of equation (one that *always* has at least one real solution), Cardano constructed a general solution of the form 
+>>
+[``
+     x = \sqrt[3]{q - \sqrt{q^2 - p^3}} + \sqrt[3]{q + \sqrt{q^2 - p^3}}  
+``]
+<<
+  
+where [` p `] and [` q `] are real numbers. 
+
+What type of equation was Cardano solving and under what condition did complex numbers arise?
+[@ $mc -> print_q() @]***
+[@ $mc -> print_a() @]***
+END_PGML
+
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( checkbox_cmp( $mc->correct_ans() ) );
+
+
+COMMENT('Written in PGML.');
+ENDDOCUMENT();

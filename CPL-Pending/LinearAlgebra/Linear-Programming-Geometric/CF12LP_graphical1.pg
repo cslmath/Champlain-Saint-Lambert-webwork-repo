@@ -1,0 +1,83 @@
+# DESCRIPTION
+# Find the max and min of a 2D feasible region by 
+# examining the objective at the vertex points.
+# A graphical approach is used to solve an LP.
+# WeBWorK problem written by Charles Fortin, 
+# <cfortin(at)champlaincollege.qc.ca(dot)ca>
+## Aug 2018 MT tagged and renamed
+# ENDDESCRIPTION
+
+## DBsubject('Operations Research')
+## DBchapter('Linear Programming')
+## DBsection('')
+## KEYWORDS('Geometric','Linear algebra')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2012')
+## Author('Charles Fortin')
+## Institution('Champlain College Saint-Lambert')
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGchoicemacros.pl",
+"PGgraphmacros.pl",
+);
+
+# make sure we're in the context we want
+Context("Numeric");
+$showPartialCorrectAnswers = 0;
+
+# The feasible region is the region enclosed by the curves y=mx+b
+# y=nx+a, x=0, and y=0. The variables are set up so that the 
+# intersection of the two curves y=mx+b and y=nx+a is (k,mk+b).
+# The slope of y=mx+b is positive and the slope of y=nx+a is negative.
+# q, which is the slope of the level curves, is positive and less than n.
+# The objective function is p = -qx+y.
+# Therefore the min occurs at (-b/m,0) and the max at (k,mk+b).
+
+$a = random(1,4);
+$n = random(3,6);
+$k = random(1,4);
+$q = random(1,$n);
+$b = random(1+$k*$n+$a,3+$k*$n+$a);
+$m = Real("($k*$n + $a - $b)/$k");
+
+$min = Real("$q*$b/$m");
+$max = Real("$m*$k+$b-$q*$k");
+
+TEXT(beginproblem());
+Context()->texStrings;
+BEGIN_TEXT
+Consider the following problem:
+\[\begin{array}{rcl} p&=&-$q x+ y \\ 
+y - $m x &\leq& $b \\
+y - $n x &\leq& $a \\
+x &\geq& 0\\
+y &\geq& 0 \end{array}
+\]
+Find the maximum and minimum values of p by graphing the feasible region in the Cartesian plane and by examining p at the vertex points. 
+$BR
+(a) The maximum value of p in the feasible region is \{ ans_rule(10) \}
+$BR
+(a) The minimum value of p in the feasible region is \{ ans_rule(10) \}
+
+END_TEXT
+Context()->normalStrings;
+
+ANS( $max->cmp() );
+ANS( $min->cmp() );
+
+Context()->texStrings;
+SOLUTION(EV3(<<'END_SOLUTION'));
+$PAR SOLUTION $PAR
+
+
+END_SOLUTION
+Context()->normalStrings;
+
+ENDDOCUMENT();

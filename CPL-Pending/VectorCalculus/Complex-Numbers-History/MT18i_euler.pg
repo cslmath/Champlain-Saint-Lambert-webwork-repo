@@ -1,0 +1,96 @@
+## DESCRIPTION
+##   History of Complex Numbers. Written in PGML.
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(History)
+## DBsection()
+## Date(2018-Apr-20)
+## Institution(Champlain College Saint-Lambert)
+## Author(M. Titcombe)
+## Level()
+## MO()
+## TitleText1()
+## AuthorText1()
+## EditionText1()
+## Section1()
+## Problem1()
+## KEYWORDS('Complex','Imaginary','complex number')
+
+## RESOURCES('Euler_inotation.png')
+
+DOCUMENT();
+
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGcourse.pl",
+  "PGchoicemacros.pl",
+  "PGML.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+Context('Numeric');
+
+$mc = new_multiple_choice();
+
+# syntax for qa
+# qa("question","correct answer")
+$mc -> qa ("What equation does one obtain by letting \(x=\pi\) (radians) in Euler's Formula? (Hint: this equation is Euler's famous identity)", 
+"\( e^{i\pi} + 1 = 0 \)$BR",
+);
+
+# syntax... add other choices than correct answer above
+$mc -> extra(
+"\(e^{i\pi} - 1 = 0 \)$BR",
+"\(e^{i\pi} + 1 = \ln 2 \)$BR",
+"\(e^{i\pi} + 1 = \sqrt{2}\)$BR",
+);
+
+$mc -> makeLast("None of the above");
+
+
+BEGIN_PGML
+  
+>>*Euler's Introduction of i*<<
+
+In 1777, Leonhard Euler introduced the notation for imaginary numbers that is still used today. Below is an excerpt from his text, in Latin, that shows the sentence in which he designated the letter [`i`] to represent the square root of minus one:
+
+>>[@ image( "Euler_inotation.png", width=>539, height=>83,  
+tex_size=>950, extra_html_tags=>'alt="i notation"' ) @]*<<
+
+Euler is famous for an identity has been called (by many) the most beautiful equation in mathematics, because it relates five very important numbers, including the number [`i`], in a simple expression.
+
+One way to see the origins of Euler's famous identity is to begin with another of his contributions, known as _Euler's Formula_, which relates an exponential function to trigonometric functions (sine and cosine).
+
+Begin with the Taylor series for [`e^x`] (this was known to Euler in his time, as Taylor series were formalized by Brook Taylor, 1715):  
+>>[` \displaystyle e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \frac{x^5}{5!} + ...`]<<
+
+Then replace [`x`] with [`ix`], and simplify powers of [`i`] (e.g., [`i^2=-1`], [`i^3=-i`], etc.) to obtain:  
+ 
+>>[` \displaystyle e^{ix} = 1 + ix + \frac{(ix)^2}{2!} + \frac{(ix)^3}{3!} + \frac{(ix)^4}{4!} + \frac{(ix)^5}{5!} + ...  = 1 + ix - \frac{x^2}{2!} - i\frac{x^3}{3!} + \frac{x^4}{4!} + i\frac{x^5}{5!} + ...`]<<
+
+Collect real terms (those not involving [`i`]) and imaginary terms (those involving [`i`]) to get:
+>>[` \displaystyle e^{ix} = \left(1 - \frac{x^2}{2!} + \frac{x^4}{4!}  - + ...\right) + i\left(x- \frac{x^3}{3!} +\frac{x^5}{5!} - + ...\right)`]<<  
+ 
+In brackets, are the Taylor series for [`\cos x`] and [`\sin x`], respectively. This gives the expression that is known as _Euler's Formula_:  
+>>[`e^{ix} = \cos x + i \sin x`]<<
+
+[@ $mc -> print_q() @]***
+[@ $mc -> print_a() @]***
+
+>> ----- <<
+*Did you know?* Electrical engineers use [`j`] instead of [`i`] for the square root of minus one (because they use the letter [`i`] for current.)
+END_PGML
+
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( checkbox_cmp( $mc->correct_ans() ) );
+
+COMMENT('Written in PGML.');
+ENDDOCUMENT();
+

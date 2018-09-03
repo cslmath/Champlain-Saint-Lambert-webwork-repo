@@ -1,0 +1,82 @@
+## DESCRIPTION
+## Linear Algebra
+## MT Aug 2018 tagged and renamed
+## ENDDESCRIPTION
+
+## DBsubject('Linear Algebra')
+## DBchapter('Matrices')
+## DBsection('Determinants')
+## Date('2013')
+## Author('Brendan Cordy')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGgraphmacros.pl",
+"PGmatrixmacros.pl", 
+"PGnumericalmacros.pl",
+"PGauxiliaryFunctions.pl",
+"PGmorematrixmacros.pl"
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+$a11 = 30;
+$a21 = 40;
+$a31 = 20;
+$a12 = 20;
+$a22 = 20;
+$a32 = 20;
+$a13 = 30;
+$a23 = 20;
+$a33 = 40;
+
+$fadem = random(50000,100000,10000);
+$midem = random(10000,30000,10000);
+$wodem = random(30000,70000,10000);
+
+BEGIN_TEXT
+Suppose that in a certain open economy there are three main production sectors: farming, milling, and woodworking. Each dollar of production from farms requires $a11 cents from the farming sector, $a21 from milling, and $a31 from woodworking. Each dollar of production in the milling sector requires $a22 cents of input from itself, $a12 cents from farming, and $a32 from woodworking. Finally, each dollar of production in the woodworking sector requires $a33 cents of input from itself, $a13 from farming, and $a23 from milling. 
+$BR
+$BR
+In your answer below, keep the columns and rows in alphabetical order (farming, milling, then woodworking).
+$BR
+$BR
+\{ mbox( 'The consumption matrix for this economy is \(C=\)', answer_matrix(3,3,5) ) \} 
+$BR
+
+Solve the Leontief equation \((I-C)X =D\) to find a level of production in each of the three sectors that will satisfy an external demand from the open sector for $fadem dollars of farming output, $midem dollars of milling output, and $wodem dollars of woodworking output. $BBOLD I'd recommend you make use of the row reducer at www.dangries.com/Flash/RowReducer/RowReducer.html to help you find \((I-C)^{-1}\)$EBOLD.
+$BR
+$BR\{ mbox( 'The required production vector is \(X=\)', answer_matrix(3,1,5) ) \} 
+END_TEXT
+
+$i11 = 22/9;
+$i12 = 1;
+$i13 = 14/9;
+$i21 = 14/9;
+$i22 = 2;
+$i23 = 13/9;
+$i31 = 4/3;
+$i32 = 1;
+$i33 = 8/3;
+
+$faprod = ($i11*$fadem + $i12*$midem + $i13*$wodem);
+$miprod = ($i21*$fadem + $i22*$midem + $i23*$wodem);
+$woprod = ($i31*$fadem + $i32*$midem + $i33*$wodem);
+
+ANS(num_cmp(0.01*$a11)); ANS(num_cmp(0.01*$a12)); ANS(num_cmp(0.01*$a13));
+ANS(num_cmp(0.01*$a21)); ANS(num_cmp(0.01*$a22)); ANS(num_cmp(0.01*$a23));
+ANS(num_cmp(0.01*$a31)); ANS(num_cmp(0.01*$a32)); ANS(num_cmp(0.01*$a33));
+ANS(num_cmp($faprod, reltol=>1)); ANS(num_cmp($miprod, reltol=>1)); ANS(num_cmp($woprod, reltol=>1));
+ENDDOCUMENT();       # This should be the last executable line in the problem.

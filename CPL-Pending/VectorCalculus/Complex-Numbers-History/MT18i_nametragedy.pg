@@ -1,0 +1,87 @@
+## DESCRIPTION
+##   History of Complex Numbers. Written in PGML.
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(History)
+## DBsection()
+## Date(2018-Apr-19)
+## Institution(Champlain College Saint-Lambert)
+## Author(M. Titcombe)
+## Level()
+## MO()
+## TitleText1()
+## AuthorText1()
+## EditionText1()
+## Section1()
+## Problem1()
+## KEYWORDS('Complex','Imaginary','complex number')
+
+## RESOURCES('term_imaginary.jpg')
+
+DOCUMENT();
+
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGcourse.pl",
+  "PGchoicemacros.pl",
+  "PGML.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+Context('Numeric');
+
+$mc = new_multiple_choice();
+
+# syntax for qa
+# qa("question","correct answer")
+$mc -> qa ("What are the other two solutions, the ones that Descartes referred to as 'imaginaires'?", 
+"\( x=2 \pm \sqrt{-1} \) $BR",
+);
+
+# syntax... add other choices than correct answer above
+$mc -> extra(
+"\(  x=2 \pm 4\sqrt{-1} \) $BR",
+"\(  x=4 \pm 2\sqrt{-1} \) $BR",
+"\(  x=1 \pm \sqrt{-1}\)$BR",
+);
+
+$mc -> makeLast("None of the above");
+
+
+BEGIN_PGML
+  
+>>*Imaginary Number: A Terminological Tragedy*<<
+
+    _"Calling a solution \[that involves the square root of a negative number\] an 'imaginary' number was a terminological tragedy, as it has led to people mistakenly inferring that somehow 'complex' numbers have a lower ontological status than 'real' ones."_  -- Robert J. Low, Coventry University
+
+In 1637, Ren[`\acute{\text{e}}`] Descartes published _G[`\acute{\text{e}}`]ometrie_, in which he studied the equation [`x^3-6x^2+13x-10=0`].  
+
+An excerpt from Descartes's text is below, in which he unfortunately used the adjective _imaginaires_ to describe solutions that involve the square root of a negative number, and the term _imaginary number_ has stuck ever since.
+
+>>[@ image( "term_imaginary.jpg", width=>480, height=>211,  
+tex_size=>900, extra_html_tags=>'alt="term imaginary"' ) @]*<<
+
+Descartes correctly assumed that there are three solutions to a polynomial equation of degree three (the Fundamental Theorem of Algebra guarantees this, as Gauss proved later, in the year 1799).
+
+The cubic equation [`x^3-6x^2+13x-10=0`] has one real solution, [`x=2`].
+
+To find the other two solutions, divide [`x^3-6x^2+13x-10`] by the factor [`x-2`], and then use the quadratic formula to find the solutions of the resulting quadratic. Note: you can simplify by using [`\sqrt{-c^2}=c\sqrt{-1}`] for [`c>0`].
+
+[@ $mc -> print_q() @]***
+[@ $mc -> print_a() @]***
+
+END_PGML
+
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( checkbox_cmp( $mc->correct_ans() ) );
+
+
+COMMENT('Written in PGML.');
+ENDDOCUMENT();

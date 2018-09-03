@@ -1,0 +1,125 @@
+## DESCRIPTION
+## Linear Algebra
+## Problem 1.1.27 in Anton Elementary Linear Algebra, 10th edition
+## Aug 2018 MT tagged and renamed
+## ENDDESCRIPTION
+
+## KEYWORDS('gaussian elimination')
+
+## DBsubject('Linear Algebra')
+## DBchapter('Systems of Linear Equations and Matrices')
+## DBsection('Elimination Methods')
+## Date('12 October 2011')
+## Author('Charles Fortin')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Elementary Linear Algebra')
+## EditionText1('10')
+## AuthorText1('Anton')
+## Section1('1.1')
+## Problem1('1.1.27')
+
+DOCUMENT(); 
+
+loadMacros("PG.pl",
+           "PGbasicmacros.pl",
+           "PGchoicemacros.pl",
+           "PGanswermacros.pl",
+           "PGmatrixmacros.pl",
+	   "MathObjects.pl",
+           "parserMultiAnswer.pl",
+           );
+
+TEXT(beginproblem());
+
+$showPartialCorrectAnswers = 1;
+
+Context("Matrix");
+Context()->variables->add(t=>"Real");
+Context()->variables->add(a=>"Real");
+
+$kk = random(6,12,2); # k is even
+$k = Compute("$kk");
+$limit1 = Compute("$k^2/2-1");
+$limit2 = Compute("$k/2-1");
+$m = random(1,limit1); # make sure n >=2
+$n = Compute("$k^2-2*$m");
+$p = random(1,$limit2); # make sure q>=2
+$q = Compute("$k-2*$p");
+
+$aa = Compute("a^2-$n");
+$bb = Compute("a-$q");
+$cc = Compute("-$m");
+$dd = Compute("1/(a+$k)");
+$ee = Compute("$p-$m /(a+$k)");
+$zero = Compute("0");
+$one = Compute("1");
+$two = Compute("2");
+
+# The systeme is Ax=b
+$A = Matrix([[$one,$m],[$two,$aa]]);
+$b = Matrix([[$p],[$bb]]);
+
+# possible answer when there are infinitely many solutions
+$x = Formula("$p+t*$cc");
+$y = Formula("$zero+t*$one");
+
+# The answer when there is a unique solution
+$U = Matrix([[$ee],[$dd]]);
+
+# variable used in the answers
+$minusk = Compute("-$k");
+
+# This piece of code was obtained from "ParametricEquationsAnswers" in
+# the Problem Technique section of the Wiki
+# It deals with answers that are not unique
+# In our case the student's answer must satisfy xstu+m*ystu=p
+$multians = MultiAnswer($x, $y)->with(
+  singleResult => 0,
+  checker => sub {
+      my ( $correct, $student, $self ) = @_;
+      my ( $xstu, $ystu) = @{$student};
+      if ( ($xstu + $m*$ystu) == $p ) 
+           {
+            return [1,1];
+           }
+  }
+);
+
+Context()->texStrings;
+BEGIN_TEXT
+Consider the linear system
+$BR
+\[$A \left[\begin{array}{c} x\\y\end{array}\right] = $b\]
+$BR
+(a) For which value of \(a\) will the system have no solutions? \{ ans_rule(10) \}
+$BR
+(b) For which value of \(a\) will the system have infinitely many solutions? \{ ans_rule(10) \}. Write down the set of solutions in this case. Use \(t\) as a parameter for your solution:
+$BR
+$BR
+\( x(t) = \) \{$multians->ans_rule(30)\}
+$BR
+\( y(t) = \) \{$multians->ans_rule(30)\}
+$BR
+$BR
+$BR
+(c) In the other cases, the system has a unique solution? This solution depends 
+on the value of the variable \(a\) and is equal to 
+$BR
+$BCENTER
+\{ mbox('\(\left[\begin{array}{c} x\\y\end{array}\right] =\)', $U->ans_array)\}
+$ECENTER
+(notice that your answer will be an expression which includes the variable \(a\) )
+$BR
+END_TEXT
+
+
+
+Context()->normalStrings;
+
+
+ANS($minusk->cmp());
+ANS($k->cmp());
+ANS( $multians->cmp() );
+ANS($U->cmp());
+
+ENDDOCUMENT() ;

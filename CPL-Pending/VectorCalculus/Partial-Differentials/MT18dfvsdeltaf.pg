@@ -1,0 +1,85 @@
+#DESCRIPTION
+##  Calculus: For f(x,y) compare differential df with deltaf
+##ENDDESCRIPTION
+
+
+## DBsubject(Calculus - multivariable)
+## DBchapter(Differentiation of multivariable functions)
+## DBsection(Differentiability, linearization and tangent planes)
+## Date(2018-Mar-20)
+## Institution(Champlain College Saint Lambert)
+## Author(Michele Titcombe)
+## MLT(linearize2)
+## Level(3)
+## MO(1)
+## TitleText1('Multivariable Calculus')
+## AuthorText1('Stewart')
+## EditionText1('8')
+## Section1('14.4')
+## Problem1('31')
+## KEYWORDS('calculus', 'partial derivatives', 'tangent planes','linearization')
+
+###########################################################
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGcourse.pl",
+  "PGML.pl",
+);
+###########################################################
+
+$showPartialCorrectAnswers = 1;
+
+TEXT(beginproblem());
+
+###########################################################
+
+Context("Numeric");
+Context()->variables->add(y =>"Real",z =>"Real");
+
+$c1 = non_zero_random(4,6,1);
+$c2 = non_zero_random(-6,4,1);
+$a = non_zero_random(-4,4,2);
+$b = non_zero_random(-5,5,2);
+$dx = non_zero_random(-0.5,0.5,0.2);
+$dy = non_zero_random(-0.4,0.4,0.2);
+$newa = Compute("$a + $dx");
+$newb = Compute("$b + $dy");
+
+$z = Compute("$c1 x^2 + $c2 y^2")->reduce();
+$zsubx = $z -> D('x');
+$zsuby = $z -> D('y');
+$zsubxab = $zsubx->eval(x=>"$a",y=>"$b");
+$zsubyab = $zsuby->eval(x=>"$a",y=>"$b");
+$zab = $z->eval(x=>"$a",y=>"$b");
+$znewab = $z->eval(x=>"$newa",y=>"$newb");
+$dz = Compute("$zsubxab*$dx + $zsubyab*$dy");
+$deltaz = Compute("$znewab - $zab");
+
+
+###############################################################
+Context()->texStrings;
+BEGIN_PGML
+If [` z = [$z] `] and [` (x,y) `] changes from [` ([$a], [$b] ) `] to [` ([$newa], [$newb] ) `], find the values of [` \Delta z `] and [` dz `].
+
+[` \Delta z  = `][______________________________]{[$deltaz]}
+
+[` dz  = `][______________________________]{[$dz]}
+END_PGML
+BEGIN_PGML_SOLUTION
+Let [`z = f(x,y)`].  
+The exact change in [` z `] for a change [`\Delta x = dx = [$dx]`] in [`x`] and a change [`\Delta y = dy = [$dy]`] in [`y`] is 
+[`  \Delta z = f([$newa],[$newb]) - f([$a],[$b]) = [$znewab] - ([$zab]) = [$deltaz] `]
+
+The approximate change in [`z`] is the change that the tangent plane to [`z`] at [`([$a],[$b])`] makes for the same small changes in [`x`] and [`y`] which is given by
+[` dz = f_x(a,b)dx + f_y(a,b)dy = f_x([$a],[$b])([$dx]) + f_y([$a],[$b])([$dy]) = [$dz] `]
+END_PGML_SOLUTION
+Context()->normalStrings;
+
+################################################################
+COMMENT("Uses PGML.");
+ENDDOCUMENT();        # This should be the last executable line in the problem.
+

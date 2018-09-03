@@ -1,0 +1,190 @@
+# DESCRIPTION
+# An assignment given in the Fall 2010 coded in Webwork
+# WeBWorK problem written by Charles Fortin, 
+# <cfortin(at)champlaincollege.qc.ca(dot)ca>
+# Sep 2018 MT tagged and renamed
+# ENDDESCRIPTION
+
+## DBsubject('Calculus - single variable')
+## DBchapter('Applications of differentiation')
+## DBsection('Rates of change - business and economics')
+## KEYWORDS('profit','elasticity','revenue')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2010')
+## Author('Charles Fortin')
+## Institution('Champlain College Saint-Lambert')
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGchoicemacros.pl",
+"PGgraphmacros.pl",
+"unionTables.pl",
+"parserPopUp.pl"
+);
+
+# make sure we're in the context we want
+Context("Numeric");
+
+$costgasoline = random(3,5,2);
+$costemployee = random(5,9,2);
+$costofmowinglawn = Real("$costgasoline + $costemployee"); #an even number between 8 and 14
+$costpercontract = Real("5*$costofmowinglawn"); # a multiple of 10
+$a = random(2,4,1); #when the price of mowing a lawn is reduced by 1$,
+                    # demand increase by a clients
+$aa = Real("$a");
+$costfirstsummer = Real("325 + 5*$costofmowinglawn*20");
+$profitfirstsummer = Real("1675-$costpercontract*20");
+$newx = Real("20+2*$a");
+$newx2  = Real("20-2*$a");
+$yint = Real("20*(1+$a)/$a"); #the y-intercept b of the demand function p=mx+b
+
+$yint5 = Real("5*$yint");
+$yint2 = Real("20*(1+$a)"); #the y-intercept b of x=mp+b
+
+$coeff2 = Real("100*(1+$a)/$a - $costpercontract"); #P(x) = -5/a x^2+coeff2 x -275
+$coeff1 = Real("-10/$a"); #P'(x) = coeff1 x + coeff2
+
+$optimal_demand_revenue = Real("10*(1+$a)");
+$optimal_demand_profit = Real("10*(1+$a) - $costpercontract*$a/10"); # an integer
+# since $costpercontract is a multiple of 10
+$optimal_priceperlawn_revenue = Real("-1/$a*$optimal_demand_revenue + 20*(1+$a)/$a");
+$optimal_priceperlawn_profit = Real("-1/$a*$optimal_demand_profit + 20*(1+$a)/$a");
+$optimal_pricecontract_revenue = Real("5*$optimal_priceperlawn_revenue");
+$optimal_pricecontract_profit = Real("5*$optimal_priceperlawn_profit");
+$optimal_revenue = Real("$optimal_demand_revenue*$optimal_pricecontract_revenue");
+$optimal_profit = Real("$optimal_demand_profit*$optimal_pricecontract_profit - 275-$optimal_demand_profit*$costpercontract");
+$profit_optimalrevenue = Real("$optimal_revenue - 275-$optimal_demand_revenue*$costpercontract");
+$revenue_optimalprofit =Real("$optimal_demand_profit*$optimal_pricecontract_profit");
+
+
+
+TEXT(beginproblem());
+Context()->texStrings;
+BEGIN_TEXT
+This summer, you have started you own lawn mowing company. In order to start your
+ business, you had to buy three lawn mowers and T-shirts labeled with the company
+ name for the three employees you had to hire. The three lawn mover were purchased at $250 and the T-shirts for $75 ($25 each). When the summer started, you had lawn mowing contracts for
+ 20 lawns. The contracts were over a 10-week period and the lawns had to be mowed
+ once every two weeks. So each contract required mowing the lawn five times over
+ the summer. Now each time a lawn was mowed, you had to pay $$costgasoline for
+ the gasoline and
+ $$costemployee for your employee. Hence the cost of mowing a lawn was
+ $$costofmowinglawn. You had set a
+ price of $20 for mowing a lawn (therefore each contract generated revenues of
+ $100 over the summer). This means that over the summer, you made a profit of
+ $$profitfirstsummer (can you see why?).
+$PAR
+This summer, you want to operate your business again and obtain contracts for 
+mowing lawn under the same conditions (once every two weeks over a 10-week period).
+ Obviously, you do not need to buy the lawn mowers again (so their cost will not
+ be part of your fixed costs this summer). However, they will need some servicing and that
+ will cost you $200. You still expect to hire the same three employees and you
+ will need 3 new T-shirts (at the same price as last year).  Your experience
+ from last summer has given you some knowledge about the lawn mowing market. You 
+believe that at a price of $20 for mowing a lawn, you will still have 20 clients.
+ You estimate that a rebate of $1 in the price charged (each time a lawn is mowed)
+ will increase the number of clients (or contracts) by $a for the summer. For 
+example, if you charge $18 for mowing a lawn (each two weeks), you will obtain
+ \(20+ 2\cdot $a = $newx\) clients. Similarly, if you increase the price by $2 dollars,
+ you will obtain  \(20- 2\cdot $a = $newx2 \) clients. 
+$PAR
+(a) Give the details of the calculations involved to deduce that a profit of $ 
+$profitfirstsummer was made last summer. Submit a hard copy for your solution.
+$BR
+(b) The elasticity of demand when the numbers of clients (lawns to mow) is 20 is
+\{ ans_rule(6) \}. This means that when the price of mowing a lawn is increased by
+1 percent, the number of clients decreases by \{ ans_rule(6) \} percent.
+$BR
+(c) Does the elasticity of demand when the numbers of clients is 20 suggests to increase
+ or decrease the price charged for mowing lawns in order to maximize your revenues? Explain.
+Submit a hard copy for your explanation.
+$BR
+(d) In order to maximize your revenues, you should charge \{ ans_rule(6) \} dollars to mow a lawn and the number of clients should be
+ \{ ans_rule(6) \}. Each client should be charged
+ \{ ans_rule(6) \} dollars for the entire summer (the price of their contract). The
+ revenues generated will be of \{ ans_rule(6) \} dollars and the profit will be of  \{ ans_rule(6) \} dollars.
+$BR
+(e) In order to maximize your profits, you should charge \{ ans_rule(6) \} dollars to mow a lawn and the number of clients should be
+ \{ ans_rule(6) \}. Each client should be charged
+ \{ ans_rule(6) \} dollars for the entire summer (the price of their contract). The
+ profits generated will be of \{ ans_rule(6) \} dollars and the revenue will be of  \{ ans_rule(6) \} dollars. 
+
+END_TEXT
+Context()->normalStrings;
+
+ANS( $aa->cmp() );
+ANS( $aa->cmp() );
+ANS( $optimal_priceperlawn_revenue->cmp() );
+ANS( $optimal_demand_revenue->cmp() );
+ANS( $optimal_pricecontract_revenue->cmp() );
+ANS( $optimal_revenue->cmp() );
+ANS( $profit_optimalrevenue->cmp() );
+ANS( $optimal_priceperlawn_profit->cmp() );
+ANS( $optimal_demand_profit->cmp() );
+ANS( $optimal_pricecontract_profit->cmp() );
+ANS( $optimal_profit->cmp() );
+ANS( $revenue_optimalprofit->cmp() );
+
+
+Context()->texStrings;
+SOLUTION(EV3(<<'END_SOLUTION'));
+$PAR SOLUTION $PAR
+
+During the first summer, the revenues are 20 clients \(\times\)  20 dollars \(\times\) 5 = 2000 dollars.
+The costs are 250 + 75 + 5 \(\times\) $costofmowinglawn \(\times\) 20 = $costfirstsummer  dollars. 
+Therefore the profit made during the first summer is $profitfirstsummer dollars. 
+
+$PAR
+Since the demand function, which we assume to be linear, goes through the
+points (20,20) and ($newx,18), then 
+\[p = -1/$a x + $yint,\]
+where p is the unit price for mowing a lawn and x is the number of clients.
+Therefore
+\[x = f(p) = -$a p + $yint2,\]
+and \(f'(p) = -$a\).
+The elasticity of demand is
+\[E(p) = \frac{$a p}{-$a p + $yint2},\]
+and \(E(20) = $a\). This means that an increase of 1% of the unit price
+decreases demand by $a %. Since \($a>1\), it is necessary to decrease the price charged in order to maximize the revenue (the demand is elastic).
+$PAR
+To maximize the revenue function, we express R as a function of x (we could 
+also have chosen to express R as a function of p). We get
+\[R(x) = 5x(-1/$a x + $yint) = -5x^2/$a + $yint5 x.\]
+Clearly, R is a concave down parabola (the leading coefficient is negative) and 
+therefore it is maximized where the derivative is zero. Since
+\[R'(x) = $coeff1 x + $coeff2\]
+then solving \(R'(x) = 0\) 
+gives \(x = $optimal_demand_revenue\) clients. We calculate the unit price to cut a 
+lawn by replacing this value of x in \(p = -1/$a x + $yint\). Therefore we 
+obtain that the revenue is maximized with a value of $optimal_revenue dollars if we have $optimal_demand_revenue clients 
+and if the price charged for cutting a lawn is $optimal_priceperlawn_revenue dollars. 
+Each client should be charged $optimal_pricecontract_revenue dollars for the entire summer. 
+$PAR
+The profit function is P(x) = R(x) - C(x). During the second summer
+\[C(x) = 275 + $costofmowinglawn x.\]
+Hence
+\[P(x) = -5x^2/$a + $yint5 x - 275 - $costofmowinglawn x = -5x^2/$a + $coeff2 x -275.\]
+Therefore profit made when the revenue is maximized is 
+\[P($optimal_demand_revenue ) = $profit_optimalrevenue \]
+dollars (if the above quantity is negative, we are loosing money). 
+$PAR
+Since P is a concave down parabola, once again the maximum profit is obtained
+by equating its derivative to zero. Since
+\[P'(x) = $coeff1 x + $coeff2,\]
+then \(P'(x) = 0\) if \(x=$optimal_demand_profit\). Therefore, profit is
+maximized with a value of $optimal_profit dollars if we have $optimal_demand_profit clients and charge  $optimal_priceperlawn_profit dollars
+ to mown a lawn. Each client should be charged 
+$optimal_pricecontract_profit dollars for the entire summer. The revenues obtained in 
+this case are $revenue_optimalprofit dollars. 
+
+
+END_SOLUTION
+Context()->normalStrings;
+
+ENDDOCUMENT();

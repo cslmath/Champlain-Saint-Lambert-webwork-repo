@@ -1,0 +1,153 @@
+## DESCRIPTION
+## Linear Algebra
+## Problem 1.1.7 in Anton Elementary Linear Algebra, 10th edition
+## ENDDESCRIPTION
+
+## KEYWORDS('')
+
+## DBsubject('Linear Algebra')
+## DBchapter('Matrices')
+## DBsection('')
+## Date('6 October 2011')
+## Author('Charles Fortin')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Elementary Linear Algebra')
+## EditionText1('10')
+## AuthorText1('Anton')
+## Section1('1.1')
+## Problem1('1.1.7')
+
+
+DOCUMENT(); 
+
+loadMacros("PG.pl",
+           "PGbasicmacros.pl",
+           "PGchoicemacros.pl",
+           "PGanswermacros.pl",
+           "PGmatrixmacros.pl",
+	   "MathObjects.pl"
+           );
+
+
+TEXT(beginproblem());
+
+$showPartialCorrectAnswers = 1;
+
+Context("Numeric");
+
+# coefficient of the matrix A
+$a11 = Compute("1");
+$a12 = Compute("2");
+$a13 = Compute("4");
+$a21 = Compute("0");
+$a22 = Compute("3");
+$a23 = Compute("1");
+$a31 = Compute("0");
+$a32 = Compute("0");
+$a33 = Compute("0");
+# a basis for the null-space of A is the vector [-10/3,-1/3,1]
+
+$x01 = non_zero_random(-6, 6, 1);
+$x02 = non_zero_random(-6, 6, 1);
+$x03 = non_zero_random(-6, 6, 1);
+
+$c1 = Compute("$a11*$x01+$a12*$x02+$a13*$x03");
+$c2 = Compute("$a21*$x01+$a22*$x02+$a23*$x03");
+$c3 = Compute("$a31*$x01+$a32*$x02+$a33*$x03");
+# x0 is a solution of Ax=c
+
+$coeff = random(2,4,1);
+# coefficient of the matrix B
+# B(2,:) = A(1,:)+A(2,:)
+# B(3,:) = coeff*A(1,:)+A(2,:)+A(3,:)
+$b11 = Compute("$a11");
+$b12 = Compute("$a12");
+$b13 = Compute("$a13");
+$b21 = Compute("$a21+$a11");
+$b22 = Compute("$a22+$a12");
+$b23 = Compute("$a23+$a13");
+$b31 = Compute("$a21+$coeff*$a11");
+$b32 = Compute("$a22+$coeff*$a12");
+$b33 = Compute("$a23+$coeff*$a13");
+
+# construct vector d
+$d1 = Compute("$c1");
+$d2 = Compute("$c1+$c2");
+$d3 = Compute("$coeff*$c1+$c2");
+
+# x0 is a system of Bx=d
+# All solutions of the system are of the form x+lambda*v
+# where v is in the null-space of B
+# a basis for the null-space of B is the vector [-10/3,-1/3,1]
+
+# v is a basis for the null-space
+$v1 = Compute("-10");
+$v2 = Compute("-1");
+$v3 = Compute("3");
+
+#Compute two solutions
+$lambda1 = Compute("2");
+$lambda2 = Compute("-1");
+# xsol1 = x0+lambda1*v
+$xsol11 = Compute("$x01+$lambda1*$v1");
+$xsol12 = Compute("$x02+$lambda1*$v2");
+$xsol13 = Compute("$x03+$lambda1*$v3");
+# xsol2 = x0+lambda2*v
+$xsol21 = Compute("$x01+$lambda2*$v1");
+$xsol22 = Compute("$x02+$lambda2*$v2");
+$xsol23 = Compute("$x03+$lambda2*$v3");
+
+#Compute three other vectors w,y,z that are not solutions
+$w1 = Compute("$xsol11+1");
+$w2 = Compute("$xsol11-1");
+$w3 = Compute("$xsol11");
+
+$y1 = Compute("$xsol12+1");
+$y2 = Compute("$xsol12-1");
+$y3 = Compute("$xsol12");
+
+$z1 = Compute("$xsol11-1");
+$z2 = Compute("$xsol11+1");
+$z3 = Compute("$xsol11-2");
+
+$mc = new_checkbox_multiple_choice();
+$mc -> qa (
+"Select all vectors that are a solution of the  
+linear system.", 
+"\( ($xsol11,$xsol12,$xsol13) \)$BR",
+"\( ($xsol21,$xsol22,$xsol23) \)$BR",              
+);
+$mc -> extra(
+"\( ($w1,$w2,$w3) \)$BR",
+"\( ($y1,$y2,$y3) \)$BR",
+"\( ($z1,$z2,$z3) \)$BR",
+);
+$mc -> makeLast("None of the above");
+
+
+Context()->texStrings;
+BEGIN_TEXT
+Consider the linear system
+$BR
+$BR
+\[\begin{array}{lll} $b11 x + $b12 y + $b13 z &=& $d1,\\
+ $b21 x + $b22 y + $b23 z &=& $d2,\\
+$b31 x + $b32 y + $b33 z &=& $d3. \end{array}\]
+$BR
+\{ $mc -> print_q() \}
+$BR
+\{ $mc -> print_a() \}
+
+END_TEXT
+
+
+
+Context()->normalStrings;
+install_problem_grader(~~&std_problem_grader);
+
+$showPartialCorrectAnswers = 0;
+
+ANS( checkbox_cmp( $mc->correct_ans() ) );
+
+
+ENDDOCUMENT() ;

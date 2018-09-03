@@ -1,0 +1,70 @@
+# DESCRIPTION
+## Linear Algebra
+## Problem 1.4.12 in Anton Elementary Linear Algebra, 9th edition
+## Aug 2018 MT tagged and renamed
+## ENDDESCRIPTION
+
+## KEYWORDS('matrix')
+
+## DBsubject('Linear Algebra')
+## DBchapter('Matrices')
+## DBsection('Matrix Operations')
+## Date('26 October 2011')
+## Author('Charles Fortin')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Elementary Linear Algebra')
+## EditionText1('9')
+## AuthorText1('Anton')
+## Section1('1.4')
+## Problem1('1.4.12')
+
+
+DOCUMENT(); 
+
+loadMacros("PG.pl",
+           "PGbasicmacros.pl",
+           "PGchoicemacros.pl",
+           "PGanswermacros.pl",
+           "PGmatrixmacros.pl",
+	   "MathObjects.pl"
+           );
+
+TEXT(beginproblem());
+
+$showPartialCorrectAnswers = 1;
+
+Context("Matrix");
+
+$a = random(2,8,2);
+$b = random(4,12,4);
+$c = Compute("$b/4"); 
+$expr1 = Compute("1/$b*(e^($a*x)+e^(-$a*x))");
+$expr2 = Compute("1/$b*(e^($a*x)-e^(-$a*x))");
+$expr3 = Compute("$c*(e^($a*x)+e^(-$a*x))");
+$expr4 = Compute("-$c*(e^($a*x)-e^(-$a*x))");
+
+$M = Matrix([[$expr1,$expr2],[$expr2,$expr1]]);
+$Minv = Matrix([[$expr3,$expr4],[$expr4,$expr3]]);
+
+
+Context()->texStrings;
+BEGIN_TEXT
+Find the inverse of the matrix
+$BR
+\[A =
+\left\lbrace
+\begin{array}{cc}
+\frac{1}{$b}(e^{$a x}+e^{-$a x}) & \frac{1}{$b}(e^{$a x}-e^{-$a x})\\
+\frac{1}{$b}(e^{$a x}-e^{-$a x}) & \frac{1}{$b}(e^{$a x}+e^{-$a x})
+\end{array}
+\right\rbrace
+\]
+$BR
+\{ mbox('\(A^{-1} =\)', $Minv->ans_array(30) )\}
+END_TEXT
+
+Context()->normalStrings;
+
+ANS($Minv->cmp());
+
+ENDDOCUMENT() ;

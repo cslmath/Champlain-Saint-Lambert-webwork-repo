@@ -1,0 +1,92 @@
+## DESCRIPTION
+##   History of Complex Numbers. Written in PGML.
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(History)
+## DBsection()
+## Date(2018-Apr-20)
+## Institution(Champlain College Saint-Lambert)
+## Author(M. Titcombe)
+## Level()
+## MO()
+## TitleText1()
+## AuthorText1()
+## EditionText1()
+## Section1()
+## Problem1()
+## KEYWORDS('Complex','Imaginary','complex number')
+
+## RESOURCES('Wesseldiagram.png','Wesseltext.png')
+
+DOCUMENT();
+
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGcourse.pl",
+  "PGchoicemacros.pl",
+  "PGML.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+Context('Numeric');
+
+$mc = new_multiple_choice();
+
+# syntax for qa
+# qa("question here",
+#"correct answer here")
+$mc -> qa ("Where would \(\varepsilon\varepsilon\varepsilon\) and \(\varepsilon\varepsilon\varepsilon\varepsilon\) appear on the complex plane?", 
+"\( \varepsilon\varepsilon\varepsilon\) at \((0,-1)\) and \(\varepsilon\varepsilon\varepsilon\varepsilon\) at \( (1,0) \) $BR",
+);
+
+
+# syntax... add other choices than correct answer above
+$mc -> extra(
+"\( \varepsilon\varepsilon\varepsilon\) at \((-1,0)\) and \(\varepsilon\varepsilon\varepsilon\varepsilon\) at \( (1,0) \) $BR",
+"\( \varepsilon\varepsilon\varepsilon\) at \((0,-1)\) and \(\varepsilon\varepsilon\varepsilon\varepsilon\) at \( (-1,0) \) $BR",
+"\( \varepsilon\varepsilon\varepsilon\) at \((-1,0)\) and \(\varepsilon\varepsilon\varepsilon\varepsilon\) at \( (0,-1) \)$BR",
+);
+
+$mc -> makeLast("None of the above");
+
+
+BEGIN_PGML
+>>*The Wessel Plane*<<
+
+Caspar Wessel, in 1797, was the first to publish a valid geometric representation of complex numbers. However, because his article was in an obscure Danish journal, it went unnoticed for a long time. (It wasn't until 1959 that an English translation of his article appeared.)
+
+In his work, Wessel introduced a unit which he called [`\varepsilon`], with length 1 and direction of [`90^{\circ}`] as illustrated in the Figure below.  
+>>[@ image( "Wesseldiagram.png", width=>382, height=>375,  
+tex_size=>700, extra_html_tags=>'alt="Wessel unit"' ) @]*<<  
+>>Figure: Wessel's unit [`\varepsilon`] with length 1 and direction [`90^{\circ}`].<<
+
+Then, Wessel determined that [`\varepsilon \varepsilon`] would have direction [`180^{\circ}`] which, geometrically, is the same direction as [`-1`], and thus,  
+>>[`\varepsilon \varepsilon=-1`]<<
+
+In the excerpt of Wessel's article (in Danish) shown below, he remarked "from this it follows that [`\varepsilon=\sqrt{-1}`]":  
+>>[@ image( "Wesseltext.png", width=>538, height=>231,  
+tex_size=>950, extra_html_tags=>'alt="Wessel"' ) @]*<<  
+(*Note:* Nowadays, we use Euler's [`i`] notation instead of Wessel's [`\varepsilon`]).
+
+Wessel's [`\varepsilon`] is the equivalent of the point [`(0,1)`] on the complex plane; that is, a complex number with real part 0 and imaginary part 1. Multiplying by [`\varepsilon`] results in a counterclockwise rotation of [`90^{\circ}`]. From the point [`(0,1)`], rotating by [`90^{\circ}`] gives [`\varepsilon\varepsilon`] (meaning [`\varepsilon`] times [`\varepsilon`]).
+
+[@ $mc -> print_q() @]***
+[@ $mc -> print_a() @]***
+
+(If it helps, use Euler's [`i`] notation instead.)
+END_PGML
+
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( checkbox_cmp( $mc->correct_ans() ) );
+
+
+COMMENT('Written in PGML.');
+ENDDOCUMENT();
+

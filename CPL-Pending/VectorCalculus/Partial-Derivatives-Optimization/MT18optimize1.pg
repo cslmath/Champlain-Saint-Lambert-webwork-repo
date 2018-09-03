@@ -1,0 +1,117 @@
+## DESCRIPTION
+## Calculus
+## ENDDESCRIPTION
+
+## DBsubject(Calculus - multivariable)
+## DBchapter(Differentiation of multivariable functions)
+## DBsection(Extreme values and optimization)
+## Author(Michele Titcombe)
+## Date(2018-April-1)
+## Institution(Champlain College Saint-Lambert)
+## MLT(AbsMinMaxClosedRegion)
+## Level(4)
+## MO(1)
+## TitleText1('Calculus')
+## AuthorText1('Stewart')
+## EditionText1('8')
+## Section1('14.7')
+## Problem1('38')
+## KEYWORDS('absolute' 'maximum' 'minimum')
+
+DOCUMENT();
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGcourse.pl",
+  "contextLimitedPoint.pl",
+  "PGML.pl",
+);
+
+## Ok, we are ready to begin the problem...
+##
+TEXT(beginproblem());
+
+## Do NOT show partial correct answers
+$showPartialCorrectAnswers = 0;
+
+Context("Numeric");
+Context()->variables->add(y=>"Real");
+$f = Compute("x^3 - 3x - y^3 + 12y")->reduce();
+#$fx = $f->D("x");
+#$fy = $f->D("y");
+$g1 = $f->substitute(x=>"-2");
+$g2 = $f->substitute(y=>"3");
+$g3 = $f->substitute(x=>"2");
+$g4 = $f->substitute(y=>"x");
+
+Context("LimitedPoint");
+Context()->variables->add(y=>"Real");
+Context()->strings->add(none=>{});
+$cp = List( Point("(1,2)"), Point("(1,-2)"), Point("(-1,2)"), Point("(-1,-2)") );
+$cpQ = List( Point("(1,2)"), Point("(-1,2)") );
+$b1max = List( Point("(-2,2)") );
+$b1min = List( Point("(-2,-2)") );
+$b2max = List( Point("(2,3)"), Point("(-1,3)") );
+$b2min = List( Point("(-2,3)"), Point("(1,3)") );
+$b3max = List( Point("(2,2)") );
+$b3min = List( Point("(2,3)") );
+$b4max = List( Point("(2,2)") );
+$b4min = List( Point("(-2,-2)") );
+$qmax = List( Point("(2,2)"), , Point("(-1,2)") );
+$qmin = List( Point("(-2,-2)") );
+
+
+#$c = random(1,9);
+
+BEGIN_PGML
+Following the steps below, you will find the absolute maximum and absolute minimum values of the function
+[` f(x,y) =  x^3 - 3x - y^3 + 12y `] on the set [`Q`] which is the closed quadrilateral region whose vertices are [`(-2,3)`], [`(2,3)`], [`(-2,-2)`] and [`(2,2)`].
+
+(a) Find all the critical points of [`f`], even those outside of the set [`Q`]. Enter a point or list of points separated by a comma, e.g., in the form [`(a,b)`] or [`(a,b),(c,d)`].    
+Critical point(s): [______________________________]{$cp}
+
+(b) List only the critical point(s) of [`f`] that is/are in the set [`Q`].     
+Critical point(s) in [`Q`]: [______________________________]{$cpQ}
+
+
+(c) Find the extrema of [` f(x,y)`] along the boundaries of the set [`Q`].  On each boundary, specify the function to be optimized, and the absolute extrema along the boundary, and the point(s) at which the extrema occur(s). 
+      (i) Let [`B_1`] be the boundary: [`x=-2`], for [`-2\le y \le 3`].  
+
+    * On [`B_1`],  [` f(x,y) = f(-2,y) = `][____________________]{$g1}   
+    * Absolute maximum value of [` f(-2,y) `] is [__________]{"14"}  
+which occurs at [`(x,y)=`][____________________]{$b1max} (enter a point or list of points)
+    * Absolute minimum value of [`f(-2,y)`] is [__________]{"-18"}  
+which occurs at [`(x,y)=`][____________________]{$b1min} (enter a point or list of points).
+
+       (ii) Let [`B_2`] be the boundary: [`y=3`], for [`-2\le x \le 2`].  
+
+    * On [`B_2`],  [` f(x,y) = f(x,3) = `][____________________]{$g2}   
+    * Absolute maximum value of [` f(x,3) `] is [__________]{"11"}  
+which occurs at [`(x,y)=`][____________________]{$b2max} (enter a point or list of points)
+    * Absolute minimum value of [`f(x,3)`] is [__________]{"7"}  
+which occurs at [`(x,y)=`][____________________]{$b2min} (enter a point or list of points).
+
+       (iii) Let [`B_3`] be the boundary: [`x=2`], for [`2\le y \le 3`].  
+
+    * On [`B_3`],  [` f(x,y) = f(2,y) = `][____________________]{$g3}   
+    * Absolute maximum value of [` f(2,y) `] is [__________]{"18"}  
+which occurs at [`(x,y)=`][____________________]{$b3max} (enter a point or list of points)
+    * Absolute minimum value of [`f(2,y)`] is [__________]{"11"}  
+which occurs at [`(x,y)=`][____________________]{$b3min} (enter a point or list of points).
+
+       (iv) Let [`B_4`] be the boundary: [`y=x`], for [`-2\le x \le 2`].  
+
+    * On [`B_4`],  [` f(x,y) = f(x,x) = `][____________________]{$g4}   
+    * Absolute maximum value of [` f(x,x) `] is [__________]{"18"}  
+which occurs at [`(x,y)=`][____________________]{$b4max} (enter a point or list of points)
+    * Absolute minimum value of [`f(x,x)`] is [__________]{"-18"}  
+which occurs at [`(x,y)=`][____________________]{$b4min} (enter a point or list of points).
+
+(c) Finally, evaluate the function [` f(x,y) `] at the critical points in [`Q`] that you found in part (b), and use  the extrema found along the four boundaries, to conclude: 
+
+    The absolute maximum of [` f(x,y) `] on [`Q`] is [___________]{"18"}, which occurs at [`(x,y)=`][____________________]{$qmax} (enter a point or list of points). The absolute minimum of [` f(x,y) `] on [`Q`] is [___________]{"-18"}, which occurs at [`(x,y)=`][____________________]{$qmin} (enter a point or list of points).
+  
+END_PGML
+COMMENT("MathObjects version. Uses PGML. Not randomized.");
+ENDDOCUMENT();
+
