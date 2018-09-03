@@ -1,0 +1,264 @@
+## DESCRIPTION
+## Linear Algebra
+## A problem that construct and LU factorization using elementary matrices
+## and which uses the LU factorization to solve a linear system.
+## ENDDESCRIPTION
+
+## KEYWORDS('matrix' 'inverse' 'elementary matrix' 'lu factorization')
+
+## DBsubject('Linear Algebra')
+## DBchapter('Matrices')
+## DBsection('LU and QR Factorization')
+## Date('24 June 2011')
+## Author('Charles Fortin')
+## Institution('Champlain College Saint-Lambert')
+
+DOCUMENT(); 
+
+loadMacros("PG.pl",
+           "PGbasicmacros.pl",
+           "PGchoicemacros.pl",
+           "PGanswermacros.pl",
+           "PGmatrixmacros.pl",
+	   "MathObjects.pl"
+           );
+
+
+TEXT(beginproblem());
+
+$showPartialCorrectAnswers = 1;
+
+Context("Matrix");
+
+$a = non_zero_random(2, 6, 1);
+$b = non_zero_random(2, 6, 1);
+$c = non_zero_random(-6, -2, 1);
+
+$twicea = Compute("2*$a");
+$twiceb = Compute("2*$b");
+$oneovera = Compute("1/$a");
+$minustwicea = Compute("-2*$a");
+$minustwiceb = Compute("-2*$b");
+$minusa = Compute("-$a");
+$oneoverb = Compute("1/$b");
+$oneoverc = Compute("1/$c");
+$zero = Compute("0");
+$one = Compute("1");
+
+$A = Matrix([[$a,1,1],[2*$a,$b+2,3],[$a,2*$b+1,$c+3]]);
+
+# the elementary matrices
+$E1 = Matrix([[$oneovera,$zero,$zero],[$zero,$one,$zero],[$zero,$zero,$one]]);
+$E2 = Matrix([[$one,$zero,$zero],[$minustwicea,$one,$zero],[$zero,$zero,$one]]);
+$E3 = Matrix([[$one,$zero,$zero],[$zero,$one,$zero],[$minusa,$zero,$one]]);
+$E4 = Matrix([[$one,$zero,$zero],[$zero,$oneoverb,$zero],[$zero,$zero,$one]]);
+$E5 = Matrix([[$one,$zero,$zero],[$zero,$one,$zero],[$zero,$minustwiceb,$one]]);
+$E6 = Matrix([[$one,$zero,$zero],[$zero,$one,$zero],[$zero,$zero,$oneoverc]]);
+
+# the inverse of the elementary matrices
+$E1inv = Matrix([[$a,$zero,$zero],[$zero,$one,$zero],[$zero,$zero,$one]]);
+$E2inv = Matrix([[$one,$zero,$zero],[$twicea,$one,$zero],[$zero,$zero,$one]]);
+$E3inv = Matrix([[$one,$zero,$zero],[$zero,$one,$zero],[$a,$zero,$one]]);
+$E4inv = Matrix([[$one,$zero,$zero],[$zero,$b,$zero],[$zero,$zero,$one]]);
+$E5inv = Matrix([[$one,$zero,$zero],[$zero,$one,$zero],[$zero,$twiceb,$one]]);
+$E6inv = Matrix([[$one,$zero,$zero],[$zero,$one,$zero],[$zero,$zero,$c]]);
+
+$L = Matrix([[$a,$zero,$zero],[$twicea,$b,$zero],[$a,$twiceb,$c]]);
+$U = Matrix([[$one,$oneovera,$oneovera],[$zero,$one,$oneoverb],[$zero,$zero,$one]]);
+
+# Solutions of the linear system at the end of the problem
+$x1 = random(1,4);
+$x2 = random(1,4);
+$x3 = random(1,4);
+
+$xx = Matrix([[$x1],[$x2],[$x3]]);
+
+# b is constructed so that Ax=b
+$b1 = Compute("$a*$x1+$x2+$x3");
+$b2 = Compute("2*$a*$x1 + ($b+2)*$x2 + 3*$x3");
+$b3 = Compute("$a*$x1+(2*$b+1)*$x2+($c+3)*$x3");
+
+$bb = Matrix([[$b1],[$b2],[$b3]]);
+
+# Solution of Ly=b
+$y1 = Compute("$b1/$a");
+$y2 = Compute("1/$b*($b2-2*$a*$y1)");
+$y3 = Compute("1/$c*($b3-$a*$y1-2*$b*$y2)");
+
+$yy = Matrix([[$y1],[$y2],[$y3]]);
+
+Context()->texStrings;
+BEGIN_TEXT
+Suppose that:
+$BR
+\[A =$A\]
+$BR
+Given the following descriptions, determine the following elementary matrices and their inverses.
+$BR$BR
+
+(a)  Multiplication on the left by the elementary matrix \(E_1\) multiplies the first row of \(A\) by \(\frac{1}{$a}\).
+$BCENTER
+
+\{ mbox('\(E_1 =\)', $E1->ans_array,  ', ',  
+        '\(E_1^{-1} =\)', $E1inv->ans_array)\}
+$ECENTER
+$BR
+
+(b) Multiplication on the left by the elementary matrix \(E_2\) subtracts $twicea times the first row of \(E_1A\) to the second row of \(E_1A\).$BR
+$BCENTER
+\{ mbox('\(E_2 =\)', $E2->ans_array,  ', ',  
+        '\(E_2^{-1} =\)', $E2inv->ans_array)\}
+$ECENTER
+$BR
+
+(c)  Multiplication on the left by the elementary matrix \(E_3\) subtracts $a times the first row of \(E_2E_1A\) to the third row of \(E_2E_1A\).$BR
+$BCENTER
+\{ mbox('\(E_3 =\)', $E3->ans_array,  ', ',  
+        '\(E_3^{-1} =\)', $E3inv->ans_array)\}
+$ECENTER
+$BR
+
+(d) Multiplication on the left by the elementary matrix \(E_4\) multiplies the second row of \(E_3E_2E_1A\) by
+\(\frac{1}{$b}\) .$BR
+$BCENTER
+\{ mbox('\(E_4 =\)', $E4->ans_array,  ', ',  
+        '\(E_4^{-1} =\)', $E4inv->ans_array)\}
+$ECENTER
+$BR
+
+(e)  Multiplication on the left by the elementary matrix \(E_5\) subtracts $twiceb times the second row of \(E_4E_3E_2E_1A\) to the third row of \(E_4E_3E_2E_1A\).$BR
+$BCENTER
+\{ mbox('\(E_5 =\)', $E5->ans_array,  ', ',  
+        '\(E_5^{-1} =\)', $E5inv->ans_array)\}
+$ECENTER
+$BR
+
+(f)  Multiplication on the left by the elementary matrix \(E_6\) multiplies the third row of \(E_5E_4E_3E_2E_1A\) by \(\frac{1}{$c}\).
+$BR
+$BCENTER
+\{ mbox('\(E_6 =\)', $E6->ans_array,  ', ',  
+        '\(E_6^{-1} =\)', $E6inv->ans_array)\}
+$ECENTER
+$BR
+You should find that the matrix \(E_6E_5E_4E_3E_2E_1A\) is in row-echelon form and that it is upper triangular. This is because the row operations performed by the elementary matrices \(E_1, E_2, ... ,E_6\) are the ones that follow by applying Gaussian Elimination to the matrix \(A\). Let this matrix be conveniently be labeled \(U\) for \(\textit{upper triangular}\). 
+$BR
+$BR
+(g) Compute \(E_6E_5E_4E_3E_2E_1A\) in order to find the upper triangular matrix \(U\).
+$BR
+$BR
+$BCENTER
+\(U =\) \{$U->ans_array\}
+$ECENTER
+$BR
+$BR
+Since \(E_6E_5E_4E_3E_2E_1A=U\), then solving for \(A\) gives 
+\[A = E_1^{-1}E_2^{-1}E_3^{-1}E_4^{-1}E_5^{-1}E_6^{-1}U.\]
+If we let \(L = E_1^{-1}E_2^{-1}E_3^{-1}E_4^{-1}E_5^{-1}E_6^{-1}\), then \(A = LU\). You will see that \(L\) is a lower triangular matrix.
+$BR
+$BR
+(h) Compute \(E_1^{-1}E_2^{-1}E_3^{-1}E_4^{-1}E_5^{-1}E_6^{-1}\) in order to find the lower triangular matrix \(L\) (check you answers in part (g) and (f) to make sure that \(L\) multiplied by \(U\) gives \(A\) ).
+$BR
+$BR
+$BCENTER
+\(L =\) \{$L->ans_array\}
+$ECENTER
+$BR
+$BR
+The advantage of having the matrix \(A\) factored as \(LU\) is that this factorization can be used to easily solve the linear system \(Ax=b\). Indeed, this system can be written as \(LUx=b\). If we let \(y = Ux\), the system becomes \(Ly=b\) (\(y\) is a temporary variable used in order to recover \(x\) ). Therefore, in order to solve \(Ax=b\), we first find \(y\) such that \(Ly=b\) (since \(L\) is lower triangular, this is done easily with a forward substitution). Once we know what \(y\) is, we solve for the variable \(x\) the system \(Ux = y\) (since \(U\) is upper triangular, this is done easily with a backward substitution).
+$BR
+$BR
+Now, suppose we want to solve the system 
+\[$A \left[\begin{array}{c} x_1\\x_2\\x_3\end{array}\right] = $bb\]
+using the \(LU\) factorization (we will refer to \(b\) as the vector on the right-hand side of the equation). Find \(y\) such that \(Ly=b\).
+$BR
+$BR
+$BCENTER
+\(y =\) \{$yy->ans_array\}
+$ECENTER
+$BR
+$BR
+Now find \(x\) such that \(Ux=y\).
+$BR
+$BR
+$BCENTER
+\(x =\) \{$xx->ans_array\}
+$ECENTER
+$BR
+$BR
+ 
+END_TEXT
+
+
+
+Context()->normalStrings;
+$showPartialCorrectAnswers= 1;
+
+ANS($E1->cmp());
+ANS($E1inv->cmp());
+
+ANS($E2->cmp());
+ANS($E2inv->cmp());
+
+ANS($E3->cmp());
+ANS($E3inv->cmp());
+
+ANS($E4->cmp());
+ANS($E4inv->cmp());
+
+ANS($E5->cmp());
+ANS($E5inv->cmp());
+
+ANS($E6->cmp());
+ANS($E6inv->cmp());
+
+ANS($U->cmp());
+
+ANS($L->cmp());
+
+ANS($yy->cmp());
+
+ANS($xx->cmp());
+
+Context()->texStrings;
+SOLUTION(EV3(<<'END_SOLUTION'));
+$PAR SOLUTION $PAR
+It is possible to find the inverse of an elementary matrix by inspection. For instance, if 
+\[E_1 = $E1,\]
+in order to find its inverse, we need to find a matrix, say \(M\), such that
+\[\left[\begin{array}{ccc} m_{11} & m_{12} & m_{13} \\
+m_{21} & m_{22} & m_{23} \\
+m_{31} & m_{32} & m_{33} \end{array}\right] $E1 = 
+\left[\begin{array}{ccc} 1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1 \end{array}\right].
+\] 
+This matrix is therefore the elementary matrix which multiplies the first row of \(E_1\) by $a. Hence
+\[E_1^{-1} = $E1inv .\]
+Simlarly, with 
+\[E_2 = $E2,\]
+its inverse is the elementary matrix which adds $twicea times the first of \(E_2\) to its second row. Thus
+\[E_2^{-1} = $E2inv .\] 
+A similar reasoning holds for the other elementary matrices and their inverses.
+$BR
+$BR
+In order to solve \(Ly=b\), a forward substitution yields
+\[
+\begin{array}{ccc}
+y_1 &=& \frac{$b1}{$a} ,\\
+y_2 &=& \frac{1}{$b}($b2-2\cdot$a\cdot\frac{$b1}{$a}) = $y2,\\
+y_3 &=& \frac{1}{$c}($b3-$a \cdot \frac{$b1}{$a}-2 \cdot $b \cdot $y2) = $y3.
+\end{array}
+\]
+In order to solve \(Ux=y\), a backward substitution yields
+\[
+\begin{array}{ccc}
+x_3 &=& $x3, \\
+x_2 &=& $y2 - \frac{1}{$b} \cdot $y3 = $x2, \\
+x_1 &=& \frac{$b1}{$a} - \frac{1}{$a} \cdot $x2 - \frac{1}{$a} \cdot $x3 = $x1. 
+\end{array}
+\]
+
+
+END_SOLUTION
+
+ENDDOCUMENT() ;

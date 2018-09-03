@@ -1,0 +1,101 @@
+## DESCRIPTION
+## Linear Algebra
+## Solve for one variable using Cramer's Rule
+## ENDDESCRIPTION
+
+## KEYWORDS('matrix')
+
+## DBsubject('Linear Algebra')
+## DBchapter('Matrices')
+## DBsection('Determinants')
+## Date('24 November 2011')
+## Author('Charles Fortin')
+## Institution('Champlain College Saint-Lambert')
+
+DOCUMENT(); 
+
+loadMacros("PG.pl",
+           "PGbasicmacros.pl",
+           "PGchoicemacros.pl",
+           "PGanswermacros.pl",
+           "PGmatrixmacros.pl",
+	   "MathObjects.pl"
+           );
+
+TEXT(beginproblem());
+
+$showPartialCorrectAnswers = 1;
+
+Context("Matrix");
+
+$a11 = random(-6,6);
+$a12 = random(-6,6);
+$a13 = random(-6,6);
+$a21 = random(-6,6);
+$a22 = random(-6,6);
+$a23 = random(-6,6);
+$a31 = random(-6,6);
+$a32 = random(-6,6);
+$a33 = random(-6,6);
+$A = Matrix([[$a11,$a12,$a13],[$a21,$a22,$a23],[$a31,$a32,$a33]]);
+$detA = Compute("$a11*($a22*$a33-$a23*$a32)-$a21*($a12*$a33-$a13*$a32)+$a31*($a12*$a23-$a13*$a22)");
+
+while ($detA == 0 )
+	{
+	$a11 = random(-6,6);
+	$a12 = random(-6,6);
+	$a13 = random(-6,6);
+	$a21 = random(-6,6);
+	$a22 = random(-6,6);
+	$a23 = random(-6,6);
+	$a31 = random(-6,6);
+	$a32 = random(-6,6);
+	$a33 = random(-6,6);
+	$A = Matrix([[$a11,$a12,$a13],[$a21,$a22,$a23],[$a31,$a32,$a33]]);
+	$detA = Compute("$a11*($a22*$a33-$a23*$a32)-$a21*($a12*$a33-$a13*$a32)+$a31*($a12*$a23-$a13*$a22)");
+	}
+$r1 = random(-6,6);
+$r2 = random(-6,6);
+$r3 = random(-6,6);
+$x1 = Compute("$r1");
+$x2 = Compute("$r2");
+$x3 = Compute("$r3");
+
+$b1 = Compute("$a11*$x1+$a12*$x2+$a13*$x3");
+$b2 = Compute("$a21*$x1+$a22*$x2+$a23*$x3");
+$b3 = Compute("$a31*$x1+$a32*$x2+$a33*$x3");
+$b = Matrix([[$b1],[$b2],[$b3]]);
+# b is chosen so that Ax=b
+
+$detA1 = Compute("$b1*($a22*$a33-$a23*$a32)-$b2*($a12*$a33-$a13*$a32)+$b3*($a12*$a23-$a13*$a22)");
+$detA2 = Compute("$a11*($b2*$a33-$a23*$b3)-$a21*($b1*$a33-$a13*$b3)+$a31*($b1*$a23-$a13*$b2)");
+$detA3 = Compute("$a11*($a22*$b3-$b2*$a32)-$a21*($a12*$b3-$b1*$a32)+$a31*($a12*$b2-$b1*$a22)");
+
+Context()->texStrings;
+BEGIN_TEXT
+
+Use Cramer's rule to solve for the variable \(y\), without solving for the other variables \(x\) and \(z\).
+$BR
+$BR
+\[\begin{array}{rcl} $a11 x+$a12 y+$a13 z &=& $b1,\\
+$a21 x+$a22 y+$a23 z &=& $b2,\\
+$a31 x+$a32 y+$a33 z &=& $b3.
+\end{array}
+\]
+$BR
+If \(A_i\) is the coefficient matrix \(A\) with its ith column replaced by the vector 
+\(b = [$b1,$b2,$b3]^T\), then
+$BR
+$BR
+\(det(A_2) = \) \{ans_rule(5)\}, and \(det(A) = \) \{ans_rule(5)\}. Therefore
+\(y = \) \{ans_rule(5)\}.
+ 
+END_TEXT
+
+Context()->normalStrings;
+
+ANS($detA2->cmp());
+ANS($detA->cmp());
+ANS($x2->cmp());
+
+ENDDOCUMENT() ;

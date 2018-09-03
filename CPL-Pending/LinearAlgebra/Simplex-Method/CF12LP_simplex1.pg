@@ -1,0 +1,121 @@
+# DESCRIPTION
+# Find the solution of a linear program using the
+# simplex method. The program is
+#
+# max (3-2p)x + (-3+p)y - z
+# s.t. x +2y - 3z <= 5
+#      2x + y -4z <= 7
+#      y <= 2
+# x,y,z >=0
+#
+# which we can be written as
+#
+# max (3-2p)x + (-3+p)y - z
+# s.t. x +2y - 3z + s_1 = 5
+#      2x + y -4z + s_2 = 7
+#      y + s_3 = 2
+# x,y,z,s_1,s_2,s_3 >=0
+#
+# A basic feasible solution is x=y=z=0 s_1=5, s_2 = 7, s_3 = 2 (P=1)
+#
+# The initial simplex tableau is
+#
+# 1    2  -3  1 0 0 0 5
+# 2    1  -4  0 1 0 0 7
+# 0    1   0  0 0 1 0 2
+# 2p-3 3-p 1  0 0 0 1 0 
+#
+# p is the parameter of this LP. The solution are as follow:
+#
+# [7/2,0,0,3/2,0,2] is optimal when 5/4 <= p <= 3/2 and P = 21/2-7p
+# [0,0,0,5,7,2] is optimal when 3/2 <= p <= 3 and P = 0
+# [0,2,0,1,5,2] is optimal when 3 <= p and P = 2p-6
+#
+# Let's avoid 3/2 <= p <= 3 since the initial basic feasible solution x=y=z=0
+# would be optimal and no work would be required by the student.
+#
+# WeBWorK problem written by Charles Fortin, 
+# <cfortin(at)champlaincollege.qc.ca(dot)ca>
+# Aug 2018 MT tagged and renamed
+# ENDDESCRIPTION
+
+## DBsubject('Operations Research')
+## DBchapter('Linear Programming')
+## DBsection('Simplex Method')
+## KEYWORDS('Linear Algebra')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2012')
+## Author('Charles Fortin')
+## Institution('Champlain College Saint-Lambert')
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGchoicemacros.pl",
+"PGgraphmacros.pl",
+);
+
+# make sure we're in the context we want
+Context("Numeric");
+$showPartialCorrectAnswers = 0;
+
+$r = random(1,2);
+
+# generate the parameter of the problem based on $r
+# and record the optimal solution
+if ($r ==1){
+	$p = random(10/8,1/8,12/8);
+	$xopt = Real("7/2");
+	$yopt = Real("0");
+	$zopt = Real("0");
+	$Popt = Real("21/2-7*$p");}
+else {
+	$p = random(4,6); # make sure p is >= 3
+	$xopt = Real("0");
+	$yopt = Real("2");
+	$zopt = Real("0");
+	$Popt = Real("2*$p-6");}
+
+$c1 = Real("3-2*$p");
+$c2 = Real("-3+$p");
+
+TEXT(beginproblem());
+Context()->texStrings;
+BEGIN_TEXT
+Consider the following problem:
+\[\begin{array}{rccl} \max & P = $c1 x + $c2 y - z\\ 
+s.t. & x + 2y - 3z &\leq& 5 \\
+&2x+y-4z &\leq& 7 \\
+&y & \leq & 2 \\
+&x,y,z & \geq & 0
+\end{array}
+\]
+Find the maximum value of P using the Simplex Method.
+$BR
+(a) The maximum value of P is \{ ans_rule(10) \}
+$BR
+(b) The maximum is attained when x= \{ ans_rule(5)\}, y= \{ ans_rule(5)\}, and z = \{ ans_rule(5)\}
+
+END_TEXT
+Context()->normalStrings;
+
+ANS( $Popt->cmp() );
+ANS( $xopt->cmp() );
+ANS( $yopt->cmp() );
+ANS( $zopt->cmp() );
+
+Context()->texStrings;
+SOLUTION(EV3(<<'END_SOLUTION'));
+$PAR SOLUTION $PAR
+
+
+END_SOLUTION
+Context()->normalStrings;
+
+ENDDOCUMENT();
+

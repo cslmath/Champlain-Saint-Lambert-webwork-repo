@@ -1,0 +1,84 @@
+## DESCRIPTION
+##   History of Complex Numbers. Written in PGML.
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(History)
+## DBsection()
+## Date(2018-Apr-20)
+## Institution(Champlain College Saint-Lambert)
+## Author(M. Titcombe)
+## Level()
+## MO()
+## TitleText1()
+## AuthorText1()
+## EditionText1()
+## Section1()
+## Problem1()
+## KEYWORDS('Complex','Imaginary','complex number')
+
+## RESOURCES('gauss-complexos.jpg')
+
+
+DOCUMENT();
+
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGcourse.pl",
+  "PGchoicemacros.pl",
+  "PGML.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+Context('Numeric');
+
+$mc = new_multiple_choice();
+
+# syntax for qa
+# qa("question","correct answer")
+$mc -> qa ("Once again, who began the unfortunate terminology with his use of the word 'imaginaire'?", 
+"R\(\acute{\text{e}}\)ne Descartes$BR",
+);
+
+# syntax... add other choices than correct answer above
+$mc -> extra(
+"Leonhard Euler $BR",
+"Jean-Robert Argand $BR",
+"Girolamo Cardano $BR",
+);
+
+$mc -> makeLast("None of the above");
+
+
+BEGIN_PGML
+  
+>>*Gauss Names the Complex Numbers*<<
+
+Carl Friedrich Gauss (1777-1855) was very influential in the world of mathematics. As soon as he accepted the importance of numbers involving the square root of negative one, that was enough to remove any lingering doubt or suspicion in many people's minds.
+
+As well as Wessel and Argand (as discussed in the previous two questions), Gauss is also credited for the geometric representation of these numbers and so the complex plane is sometimes referred to as the Gauss plane. In fact, Gauss was responsible for giving the name _complex_ to these numbers.
+
+The excerpt of Gauss's text (in Latin), in which he calls numbers of the form [`a+bi`] "complex numbers":
+>>[@ image( "gauss-complexos.jpg", width=>680, height=>271,  
+tex_size=>950, extra_html_tags=>'alt="Gauss excerpt"' ) @]*<<  
+
+The term _complex_ is an unfortunate name, just like _imaginary_ and _real_ to describe certain sets of numbers. Complex numbers and imaginary numbers are just as real (in the non-mathematical sense) as the numbers in the set [`\mathbb{R}`] (that is, "real" in the mathematical sense).
+
+[@ $mc -> print_q() @]***
+[@ $mc -> print_a() @]***
+
+END_PGML
+
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( checkbox_cmp( $mc->correct_ans() ) );
+
+
+COMMENT('Written in PGML.');
+ENDDOCUMENT();
+

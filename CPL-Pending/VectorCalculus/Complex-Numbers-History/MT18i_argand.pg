@@ -1,0 +1,81 @@
+## DESCRIPTION
+##   History of Complex Numbers. Written in PGML.
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(History)
+## DBsection()
+## Date(2018-Apr-20)
+## Institution(Champlain College Saint-Lambert)
+## Author(M. Titcombe)
+## Level()
+## MO()
+## TitleText1()
+## AuthorText1()
+## EditionText1()
+## Section1()
+## Problem1()
+## KEYWORDS('Complex','Imaginary','complex number')
+
+## Resources('Arganddiagram.png')
+
+DOCUMENT();
+
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGcourse.pl",
+  "PGchoicemacros.pl",
+  "PGML.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+Context('Numeric');
+
+$mc = new_multiple_choice();
+
+# syntax for qa
+# qa("question","correct answer")
+$mc -> qa ("What are the line segments \(\overline{KN}\) and \(\overline{KI}\)?", 
+"\(\overline{KN}=-\sqrt{-1}\) and \(\overline{KI}=-1\)$BR",
+);
+
+# syntax... add other choices than correct answer above
+$mc -> extra(
+"\(\overline{KN}=(1-\sqrt{3})/2\) and \(\overline{KI}=-1\)$BR",
+"\(\overline{KN}=\sqrt{-1}\) and \(\overline{KI}=1\)$BR",
+"\(\overline{KN}=-\sqrt{-1}\) and \(\overline{KI}=1\)$BR",
+);
+
+$mc -> makeLast("None of the above");
+
+
+BEGIN_PGML
+  
+>>*The Argand Plane*<<
+
+The complex plane is often called the Argand plane after French mathematician Jean-Robert Argand who, in 1806, published an article representing complex numbers geometrically. (The complex plane is also named after another famous mathematician as you will see in the next question.)
+
+Below is a diagram of a unit circle with centre at [`K`] from Argand's 1806 article:
+>>[@ image( "Arganddiagram.png", width=>329, height=>358,  
+tex_size=>700, extra_html_tags=>'alt="Argand excerpt"' ) @]*<<
+
+In Argand's diagram, the line segments [`\overline{KA} = 1`] and [`\overline{KE} = \sqrt{-1}`].  
+
+[@ $mc -> print_q() @]***
+[@ $mc -> print_a() @]***
+
+END_PGML
+
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( checkbox_cmp( $mc->correct_ans() ) );
+
+
+COMMENT('Written in PGML.');
+ENDDOCUMENT();
+

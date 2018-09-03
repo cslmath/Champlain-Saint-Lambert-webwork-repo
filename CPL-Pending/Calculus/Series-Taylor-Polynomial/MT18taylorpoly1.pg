@@ -1,0 +1,191 @@
+# DESCRIPTION
+# M.Titcombe modified original version
+# /Library/Wiley/setAnton_Section_9.7/Anton9_7Q30.pg
+# for wording (Taylor polynomial) and to include an estimate
+## ENDDESCRIPTION
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Infinite sequences and series)
+## DBsection(Taylor polynomials)
+## Institution(John Wiley & Sons)
+## Author(Brian Burns)
+## Level(2)
+## MO(1)
+## TitleText1('Calculus')
+## AuthorText1('Anton')
+## EditionText1('9')
+## Section1('9.7')
+## Problem1('30')
+## KEYWORDS('linear approximation','differentials')
+#***************************************************************
+
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "contextFraction.pl",
+  "littleneck.pl",
+  "PGgraphmacros.pl",
+  "PGcourse.pl"
+);
+# allow the student to change the seed for this problem.
+
+rand_button();
+TEXT(beginproblem());
+
+###################################
+# Setup
+$a=random(1,9,1);
+$aa = $a;
+$x0=1-$a;
+
+# MT - three lines of code for $dx and $x1 and $x1plusa (where to evaluate x)
+$dx = non_zero_random(-0.2,0.05,0.4);
+$x1 = Compute("$x0 + $dx");
+$x1plusa = Compute("$x1 + $a");
+
+
+$f=Formula("ln(x+$a)")->reduce;
+$df=Formula("1/(x+$a)")->reduce;
+$df2=Formula("-1/(x+$a)^2")->reduce;
+$df3=Formula("2/(x+$a)^3")->reduce;
+$fx0=Compute("0");
+$dfx0=Compute("1");
+Context("Fraction");
+$df2x0=Compute("-1/2");
+$df3x0=Compute("2/6");
+$ans0d=Formula("$fx0");
+$ans1d=Formula("$ans0d+$dfx0*(x-$x0)")->reduce;
+$ans2d=Formula("$ans1d+$df2x0*(x-$x0)^2")->reduce;
+$ans3d=Formula("$ans2d+$df3x0*(x-$x0)^3")->reduce;
+Context("Numeric");
+$ans0=Compute("$ans0d");
+$ans1=Compute("$ans1d");
+$ans2=Compute("$ans2d");
+$ans3=Compute("$ans3d");
+
+# MT - four lines of code...
+$approx0 = $ans0->eval(x=>"$x1");
+$approx1 = $ans1->eval(x=>"$x1");
+$approx2 = $ans2->eval(x=>"$x1");
+$approx3 = $ans3->eval(x=>"$x1");
+
+#******************
+#***********************
+#   Plot the function
+#***********************
+$a=$x0;
+$grminX=min(-1,$a-2);
+$grmaxX=max(1,$a+2);
+
+$xgrid=Compute("($grmaxX-$grminX)");
+$grmaxY=Compute("1.6");
+$grminY=Compute("-1.6");
+$f1minX= $grminX;
+$f1maxX = $grmaxX;
+
+
+$gr = init_graph($grminX,$grminY,$grmaxX,$grmaxY,
+                 'axes'=>[0,0],'ticks'=>[$xgrid,4],'grid' =>[$xgrid,4],'size'=>[600,600]);
+
+
+plot_functions($gr, "$f for x in [$f1minX,$f1maxX] using color:black and weight:4");
+  $gr->lb( new Label($a+1,-0.30,'f(x) -----',
+      'black','center','middle'));
+
+plot_functions($gr, "$ans1 for x in [$f1minX,$f1maxX] using color:blue and weight:4");
+  $gr->lb( new Label($a+1,-0.9,'T1(x) -----',
+      'blue','center','middle'));
+
+
+
+plot_functions($gr, "$ans2 for x in [$f1minX,$f1maxX] using color:red and weight:4");  
+$gr->lb( new Label($a+1,-0.7,'T2(x) -----',
+      'red','center','middle'));
+
+
+plot_functions($gr, "$ans3 for x in [$f1minX,$f1maxX] using color:green and weight:4");  
+$gr->lb( new Label($a+1,-0.5,'T3(x) -----',
+      'green','center','middle'));
+
+
+plot_functions($gr, "$ans0 for x in [$f1minX,$f1maxX] using color:yellow and weight:4");  
+$gr->lb( new Label($a+1,-1.1,'T0(x) -----',
+      'yellow','center','middle'));
+#******************
+###################################
+# Main text
+Context()->texStrings;
+BEGIN_TEXT
+(a) Find the first four Taylor polynomials (where \( T_n(x) \) is the Taylor polynomial of degree \(n\)) about \(x = x_0\): 
+$PAR
+\($f;\;x_0=$x0\).$PAR
+\(T_0(x)=\)  \{ans_rule(20) \}$PAR
+\(T_1(x)=\)  \{ans_rule(20) \}$PAR
+\(T_2(x)=\)  \{ans_rule(20) \}$PAR
+\(T_3(x)=\)  \{ans_rule(20) \}$PAR
+
+(b) Estimate the value of \( \ln $x1plusa \) using each of the Taylor polynomials above:
+$PAR
+Using \(T_0(x)\) to estimate: \( \ln $x1plusa \approx \) \{ans_rule(20) \}$PAR
+Using \(T_1(x)\) to estimate: \( \ln $x1plusa \approx \) \{ans_rule(20) \}$PAR
+Using \(T_2(x)\) to estimate: \( \ln $x1plusa \approx \) \{ans_rule(20) \}$PAR
+Using \(T_3(x)\) to estimate: \( \ln $x1plusa \approx \) \{ans_rule(20) \}$PAR
+
+END_TEXT
+
+
+
+###################################
+# Answers
+
+#$showPartialCorrectAnswers = 0;
+
+ANS($ans0->cmp);
+ANS($ans1->cmp);
+ANS($ans2->cmp);
+ANS($ans3->cmp);
+
+# MT... Answer checkers
+
+ANS($approx0->cmp);
+ANS($approx1->cmp);
+ANS($approx2->cmp);
+ANS($approx3->cmp);
+
+###################################
+Context()->texStrings;
+SOLUTION(EV3(<<'END_SOLUTION'));
+$PAR SOLUTION $PAR
+(a) Let \(f(x)=$f\),then \[f'(x)=$df,\; f''(x)=$df2,\; f'''(x)=$df3\]Then \[f($x0)=$fx0, \;f'($x0)=$dfx0,\; \frac{f''($x0)}{2}=$df2x0,\; \frac{f'''($x0)}{6}=$df3x0,\;\]$PAR
+Then we have, 
+\[ \begin{align}
+& T_0(x)=f($x0)=$ans0d \\
+& T_1(x)=f($x0)+f'($x0)(x-$x0)=$ans1d \\
+& T_2(x)=f($x0)+f'($x0)(x-$x0)+\frac{f''($x0)}{2}(x-$x0)^2=$ans2d\\
+& T_3(x)=f($x0)+f'($x0)(x-$x0)+\frac{f''($x0)}{2}(x-$x0)^2 +\frac{f'''($x0)}{6}(x-$x0)^3=$ans3d\\
+
+\end{align}\]
+$BCENTER
+$PAR
+(click on image to enlarge) 
+$BR
+\{ image(insertGraph($gr,tex_size=>300,height=>100,width=>100)) \}
+$BR
+
+
+$ECENTER
+
+(b) To estimate \( \ln $x1plusa \), we need \( x + $aa = $x1plusa \) which gives \( x = $x1 \) $PAR
+Then we have, $BR
+\( \ln $x1plusa \approx T_0($x1) = $approx0 \) $BR
+\( \ln $x1plusa \approx T_1($x1) = $approx1 \) $BR
+\( \ln $x1plusa \approx T_2($x1) = $approx2 \) $BR
+\( \ln $x1plusa \approx T_3($x1) = $approx3 \)
+END_SOLUTION
+Context()->normalStrings;
+
+###################################
+ENDDOCUMENT();

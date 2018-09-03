@@ -1,0 +1,85 @@
+# DESCRIPTION
+# Find the max and min of a 2D feasible region by 
+# examining the objective at the vextex points.
+# A graphical approach is used to solve an LP.
+# WeBWorK problem written by Charles Fortin, 
+# <cfortin(at)champlaincollege.qc.ca(dot)ca>
+## Aug 2018 MT tagged and renamed
+# ENDDESCRIPTION
+
+## DBsubject('Operations Research')
+## DBchapter('Linear Programming')
+## DBsection('')
+## KEYWORDS('Geometric','Linear algebra')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2012')
+## Author('Charles Fortin')
+## Institution('ChamplainCollege')
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGchoicemacros.pl",
+"PGgraphmacros.pl",
+);
+
+# make sure we're in the context we want
+Context("Numeric");
+$showPartialCorrectAnswers = 0;
+
+# The feasible region is the region enclosed by y<=mx+b
+# y=>nx+b, y =  x=>0, and y >= l(x+2b/n). The vertices are
+# (0,b), (-b/n,0), (-2b/n,0), and the solution to y=mx+b
+# and y=l(x+2b/n). 
+# The objective function is p = -qx+y.
+# We choose l=3m, q=2m so that the min occurs at (-2b/n,0)
+# and the max at (0,b).
+
+$b = random(1,10);
+$m = random(1,3);
+$n = random(-3,-1);
+$l = Real("3*$m");
+$q = Real("2*$m");
+$k = random(1,4);
+$c1 = Real("2*$b*$l");
+$c2 = Real("-$n*$l");
+
+$min = Real("2*$b*$q/$n");
+$max = Real("$b");
+
+TEXT(beginproblem());
+Context()->texStrings;
+BEGIN_TEXT
+Consider the following problem:
+\[\begin{array}{rcl} p&=&-$q x+ y \\ 
+-$m x + y &\leq& $b \\
+$n x - y &\leq& -$b \\
+$c2 x + $n y &\leq $c1 \\
+y &\geq& 0 \end{array}
+\]
+Find the maximum and minimum values of p by graphing the feasible region in the Cartesian plane and by examining p at the vertex points. 
+$BR
+(a) The maximum value of p in the feasible region is \{ ans_rule(10) \}
+$BR
+(a) The minimum value of p in the feasible region is \{ ans_rule(10) \}
+
+END_TEXT
+Context()->normalStrings;
+
+ANS( $max->cmp() );
+ANS( $min->cmp() );
+
+Context()->texStrings;
+SOLUTION(EV3(<<'END_SOLUTION'));
+$PAR SOLUTION $PAR
+
+
+END_SOLUTION
+Context()->normalStrings;
+
+ENDDOCUMENT();

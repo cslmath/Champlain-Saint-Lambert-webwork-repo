@@ -1,0 +1,121 @@
+## DESCRIPTION
+##   History of Complex Numbers. Written in PGML.
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(History)
+## DBsection()
+## Date(2018-Apr-19)
+## Author(M. Titcombe)
+## Level()
+## MO()
+## TitleText1()
+## AuthorText1()
+## EditionText1()
+## Section1()
+## Problem1()
+## KEYWORDS('Complex','Imaginary','complex number')
+
+## RESOURCES('realroots.png','complexroots.png')
+
+DOCUMENT();
+
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGcourse.pl",
+  "PGchoicemacros.pl",
+  "PGML.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+Context('Numeric');
+
+# Distinct roots:
+$mc1 = new_multiple_choice();
+
+# syntax for qa
+# qa("question","correct answer")
+$mc1 -> qa ("In Wallis's geometric representation of distinct real roots, what are the lengths of \(AC\), \(AB\) and \(AD\) in the figure above?", 
+" \( AB=AD=p \) and \(AC=q\) $BR",
+);
+
+# syntax... add other choices than correct answer above
+$mc1 -> extra(
+" \( AC=AD=p \) and \(AB=q\)$BR",
+" \( AB=AC=p \) and \(AD=q\) $BR",
+" \( AB=AD=q \) and \(AC=p\)$BR",
+);
+
+$mc1 -> makeLast("None of the above");
+
+# Complex roots: 
+$mc2 = new_multiple_choice();
+
+# syntax for qa
+# qa("question","correct answer")
+$mc2 -> qa ("At what points are the two complex roots located, in Wallis's representation and in the modern representation (Figure 2)?", 
+" Wallis: at \( K \) and \(M\); Modern: at \(V\) and \( W\) $BR",
+);
+
+# syntax... add other choices than correct answer above
+$mc2 -> extra(
+"Wallis: at \( L \) and \(N\); Modern: at \(U\) and \( O\) $BR",
+"Wallis: at \( K \) and \(N\); Modern: at \(U\) and \( W\) $BR",
+"Wallis: at \( N \) and \(M\); Modern: at \(U\) and \( V\)$BR",
+);
+
+$mc2 -> makeLast("None of the above");
+
+# How to put in a static image...
+#An excerpt from Descartes' text is below:  
+#[@ image( "term_imaginary.jpg", width=>480, height=>211,  
+#tex_size=>700, extra_html_tags=>'alt="First coined the term imaginary"' ) @]*
+
+
+
+BEGIN_PGML
+  
+>>*Plotting Complex Numbers: Wallis's Geometric Attempt*<<
+
+Before John Wallis published _Algebra_ in 1673, a number had been seen primarily as a quantity. But how does one interpret a negative number or a complex number as a quantity?
+
+Wallis attempted to find a geometric representation of such numbers. In particular, he made an attempt at plotting the roots of a quadratic equation of the form [`x^2 + 2px + q^2 = 0`], where the parameters [`p`] and [`q`] are real numbers.
+
+(a) *Distinct real roots:*  
+In this case, the parameters are such that [`p>q>0`]. In Figure 1 below, [`O`] is the origin and the two (distinct) real roots to the quadratic equation are [`x=-p \pm \sqrt{p^2-q^2}`]. Both roots are negative numbers and are located on the real number line at the points [`B`] and [`D`].
+
+>>[@ image( "realroots.png", width=>400, height=>300,  
+tex_size=>700, extra_html_tags=>'alt="real roots"' ) @]*  
+Figure 1: Wallis's representation of distinct real roots.<<
+
+[@ $mc1 -> print_q() @]***
+[@ $mc1 -> print_a() @]***
+
+(b) *Complex roots:*  
+In this case, the parameters are such that [`q>p>0`]. The two complex roots are [`x=-p\pm \sqrt{-1}\sqrt{q^2-p^2}`]. In Wallis's words, the complex roots _"cannot be had in the line"_ and so he plotted those points _"out of the line...(in the same Plain)"_. Figure 2 shows geometric representations of complex roots. In Wallis's attempt, Figure 2(a), the point [`N`] lies at [`(-p,0)`].  Although Wallis's attempt at representing the complex roots geometrically was a step in the right direction,  his representation leads to inconsistencies (such as [`\sqrt{-1}=-\sqrt{-1}`] if [`p\to 0`]). In the modern representation, Figure 2(b), the point [`U`] has coordinates [`(-p,0)`]. As before, [`O`] is the origin.
+
+>>[@ image( "complexroots.png", width=>600, height=>300,  
+tex_size=>700, extra_html_tags=>'alt="complex roots"' ) @]*  
+Figure 2: Complex roots.<<
+
+[@ $mc2 -> print_q() @]***
+[@ $mc2 -> print_a() @]***
+
+
+
+*Did you know?* John Wallis is also known for introducing the symbol [`\infty`] for infinity.
+END_PGML
+
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( checkbox_cmp( $mc1->correct_ans() ) );
+ANS( checkbox_cmp( $mc2->correct_ans() ) );
+
+
+COMMENT('Written in PGML.');
+ENDDOCUMENT();

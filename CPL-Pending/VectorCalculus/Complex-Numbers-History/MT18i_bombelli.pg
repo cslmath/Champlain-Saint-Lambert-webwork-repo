@@ -1,0 +1,95 @@
+## DESCRIPTION
+##   History of Complex Numbers. Written in PGML.
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(History)
+## DBsection()
+## Date(2018-Apr-19)
+## Institution(Champlain College Saint-Lambert)
+## Author(M. Titcombe)
+## Level()
+## MO()
+## TitleText1()
+## AuthorText1()
+## EditionText1()
+## Section1()
+## Problem1()
+## KEYWORDS('Complex','Imaginary','complex number')
+
+DOCUMENT();
+
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGcourse.pl",
+  "PGchoicemacros.pl",
+  "PGML.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+Context('Numeric');
+
+$mc = new_multiple_choice();
+
+# syntax for qa
+# qa("question","correct answer")
+$mc -> qa ("What are the two equations?", 
+"\( 2 = 8 - 6k^2 \) and \( 11 = 12k-k^3 \) $BR",
+);
+
+# syntax... add other choices than correct answer above
+$mc -> extra(
+"\( 11 = 8 - 6k^2 \) and \( 2 = 12k-k^3 \) $BR",
+"\( 2 = 8 + 6k^2 \) and \( 11 = 12k-k^3 \) $BR",
+"\( 11 = 8 - 6k^2 \) and \( 2 = 12k+k^3 \)$BR",
+);
+
+$mc -> makeLast("None of the above");
+
+
+BEGIN_PGML
+  
+>>*Bombelli's Wild Thought*<<
+
+Cardano's solution (see the previous question) with [` p = 5 `] and [` q = 2 `] should lead to the real solution [` x = 4 `], but instead gives
+>>
+[``
+     x = \sqrt[3]{2 - \sqrt{-121}} + \sqrt[3]{2 + \sqrt{-121}}.
+``]
+<<
+Cardano thought the expression was irreducible and did not pursue it further.
+
+In 1572, twenty-seven years after the publication of Cardano's _Ars Magna_, Rafael Bombelli took over where Cardano left off. In Bombelli's book _Algebra_, he proposed a "wild thought": 
+
+    If [` \sqrt[3]{2 + \sqrt{-121}} `] could be expressed in the form [` 2 + k\sqrt{-1} `] for some real number [`k`], and similarly,  [` \sqrt[3]{2 - \sqrt{-121}} `] in the form [` 2 - k\sqrt{-1} `], then Cardano's solution would  simplify to the real solution [` x = 4 `].
+
+Consider the first part of Bombelli's wild thought:
+
+ >> [`  \sqrt[3]{2 + \sqrt{-121}} = 2 + k\sqrt{-1} `]<<
+
+To solve for [`k`], first write [` \sqrt{-121} `] as [` 11\sqrt{-1} `]. Then, cube both sides and expand the right-side and simplify (see the algebraic rules below). Finally, comparing terms that involve [` \sqrt{-1} `] and those that do not, one obtains two equations in terms of [`k`].
+
+[@ $mc -> print_q() @]***
+[@ $mc -> print_a() @]***
+
+>> ----- <<
+*Algebra rules*: As part of his wild thought, Bombelli had assumed some rules of algebra for complex numbers (which were later formalized). Let [` a`], [` b`], [` c`] and [` d`] be real numbers. 
+* [` (a\sqrt{-1})^2 = -a^2 `]
+* [` (a\sqrt{-1})^3 =-a^3\sqrt{-1} `]
+* [` (a + b\sqrt{-1}) + (c + d\sqrt{-1}) = (a+c) + (b+d)\sqrt{-1} `] 
+* [` (a + b\sqrt{-1})(c + d\sqrt{-1}) = (ac-bd) + (ad+bc)\sqrt{-1} `]  
+* [` \sqrt{-a^2} = |a|\sqrt{-1} `]
+END_PGML
+
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( checkbox_cmp( $mc->correct_ans() ) );
+
+
+COMMENT('Written in PGML.');
+ENDDOCUMENT();
