@@ -1,0 +1,146 @@
+##DESCRIPTION
+##  Algebra problem: true or false for inequality 
+##ENDDESCRIPTION
+
+##KEYWORDS('conjunction', 'disjunction', 'negation', 'logic statement')
+
+## DBsubject('Set theory and logic')
+## DBchapter('Propositional logic')
+## DBsection('Operations on propositions')
+## Date('2018/10/30')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Essential Computer Mathematics')
+## EditionText1('')
+## AuthorText1('Lipschutz')
+## Chapter1('4');
+## Section1('Solved Problems')
+## Problem1('4.1')
+
+########################################################################
+
+DOCUMENT();      
+
+loadMacros(
+   "PGstandard.pl",     # Standard macros for PG language
+   "PGbasicmacros.pl",
+   "PGchoicemacros.pl",
+   "unionTables.pl",
+   "MathObjects.pl",
+   #"source.pl",        # allows code to be displayed on certain sites.
+   "PGcourse.pl",      # Customization file for the course
+);
+
+# Print problem number and point value (weight) for the problem
+TEXT(beginproblem());
+
+# Show which answers are correct and which ones are incorrect
+$showPartialCorrectAnswers = 1;
+
+##############################################################
+#
+#  Setup
+#
+#
+Context("Numeric");
+$neg = negate();
+
+$ml = new_match_list();
+$ml->qa(
+"\($neg p \)", "It is not windy.",
+"\(p \wedge q\)", "It is windy and it is snowing.",
+"\( p \vee q\)", "It is windy or it is snowing.",
+"\( q \vee $neg p\)", "It is snowing or it is not windy.",
+"\( $neg p \wedge $neg q\)", "It is not windy and it is not snowing.",
+"\( $neg $neg q\)", "It is not true that it is not snowing.",
+);
+
+# use pop-up-lists
+$ml->rf_print_q(~~&pop_up_list_print_q);
+# you may need to add more letters D=>"D", etc. 
+$ml->ra_pop_up_list([No_answer=>"?",A=>"A",B=>"B",C=>"C",D=>"D",E=>"E",F=>"F",G=>"G",H=>"H"]);
+
+$ml->choose(5);
+
+# to add extra answers that show up in the
+#    matching list, we would uncomment
+#    (remove the leading "# " from) the two
+#    lines below:
+$ml->extra("It is not true that it is not windy.", "It is not windy or it is not snowing.", "It is not windy.");
+$ml->choose_extra(3);
+  
+$ml->makeLast("None of the above");
+
+##############################################################
+#
+#  Text
+#
+#
+
+Context()->texStrings;
+BEGIN_TEXT
+Let \(p\) be the statement $BITALIC It is windy $EITALIC and let \(q\) be the statement $BITALIC It is snowing.$EITALIC Give a simple verbal sentence which describes each of the following statements:
+\{ $ml->print_q() \}
+\{ $ml->print_a() \}
+END_TEXT
+Context()->normalStrings;
+
+##############################################################
+#
+#  Answers
+#
+#
+# no credit until all answers are correct
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+
+ANS( str_cmp( $ml->ra_correct_ans ) );
+
+# the remainder of the code is included to
+#    provide a sensible solution for the
+#    student.
+
+# the answers to the questions that were
+#    asked, in order, are
+@correctAns = @{$ml->ra_correct_ans};
+
+# the following becomes necessary if we want
+#    to figure out what questions were asked
+#    so that we can give explanations for 
+#    them.  
+# it's useful to define an array of 
+#    explanations that correspond to the
+#    list of questions we might have asked
+#@explanations = (
+#"explanation for question 1",
+#"explanation for question 2",
+#"explanation for question 3"
+#);
+
+# then find the questions that were asked
+@askedQuestions = ();
+foreach $q ( @{$ml->selected_q} ) {
+  $i = 0;
+  foreach $mq ( @{$ml->questions} ) {
+    if ( $q eq $mq ) {
+      push(@askedQuestions, $i);
+      last;
+    }
+    $i++;
+  } 
+}
+# now we know which questions were asked,
+#    and can print the corresponding 
+#    explanations for the solution
+BEGIN_SOLUTION
+$PAR SOLUTION $PAR
+In each case, translate \(\wedge\) as $BBOLD and$EBOLD, \(\vee\) as $BBOLD or$EBOLD, and \($neg\) as $BBOLD it is false that$EBOLD or $BBOLD not$EBOLD, and then simplify the English sentence.$BR
+The answers are: 
+1-$correctAns[0], 
+2-$correctAns[1], 
+3-$correctAns[2], 
+4-$correctAns[3], 
+5-$correctAns[4]
+END_SOLUTION
+
+ENDDOCUMENT();        
