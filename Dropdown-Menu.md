@@ -37,15 +37,27 @@
   - Matrix-Inverse  (symbolic link to LinearAlgebra)
 * Functions/Linear-Equations
 * LinearAlgebra
+  - LinearAlgebra/Determinants-Computing
+  - LinearAlgebra/Gaussian-Elimination
+  - LinearAlgebra/Linear-Programming-Geometric
   - LinearAlgebra/Matrices
+  - LinearAlgebra/Matrices-Applications-Cryptography
+  - LinearAlgebra/Matrices-Applications-Graphs
+  - LinearAlgebra/Matrices-Applications-Leontif-Closed
+  - LinearAlgebra/Matrices-Applications-Leontif-Open
   - LinearAlgebra/Matrix-Inverse
+  - LinearAlgebra/Matrix-Operations
+  - LinearAlgebra/Simplex-Method
   - LinearAlgebra/Systems-Linear-Equations
 * Orientation
 * VectorCalculus
   - VectorCalculus/Arc-Length-Curvature
   - VectorCalculus/Chain-Rule
+  - VectorCalculus/Complex-Numbers-History
   - VectorCalculus/Limits-Continuity
   - VectorCalculus/Partial-Derivatives
+  - VectorCalculus/Partial-Derivatives-Optimization
+  - VectorCalculus/Partial-Differentials
   - VectorCalculus/Triple-Integrals
   - VectorCalculus/Vector-Functions-Derivatives
   - VectorCalculus/Vector-Functions-Space-Curves
