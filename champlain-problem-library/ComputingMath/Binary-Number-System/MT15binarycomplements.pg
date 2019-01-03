@@ -1,5 +1,6 @@
 ## DESCRIPTION
 ##   Complements in binary number system: ones and twos complements.
+##   2018 Dec MT FIX : Use niceTables.pl to create tables.
 ## ENDDESCRIPTION
 
 ## DBsubject(Arithmetic)
@@ -24,6 +25,7 @@ loadMacros(
 "PGchoicemacros.pl",
 "PGanswermacros.pl",
 "PGauxiliaryFunctions.pl",
+"niceTables.pl",
 );
 
 TEXT(beginproblem());
@@ -106,32 +108,24 @@ if ($length == 3) {$anstwos2 = "00000$twostr[2]"; }
 if ($length == 2) {$anstwos2 = "000000$twostr[2]"; }
 if ($length == 1) {$anstwos2 = "0000000$twostr[2]"; }
 
-@header=("$BCENTER \( N \) $ECENTER",
-"$BCENTER \( $a[0] \) $ECENTER",
-"$BCENTER \( $a[1]  \) $ECENTER",
-"$BCENTER \( $a[2] \) $ECENTER",
-"$BCENTER \( $a[3] \) $ECENTER");
-
-
-@header = map {EV2($_) } @header;
-
 BEGIN_TEXT
 Determine the ones and two complements of the given binary numbers. $BR
 $BITALIC 
 Note: Your answers should have the same number of bits as \( N \). For example, in the first column, \( N \) is a 4-bit number; in the second column, \( N \) is a 6-bit number, etc.
 $EITALIC
+\{
+DataTable(
+  [
+    [['\(N\)', headerrow => 1],'\( $a[0]\)', '\( $a[1]\)','\( $a[2]\)'],
+    ['1s Complement',ans_rule(10), ans_rule(10), ans_rule(13)],
+    ['2s Complement',ans_rule(10), ans_rule(10), ans_rule(13)]
+  ], 
+  align => '|c|c|c|c|c|',
+  midrules => 1,
+);
+\}
 $PAR
 END_TEXT
-
-TEXT(
-
-begintable(1+scalar(@header)), 
-	row(@header),
-	row("1s complement",ans_rule(10), ans_rule(10) ,  ans_rule(13)) ,
-	row("2s complement", ans_rule(10), ans_rule(10) , ans_rule(13)) ,
-endtable() 
-);
-
 
 BEGIN_HINT
 Let \( N \) be a binary number. The ones complement of \( N \) is obtained by replacing each 0 bit by 1 and each 1 bit by 0 (this is equivalent to subtracting each digit of \( N \) from 1). The twos complement of \( N \) is its ones complement plus one.$BR
@@ -159,3 +153,4 @@ ANS(str_cmp($anstwos1) );
 ANS(str_cmp($anstwos2) );
 
 ENDDOCUMENT();        # This should be the last executable line in the problem.;
+
