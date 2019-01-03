@@ -1,0 +1,116 @@
+# DESCRIPTION
+# Boolean expression and truth table for logic circuit.
+# ENDDESCRIPTION
+
+## DBsubject(Set theory and logic)
+## DBchapter(Propositional logic)
+## DBsection(Boolean circuits)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2018-Oct-31)
+## TitleText1('Essential Computer Mathematics')
+## EditionText1('1987')
+## AuthorText1('Lipschutz')
+## Section1('7')
+## Problem1('7.27')
+## Level(2)
+
+## RESOURCES('circuitacb.png')
+
+############################
+# Initialization
+
+DOCUMENT();
+
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGchoicemacros.pl",
+"niceTables.pl",
+);
+
+TEXT(beginproblem());
+
+############################
+# Setup
+
+# image width and height
+$width = 350;
+$height = 170;
+$image = image("circuitacb.png",width=>$width,height=>$height);
+
+# Part (a) Boolean expression.
+$radio = new_multiple_choice();
+$radio->qa("Which of the following is the correct Boolean expression?"," \(A\overline{C}+B\overline{C}\)");
+$radio->extra(" \((A+\overline{C})(B+\overline{C})\)"," \(A+\overline{C}+B\)"," \(A\overline{C}+C\overline{B}\)");
+$radio->makeLast("None of the above");
+
+# Part (b) Truth table of logic circuit.
+$radio2 = new_multiple_choice();
+$radio2->qa("Which of the following completes the truth table of the logic circuit?","\(Y = 00101010\)");
+$radio2->extra("\(Y=01001100\)","\(Y=01010100\)","\(Y=00110010\)");
+$radio2->makeLast("None of the above");
+
+############################
+# Main Text
+
+Context()->texStrings;
+BEGIN_TEXT
+Consider the logic circuit in the figure below. $BR
+$image $PAR
+(a) Give the output \(Y\) as a Boolean expression in the inputs \(A\), \(B\), and \(C\).
+\{$radio->print_q()\}
+\{$radio->print_a()\}
+$BR
+(b) The truth table of the logic circuit in the figure is:
+\{
+DataTable(
+  [
+    [['\(A\)', headerrow => 1],'\(00001111\)'],
+    ['\(B\)','\(00110011\)'],
+    ['\(C\)','\(01010101\)'],
+    ['\(Y\)','?'],
+  ], 
+    align => '| c | c |',
+    midrules => 1,
+);
+\}
+\{$radio2->print_q()\}
+\{$radio2->print_a()\}
+END_TEXT
+Context()->normalStrings;
+
+############################
+# Answer Evaluation
+
+$showPartialCorrectAnswers = 0;
+
+ANS(radio_cmp($radio->correct_ans()));
+ANS(radio_cmp($radio2->correct_ans()));
+
+############################
+# Solution
+
+Context()->texStrings;
+BEGIN_SOLUTION
+$PAR Solution: $PAR
+$image $PAR
+(a) The correct logical statement for this diagram is 
+\(A\overline{C}+B\overline{C}\) $BR
+(b) The truth table of the circuit is:
+\{
+DataTable(
+  [
+    [['\(A\)', headerrow => 1],'\(00001111\)'],
+    ['\(B\)','\(00110011\)'],
+    ['\(C\)','\(01010101\)'],
+    ['\(Y\)','\(00101010\)'],
+  ], 
+    align => '| c | c |',
+    midrules => 1,
+);
+\}
+END_SOLUTION
+Context()->normalStrings;
+
+ENDDOCUMENT();

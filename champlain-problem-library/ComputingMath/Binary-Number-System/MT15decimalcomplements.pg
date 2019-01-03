@@ -1,5 +1,6 @@
 ## DESCRIPTION
 ##   Complements in decimal number system: nines and tens complements.
+## 2018 Dec MT FIX : use niceTables.pl to create table.
 ## ENDDESCRIPTION
 
 ## DBsubject(Arithmetic)
@@ -26,6 +27,7 @@ loadMacros(
 "PGauxiliaryFunctions.pl",
 "MathObjects.pl",
 "contextLimitedNumeric.pl",
+"niceTables.pl",
 );
 
 TEXT(beginproblem());
@@ -59,29 +61,22 @@ foreach my $i (0..3) {
     $tens[$i] = Compute("$nines[$i] + 1");
 }
 
-@header=("$BCENTER \( N \) $ECENTER",
-"$BCENTER \( $a[0] \) $ECENTER",
-"$BCENTER \( $a[1]  \) $ECENTER",
-"$BCENTER \( $a[2] \) $ECENTER",
-"$BCENTER \( $a[3] \) $ECENTER");
-
-
-@header = map {EV2($_) } @header;
-
 Context()->texStrings;
 BEGIN_TEXT
 Determine the nines and tens complements of the given decimal numbers.
+\{
+DataTable(
+[
+    [['\(N\)', headerrow => 1],'\( $a[0] \)', '\( $a[1] \)','\( $a[2] \)','\( $a[3]\)'],
+    ['9s complement',ans_rule(10),ans_rule(10),ans_rule(13),ans_rule(10)],
+    ['10s complement',ans_rule(10),ans_rule(10),ans_rule(13),ans_rule(10)]
+],
+  align => '|c|c|c|c|c|',
+  midrules => 1,
+)
+\}
 $PAR
 END_TEXT
-
-TEXT(
-
-begintable(1+scalar(@header)), 
-	row(@header),
-	row("9s complement",ans_rule(10),ans_rule(10),ans_rule(13),ans_rule(10)),
-	row("10s complement",ans_rule(10),ans_rule(10),ans_rule(13),ans_rule(10)),
-endtable() 
-);
 
 BEGIN_HINT
 Let \( N \) be a decimal number. The nines complement of \( N \) is obtained by subtracting each digit of \( N \) from 9. The tens complement of \( N \) is its nines complement plus one.$BR
@@ -116,3 +111,4 @@ foreach my $i (0..3) {
 
 COMMENT("MathObjects version.");
 ENDDOCUMENT();        # This should be the last executable line in the problem.;
+

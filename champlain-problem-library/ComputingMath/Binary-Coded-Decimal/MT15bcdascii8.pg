@@ -1,5 +1,6 @@
 ##DESCRIPTION
 ##  Binary-coded decimal (BCD): ASCII-8
+##  2018 Sep MT FIX removed lonely $EITALIC
 ##ENDDESCRIPTION
 
 ##KEYWORDS('binary-coded decimal', 'BCD', 'ascii')
@@ -14,6 +15,8 @@
 ## AuthorText1('Lipschutz')
 ## Section1('2.7')
 ## Problem1('')
+
+## RESOURCES('ascii8chart.jpg')
 
 ########################################################################
 
@@ -63,8 +66,6 @@ $BR
 $BBOLD Note 1. $EBOLD The answer is case-sensitive (capital B is not the same as small b). 
 $BR
 $BBOLD Note 2. $EBOLD Do not put any spaces between characters in your answer.
-$EITALIC
-
 END_TEXT
 
 BEGIN_HINT
@@ -81,3 +82,4 @@ ANS(std_cs_str_cmp("$ansstring"));
 
 COMMENT('Math Objects version');
 ENDDOCUMENT();        
+
