@@ -2,7 +2,7 @@ Champlain-Saint-Lambert-webwork-repo
 
 This is the Champlain-Saint-Lambert-webwork-repo. Here you will find WeBWorK problems contributed by the Champlain Saint-Lambert math department.
 
-This repository has three parts:
+This repository has two parts:
 
     1) champlain-problem-library
     2) CPL-Contrib
