@@ -1,0 +1,70 @@
+## DESCRIPTION
+##   Unit Vectors
+## ENDDESCRIPTION
+
+## DBsubject(Geometry)
+## DBchapter(Vector geometry)
+## DBsection(Dot product, length, and unit vectors)
+## Date(2018/12/21)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## MLT()
+## MLTleader()
+## Level()
+## MO('1')
+## TitleText1()
+## AuthorText1()
+## EditionText1()
+## Section1()
+## Problem1()
+## KEYWORDS('Vector', 'Length', 'Unit')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+  "PGstandard.pl",
+  "PGunion.pl",
+  "MathObjects.pl",
+  "parserVectorUtils.pl",
+  "PGML.pl",
+  "PGcourse.pl",
+);
+##############################################
+# Problem Set up
+
+Context("Vector")->functions->undefine("unit");
+$showPartialCorrectAnswers = 1;
+
+
+# the vectors
+$U = non_zero_vector2D();
+$V = non_zero_vector3D();
+
+# the points A and B
+$A = non_zero_point2D();
+$B = $A + non_zero_point2D();
+
+# the points P and Q
+$P = non_zero_point3D();
+$Q = $P + non_zero_point3D();
+
+##############################################
+#  Text section
+TEXT(beginproblem());
+
+BEGIN_PGML
+Find the following *unit* vectors:
+
+(a) The unit vector in the same direction as [`[$U]`] is [______]{$U->unit->cmp}{20}.
+
+(b) The unit vector in [` \mathbb{R}^3`] in the opposite direction to
+ [`[$V->ijk]`] is [______]{(-$V)->unit->cmp}{20}.
+
+(c) The unit vector in same direction as the
+vector from the point [`A=[$A]`] to the point [`B=[$B]`] is [______]{Vector($B-$A)->unit->cmp}{20}.
+
+(d) The unit vector in the opposite direction as [`\overrightarrow{PQ}`], where  [`P =[$P]`] and [`Q=[$Q]`], is [_____]{Vector($P-$Q)->unit->cmp}{20}.
+END_PGML
+
+COMMENT('Written in PGML');
+ENDDOCUMENT();

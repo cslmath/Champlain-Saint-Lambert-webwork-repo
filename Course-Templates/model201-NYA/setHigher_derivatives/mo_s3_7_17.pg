@@ -1,0 +1,57 @@
+##DESCRIPTION
+##  Evaluate first and second derivative of tan(ax+b) at a given point
+##ENDDESCRIPTION
+
+## Shotwell cleaned
+## tcao , PAID on 11-24-2003
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Differentiation)
+## DBsection(Higher-order derivatives)
+## Date(6/3/2002)
+## MLT(hod_1st_2nd_trig_eval)
+## Level(2)
+## TitleText1('Calculus: Early Transcendentals')
+## AuthorText1('Stewart')
+## EditionText1('6')
+## Section1('3.5')
+## Problem1('17')
+## KEYWORDS('trigonometry', 'derivatives')
+
+## Original problem: /Library/ma122DB/set5/s3_7_17.pg
+## Revised to create MathObjects version
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PGbasicmacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$a1 = random(2,5,1);
+$b1 = random(2,8,1);
+$x1 = random(1,5,1);
+$deriv1 = Compute("$a1 / (cos($a1*$x1+$b1))^2");
+$deriv2 = Compute("2*$a1^2 * (tan($a1*$x1+$b1)) / (cos($a1*$x1+$b1))^2");
+
+Context()->texStrings;
+BEGIN_TEXT
+
+Let \( h(t) = \tan ( $a1 x +$b1 )  \). $BR$BR
+ \( h'( $x1 )=\) \{ans_rule(40) \} $BR
+\( h''( $x1 )= \) \{ans_rule(40) \}
+
+END_TEXT
+Context()->normalStrings;
+
+ANS($deriv1->cmp);
+ANS($deriv2->cmp);
+
+COMMENT('MathObjects version');
+ENDDOCUMENT();        # This should be the last executable line in the problem.

@@ -1,0 +1,56 @@
+## DESCRIPTION
+##  Calculus
+## ENDDESCRIPTION
+
+## Tagged by dgt5v
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Differentiation)
+## DBsection(Logarithmic differentiation)
+## Level(4)
+## KEYWORDS('Calculus','Derivatives')
+
+## Original problem: Library/270/setDerivatives7Log/osu_dr_7_2.pg
+## Revised to create MathObjects version
+
+DOCUMENT();
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+
+$showPartialCorrectAnswers = 1;
+
+$AA = random(3,6,1);
+$BB = random(2,5,1);
+$CC = random(3,7,1);
+
+Context()->texStrings;
+BEGIN_TEXT
+Find the indicated derivatives.
+$PAR
+
+(a) \(\frac{d}{dx}\left(e^{x^$AA}+\log_{$BB}(\pi)\right)\)  =  \{ ans_rule(35)\}
+$PAR
+
+(b) \(\frac{d}{dx}\left( \left( \sqrt[$CC]{x} \right) ^{\ln(x)}\right)\)  =  \{ ans_rule(35)\}
+$BR
+END_TEXT
+Context()->normalStrings;
+
+$ans1=Compute("$AA*x^($AA-1)*e^(x^$AA)");
+$ans2=Compute("2*(ln(x))*x^(ln(x)/$CC)/(x*$CC)");
+
+ANS($ans1->cmp(limits=>[0.99,1.01]));
+ANS($ans2->cmp(limits=>[1.01,2.01]));
+
+COMMENT('MathObjects version');
+ENDDOCUMENT();

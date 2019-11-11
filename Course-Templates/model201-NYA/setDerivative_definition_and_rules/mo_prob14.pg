@@ -1,0 +1,56 @@
+## DESCRIPTION
+## Calculus
+## ENDDESCRIPTION
+
+## Tagged by cmd6a 5/29/06
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Differentiation)
+## DBsection(Definition of the derivative)
+## Date(July 2001)
+## Institution(OSU)
+## Author(Zig Fiedorowicz)
+## Level(4)
+## KEYWORDS('calculus','limit','tangent line')
+
+## Original problem: /Library/OSU/high_school_apcalc/dchmwk1/prob14.pg
+## Revised to create MathObjects version
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$a = random(2,7,1);
+$b = -random(2,11,1);
+$c = random(-1,1,2)*random(3,12,1),
+$ans1 = Compute("$c*(x - $a) + $b");
+$ans2 = Compute("$a");
+$ans3 = Compute("$b");
+
+Context()->texStrings;
+BEGIN_TEXT
+Assume that \(f(x)\) is everywhere continuous and it is given to you that
+\[\lim_{x\to $a}\frac{f(x) - $b}{x - $a} = $c \]
+It follows that \(y =\) \{ans_rule()\} is the equation of the tangent line
+to \(y = f(x)\) at the point \((\)\{ans_rule(5)\}\(,\)\{ans_rule(5)\}\()\).
+END_TEXT
+Context()->normalStrings;
+
+ANS($ans1->cmp);
+ANS($ans2->cmp);
+ANS($ans3->cmp);
+
+COMMENT('MathObjects version');
+ENDDOCUMENT();        # This should be the last executable line in the problem.
+
