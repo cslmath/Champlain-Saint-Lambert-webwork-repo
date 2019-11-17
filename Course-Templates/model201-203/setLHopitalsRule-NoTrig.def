@@ -1,0 +1,84 @@
+assignmentType      = default
+openDate          = 01/11/2016 at 12:00am EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 12/31/2016 at 01:00am EST
+answerDate        = 12/31/2016 at 02:00am EST
+enableReducedScoring = N
+paperHeaderFile   = 
+screenHeaderFile  = 
+description       = 
+restrictProbProgression = 
+emailInstructor   = 
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = champlainLibrary/Calculus/Derivatives-LHospital/Rochur_dr_21_1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/Rochester/setDerivatives21LHospital/ur_dr_21_3.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C04S04-LHop/4-4-07.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C04S04-LHop/4-4-15.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 5
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C04S04-LHop/4-4-20.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 6
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C04S04-LHop/4-4-33.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 7
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C04S04-LHop/4-4-39.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+
