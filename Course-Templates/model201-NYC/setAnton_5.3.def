@@ -1,0 +1,22 @@
+
+openDate          = 08/01/2012 at 12:00am EDT
+dueDate           = 12/31/2013 at 01:00am EST
+answerDate        = 12/31/2013 at 02:00am EST
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+problemList       = 
+setSimplexmethod/LP_simplex1.pg, 1, -1 
+Library/ASU-topics/set119LPsimplex/p10.pg, 1, -1 
+Library/ASU-topics/set119LPsimplex/nonstand2.pg, 1, -1 
+Library/ASU-topics/set119LPsimplex/p2.pg, 1, -1 
+Library/ASU-topics/set119LPsimplex/p7.pg, 1, -1 
+Library/ASU-topics/set119LPsimplex/p1.pg, 1, -1 
+Library/ASU-topics/set119LPsimplex/p8.pg, 1, -1 
+Library/ASU-topics/set119LPsimplex/jj1.pg, 1, -1 
+Library/ASU-topics/set119LPsimplex/nonstandword1.pg, 1, -1 
+Library/ASU-topics/set119LPsimplex/p6.pg, 1, -1 
+Library/ASU-topics/set119LPsimplex/p12.pg, 1, -1 
+Library/ASU-topics/set119LPsimplex/jj2.pg, 1, -1 
+Library/ASU-topics/set119LPsimplex/p4.pg, 1, -1 
+setSimplexmethod/LP_simplex2v2.pg, 1, -1 
+

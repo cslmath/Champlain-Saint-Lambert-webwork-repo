@@ -1,0 +1,12 @@
+
+openDate          = 08/18/2014 at 08:00am EDT
+dueDate           = 12/30/2016 at 08:00pm EST
+answerDate        = 12/31/2016 at 08:00pm EST
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+problemList       = 
+Library/Rochester/setLinearAlgebra18OrthogonalBases/ur_la_18_11.pg, 1, -1 
+Library/Rochester/setLinearAlgebra18OrthogonalBases/ur_la_18_4.pg, 1, -1 
+Library/Rochester/setLinearAlgebra18OrthogonalBases/ur_la_18_6.pg, 1, -1 
+setLinAlg_HW14_Orthogonal_Bases/ur_la_18_3.pg, 1, -1 
+

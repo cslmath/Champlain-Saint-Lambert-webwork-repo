@@ -1,0 +1,19 @@
+
+openDate          = 08/18/2014 at 08:00am EDT
+dueDate           = 12/30/2016 at 08:00pm EST
+answerDate        = 12/31/2016 at 08:00pm EST
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+problemList       = 
+Library/Rochester/setLinearAlgebra9Dependence/ur_la_9_1.pg, 1, -1 
+Library/Rochester/setLinearAlgebra9Dependence/ur_la_9_9.pg, 1, -1 
+Library/Rochester/setLinearAlgebra9Dependence/ur_la_9_2.pg, 1, -1 
+Library/Rochester/setLinearAlgebra9Dependence/ur_la_9_3.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixEquations/problem13.pg, 1, -1 
+Library/TCNJ/TCNJ_LinearIndependence/problem10.pg, 1, -1 
+Library/TCNJ/TCNJ_BasesLinearlyIndependentSet/problem8.pg, 1, -1 
+Library/TCNJ/TCNJ_BasesLinearlyIndependentSet/problem5.pg, 1, -1 
+Library/TCNJ/TCNJ_BasesLinearlyIndependentSet/problem6.pg, 1, -1 
+Library/TCNJ/TCNJ_BasesLinearlyIndependentSet/problem7.pg, 1, -1 
+Library/TCNJ/TCNJ_VectorEquations/problem5.pg, 1, -1 
+

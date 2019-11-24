@@ -1,0 +1,69 @@
+# DESCRIPTION
+## Linear Algebra
+## Problem 1.6.17 in Anton Elementary Linear Algebra, 9th edition
+## ENDDESCRIPTION
+
+## KEYWORDS('matrix')
+
+## DBsubject('Linear Algebra')
+## DBchapter('Systems of Linear Equations and Matrices')
+## DBsection('Elimination Methods')
+## Date('26 October 2011')
+## Author('Charles Fortin')
+## Institution('Champlain College')
+
+DOCUMENT(); 
+
+loadMacros("PG.pl",
+           "PGbasicmacros.pl",
+           "PGchoicemacros.pl",
+           "PGanswermacros.pl",
+           "PGmatrixmacros.pl",
+	   "MathObjects.pl"
+           );
+
+TEXT(beginproblem());
+
+$showPartialCorrectAnswers = 1;
+
+Context("Numeric");
+Context()->variables->add(a=>'Real');
+Context()->variables->add(b=>'Real');
+Context()->variables->add(c=>'Real');
+
+$a_11 = Compute("1");
+$a_12 = random(-6,6);
+$a_13 = Compute("-4");
+$a_21 = Compute("3");
+$a_22 = random(-6,6);
+$a_23 = Compute("-1");
+# the first two lines of the matrix A should be linearly independent
+$k = random(1,5);
+$h = random(-5,-1);
+$a_31 = Compute("$k*$a_11+$h*$a_21");
+$a_32 = Compute("$k*$a_12+$h*$a_22");
+$a_33 = Compute("$k*$a_13+$h*$a_23");
+# the last line of A is a linear combination of the first two lines
+# the determinant of A is 0
+$condition = Compute("$k a + $h b");
+
+Context()->texStrings;
+BEGIN_TEXT
+Find a condition that \(a\), \(b\), and \(c\) must satisfy to make the system  consistent.
+$BR
+$BR
+\[\begin{array}{ccc} $a_11 x_1 + $a_12 x_2+ $a_13 x_3 &=& a,\\
+$a_21 x_1 + $a_22 x_2 + $a_23 x_3 &=& b,\\
+$a_31 x_1 + $a_32 x_2 + $a_33 x_3 &=& c.\\
+\end{array}
+\]
+$BR
+$BR
+The condition can be written as the equation \(c=\) \{ans_rule(10)\}.
+END_TEXT
+
+Context()->normalStrings;
+
+ANS($condition->cmp());
+
+ENDDOCUMENT() ;

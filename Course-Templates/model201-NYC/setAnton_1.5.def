@@ -1,0 +1,24 @@
+
+openDate          = 08/01/2012 at 12:00am EDT
+dueDate           = 12/31/2013 at 01:00am EST
+answerDate        = 12/31/2013 at 02:00am EST
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+problemList       = 
+setGaussian_Elimination/cfortin_LU_with_elementarymatrices2.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixInverse/problem14.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixInverse/problem15.pg, 1, -1 
+Library/Rochester/setLinearAlgebra5LUfactorization/ur_la_5_8.pg, 1, -1 
+Library/Rochester/setLinearAlgebra5LUfactorization/ur_la_5_1.pg, 1, -1 
+Library/Rochester/setLinearAlgebra5LUfactorization/ur_la_5_2.pg, 1, -1 
+Library/Rochester/setLinearAlgebra5LUfactorization/ur_la_5_3.pg, 1, -1 
+Library/Rochester/setLinearAlgebra5LUfactorization/ur_la_5_4.pg, 1, -1 
+Library/Rochester/setLinearAlgebra5LUfactorization/ur_la_5_5.pg, 1, -1 
+Library/Rochester/setLinearAlgebra5LUfactorization/ur_la_5_6.pg, 1, -1 
+Library/Rochester/setLinearAlgebra5LUfactorization/ur_la_5_7.pg, 1, -1 
+Library/Rochester/setLinearAlgebra5LUfactorization/ur_la_5_9.pg, 1, -1 
+Library/ASU-topics/set119MatrixAlgebra/p6.pg, 1, -1 
+Library/ASU-topics/set119MatrixAlgebra/p13.pg, 1, -1 
+Library/Rochester/setLinearAlgebra4InverseMatrix/ur_la_4_5.pg, 1, -1 
+Library/maCalcDB/setLinearAlgebra4InverseMatrix/ur_la_4_4.pg, 1, -1 
+

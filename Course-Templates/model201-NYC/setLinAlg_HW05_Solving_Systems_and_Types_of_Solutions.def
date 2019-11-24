@@ -1,0 +1,21 @@
+
+openDate          = 08/18/2014 at 08:00am EDT
+dueDate           = 12/30/2016 at 08:00pm EST
+answerDate        = 12/31/2016 at 08:00pm EST
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+problemList       = 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_22.pg, 1, -1 
+Library/TCNJ/TCNJ_RowReduction/problem14.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_5a.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_17.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_10.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_13.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_15.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_18.pg, 1, -1 
+Library/TCNJ/TCNJ_LinearSystems/problem1.pg, 1, -1 
+Library/TCNJ/TCNJ_LinearSystems/problem3.pg, 1, -1 
+Library/TCNJ/TCNJ_LinearSystems/problem6.pg, 1, -1 
+Library/TCNJ/TCNJ_LinearSystems/problem11.pg, 1, -1 
+Library/TCNJ/TCNJ_LinearSystems/problem4.pg, 1, -1 
+

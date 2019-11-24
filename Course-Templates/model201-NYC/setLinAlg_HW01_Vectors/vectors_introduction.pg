@@ -1,0 +1,65 @@
+## DESCRIPTION
+##   Working with Vectors, presenting the many notations used with vectors
+## ENDDESCRIPTION
+
+## KEYWORDS('Vector', 'Length', 'Notation')
+## Tagged by nhamblet
+
+## DBsubject('Calculus')
+## DBchapter('Vectors and the Geometry of Space')
+## DBsection('Vectors')
+## Date('06/20/11')
+## Author("Jim Fischer')
+## Institution('Oregon Institute of Technology')
+
+DOCUMENT();  
+loadMacros(
+"PGstandard.pl",
+"PGchoicemacros.pl",
+"MathObjects.pl",
+"PGunion.pl",
+"parserVectorUtils.pl",
+"PGcourse.pl",
+);
+
+TEXT(beginproblem());
+
+####################################
+# Setup
+
+
+$a = random(1, 10);
+$b = random(1, 10);
+while ($b == $a){
+$b = random(1,10)}
+$c = random(1, 10);
+while (($c == $a) or ($c == $b)){
+$c = random(1,10)}
+
+BEGIN_TEXT
+
+There are many ways to denote a vector and it is crucial that correct notation is used when writing expressions that involve vectors. For example, the notation  \(($a, $b, $c)\) could indicate a point or a vector in \( \mathbf R^3,\) or a list of numbers. When one writes expressions it is important to distinguish vectors from points or vectors from scalars.
+
+
+To indicate a vector quantity authors usually use bold face type or a symbol over the variable. Here are some notations used:$BR
+$BR
+\[ {\mathbf v} = ($a, $b, $c), \ \vec{v} =($a, $b, $c), \  \bar{v} = ($a, $b, $c) \]
+$BR
+To further emphasize one is working with a vector, some authors choose to use brackets instead of parentheses:$BR
+$BR
+\[ {\mathbf v} = ($a, $b, $c) = \left<$a, $b, $c\right>  \]
+$BR
+$BR
+There is also more than one way to indicate the length (norm or magnitude) of a vector. The two most common ways to indicate the length of a vector are:
+$BR
+$BR 
+\[\left| {\mathbf v} \right| =\left|\left| {\mathbf v} \right|\right| = \sqrt{$a^2 + $b^2 + $c^2}\] 
+$BR
+$BR
+It is best practice to use the notation being used in the current course (or text), however, keep in mind that the problems in WeBWork do not consistently use the same notation. 
+
+$PAR  
+END_TEXT
+
+
+ENDDOCUMENT();

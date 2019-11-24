@@ -1,0 +1,13 @@
+
+openDate          = 08/18/2014 at 08:00am EDT
+dueDate           = 12/30/2016 at 08:00pm EST
+answerDate        = 12/31/2016 at 08:00pm EST
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+problemList       = 
+Library/ASU-topics/set119MatrixAlgebra/p13.pg, 1, -1 
+Library/Rochester/setLinearAlgebra4InverseMatrix/ur_la_4_2.pg, 1, -1 
+Library/Rochester/setLinearAlgebra4InverseMatrix/ur_la_4_3.pg, 1, -1 
+Library/Rochester/setLinearAlgebra4InverseMatrix/ur_la_4_5.pg, 1, -1 
+Library/Rochester/setLinearAlgebra4InverseMatrix/ur_la_4_8.pg, 1, -1 
+

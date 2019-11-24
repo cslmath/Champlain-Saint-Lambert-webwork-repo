@@ -1,0 +1,54 @@
+assignmentType      = default
+openDate          = 09/12/2016 at 05:45pm EDT
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 09/19/2016 at 11:59pm EDT
+answerDate        = 09/21/2016 at 04:30pm EDT
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = Binary to octal and hexadecimal conversions. Decimal to octal and hexadecimal conversions. Octal sum. Hexadecimal sum.
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/Rochester/setDiscrete6Integers/ur_dis_6_12.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = champlainLibrary/ComputingMath/Octal-Hexadecimal/MT15decimaloctalhex.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = champlainLibrary/ComputingMath/Octal-Hexadecimal/MT15octalsum.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = champlainLibrary/ComputingMath/Octal-Hexadecimal/MT15hexadecimalsum.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+
