@@ -37,6 +37,7 @@
   - Matrix-Inverse  (symbolic link to LinearAlgebra)
 * Functions/Linear-Equations
 * LinearAlgebra
+  - LinearAlgebra/Determinants-Applications
   - LinearAlgebra/Determinants-Computing
   - LinearAlgebra/Gaussian-Elimination
   - LinearAlgebra/Linear-Programming-Geometric
