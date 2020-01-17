@@ -1,0 +1,60 @@
+## DBsubject(Calculus - single variable)
+## DBchapter(Differentiation)
+## DBsection(Higher-order derivatives)
+## Institution(UCSB)
+## MLT(hod_accel_true_false)
+## Level(4)
+## TitleText1('Calculus: Early Transcendentals')
+## AuthorText1('Stewart')
+## EditionText1('5')
+## Section1('3.7')
+## Problem1('4')
+## KEYWORDS('Differentiation','Higher derivatives')
+
+## Original problem: 
+##   /Library/UCSB/Stewart5_3_7/Stewart5_3_7_4/Stewart5_3_7_4.pg
+## Revised to create MathObjects version
+
+DOCUMENT();
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+TEXT(&beginproblem);
+Context("Numeric")->variables->set(a=>'Real',b=>'Real',c=>'Real',d=>'Real');
+
+$showPartialCorrectAnswers = 1;
+
+Context()->texStrings;
+BEGIN_TEXT
+
+$PAR
+
+The figure shows the graphs of four functions. One is the position function \((s)\) of a car, one is the velocity \((v)\) of a car, one is its acceleration \((a)\), and one is its jerk \((j)\). Identify each curve. $BR
+
+\{ image( "stew5374.png", height => 200, width => 300, tex_size => 500 )  \}
+$PAR
+
+\(s:\) \{ans_rule(10)\} $BR
+\(v:\) \{ans_rule(10)\} $BR
+\(a:\) \{ans_rule(10)\} $BR
+\(j:\) \{ans_rule(10)\}
+
+END_TEXT
+Context()->normalStrings;
+
+@ans=(Compute("d"), Compute("c"), Compute("b"), Compute("a"));
+
+ANS($ans[0]->cmp);
+ANS($ans[1]->cmp);
+ANS($ans[2]->cmp);
+ANS($ans[3]->cmp);
+
+COMMENT('MathObjects version');
+ENDDOCUMENT();

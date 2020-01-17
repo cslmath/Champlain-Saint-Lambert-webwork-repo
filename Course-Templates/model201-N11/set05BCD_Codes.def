@@ -1,0 +1,54 @@
+assignmentType      = default
+openDate          = 09/19/2016 at 06:59am EDT
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 09/26/2016 at 11:59pm EDT
+answerDate        = 09/27/2016 at 09:59am EDT
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = Binary-coded decimal (BCD): 4-bit, 6-bit (7-bit with parity check), 8-bit (ASCII).
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = champlainLibrary/ComputingMath/Binary-Coded-Decimal/MT15bcd4bit.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = champlainLibrary/ComputingMath/Binary-Coded-Decimal/MT16bcd7bitoddparity.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = champlainLibrary/ComputingMath/Binary-Coded-Decimal//MT15bcdascii8.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = champlainLibrary/ComputingMath/Binary-Coded-Decimal//MT16bcd7bitevenparity.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+

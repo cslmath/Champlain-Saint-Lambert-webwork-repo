@@ -1,0 +1,58 @@
+## DESCRIPTION
+##   Higher Derivatives
+## ENDDESCRIPTION
+
+## Tagged by nhamblet
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Differentiation)
+## DBsection(Higher-order derivatives)
+## Institution(ASU)
+## MLT(hod_big_trig)
+## Level(3)
+## KEYWORDS('Higher Derivative', 'Trigonometry')
+
+## Original problem: /Library/Rochester/setDerivatives13Higher/hder1.pg
+## Revised to create MathObjects version.
+ 
+DOCUMENT();  
+# This should be the first executableline in the problem.
+ 
+loadMacros( 
+"PG.pl", 
+"PGbasicmacros.pl",
+"PGchoicemacros.pl", 
+"PGanswermacros.pl", 
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+TEXT(beginproblem()); 
+Context("Numeric");
+$showPartialCorrectAnswers = 1; 
+
+$a1 = random(0,1,1);
+$a2 = random(0,1,1); 
+$b1 = random(44,120,4); 
+$c1 = Compute("$a1 + 2*$a2 + $b1");
+$dereven = Compute("((-1)**$a2 )*cos(x)"); 
+$derodd = Compute("((-1)**(1+$a2 ))*sin(x)"); 
+
+Context()->texStrings;
+BEGIN_TEXT
+Find the $c1 th derivative of the function \( f(x) = \cos (x)  \). $BR 
+The answer is the function \{ans_rule(30) \} $BR 
+END_TEXT
+Context()->normalStrings;
+
+if ($a1==0) {
+        $answer = $dereven; 
+} else {
+        $answer = $derodd; 
+} 
+
+ANS($answer->cmp);
+
+COMMENT('MathObjects version');
+ENDDOCUMENT();  
+# This should be the last executable line in the problem.

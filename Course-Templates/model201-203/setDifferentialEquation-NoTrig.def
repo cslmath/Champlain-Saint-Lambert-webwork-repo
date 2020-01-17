@@ -1,0 +1,94 @@
+assignmentType      = default
+openDate          = 01/11/2016 at 12:00am EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 12/31/2016 at 01:00am EST
+answerDate        = 12/31/2016 at 02:00am EST
+enableReducedScoring = N
+paperHeaderFile   = 
+screenHeaderFile  = 
+description       = 
+restrictProbProgression = 
+emailInstructor   = 
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/ma123DB/set6/s9_1_6.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/ma123DB/set6/s9_3_5.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/ma123DB/set6/s9_3_10.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/ma123DB/set6/s9_3_6.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 5
+source_file = champlainLibrary/Calculus/Differential-Equations/tan7ed9.3.6.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 6
+source_file = champlainLibrary/Calculus/Differential-Equations/tan7ed9.3.14.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 7
+source_file = Library/Rochester/setDiffEQ3Separable/ns7_4_3.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 8
+source_file = Library/Rochester/setDiffEQ3Separable/ur_de_3_11.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+

@@ -1,0 +1,134 @@
+assignmentType      = default
+openDate          = 01/11/2016 at 12:00am EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 12/31/2016 at 01:00am EST
+answerDate        = 12/31/2016 at 02:00am EST
+enableReducedScoring = N
+paperHeaderFile   = 
+screenHeaderFile  = 
+description       = 
+restrictProbProgression = 
+emailInstructor   = 
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = champlainLibrary/Calculus/Integrals-Improper/RochImpropersc5_9_6.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 2
+source_file = champlainLibrary/Calculus/Integrals-Improper/Rochsc5_9_7.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 3
+source_file = champlainLibrary/Calculus/Integrals-Improper/Rochsc5_9_19.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 4
+source_file = champlainLibrary/Calculus/Integrals-Improper/S07.08.ImproperIntegrals.PTP18.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 5
+source_file = champlainLibrary/Calculus/Integrals-Economics-Applications/Utah1220s17p3.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 6
+source_file = Library/Rochester/setIntegrals18Improper/sc5_9_3.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 7
+source_file = Library/Rochester/setIntegrals18Improper/sc5_9_5.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 8
+source_file = Library/Rochester/setIntegrals18Improper/sc5_9_11.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 9
+source_file = Library/Rochester/setIntegrals18Improper/ur_in_18_1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 10
+source_file = Library/Rochester/setIntegrals18Improper/ur_in_18_2.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 11
+source_file = Library/Rochester/setIntegrals18Improper/ur_in_18_3.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 12
+source_file = Library/Rochester/setIntegrals18Improper/ur_in_18_4.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+

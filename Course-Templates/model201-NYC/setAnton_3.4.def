@@ -1,0 +1,22 @@
+
+openDate          = 08/01/2012 at 12:00am EDT
+dueDate           = 12/31/2013 at 01:00am EST
+answerDate        = 12/31/2013 at 02:00am EST
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+problemList       = 
+Library/Dartmouth/setMTWCh1S4/problem_2.pg, 1, -1 
+Library/maCalcDB/setVectors4PlanesLines/ur_vc_2_9a.pg, 1, -1 
+Library/maCalcDB/setVectors4PlanesLines/ur_vc_2_10.pg, 1, -1 
+Library/maCalcDB/setVectors4PlanesLines/ur_vc_2_13.pg, 1, -1 
+Library/maCalcDB/setVectors4PlanesLines/ur_vc_2_17.pg, 1, -1 
+Library/ASU-topics/setCalculus/stef12_5p3.pg, 1, -1 
+Library/ASU-topics/setCalculus/stef12_5p4.pg, 1, -1 
+Library/Dartmouth/setMTWCh1S1/problem_1.pg, 1, -1 
+Library/Dartmouth/setStewartCh13S5/problem_7.pg, 1, -1 
+Library/Dartmouth/setStewartCh13S5/problem_3.pg, 1, -1 
+Library/Dartmouth/setStewartCh13S5/problem_14.pg, 1, -1 
+Library/Union/setMVlinesplanes/an12_5_19.pg, 1, -1 
+Library/Union/setMVvectors/an12_3_25/an12_3_25c.pg, 1, -1 
+Library/Rochester/setVectors4PlanesLines/ur_vc_2_19.pg, 1, -1 
+

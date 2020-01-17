@@ -1,0 +1,44 @@
+assignmentType      = default
+openDate          = 12/07/2016 at 11:59pm EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 12/14/2016 at 11:59pm EST
+answerDate        = 12/16/2016 at 11:59pm EST
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = 
+restrictProbProgression = 
+emailInstructor   = 
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/Hope/Multi1/02-01-Matrix-operations/Matrix_add_03.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 1 
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/WHFreeman/Holt_linear_algebra/Chaps_1-4/3.3.51.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 1 
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/WHFreeman/Holt_linear_algebra/Chaps_1-4/3.3.54.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 1 
+problem_end
+

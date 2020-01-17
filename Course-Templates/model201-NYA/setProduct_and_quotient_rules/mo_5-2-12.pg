@@ -1,0 +1,53 @@
+## DESCRIPTION
+## Calculus
+## ENDDESCRIPTION
+
+## Tagged by tda2d
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Differentiation)
+## DBsection(Product rule (without trigonometric functions))
+## Institution(ASU)
+## MLT(prodruleNoTrigexpoPoly)
+## MLTleader(1)
+## Level(2)
+## KEYWORDS('Differentiation' 'Product Rule' 'Quotient Rule')
+
+## Original problem: /Library/ASU-topics/setProductQuotientRule/5-2-12.pg
+## Revised to create MathObjects version
+
+DOCUMENT();
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$a = random(2,20,1);
+
+Context()->texStrings;
+BEGIN_TEXT
+
+Suppose that \( f(x) = x^{$a} e^{x} \).  Find \(f'(1)\).
+
+$BR $BR
+
+\(f'(1)\) = \{ans_rule(30) \}
+$BR
+
+END_TEXT
+Context()->normalStrings;
+
+$ans = Compute("exp(1)*($a+1)") ;
+ANS($ans->cmp);
+
+COMMENT('MathObjects version');
+ENDDOCUMENT();

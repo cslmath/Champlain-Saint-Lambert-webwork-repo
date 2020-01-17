@@ -1,0 +1,22 @@
+
+openDate          = 08/01/2012 at 12:00am EDT
+dueDate           = 12/31/2013 at 01:00am EST
+answerDate        = 12/31/2013 at 02:00am EST
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+problemList       = 
+Library/maCalcDB/setLinearAlgebra6Determinants/ur_la_6_9.pg, 1, -1 
+Library/TCNJ/TCNJ_PropertiesDeterminants/problem4.pg, 1, -1 
+Library/TCNJ/TCNJ_PropertiesDeterminants/problem12.pg, 1, -1 
+Library/TCNJ/TCNJ_PropertiesDeterminants/problem1.pg, 1, -1 
+Library/TCNJ/TCNJ_PropertiesDeterminants/problem9.pg, 1, -1 
+Library/TCNJ/TCNJ_PropertiesDeterminants/problem8.pg, 1, -1 
+Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_19.pg, 1, -1 
+Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_17.pg, 1, -1 
+Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_1.pg, 1, -1 
+Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_16.pg, 1, -1 
+Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_22.pg, 1, -1 
+Library/maCalcDB/setLinearAlgebra6Determinants/ur_la_6_9.pg, 1, -1 
+Library/Rochester/setAlgebra34Matrices/determinant_2x2a.pg, 1, -1 
+setDeterminants_Properties/problem13.pg, 1, -1 
+
