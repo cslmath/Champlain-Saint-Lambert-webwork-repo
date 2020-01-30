@@ -1,0 +1,78 @@
+## DESCRIPTION
+## Calculus. Antiderivative twice from second derivative.
+## ENDDESCRIPTION
+
+## KEYWORDS('integrals','trig')
+
+## DBsubject('Calculus - single variable')
+## DBchapter('Integrals')
+## DBsection('Indefinite integrals (with trigonometric functions)')
+## Date('2020/01/29')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+"parserFormulaUpToConstant.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+Context()->variables->add(t=>['Real']);
+$showPartialCorrectAnswers = 1;
+
+$a=random(2, 8, 1);
+$b=random(3, 9, 2);
+$c=random(3, 9, 1);
+$d=random(2, 8, 2);
+$bigC=$d - 1/$a;
+$bigD=$c-1/$a + 1/$b;
+$answer1=Compute("(e^t)/$a + sin(t)/$b + $bigC"); #FIXXXXXX
+$answer2=Compute("(e^t)/$a - cos(t)/$b + $bigC t + $bigD");
+$answer3=Compute("(e)/$a - cos(1)/$b + $bigC  + $bigD");
+
+Context()->texStrings;
+BEGIN_TEXT
+Find \( f'(t)\), \(f(t)\) and \( f(1) \) given that:$PAR
+\( f''(t) = \displaystyle\frac{1}{$a e^{-t}}+ \frac{1}{$b\sec t} , \quad f'(0)=$d, \quad f(0)=$c \)
+$PAR
+\( f'(t) \) = \{ans_rule(40)\}
+$PAR
+\( f(t) \) = \{ans_rule(40)\}
+$PAR
+\( f(1) \) = \{ans_rule(40)\}
+
+END_TEXT
+
+BEGIN_SOLUTION
+\( f'(t) = \frac{e^t}{$a} + \frac{\sin t}{$b} + C \) $BR
+Using \( f'(0)=$d \) gives \( $d = \frac{e^0}{$a}+\frac{\sin(0)}{$b}+C\) and thus \( C = $bigC \).$BR
+\( f(t) = \frac{e^t}{$a} - \frac{\cos t}{$b} + Ct + D \) $BR
+Using \( f(0)=$c \) and \( C=$bigC \) gives \( $c = \frac{e^0}{$a}-\frac{1}{$b} + D\) and thus \( D = $bigD\).$BR
+Then,
+\( f(t) = \frac{e^t}{$a} - \frac{\cos t}{$b} + ($bigC)t + $bigD \) 
+Finally,
+\( f(1) = \frac{e^1}{$a} - \frac{\cos (1)}{$b} + ($bigC)(1) + $bigD \) 
+
+END_SOLUTION
+Context()->normalStrings;
+
+ANS($answer1->cmp());
+ANS($answer2->cmp());
+ANS($answer3->cmp());
+
+COMMENT('Math Objects version.');
+ENDDOCUMENT();        # This should be the last executable line in the problem.
+

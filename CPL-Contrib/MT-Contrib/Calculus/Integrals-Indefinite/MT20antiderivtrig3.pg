@@ -1,0 +1,63 @@
+## DESCRIPTION
+## Calculus. Initial value problem (indefinite integral) with trig.
+## ENDDESCRIPTION
+
+## KEYWORDS('integrals','trig')
+
+## DBsubject('Calculus - single variable')
+## DBchapter('Integrals')
+## DBsection('Indefinite integrals (with trigonometric functions)')
+## Date('2020/01/29')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+"parserFormulaUpToConstant.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$a=random(2, 8, 1);
+$b=random(3, 9, 2);
+$c=random(3, 9, 2);
+while ($b-$a == $c){
+     $c=random(3,9,2);
+     }
+$bigC=$c+$b-$a;
+$answer=Compute("$a e^x -$b cos(x) + $bigC");
+
+Context()->texStrings;
+BEGIN_TEXT
+Find \(f(x)\) by solving the initial value problem:$PAR
+\( f'(x) = $a e^x + $b\sin x , \quad f(0)=$c \)
+$PAR
+\( f(x) \) = \{ans_rule(40)\}
+END_TEXT
+
+BEGIN_SOLUTION
+   \( f(x) = $a e^x - $b\cos x + C  \) where \( C \) is an arbitrary constant.$BR
+Given that \(f(0)=$c\) implies \( $c = $a e^0 - $b \cos(0) + C \). Thus, \( C = $bigC \).$BR
+Finally, \( f(x) = $a e^x - $b\cos x + $bigC \)
+END_SOLUTION
+Context()->normalStrings;
+
+ANS($answer->cmp());
+
+COMMENT('Math Objects version.');
+ENDDOCUMENT();        # This should be the last executable line in the problem.
+
