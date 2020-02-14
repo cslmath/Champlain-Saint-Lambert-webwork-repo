@@ -1,0 +1,214 @@
+assignmentType      = 
+openDate          = 08/01/2012 at 12:00am EDT
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 12/31/2013 at 01:00am EST
+answerDate        = 12/31/2013 at 02:00am EST
+enableReducedScoring = N
+paperHeaderFile   = 
+screenHeaderFile  = 
+description       = 
+restrictProbProgression = 
+emailInstructor   = 
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/Rochester/setIntegrals4FTC/S05.03.FundThmCalc.PTP18.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/Rochester/setIntegrals4FTC/S05.03.FundThmCalc.PTP21.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/Rochester/setIntegrals4FTC/c4s4p1.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/Rochester/setIntegrals4FTC/c4s4p7a.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 5
+source_file = Library/Rochester/setIntegrals4FTC/csuf_in_4_1.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 6
+source_file = Library/Rochester/setIntegrals4FTC/osu_in_4_15.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 7
+source_file = Library/Rochester/setIntegrals4FTC/osu_in_4_16.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 8
+source_file = Library/NAU/setCalcI/totalChange_1.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 9
+source_file = Library/NAU/setCalcI/totalChange_2.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 10
+source_file = Library/NAU/setCalcI/int_upper_limit_x_quad.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 11
+source_file = Library/NAU/setCalcI/int_upper_limit_x_lin.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 12
+source_file = Library/Michigan/5e/Chap5Sec4/Q13.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 13
+source_file = Library/Michigan/Chap6Sec1/Q13.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 14
+source_file = Library/Michigan/Chap5Sec3/Q13.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 15
+source_file = Library/Michigan/Chap5Sec3/Q07.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 16
+source_file = Library/Michigan/Chap5Sec4/Q13.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 17
+source_file = Library/Michigan/Chap5Sec4/Q01.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 18
+source_file = Library/Michigan/Chap5Sec4/Q11.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 19
+source_file = Library/Michigan/Chap5Sec4/Q05.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 20
+source_file = Library/Michigan/Chap5Sec4/Q21.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+

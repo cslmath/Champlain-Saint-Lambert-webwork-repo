@@ -1,0 +1,104 @@
+assignmentType      = 
+openDate          = 11/20/2013 at 06:48pm EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 11/27/2013 at 06:48pm EST
+answerDate        = 12/04/2013 at 06:48pm EST
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = 
+restrictProbProgression = 
+emailInstructor   = 
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/Union/setDervLogs/sc3_7_32.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/Union/setDervLogs/an4_3_45.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/Union/setDervLogs/an4_3_42.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/Union/setDervLogs/mec7.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 5
+source_file = Library/Union/setDervLogs/sc3_7_29.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 6
+source_file = Library/Rochester/setDerivatives7Log/mec7_mo.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 7
+source_file = Library/Union/setDervChainRule/an3_5_37.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 8
+source_file = Library/Union/setDervChainRule/an3_5_34.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 9
+source_file = Library/Rochester/setDerivatives5ChainRule/ur_dr_5_20_mo.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+

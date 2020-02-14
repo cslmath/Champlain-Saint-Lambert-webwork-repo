@@ -1,0 +1,54 @@
+## DBsubject(Calculus - single variable)
+## DBchapter(Differentiation)
+## DBsection(Logarithmic differentiation)
+## Institution(UCSB)
+## MLT(logDiffdoubleexpo)
+## Level(3)
+## TitleText1('Calculus: Early Transcendentals')
+## AuthorText1('Stewart')
+## EditionText1('5')
+## Section1('3.8')
+## Problem1('45')
+## KEYWORDS('Differentiation','logarithmic differentiation')
+
+## Original problem: /Library/UCSB/Stewart5_3_8/Stewart5_3_8_45.pg
+## Revised to create MathObjects version
+
+DOCUMENT();
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+TEXT(&beginproblem);
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+$a=random(1,10,1)*random(-1,1,2);
+$b=random(1,10,1)*random(-1,1,2);
+$c=random(1,10,1)*random(-1,1,2);
+
+Context()->texStrings;
+BEGIN_TEXT
+
+$PAR
+
+Use logarithmic differentiation to find the derivative of the function.
+\[y= x^{e^x} \]
+
+$PAR
+
+\(y' =\) \{ans_rule(30)\}
+
+END_TEXT
+Context()->normalStrings;
+
+$ans=Compute("x^(e^x)e^x(ln(x)+1/x)");
+ANS($ans->cmp);
+
+COMMENT('MathObjects version');
+ENDDOCUMENT();

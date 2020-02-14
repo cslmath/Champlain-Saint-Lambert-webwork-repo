@@ -1,0 +1,124 @@
+assignmentType      = default
+openDate          = 01/11/2016 at 12:00am EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 12/31/2016 at 01:00am EST
+answerDate        = 12/31/2016 at 02:00am EST
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = 
+restrictProbProgression = 
+emailInstructor   = 
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/Rochester/setSeries4Geometric/ns8_2_9.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/ma123DB/set11/s11_4_7.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/ma123DB/set11/s11_4_17.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/ma123DB/set11/s11_4_5.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 5
+source_file = Library/ma123DB/set11/s11_4_21.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 6
+source_file = Library/Rochester/setSeries3Convergent/ns8_3_7.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 7
+source_file = Library/Rochester/setSeries3Convergent/ns8_3_17BB.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 8
+source_file = Library/Rochester/setSeries6CompTests/benny_ser4B.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 9
+source_file = Library/Rochester/setSeries3Convergent/ns8_3_7BB.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 10
+source_file = champlainLibrary/Calculus/Series-Comparison-Tests/ns8_3_17.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 11
+source_file = champlainLibrary/Calculus/Series-Comparison-Tests/seriestests1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+

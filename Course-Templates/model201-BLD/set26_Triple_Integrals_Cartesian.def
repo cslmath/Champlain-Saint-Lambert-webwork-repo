@@ -1,0 +1,64 @@
+assignmentType      = default
+openDate          = 05/05/2017 at 10:45am EDT
+reducedScoringDate = 05/09/2017 at 11:59pm EDT
+dueDate           = 05/09/2017 at 11:59pm EDT
+answerDate        = 05/10/2017 at 11:59pm EDT
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = 
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/272/setStewart15_7/problem_3.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/FortLewis/Calc3/16-3-Triple-integrals/HGM5-16-3-35-Triple-integrals.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/ASU-topics/setCalculus/stef/stef15_7p8.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/ASU-topics/setCalculus/stef/stef15_7p4.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 5
+source_file = champlainLibrary/VectorCalculus/Triple-Integrals/MT15tripleintegralmass.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+

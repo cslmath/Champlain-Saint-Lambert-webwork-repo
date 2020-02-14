@@ -1,0 +1,164 @@
+assignmentType      = 
+openDate          = 08/01/2012 at 12:00am EDT
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 12/31/2013 at 01:00am EST
+answerDate        = 12/31/2013 at 02:00am EST
+enableReducedScoring = N
+paperHeaderFile   = 
+screenHeaderFile  = 
+description       = 
+restrictProbProgression = 
+emailInstructor   = 
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/Rochester/setTrig02FunctionsUnitCircle/srw5_1_13.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/Rochester/setTrig02FunctionsUnitCircle/ur_tr_1_6d_mo.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/Rochester/setTrig02FunctionsUnitCircle/ur_tr_1_6c_mo.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/NAU/setGraphSinCos/AmpPerPS3.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 5
+source_file = Library/NAU/setGraphSinCos/AmpPerPS2.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 6
+source_file = Library/Rochester/setTrig02FunctionsUnitCircle/srw5_2_61.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 7
+source_file = Library/Rochester/setTrig02FunctionsUnitCircle/srw5_2_33.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 8
+source_file = Library/NAU/setTrigInverse/TrigInverse1.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 9
+source_file = Library/NAU/setTrigInverse/InverseFn2.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 10
+source_file = Library/maCalcDB/setTrigonometry4Inverse/osu_tr_4_2.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 11
+source_file = Library/maCalcDB/setTrigonometry4Inverse/ur_tr_4_1.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 12
+source_file = Library/Utah/Trigonometry/set11_Analytic_Trigonometry/p5/p5.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 13
+source_file = Library/Union/setTrigEquations/srw7_5_67.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 14
+source_file = Library/Rochester/setTrig08Equations/srw7_5_11.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 15
+source_file = Library/Rochester/setTrig07Identity/p12.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+

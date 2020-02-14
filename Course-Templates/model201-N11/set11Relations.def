@@ -1,0 +1,54 @@
+assignmentType      = default
+openDate          = 10/19/2016 at 10:18am EDT
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 10/24/2016 at 11:59pm EDT
+answerDate        = 10/26/2016 at 11:59pm EDT
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = Some pictorial representations of relations. Inverse relation. Relations as a set of ordered pairs.
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = champlainLibrary/ComputingMath/Set-Theory/MT16relationsmatrix1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = champlainLibrary/ComputingMath/Set-Theory/MT16relationsmatrix2.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = champlainLibrary/ComputingMath/Set-Theory/MT16relationsgraph1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = champlainLibrary/ComputingMath/Set-Theory/MT16inverserelationsgraph.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+

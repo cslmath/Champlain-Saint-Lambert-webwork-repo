@@ -1,0 +1,104 @@
+assignmentType      = 
+openDate          = 08/01/2012 at 12:00am EDT
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 12/31/2013 at 01:00am EST
+answerDate        = 12/31/2013 at 02:00am EST
+enableReducedScoring = N
+paperHeaderFile   = 
+screenHeaderFile  = 
+description       = 
+restrictProbProgression = 
+emailInstructor   = 
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/Rochester/setDerivatives4Trig/s2_4_7.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/Rochester/setDerivatives4Trig/s2_4_8.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/Rochester/setDerivatives4Trig/s2_4_8a.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/Rochester/setDerivatives4Trig/s2_4_12.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 5
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C03S04-DerivsTrig/3-4-37.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 6
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C03S04-DerivsTrig/3-4-38.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 7
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C03S04-DerivsTrig/3-4-39.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 8
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C03S04-DerivsTrig/3-4-42.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 9
+source_file = Library/WHFreeman/Rogawski_Calculus_Early_Transcendentals_Second_Edition/2_Limits/2.5_Evaluating_Limits_Algebraically/2.5.27.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+

@@ -1,0 +1,58 @@
+## DESCRIPTION
+## Linear Algebra
+## Problem 1.3.24 in Anton Elementary Linear Algebra, 10th edition
+## ENDDESCRIPTION
+
+## KEYWORDS('matrix')
+
+## DBsubject('Linear Algebra')
+## DBchapter('Matrices')
+## DBsection('Matrix Operations')
+## Date('12 October 2011')
+## Author('Charles Fortin')
+## Institution('Champlain College')
+
+DOCUMENT(); 
+
+loadMacros("PG.pl",
+           "PGbasicmacros.pl",
+           "PGchoicemacros.pl",
+           "PGanswermacros.pl",
+           "PGmatrixmacros.pl",
+	   "MathObjects.pl"
+           );
+
+TEXT(beginproblem());
+
+$showPartialCorrectAnswers = 1;
+
+Context("Matrix");
+# aij = mi+nj
+$m = random(1,4);
+$n = random(1,4);
+$a11 = Compute("$m + $n");
+$a12 = Compute("$m + 2*$n");
+$a13 = Compute("$m + 3*$n");
+$a21 = Compute("2*$m + $n");
+$a22 = Compute("2*$m + 2*$n");
+$a23 = Compute("2*$m + 3*$n");
+$a31 = Compute("3*$m + $n");
+$a32 = Compute("3*$m + 2*$n");
+$a33 = Compute("3*$m + 3*$n");
+$A = Matrix([[$a11,$a12,$a13],[$a21,$a22,$a23],[$a31,$a32,$a33]]);
+
+Context()->texStrings;
+BEGIN_TEXT
+
+Find the \(3 \times 3\) matrix \(A = a_{ij}\) that satisfies \(a_{ij} = $m i + $n j\).
+$BCENTER
+\{ mbox('\(A =\)', $A->ans_array)\}
+$ECENTER
+
+END_TEXT
+
+Context()->normalStrings;
+
+ANS($A->cmp());
+
+ENDDOCUMENT() ;

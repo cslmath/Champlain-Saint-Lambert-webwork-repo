@@ -1,0 +1,94 @@
+assignmentType      = 
+openDate          = 11/25/2013 at 09:21am EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 12/02/2013 at 09:21am EST
+answerDate        = 12/09/2013 at 09:21am EST
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = 
+restrictProbProgression = 
+emailInstructor   = 
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/Michigan/Chap3Sec10/Q15.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/Michigan/Chap3Sec10/Q07.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/Michigan/Chap3Sec10/Q11.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/Michigan/Chap3Sec10/Q17.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 5
+source_file = Library/maCalcDB/setDerivatives12MVT/c3s2p1_mo.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 6
+source_file = Library/ma122DB/set7/s4_2_1_mo.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 7
+source_file = Library/Rochester/setDerivatives12MVT/S04.02.MeanValueTheorem.PTP02.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 8
+source_file = Library/maCalcDB/setDerivatives12MVT/s3_2_1_mo.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+

@@ -1,0 +1,65 @@
+## DESCRIPTION
+## Calculus
+## ENDDESCRIPTION
+
+## Tagged by cmd6a 5/29/06
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Differentiation)
+## DBsection(Definition of the derivative)
+## Institution(OSU)
+## MLT(DefDerLimitDefDer2)
+## Level(3)
+## TitleText1('Calculus: Early Transcendentals')
+## AuthorText1('Rogawski')
+## EditionText1('1')
+## Section1('3.1')
+## Problem1('37')
+## KEYWORDS('calculus','derivative','limit')
+
+## Original problem: /Library/OSU/high_school_apcalc/dchmwk3/prob4.pg
+## Revised to create MathObjects version
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$a1 = random(1,4,1);
+$x1 = random(1,5,1);
+$y1 = Compute("$a1/$x1**2");
+$m1 = Compute("(-2*$a1/($x1*$x1*$x1))");
+
+Context()->texStrings;
+BEGIN_TEXT
+If \( f(x) =  \frac { $a1 } {x^2}  \), find \( f'( $x1 ) \), using the
+definition of the derivative. \( f'( $x1 ) \) is the limit as \(x\to\) \{ans_rule()\}
+of the expression
+$BR
+\{ans_rule(40)\}
+$BR
+The value of this limit is
+\{ans_rule(20) \}
+$BR
+END_TEXT
+Context()->normalStrings;
+
+$ans1 = Compute("$x1");
+$ans2 = Compute("($a1/x**2 - $y1)/(x - $x1)");
+$ans3 = Compute("$m1");
+ANS($ans1->cmp);
+ANS($ans2->cmp);
+ANS($ans3->cmp);
+
+COMMENT('MathObjects version');
+ENDDOCUMENT();        # This should be the last executable line in the problem.

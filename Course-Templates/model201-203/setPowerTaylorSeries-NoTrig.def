@@ -1,0 +1,94 @@
+assignmentType      = 
+openDate          = 08/01/2012 at 12:00am EDT
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 12/31/2013 at 01:00am EST
+answerDate        = 12/31/2013 at 02:00am EST
+enableReducedScoring = N
+paperHeaderFile   = 
+screenHeaderFile  = 
+description       = 
+restrictProbProgression = 
+emailInstructor   = 
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/Rochester/setSeries9Taylor/benny_taylor3.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/OSU/accelerated_calculus_and_analytic_geometry_ii/hmwk4/prob16.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/Rochester/setSeries8Power/eva8_5a_3.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/Rochester/setSeries8Power/eva8_5b.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 5
+source_file = Library/Rochester/setSeries8Power/eva8_5a_2.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 6
+source_file = Library/Rochester/setSeries8Power/eva8_5a_7.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 7
+source_file = Library/Rochester/setSeries8Power/eva8_5a_1.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 8
+source_file = Library/ma123DB/set12/s11_8_5.pg
+value = 1
+max_attempts = -1
+showMeAnother = 
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+

@@ -1,0 +1,104 @@
+assignmentType      = default
+openDate          = 10/03/2016 at 05:52pm EDT
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 10/06/2016 at 11:59pm EDT
+answerDate        = 10/11/2016 at 08:00am EDT
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = Union, intersection, complement, difference, subset, universal set, empty set.
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/NAU/setSet/Sets_3_b.pg
+value = 1
+max_attempts = -1
+showMeAnother = 0
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/SDSU/Discrete/Sets/unionB3.pg
+value = 1
+max_attempts = -1
+showMeAnother = 0
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/SDSU/Discrete/Sets/intersectA1.pg
+value = 1
+max_attempts = -1
+showMeAnother = 0
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/UMN/logicAndSetTheory/prob03.pg
+value = 1
+max_attempts = -1
+showMeAnother = 0
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 5
+source_file = Library/CollegeOfIdaho/setAlgebra_04_02_CompoundIneq/42IntAlg_02_CompoundIneq.pg
+value = 1
+max_attempts = -1
+showMeAnother = 0
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 6
+source_file = Library/CollegeOfIdaho/setAlgebra_04_02_CompoundIneq/42IntAlg_01_CompoundIneq.pg
+value = 1
+max_attempts = -1
+showMeAnother = 0
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 7
+source_file = Library/Rochester/setSetTheory1/ur_st_1_8.pg
+value = 1
+max_attempts = -1
+showMeAnother = 0
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 8
+source_file = Library/SDSU/Discrete/Sets/subsetB1.pg
+value = 1
+max_attempts = -1
+showMeAnother = 0
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 9
+source_file = Library/ASU-topics/setDiscrete/katie1.7_1.pg
+value = 1
+max_attempts = -1
+showMeAnother = 0
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+

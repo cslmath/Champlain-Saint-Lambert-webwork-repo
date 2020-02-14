@@ -1,0 +1,17 @@
+
+openDate          = 08/18/2014 at 08:00am EDT
+dueDate           = 12/30/2016 at 08:00pm EST
+answerDate        = 12/31/2016 at 08:00pm EST
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+problemList       = 
+Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_29.pg, 1, -1 
+Library/TCNJ/TCNJ_RowReduction/problem2.pg, 1, -1 
+Library/TCNJ/TCNJ_RowReduction/problem1.pg, 1, -1 
+Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_30.pg, 1, -1 
+Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_31.pg, 1, -1 
+Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_32.pg, 1, -1 
+Library/TCNJ/TCNJ_VectorEquations/problem2.pg, 1, -1 
+Library/Rochester/setLinearAlgebra3Matrices/ur_Ch1_3_4.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_23.pg, 1, -1 
+

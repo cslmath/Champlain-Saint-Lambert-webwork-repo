@@ -1,0 +1,21 @@
+
+openDate          = 08/01/2012 at 12:00am EDT
+dueDate           = 12/31/2013 at 01:00am EST
+answerDate        = 12/31/2013 at 02:00am EST
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+problemList       = 
+Library/Union/setMVvectors/an12_3_23a.pg, 1, -1 
+Library/Michigan/Chap13Sec3/Q39.pg, 1, -1 
+Library/Michigan/Chap13Sec3/Q17.pg, 1, -1 
+Library/Rochester/setVectors4PlanesLines/ur_vc_2_20.pg, 1, -1 
+Library/Dartmouth/setMTWCh1S4/problem_1.pg, 1, -1 
+Library/maCalcDB/setVectors4PlanesLines/ur_vc_2_8.pg, 1, -1 
+Library/maCalcDB/setVectors4PlanesLines/ur_vc_2_16.pg, 1, -1 
+Library/maCalcDB/setVectors4PlanesLines/ur_vc_2_20.pg, 1, -1 
+Library/Dartmouth/setStewartCh13S5/problem_16.pg, 1, -1 
+Library/Rochester/setVectors1space3D/UR_VC_1_2.pg, 1, -1 
+Library/Union/setMVvectors/an12_3_25/an12_3_25a.pg, 1, -1 
+Library/Rochester/setVectors2DotProduct/UR_VC_1_18.pg, 1, -1 
+Library/Union/setMVvectors/an12_3_25/an12_3_25b.pg, 1, -1 
+

@@ -1,0 +1,74 @@
+assignmentType      = default
+openDate          = 11/28/2016 at 03:44pm EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 11/30/2016 at 11:59pm EST
+answerDate        = 11/30/2016 at 11:59pm EST
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = 
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/ASU-topics/set119LinearSystems/p21.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/Rochester/setLinearAlgebra1Systems/ur_la_1_7.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/WHFreeman/Holt_linear_algebra/Chaps_1-4/holt_01_02_004.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/WHFreeman/Holt_linear_algebra/Chaps_1-4/holt_01_02_002.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 5
+source_file = Library/WHFreeman/Holt_linear_algebra/Chaps_1-4/holt_01_02_001.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 6
+source_file = Library/Rochester/setLinearAlgebra1Systems/ur_la_1_9.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+

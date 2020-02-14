@@ -1,0 +1,54 @@
+assignmentType      = default
+openDate          = 11/21/2016 at 05:45pm EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 11/28/2016 at 11:59pm EST
+answerDate        = 11/30/2016 at 11:59pm EST
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = Find det(A) for 2x2 and 3x3 matrices.
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_3.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/UMN/algebraKaufmannSchwitters/ks_11_4_12.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_4.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/Dartmouth/setMTWCh1S3/problem_1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+

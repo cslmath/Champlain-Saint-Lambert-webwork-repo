@@ -1,0 +1,14 @@
+openDate          = 08/18/2014 at 08:00am EDT
+dueDate           = 12/30/2016 at 08:00pm EST
+answerDate        = 12/31/2016 at 08:00pm EST
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+problemList       = 
+Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_14.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixEquations/problem11.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixEquations/problem12.pg, 1, -1 
+Library/TCNJ/TCNJ_VectorEquations/problem2.pg, 1, -1 
+Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_26.pg, 1, -1 
+Library/Rochester/setLinearAlgebra3Matrices/ur_Ch1_3_2.pg, 1, -1 
+setLinAlg_HW06_Rank_of_a_Matrix/rank_problem_JF1.pg, 1, -1 
+

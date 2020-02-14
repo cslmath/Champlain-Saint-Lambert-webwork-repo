@@ -1,0 +1,64 @@
+## DBsubject(Calculus - single variable)
+## DBchapter(Differentiation)
+## DBsection(Higher-order derivatives)
+## Institution(UCSB)
+## MLT(hod_diff_eq)
+## Level(4)
+## TitleText1('Calculus: Early Transcendentals')
+## AuthorText1('Stewart')
+## EditionText1('5')
+## Section1('3.7')
+## Problem1('55')
+## KEYWORDS('Differentiation','Differential equation','Higher derivatives')
+
+## Original problem: /Library/UCSB/Stewart5_3_7/Stewart5_3_7_55.pg
+## Revised to create MathObjects version
+## Modified from original to include random coefficient of sin x term in DE
+## ?? Compute ->reduce ?? how to reduce Correct answer display to fraction
+## in lowest terms ??
+
+DOCUMENT();
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+TEXT(&beginproblem);
+Context("Numeric");
+
+$showPartialCorrectAnswers = 1;
+$a=random(2,10,1)*random(-1,1,2);
+## $b=random(1,10,1)*random(-1,1,2);
+## $c=random(1,10,1)*random(-1,1,2);
+
+Context()->texStrings;
+BEGIN_TEXT
+
+$PAR
+
+The equation \( y''+ y' - 2y= $a \sin{x}\) is called a ${BITALIC}differential equation${EITALIC}, because it involves an unknown function \(y\) and its derivatives \(y'\) and \(y''\). Find constants \(A\) and \(B\) such that the function \(y=A\sin{x}+B\cos{x}\) satisfies this equation.
+
+$PAR
+
+\(A =\) \{ans_rule(10)\} $BR
+\(B =\) \{ans_rule(10)\}
+
+END_TEXT
+Context()->normalStrings;
+
+$ans1=Compute("-3/10*$a")->reduce();
+$ans2=Compute("-$a/10")->reduce();
+ANS($ans1->cmp);
+ANS($ans2->cmp);
+
+## Original equation" y'' + y' -2y = sin x
+##ANS(num_cmp(-.3));
+##ANS(num_cmp(-.1));
+
+COMMENT('MathObjects version');
+ENDDOCUMENT();
