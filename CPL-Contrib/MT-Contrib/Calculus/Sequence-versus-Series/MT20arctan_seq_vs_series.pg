@@ -1,0 +1,68 @@
+## DESCRIPTION
+## Calculus
+## Determine convergence/divergence of infinite sequences and
+## series involving arctan.
+## ENDDESCRIPTION
+
+## KEYWORDS('sequence' 'converge' 'diverge' 'limit' 'arctan')
+
+## DBsubject(Calculus - single variable)
+## DBchapter('Infinite sequences and series')
+## DBsection('Limit of a sequence')
+## Date('2020/05/05')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Calculus')
+## EditionText1('5')
+## AuthorText1('Stewart')
+## Section1('12.1')
+## Problem1('')
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"parserFormulaUpToConstant.pl",
+"PGML.pl",
+"PGcourse.pl",
+);
+
+Context("Numeric");
+Context()->strings->add(CONV=>{},DIV=>{});
+
+## Do NOT show partial correct answers
+$showPartialCorrectAnswers = 0;
+
+$a = random(2,20);
+$b = random(2,20);
+$c = non_zero_random(-9,19);
+
+$ans1a=Compute("$c*pi/2");
+$ans1b=Compute("DIV");
+
+TEXT(beginproblem());
+
+BEGIN_PGML
+Given [`\displaystyle a_n = [$c]\arctan([$a] n^{[$b]}) `].  
+(a) Determine whether the sequence {[` a_n `]} converges or diverges.  
+If the sequence converges, enter its limit. If the sequence diverges, enter DIV.  
+Answer = [_____]{$ans1a->cmp}{20}
+
+(b) Determine whether the series [` \sum_{n=1}^\infty a_n `] converges or diverges.  
+If the series converges, enter CONV. If the series diverges, enter DIV.  
+Answer = [_____]{$ans1b->cmp}{20}
+END_PGML
+BEGIN_PGML_HINT
+(a) Hint: To determine convergence/divergence of a sequence {[` a_n `]}, take the limit of [`a_n`] as [`n\to\infty`]  
+(b) Hint: is the answer to part (a) nonzero? In that case, what Test can you use?
+END_PGML_HINT
+BEGIN_PGML_SOLUTION
+(a) Since [` [$a] n^{[$b]} \to \infty`] as [`n\to\infty`] and since [`\arctan(n) \to \pi/2`] as [`n\to\infty`], then  
+[` \lim\limits_{n\to\infty} a_n = \lim\limits_{n\to\infty} [$c]\arctan([$a] n^{[$b]}) = [$c]\pi/2 `]. The limit is a finite number, so the sequence converges.
+
+(b) From part (a), [`\lim\limits_{n\to\infty} a_n = \lim\limits_{n\to\infty} [$c]\arctan([$a] n^{[$b]}) = [$c]\pi/2 \ne 0`], the series [` \sum_{n=1}^\infty a_n `] diverges by the Divergence Test.
+END_PGML_SOLUTION
+
+COMMENT('Writen in PGML');
+ENDDOCUMENT();
+

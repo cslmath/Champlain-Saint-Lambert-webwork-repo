@@ -1,5 +1,5 @@
 ## DESCRIPTION
-## Calculus
+## Calculus. Indefinite integral with trig functions.
 ## ENDDESCRIPTION
 
 ## KEYWORDS('integrals','trig')
@@ -19,16 +19,13 @@
 DOCUMENT();        # This should be the first executable line in the problem.
 
 loadMacros(
-"PG.pl",
-"PGbasicmacros.pl",
-"PGchoicemacros.pl",
-"PGanswermacros.pl",
-"PGauxiliaryFunctions.pl",
+"PGstandard.pl",
 "MathObjects.pl",
 "parserFormulaUpToConstant.pl",
+"PGML.pl",
+"PGcourse.pl",
 );
 
-TEXT(beginproblem());
 Context("Numeric");
 $showPartialCorrectAnswers = 1;
 
@@ -39,31 +36,30 @@ $b1 = Compute("$b+1");
 while ($a == $c){
        $c=random(2, 9, 1)
 }
-#$f = Compute("sin($a) + $b sin(x)");
 $answer=FormulaUpToConstant("x*(sin($a))+($b)*(-cos(x))");
 
-Context()->texStrings;
-BEGIN_TEXT
-Compute the indefinite integral$PAR
-\( \int (\sin($a) + $b \sin(x)) dx \) = \{ans_rule(40)\}
-$PAR
-$BITALIC Remember to include the constant of integration.$EITALIC
-END_TEXT
+TEXT(beginproblem());
 
-BEGIN_SOLUTION
-Note that \( \sin($a) \) is a constant. Thus, the problem is solved as follows:
-\[
+BEGIN_PGML
+Compute the indefinite integral
+
+[` \int (\sin([$a]) + [$b] \sin(x)) dx = `][_______]{$answer->cmp}{40}
+
+_Remember to include the constant of integration._
+END_PGML
+
+BEGIN_PGML_SOLUTION
+Note that [` \sin([$a]) `] is a constant. Thus, the problem is solved as follows:
+[``
 \begin{array}{rcl}
-   \int (\sin($a) + $b \sin(x)) dx
-&=&	(\sin($a))x + $b(-\cos(x)) + C
+   \int (\sin([$a]) + [$b] \sin(x)) dx
+&=&	(\sin([$a]))x + [$b](-\cos(x)) + C,
 \end{array}
-\]
-where \( C \) is a constant of integration.
-END_SOLUTION
-Context()->normalStrings;
+``]
+where [` C `] is a constant of integration.
+END_PGML_SOLUTION
 
-ANS($answer->cmp());
 
-COMMENT('Math Objects version.');
+COMMENT('Written in PGML');
 ENDDOCUMENT();        # This should be the last executable line in the problem.
 

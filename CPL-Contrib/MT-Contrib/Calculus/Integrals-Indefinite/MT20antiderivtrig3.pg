@@ -19,16 +19,13 @@
 DOCUMENT();        # This should be the first executable line in the problem.
 
 loadMacros(
-"PG.pl",
-"PGbasicmacros.pl",
-"PGchoicemacros.pl",
-"PGanswermacros.pl",
-"PGauxiliaryFunctions.pl",
+"PGstandard.pl",
 "MathObjects.pl",
 "parserFormulaUpToConstant.pl",
+"PGML.pl",
+"PGcourse.pl",
 );
 
-TEXT(beginproblem());
 Context("Numeric");
 $showPartialCorrectAnswers = 1;
 
@@ -41,23 +38,23 @@ while ($b-$a == $c){
 $bigC=$c+$b-$a;
 $answer=Compute("$a e^x -$b cos(x) + $bigC");
 
-Context()->texStrings;
-BEGIN_TEXT
-Find \(f(x)\) by solving the initial value problem:$PAR
-\( f'(x) = $a e^x + $b\sin x , \quad f(0)=$c \)
-$PAR
-\( f(x) \) = \{ans_rule(40)\}
-END_TEXT
+TEXT(beginproblem());
+BEGIN_PGML
+Find [`f(x)`] by solving the initial value problem:
 
-BEGIN_SOLUTION
-   \( f(x) = $a e^x - $b\cos x + C  \) where \( C \) is an arbitrary constant.$BR
-Given that \(f(0)=$c\) implies \( $c = $a e^0 - $b \cos(0) + C \). Thus, \( C = $bigC \).$BR
-Finally, \( f(x) = $a e^x - $b\cos x + $bigC \)
-END_SOLUTION
-Context()->normalStrings;
+[` f'(x) = [$a] e^x + [$b]\sin x , \quad f(0)=[$c] `]
 
-ANS($answer->cmp());
+[` f(x)  = `][________]{$answer->cmp}{40}
+END_PGML
+BEGIN_PGML_HINT
+  [` f(x) = \int f'(x)dx `]
+END_PGML_HINT
+BEGIN_PGML_SOLUTION
+   [` f(x) = \int f'(x)dx = [$a] e^x - [$b]\cos x + C  `] where [` C `] is an arbitrary constant.  
+Given that [`f(0)=[$c]`] implies [` [$c] = [$a] e^0 - [$b] \cos(0) + C `]. Thus, [` C = [$bigC] `].  
+Finally, [` f(x) = [$a] e^x - [$b]\cos x + [$bigC] `]
+END_PGML_SOLUTION
 
-COMMENT('Math Objects version.');
-ENDDOCUMENT();        # This should be the last executable line in the problem.
+COMMENT('Written in PGML');
+ENDDOCUMENT();  
 

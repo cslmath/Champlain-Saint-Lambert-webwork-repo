@@ -19,16 +19,13 @@
 DOCUMENT();        # This should be the first executable line in the problem.
 
 loadMacros(
-"PG.pl",
-"PGbasicmacros.pl",
-"PGchoicemacros.pl",
-"PGanswermacros.pl",
-"PGauxiliaryFunctions.pl",
+"PGstandard.pl",
 "MathObjects.pl",
 "parserFormulaUpToConstant.pl",
+"PGML.pl",
+"PGcourse.pl",
 );
 
-TEXT(beginproblem());
 Context("Numeric");
 $showPartialCorrectAnswers = 1;
 
@@ -36,33 +33,30 @@ $a=random(2, 8, 1);
 $b=random(3, 9, 2);
 $answer=FormulaUpToConstant("(tan(x))/$a + (sec(x))/$b");
 
-Context()->texStrings;
-BEGIN_TEXT
-Compute the indefinite integral$PAR
-\( \displaystyle\int \left( \frac{1}{$a \cos^2 x} + \frac{\tan x}{$b\cos x} \right) dx \) = \{ans_rule(40)\}
-$PAR
-$BITALIC Remember to include the constant of integration.$EITALIC
-END_TEXT
+TEXT(beginproblem());
+BEGIN_PGML
+Compute the indefinite integral
 
-BEGIN_HINT
+[` \displaystyle\int \left( \frac{1}{[$a] \cos^2 x} + \frac{\tan x}{[$b]\cos x} \right) dx  = `][_________]{$answer->cmp}{40}
+
+_Remember to include the constant of integration._
+END_PGML
+
+BEGIN_PGML_HINT
    Simplify the integrand first.
-END_HINT
+END_PGML_HINT
 
-BEGIN_SOLUTION
+BEGIN_PGML_SOLUTION
 Simplify the integrand first. Thus, the problem is solved as follows:
-\[
+[``
 \begin{array}{rcl}
-   \int (\frac{1}{$a \cos^2 x} + \frac{\tan x}{$b\cos x}) dx
-&=&	\int (\frac{\sec^2 x}{$a} + \frac{\tan x \sec x}{$b} ) dx \\
-&=& \frac{\tan x}{$a} + \frac{\sec x}{$b} + C
+   \int (\frac{1}{[$a] \cos^2 x} + \frac{\tan x}{[$b]\cos x}) dx
+&=&	\int (\frac{\sec^2 x}{[$a]} + \frac{\tan x \sec x}{[$b]} ) dx \\
+&=& \frac{\tan x}{[$a]} + \frac{\sec x}{[$b]} + C
 \end{array}
-\]
-where \( C \) is a constant of integration.
-END_SOLUTION
-Context()->normalStrings;
+``]
+where [` C `] is a constant of integration.
+END_PGML_SOLUTION
 
-ANS($answer->cmp());
-
-COMMENT('Math Objects version.');
-ENDDOCUMENT();        # This should be the last executable line in the problem.
-
+COMMENT('Written in PGML');
+ENDDOCUMENT();        

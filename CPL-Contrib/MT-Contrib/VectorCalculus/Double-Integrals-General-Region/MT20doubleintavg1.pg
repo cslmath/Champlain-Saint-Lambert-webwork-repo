@@ -1,0 +1,85 @@
+#DESCRIPTION
+##  Calculus: Double integrals over general regions to find average value
+##ENDDESCRIPTION
+
+## DBsubject(Calculus - multivariable)
+## DBchapter(Integration of multivariable functions)
+## DBsection(Applications of double integrals)
+## Date(2020/05/06)
+## Institution(Champlain College Saint-Lamber)
+## Author(Michele Titcombe)
+## Level(3)
+## MO(1)
+## TitleText1('Multivariable Calculus')
+## AuthorText1('Stewart')
+## EditionText1('7')
+## Section1('15.3')
+## Problem1('18')
+## KEYWORDS('calculus', 'double integrals', 'iterated integrals', 'general regions')
+
+########################################################################
+
+DOCUMENT();        # This should be the first executable line in the problem.
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGML.pl",
+"PGcourse.pl",
+);
+########################################################################
+
+$showPartialCorrectAnswers = 1;
+
+##############################################################
+
+Context("Numeric");
+Context()->variables->add(y =>'Real', z =>'Real');
+
+$a = random(2,8,2);
+$b = Compute("$a/2");
+
+$ans = Compute("(4/21)*$b+1/12");
+$areaD = Compute("0.5 - 0.25");
+$avg = Compute("$ans/$areaD");
+
+##############################################################
+
+TEXT(beginproblem);
+
+BEGIN_PGML
+Given [` f(x,y) = x^2+[$a] y `], and [`D`] is the region bounded by [` y=x,`] [`y=x^3,`] and [`x \ge 0.`]
+
+(a) Evaluate the double integral [` \displaystyle
+\iint_D \! f(x,y) \, dA,`]  
+Answer: [____________________]{$ans->cmp}
+
+(b) Find the area of the region [` D `].  
+Answer: [____________________]{$areaD->cmp}
+
+(c) Find the average value of [` f(x,y) `] over the region [` D`]:
+[`` f_{\text{avg}} = \displaystyle \frac{1}{\text{area}(D)} 
+\iint_D \! f(x,y) \, dA ``]  
+Answer: [____________________]{$avg->cmp}
+END_PGML
+
+########################################################################
+
+BEGIN_PGML_SOLUTION
+(a) [`` \int_0^1 \int_{x^3}^x (x^2+[$a]y)dydx  
+ = \int_0^1 \left. \left( x^2 y + [$b]y^2 \right) \right|_{y=x^3}^{y=x} dx 
+ = \int_0^1 [(x^3 + [$b]x^2) - (x^5 + [$b]x^6)]dx 
+ ``]
+ 
+ [``= \left. \frac{x^4}{4} + \frac{[$b]x^3}{3} - \frac{x^6}{6} - \frac{[$b]x^7}{7} \right|_0^1 = \frac{1}{4} + \frac{[$b]}{3} - \frac{1}{6}-\frac{[$b]}{7} = [$ans]``]
+ 
+(b) The area of the region [`D`] can be expressed as a double integral (with integrand equal to 1):  
+[`` \text{Area}(D) = \int_0^1 \int_{x^3}^x 1 dydx = \int_0^1 \left. y \right|_{y=x^3}^{y=x} dx = \int_0^1 x - x^3 dx = \left. \frac{x^2}{2} - \frac{x^4}{4} \right|_0^1 = \frac{1}{2}-\frac{1}{4}= [$areaD]   ``]
+
+(c) The average value is the quotient of the answers from (a) and (b):  
+[`` f_{\text{avg}} = \displaystyle \frac{1}{\text{area}(D)} 
+\iint_D \! f(x,y) \, dA = \frac{[$ans]}{[$areaD]} = [$avg] ``]
+
+END_PGML_SOLUTION
+
+COMMENT('Written in PGML');
+ENDDOCUMENT();     

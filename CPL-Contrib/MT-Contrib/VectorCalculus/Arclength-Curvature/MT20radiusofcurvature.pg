@@ -1,0 +1,73 @@
+## DESCRIPTION
+## Vector Calculus: radius of curvature
+## ENDDESCRIPTION
+
+## Tagged by tda2d
+
+## DBsubject(Calculus - multivariable)
+## DBchapter(Calculus of vector valued functions)
+## DBsection(Arc length and curvature)
+## Date(2020-March-12)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## MLT(alc_curvature_parametric)
+## Level(2)
+## TitleText1('Calculus: Early Transcendentals')
+## AuthorText1('Stewart')
+## EditionText1('6')
+## Section1('13.3')
+## Problem1('27 28 29 30')
+## TitleText2('Calculus: Early Transcendentals')
+## KEYWORDS('vector' 'multivariable' 'curvature','Vector','Curvature','calculus')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+  "PGstandard.pl",
+  "PGchoicemacros.pl",
+  "PGcourse.pl",
+  "MathObjects.pl",
+);
+
+TEXT( beginproblem() );
+Context("Numeric");
+Context()->variables->are(t=>"Real");
+$showPartialCorrectAnswers = 1;
+
+$a = non_zero_random( -6, 6, 1 );
+$b = non_zero_random( -6, 6, 1 );
+if ($a == 1){
+  $a = $a+1;
+}
+if ($b == 1){
+  $b = $b+2;
+}
+if ($a == $b){
+   $a = $a + 1;
+} 
+
+
+$kappa = Compute("(2*( $a*$b )**2)**.5/(( $b*sin(t)) **2 + 2*( $a*cos(t))**2 )**1.5 ");
+$ans = 1/$kappa;
+
+Context()->texStrings;
+BEGIN_TEXT
+The $BBOLD radius of curvature $EBOLD at a point on a space curve is the radius of the circle that best approximates the curve at that point. If the curvature at the point is \( \kappa(t) \), then the radius of curvature is given by: \[ R(t) = \frac{1}{\kappa(t)} \]
+$PAR
+Find the radius of curvature \( R(t) \) of the curve \( \mathbf{r} (t) = \left( $a \sin t \right)
+\mathbf{i} + \left( $a \sin t \right) \mathbf{j} + \left( $b \cos t \right) \mathbf{k} \).
+$PAR
+\{ans_rule(70)\}
+END_TEXT
+Context()->normalStrings;
+
+ANS($ans->cmp());
+
+BEGIN_SOLUTION
+The radius of curvature is:$BR
+\[
+  R(t) = \frac{1}{\kappa(t)} = \frac{[ ($b\sin t)^2 + 2($a\cos t)^2 ]^{3/2}}{\sqrt{2}|($a)($b)|}
+\]
+END_SOLUTION
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.

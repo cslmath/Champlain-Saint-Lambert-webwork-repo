@@ -1,0 +1,82 @@
+##DESCRIPTION
+# Calculus: p-series
+##ENDDESCRIPTION
+
+## DBsubject('Calculus - single variable')
+## DBchapter('Infinite sequences and series')
+## DBsection('Integral test')
+## Date(2020/04/22)
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Applied Calculus')
+## EditionText1('7')
+## AuthorText1('Tan')
+## Section1('11.4')
+## Problem1('21')
+## KEYWORDS('p-series','convergence','divergence')
+
+########################################################################
+
+DOCUMENT();      
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGcourse.pl",
+  "PGML.pl",
+  "parserRadioButtons.pl",
+);
+
+Context()->variables->are(
+	k => Real
+);
+
+$a = random(1, 9);
+$b = random(1, 9);
+$c1 = random(2,9,1);
+do {
+	$c = random(1, 9)
+} until (gcd($b, $c) == 1);
+$p = random(2, 5);
+$ak = Formula("$a*k / ($b*k + $c)^{$p}")->reduce;
+
+# Print problem number and point value (weight) for the problem
+TEXT(beginproblem());
+
+# Show which answers are correct and which ones are incorrect
+$showPartialCorrectAnswers = 1;
+
+##############################################################
+#  Setup
+
+Context()->strings->are(
+	"converges" => {},
+	"diverges" => {}
+);
+$converges = String("converges");
+$diverges = String("diverges");
+# \{ pop_up_list([$converges->string,$diverges->string,$furthertesting->string]) \}
+
+$radio1 = RadioButtons(
+  ["converges","diverges"],
+  "converges", # correct answer
+);
+##############################################################
+#  Text
+BEGIN_PGML
+For the following $p$-series, state the value of $p$ and whether the $p$-series is convergent or divergent.
+
+a. [` \sum\limits_{n=1}^\infty n^{-[$c1]}`]
+\[ \sum_{k=1}^\infty $ak \]  
+For this $p$-series, $p = $ [__________]{$c1}. The series [@ $radio1->buttons() @]*
+END_PGML
+
+##############################################################
+#  Answers
+
+#ANS($furthertesting->cmp());
+
+COMMENT('Written in PGML');
+
+ENDDOCUMENT();        
+
