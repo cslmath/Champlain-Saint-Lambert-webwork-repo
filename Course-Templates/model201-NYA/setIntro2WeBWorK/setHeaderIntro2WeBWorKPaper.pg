@@ -1,0 +1,33 @@
+##Problem set header for set 0, Champlain College St Lambert
+
+&DOCUMENT;
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl"
+);
+
+$dateTime = $formatedDueDate;
+$instructor = '';
+$course = protect_underbar($courseName);
+$setNumber = protect_underbar($setNumber);
+$sectionNumber = protect_underbar($sectionNumber);
+
+
+TEXT(EV2(<<EOT));
+$BEGIN_ONE_COLUMN
+\noindent {\large \bf $studentName}
+\hfill
+\noindent {\large \bf Champlain College St Lambert}
+\par
+\noindent{\large \bf DUE DATE: $setNumber  due $dateTime}\par
+
+\noindent This first set (Intro2WeBWorK) is OPTIONAL. It is designed to acquaint you with using WeBWorK. The ${LQ}due date${RQ} is set for the end of the term. 
+{\bf Your score on this set will not be counted toward your final grade.}
+\par
+$END_ONE_COLUMN
+EOT
+
+&ENDDOCUMENT;

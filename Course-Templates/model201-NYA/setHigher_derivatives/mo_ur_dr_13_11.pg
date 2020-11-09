@@ -1,0 +1,61 @@
+## DESCRIPTION
+##   Higher Derivatives
+## ENDDESCRIPTION
+
+## Tagged by nhamblet
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Differentiation)
+## DBsection(Higher-order derivatives)
+## Institution(ASU)
+## MLT(hod_2nd_log)
+## MLTleader(1)
+## Level(2)
+## TitleText1('Calculus: Early Transcendentals')
+## AuthorText1('Stewart')
+## EditionText1('6')
+## Section1('3.6')
+## Problem1('3 4')
+## KEYWORDS('Higher Derivative', 'Trigonometry', 'Logarithm','derivatives', 'logarithmic functions')
+
+## Original problem: /Library/Rochester/setDerivatives13Higher/ur_dr_13_11.pg
+## Revised to create MathObjects version
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$an = random(2,5,1);
+$as = random(-1,1,2);
+$a  = Compute("$an * $as");
+
+@inside_function = ("\sin(x)","\cos(x)");
+
+$tag = random(0,1,1);
+
+@answer = (Compute("- $a/(sin(x))**2"),Compute("- $a/(cos(x))**2"));
+
+Context()->texStrings;
+BEGIN_TEXT
+Let \[ f(x) = $a \ln($inside_function[$tag]) \]
+$PAR
+\( f''( x ) = \) \{ans_rule(40) \}
+END_TEXT
+Context()->normalStrings;
+
+$ans = $answer[$tag];
+ANS($ans->cmp());
+
+COMMENT('MathObjects version');
+ENDDOCUMENT();        # This should be the last executable line in the problem.

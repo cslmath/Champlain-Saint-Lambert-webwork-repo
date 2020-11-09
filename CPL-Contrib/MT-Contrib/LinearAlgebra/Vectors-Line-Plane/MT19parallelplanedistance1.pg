@@ -1,0 +1,64 @@
+##DESCRIPTION
+# Distance between two parallel planes.      
+##ENDDESCRIPTION   
+
+## DBsubject(Geometry)
+## DBchapter(Vector geometry)
+## DBsection(Planes)
+## Date(2019-Nov-23)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Level(3)
+## TitleText1('')
+## KEYWORDS('Geometry','Distance', 'Point', 'Plane', 'Dot Product')
+          
+DOCUMENT();	# This should be the first executable line in the problem.
+
+loadMacros(
+  "PGstandard.pl",
+  "PGchoicemacros.pl",
+  "PGcourse.pl",
+  "MathObjects.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+    
+# components of normal vector of first plane:
+$a = random(2,6,2);
+$b = $a + 1;
+$c = non_zero_random(-7, 7, 1);
+# point on first plane
+$x0 = non_zero_random(-5,5,2);
+$y0 = non_zero_random(-5,5,1);
+$z0 = non_zero_random(-5,5,1);
+# scalar multiple  is 2 for normal of second plane:
+# normal for second plane:
+$a2 = 2*($a);
+$b2 = 2*($b);
+$c2 = 2*($c);
+# rhs of first plane
+$d1 = ($a)*($x0) + ($b)*($y0) + ($c)*($z0);
+# point on second plane:
+$x1 = 2*$x0;
+$y1 = 1.5;
+$z1 = ($z0) + 1;
+# rhs of second plane:
+$d2 = ($a2)*($x1) + ($b2)*($y1) + ($c2)*($z1);
+
+BEGIN_TEXT
+Find the distance between the parallel planes
+\( $a\,x + $b\,y + $c\,z = $d1 \)
+and
+\( $a2\,x + $b2\,y + $c2\,z = $d2. \)
+
+$PAR
+\{ ans_rule(40) \}
+END_TEXT
+$numerator = abs( ($x1)*($a) + ($y1)*($b) + ($z1)*($c) - $d1 );
+$denominator = sqrt( ($a)**2 + ($b)**2 + ($c)**2 );
+
+ANS(num_cmp($numerator/$denominator));
+
+ENDDOCUMENT();	# This should be the last executable line in the problem.
+

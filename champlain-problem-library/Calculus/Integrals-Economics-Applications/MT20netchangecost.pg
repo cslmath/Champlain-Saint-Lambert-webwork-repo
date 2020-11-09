@@ -1,0 +1,96 @@
+## DESCRIPTION
+## Marginal Analysis
+## ENDDESCRIPTION
+
+## KEYWORDS('integrals', 'economics', 'marginal revenue')
+
+## DBsubject('Calculus - single variable')
+## DBchapter('Applications of integration')
+## DBsection('Economics')
+## Date('2020/02/11')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('Applied Calculus')
+## EditionText1('7')
+## AuthorText1('Tan')
+## Section1('6.4')
+## Problem1('44')
+
+################################################################
+
+DOCUMENT();
+
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "PGML.pl",
+    "contextCurrency.pl",
+);
+
+TEXT(beginproblem());
+$showpartialcorrectanswers = 1;
+
+################################################################
+# Setup
+#
+################################################################
+Context("Numeric");
+
+$a = random(0.0003, 0.0009, 0.0003);
+$b = random(0.12, 0.18, 0.02);
+$c = random(15,25,5);
+# Note: want ($b)^2-4*($a)*($c) < 0 so that C'(x) > 0 for all x
+while (($b)**2 >= 4*($a)*($c)){
+    $c = $c + 5;
+}
+$x1 = random(100,300,100);
+$x1plus1 = Compute("$x1+1");
+$x2 = $x1 + 100;
+$C0 = random(150,750,100);
+$Cfun = Compute("($a)/3*x**3 - ($b)/2*x**2 + $c*x + $C0"); 
+$Cprime = Compute("($a)*x^2 - ($b)*x + $c");
+$C2 = $Cfun->eval(x=>$x2);
+$C1 = $Cfun->eval(x=>$x1);
+#$ansb = $C2 - $C1;
+Context("Currency");
+Context()->flags->set(trimTrailingZeros=>1);
+$Cfixed = Currency($C0);
+$ansa = Currency($C1);
+$ansb = Currency($C2-$C1);
+
+BEGIN_PGML
+The daily marginal cost function (in dollars per unit) associated with producing  [`x`] toasters is
+[``` C'(x) = [$Cprime] . ```]
+Also, the daily fixed cost incurred in production is [` [$Cfixed] `] dollars.    
+
+a. Evaluate the total cost incurred in producing the first  [` [$x1] `] units of these toasters per day.  
+Answer (a) = [________________________________________]{$ansa} 
+b. Find the total cost  incurred in producing the [` [$x1plus1]`]st through [`[$x2]`]th units per day.  
+Answer (b) = [________________________________________]{$ansb}     
+**Note:** Type the dollar symbol in your answers.
+END_PGML
+
+BEGIN_PGML_HINT
+The net change in a function [` f `] over an interval [` [a,b] `] is given by
+[```   f(b) - f(a) = \int_a^b f '(x) dx  ```]
+provided [` f' `] is continuous on [` [a,b] `].    
+
+For part (a), you want to find [` C([$x1]) `]. Note that [` C(0) = [$Cfixed] `].
+
+For part (b), you want to find [` C([$x2]) - C([$x1]) `].
+END_PGML_HINT
+
+BEGIN_PGML_SOLUTION
+(a) Using the net change formula: [` C([$x1]) - C(0) = \int_0^{[$x1]} C'(x)dx `] where [` C(0) = [$Cfixed]`]. Thus, 
+[```
+C([$x1]) = [$Cfixed] + \left. \left( [$a] \frac{x^3}{3} - [$b]\frac{x^2}{2} + [$c] x   \right) \right|_{0}^{[$x1]} \\
+= [$Cfixed] + [$a] \frac{[$x1]^3}{3} - [$b]\frac{[$x1]^2}{2} + [$c] [$x1] - 0 = [$ansa] 
+```]
+(b) The answer is given by the definite integral:
+[```
+  \int_{[$x1]}^{[$x2]} C'(x)dx = \left. \left( [$a] \frac{x^3}{3} - [$b]\frac{x^2}{2} + [$c] x   \right) \right|_{[$x1]}^{[$x2]} \\
+= \left( [$a] \frac{[$x2]^3}{3} - [$b]\frac{[$x2]^2}{2} + [$c] [$x2]   \right) - \left( [$a] \frac{[$x1]^3}{3} - [$b]\frac{[$x1]^2}{2} + [$c] [$x1]   \right) \\ = [$C2]-[$C1] = [$ansb]
+```]
+END_PGML_SOLUTION
+COMMENT('Uses Math Objects / PGML.');
+ENDDOCUMENT();

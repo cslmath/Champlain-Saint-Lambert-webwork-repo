@@ -1,0 +1,76 @@
+## DESCRIPTION
+## Calculus. Antiderivative twice from second derivative.
+## ENDDESCRIPTION
+
+## KEYWORDS('integrals','trig')
+
+## DBsubject('Calculus - single variable')
+## DBchapter('Integrals')
+## DBsection('Indefinite integrals (with trigonometric functions)')
+## Date('2020/01/29')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"parserFormulaUpToConstant.pl",
+"PGML.pl",
+"PGcourse.pl",
+);
+
+Context("Numeric");
+Context()->variables->add(t=>['Real']);
+Context()->flags->set(
+    reduceConstants=>0,
+    reduceConstantFunctions=>0
+);
+
+$showPartialCorrectAnswers = 1;
+
+$a=random(2, 8, 1);
+$b=random(3, 9, 2);
+$c=random(3, 9, 1);
+$d=random(2, 8, 2);
+$bigC=Formula($d - 1/$a);
+$bigD=Formula($c-1/$a + 1/$b);
+$answer1=Compute("(e^t)/$a + sin(t)/$b + $bigC");
+$answer2=Compute("(e^t)/$a - cos(t)/$b + $bigC t + $bigD");
+$answer3=Compute("(e)/$a - cos(1)/$b + $bigC  + $bigD");
+
+TEXT(beginproblem());
+BEGIN_PGML
+Find [` f'(t)`], [`f(t)`] and [` f(1) `] given that:
+
+[` f''(t) = \displaystyle\frac{1}{[$a] e^{-t}}+ \frac{1}{[$b]\sec t} , \quad f'(0)=[$d], \quad f(0)=[$c] `]
+
+[` f'(t) = `][_______]{$answer1->cmp}{40}
+
+[` f(t) = `][_______]{$answer2->cmp}{40}
+
+[` f(1) = `][_______]{$answer3->cmp}{40}
+END_PGML
+
+BEGIN_PGML_SOLUTION
+[` f'(t) = \frac{e^t}{[$a]} + \frac{\sin t}{[$b]} + C `]  
+Using [` f'(0)=[$d] `] gives [` [$d] = \frac{e^0}{[$a]}+\frac{\sin(0)}{[$b]}+C`] and thus [` C = [$d]-1/[$a] \approx [$bigC] `].  
+[` f(t) = \frac{e^t}{[$a]} - \frac{\cos t}{[$b]} + Ct + D `]  
+Using [` f(0)=[$c] `] and [` C=[$d]-1/[$a] `] gives [` [$c] = \frac{e^0}{[$a]}-\frac{1}{[$b]} + D`] and thus [` D = [$c]-1/[$a]+1/[$b] \approx [$bigD]`].  
+Then,
+[` f(t) = \frac{e^t}{[$a]} - \frac{\cos t}{[$b]} + ([$d]-1/[$a])t + [$c]-1/[$a]+1/[$b]`]
+
+Finally,
+[` f(1) = \frac{e^1}{[$a]} - \frac{\cos (1)}{[$b]} + ([$d]-1/[$a])(1) + [$c]-1/[$a]+1/[$b] \approx [$answer3]`] 
+
+END_PGML_SOLUTION
+
+COMMENT('Written in PGML');
+ENDDOCUMENT();       
+

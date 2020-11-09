@@ -1,0 +1,178 @@
+## DESCRIPTION
+##   Complex Numbers. Mandelbrot set.
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(Arithmetic)
+## DBsection(Multiplication)
+## Date(2016/05/03)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Level(2)
+## MO(1)
+## TitleText1()
+## AuthorText1()
+## EditionText1()
+## Section1()
+## Problem1()
+## KEYWORDS('Complex', 'Imaginary','algebra', 'complex number','Mandelbrot set')
+
+## RESOURCES('mandelbrot.png')
+
+DOCUMENT();
+
+
+loadMacros(
+'PGstandard.pl',
+'MathObjects.pl',
+'contextLimitedComplex.pl',
+"parserPopUp.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+#Context('LimitedComplex-cartesian-strict');
+Context('Complex');
+
+do {
+$a1 = non_zero_random(-9,9,1);
+$a2 = non_zero_random(-9,9,1);
+$b1 = non_zero_random(-9,9,1);
+$b2 = non_zero_random(-9,9,1);
+} until (($a1 != $a2) and ($b1 != $b2) and ($a1 * $b2 != -1 * $a2 * $b1));
+
+$z1 = $a1 + $b1 * i;
+$z2 = $a2 + $b2 * i;
+
+$a = $a1 * $a2 - $b1 * $b2;
+$b = $a1 * $b2 + $a2 * $b1;
+
+$z = $a + $b * i;
+
+$moduli1 = PopUp(["?", "bounded", "unbounded"], "bounded");
+$inset1 = PopUp(["?", "belongs", "does not belong"], "belongs");
+$moduli2 = PopUp(["?", "bounded", "unbounded"], "unbounded");
+$inset2 = PopUp(["?", "belongs", "does not belong"], "does not belong");
+
+Context()->texStrings;
+BEGIN_TEXT
+$BBOLD Mandelbrot Set $EBOLD
+$BR
+Let's explore a famous fractal called the Mandelbrot set, named after mathematician Benoit Mandelbrot (1924-2010). The image below is a portion of the complex plane showing a graphical representation of part of the Mandelbrot set: the points in the black region (the bug-like shape) are in the Mandelbrot set. (The points in colour are not in the Mandelbrot set.)
+$BR
+\{ image( "mandelbrot.png", width=>150, height=>150,  
+tex_size=>700, extra_html_tags=>'alt="Mandelbrot set."' ) \}
+$BR
+To determine whether a complex number \( c \) belongs to the Mandelbrot set,
+consider the function \( f(z) = z^2 + c \), and the infinite sequence of complex numbers:
+$BCENTER
+   \( z_0 = 0 \) $BR
+   \( z_1 = f(z_0)  \) $BR
+   \( z_2 = f(z_1)  \) $BR
+   \( \vdots \)
+$ECENTER
+If the moduli (absolute values) \(  |z_1|,  \, |z_2|,  \, |z_3|, \, \ldots \)  are all less than some fixed number \( N \) (in other words, the $BBOLD moduli are bounded$EBOLD), then the complex number \( c \) $BBOLD belongs$EBOLD to the Mandelbrot set (and its corresponding point would be in black in the complex plane).
+$BR
+$BR
+Determine whether or not the complex number \( c \) is in the Mandelbrot set. 
+$BR
+$BBOLD (a) $EBOLD \( \fbox { c = i }  \) 
+$BR 
+Let \( f(z) = z^2 + i \).
+$BR
+Starting with \( z_0 = 0 \), compute the following (enter your answers in the form \( a+bi \) ):
+$BR
+\(   z_1 = z_0^2 + c = 0^2 + i = \)  \{ans_rule(10)\}
+$BR
+\( z_2 = z_1^2 + c = z_1^2 + i = \) \{ans_rule(10)\}
+$BR
+\( z_3 = z_2^2 + c = z_2^2 + i = \) \{ans_rule(10)\}
+$BR
+\( z_4 = z_3^2 + c = z_3^2 + i = \) \{ans_rule(10)\}
+$BR
+and the moduli (which are real numbers):
+$BR
+\(  |z_1| = \) \{ans_rule(10)\}
+$BR
+\(  |z_2| = \) \{ans_rule(10)\}
+$BR
+\(  |z_3| = \) \{ans_rule(10)\}
+$BR
+\(  |z_4| = \) \{ans_rule(10)\}
+$BR
+For the complex number \( c = i \):
+$BR
+- the moduli \( |z_k | \) are \{ $moduli1 ->menu() \}
+$BR
+- the complex number \( c = i \)  \{$inset1->menu() \} to the Mandelbrot set
+$BR
+$BR
+
+$BBOLD (b) $EBOLD \( \fbox { c = 1+ i }  \) 
+$BR 
+Let \( f(z) = z^2 + (1+i) \).
+$BR
+Starting with \( z_0 = 0 \), compute the following (enter your answers in the form \( a+bi \) ):
+$BR
+\(   z_1 = z_0^2 + c = 0^2 + (1+i) = \)  \{ans_rule(10)\}
+$BR
+\( z_2 = z_1^2 + c = z_1^2 + (1+i) = \) \{ans_rule(10)\}
+$BR
+\( z_3 = z_2^2 + c = z_2^2 + (1+i) = \) \{ans_rule(10)\}
+$BR
+\( z_4 = z_3^2 + c = z_3^2 + (1+i) = \) \{ans_rule(10)\}
+$BR
+and the moduli (which are real numbers):
+$BR
+\(  |z_1| = \) \{ans_rule(10)\}
+$BR
+\(  |z_2| = \) \{ans_rule(10)\}
+$BR
+\(  |z_3| = \) \{ans_rule(10)\}
+$BR
+\(  |z_4| = \) \{ans_rule(10)\}
+$BR
+For the complex number \( c = 1 + i \):
+$BR
+- the moduli \( |z_k | \) are \{ $moduli2 ->menu() \}
+$BR
+- the complex number \( c = 1+ i \)  \{$inset2->menu() \} to the Mandelbrot set
+$BR
+$BR
+END_TEXT
+Context()->normalStrings;
+
+# First point is in the Mandelbrot set
+ANS(Compute("i")->cmp);
+ANS(Compute("-1 + i") ->cmp);
+ANS(Compute("-i") ->cmp);
+ANS(Compute("-1 + i") ->cmp);
+
+Context("Numeric");
+ANS(Compute("1")->cmp);
+ANS(Compute("sqrt{2}")->cmp);
+ANS(Compute("1")->cmp);
+ANS(Compute("sqrt{2}")->cmp);
+
+ANS($moduli1->cmp);
+ANS($inset1->cmp);
+
+
+# Second point is not in the Mandelbrot set
+Context("Complex");
+ANS(Compute("1+i")->cmp);
+ANS(Compute("1 + 3i") ->cmp);
+ANS(Compute("-7+7i") ->cmp);
+ANS(Compute("1-97i") ->cmp);
+
+ANS(Compute("mod(1+i)")->cmp);
+ANS(Compute("mod(1+3i)")->cmp);
+ANS(Compute("mod(-7+7i)")->cmp);
+ANS(Compute("mod(1-97i)")->cmp);
+
+ANS($moduli2->cmp);
+ANS($inset2->cmp);
+
+COMMENT('No randomization (for now).');
+ENDDOCUMENT();

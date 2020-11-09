@@ -1,5 +1,6 @@
 ##DESCRIPTION
 ##  Calculus: Integration, substitution method
+##  M.Titcombe Fix 2020-winter exponents too big
 ##ENDDESCRIPTION
 
 ## DBsubject(Calculus - single variable)
@@ -31,11 +32,11 @@ TEXT(beginproblem());
 Context("Numeric");
 Context()->variables->add(u=>"Real",dx=>"Real");
 
-$a = random(3,7,1);
-$b = random(4,15,1);
-$m = random(3,7,1);
+$a = non_zero_random(-7,7,1);
+$b = random(2,5,1);
+$m = random(2,4,1);
 $m1 = Compute("$m+1");
-$n = random(8,12,1);
+$n = random(4,6,1);
 $integrand = Compute("x^{$m}($a+$b x^{$m1})^{$n}");
 $uf = Compute("$a+$b*x^($m+1)");
 $uprime = $uf->D('x');
@@ -44,7 +45,6 @@ $gu = Compute("u^$n/($b*($m+1))");
 $ansu = FormulaUpToConstant("u^($n+1)/($b*($m+1)*($n+1))");
 $ansx = FormulaUpToConstant("($a+$b*x^($m+1))^($n+1)/($b*($m+1)*($n+1))");
 
-Context()->texStrings;
 BEGIN_PGML
 Consider the indefinite integral:  
 >> [` \displaystyle \int [$integrand] \, dx `]  <<
@@ -81,7 +81,6 @@ d. Evaluating this integral in terms of [`u`] gives:
 e. After substituting back for [`u`] we obtain the following final form of the answer in terms of the original variable:  
 [` \int [$integrand]\,dx = [$ansx]`]
 END_PGML_SOLUTION
-Context()->normalStrings;
 
 COMMENT('Uses MathObjects / PGML.');
 ENDDOCUMENT();

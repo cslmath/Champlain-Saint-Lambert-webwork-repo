@@ -1,0 +1,94 @@
+assignmentType      = default
+openDate          = 04/26/2017 at 09:29am EDT
+reducedScoringDate = 05/01/2017 at 11:59pm EDT
+dueDate           = 05/01/2017 at 11:59pm EDT
+answerDate        = 05/02/2017 at 11:59pm EDT
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = 
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/WHFreeman/Rogawski_Calculus_Early_Transcendentals_Second_Edition/11_Parametric_Equations_Polar_Coordinates_and_Conic_Sections/11.3_Polar_Coordinates/11.3.5.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/WHFreeman/Rogawski_Calculus_Early_Transcendentals_Second_Edition/11_Parametric_Equations_Polar_Coordinates_and_Conic_Sections/11.3_Polar_Coordinates/11.3.3.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/UCSB/Stewart5_10_3/Stewart5_10_3_2.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/UCSB/Stewart5_10_3/Stewart5_10_3_14.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 5
+source_file = Library/ma123DB/set9/s10_4_16.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 6
+source_file = Library/UCSB/Stewart5_10_3/Stewart5_10_3_67.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 7
+source_file = Library/UCSB/Stewart5_10_3/Stewart5_10_3_7to12/Stewart5_10_3_7to12.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 8
+source_file = Library/UCSB/Stewart5_10_3/Stewart5_10_3_35to40/Stewart5_10_3_35to40.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+

@@ -1,0 +1,61 @@
+## DBsubject(Calculus - single variable)
+## DBchapter(Differentiation)
+## DBsection(Implicit differentiation)
+## Institution(UCSB)
+## MLT(xy_powers_chain)
+## MLTleader(1)
+## Level(3)
+## TitleText1('Calculus: Early Transcendentals')
+## AuthorText1('Stewart')
+## EditionText1('5')
+## Section1('3.6')
+## Problem1('24')
+## KEYWORDS('Differentiation','Product','Quotient')
+
+## Original problem: /Library/UCSB/Stewart5_3_6/Stewart5_3_6_24.pg
+## Revised to create MathObjects version.
+## M.Titcombe 2013-Dec-05
+
+DOCUMENT();
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"MathObjects.pl",
+);
+
+Context("Numeric");
+Context()->variables->add( y=>'Real' );
+
+TEXT(&beginproblem);
+$showPartialCorrectAnswers = 1;
+$a=random(1,10,1);
+$c=($a)**2;
+
+$ans=Compute("($a x^2-4y(x^2+y^2))/(4x(x^2+y^2)-2($a)xy)");
+
+Context()->texStrings;
+BEGIN_TEXT
+
+$PAR
+
+Find \(dx/dy\) using implicit differentiation by regarding \(x\) as a function of \(y\). $BR
+\[ (x^2+y^2)^2=$a x^2y\]
+
+$PAR
+
+\(dx/dy =\) \{ans_rule(50)\}
+
+END_TEXT
+Context()->normalStrings;
+
+## ANS(Compute( "(($a/x) - ln(y))/((x/y) + $r*y^($r-1))" )->cmp() );
+ANS($ans->cmp() );
+
+## ANS(fun_cmp(" ($a x^2-4y(x^2+y^2))/(4x(x^2+y^2)-2($a)xy) ", var=>["x", "y"]));
+
+COMMENT('MathObjects version');
+ENDDOCUMENT();

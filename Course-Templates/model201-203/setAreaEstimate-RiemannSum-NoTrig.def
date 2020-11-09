@@ -1,0 +1,174 @@
+assignmentType      = default
+openDate          = 01/11/2016 at 12:00am EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 12/31/2016 at 01:00am EST
+answerDate        = 12/31/2016 at 02:00am EST
+enableReducedScoring = N
+paperHeaderFile   = 
+screenHeaderFile  = 
+description       = 
+restrictProbProgression = 
+emailInstructor   = 
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = champlainLibrary/Calculus/Integrals-Riemann-Sum/RochS05.01.AreaDistance.PTP00.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 2
+source_file = champlainLibrary/Calculus/Integrals-Riemann-Sum/Rochsc5_2_3.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 3
+source_file = champlainLibrary/Calculus/Integrals-Riemann-Sum/Rochsc5_2_2a.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 4
+source_file = champlainLibrary/Calculus/Integrals-Riemann-Sum/RochPTP03.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 5
+source_file = champlainLibrary/Calculus/Integrals-Riemann-Sum/Rochosu_in_0_13.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 6
+source_file = champlainLibrary/Calculus/Integrals-Riemann-Sum/Rochsc5_2_28.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 7
+source_file = champlainLibrary/Calculus/Integrals-Riemann-Sum/RochS05.01.AreaDistance.PTP02.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 8
+source_file = champlainLibrary/Calculus/Integrals-Riemann-Sum/RochS05.01.AreaDistance.PTP01.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 9
+source_file = champlainLibrary/Calculus/Integrals-Riemann-Sum/Indianasc5_2_5.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 10
+source_file = champlainLibrary/Calculus/Integrals-Riemann-Sum/UVA-Stew5e5-1-04.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 11
+source_file = champlainLibrary/Calculus/Integrals-Riemann-Sum/UVA-Stew5e5-1-03.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 12
+source_file = champlainLibrary/Calculus/Integrals-Riemann-Sum/riemann11.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 13
+source_file = champlainLibrary/Calculus/Integrals-Riemann-Sum/riemann12.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 14
+source_file = Library/Michigan/Chap5Sec3/Q17.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 15
+source_file = Library/Michigan/Chap5Sec2/Q07.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+problem_start
+problem_id = 16
+source_file = Library/Michigan/Chap5Sec2/Q19.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = 
+counts_parent_grade = 
+att_to_open_children =  
+problem_end
+

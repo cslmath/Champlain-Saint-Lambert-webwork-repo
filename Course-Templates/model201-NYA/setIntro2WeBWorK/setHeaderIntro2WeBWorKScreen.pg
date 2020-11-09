@@ -1,0 +1,100 @@
+DOCUMENT();
+
+loadMacros(
+	"PG.pl",
+	"PGbasicmacros.pl",
+	
+);
+
+
+####################################################
+#
+# The item below printed out only when a hardcopy is made.
+#
+####################################################
+
+TEXT($BEGIN_ONE_COLUMN);
+
+TEXT(MODES(TeX =>EV3(<<'END_TEXT'),HTML=>""));
+
+\noindent {\large \bf $studentName}
+\hfill
+\noindent {\large \bf \{protect_underbar($courseName)\}  
+$sectionNumber   }
+\par
+
+END_TEXT
+
+##########################################################
+# 
+# Items printed both to the screen when a hardcopy is made.
+#
+# You can insert a url pointing to your course's home page 
+# a few lines below.  Remove the comment (#) symbol from the line
+# to make it active.
+#
+##########################################################
+
+BEGIN_TEXT
+
+$BBOLD WeBWorK  assignment number \{ protect_underbar($setNumber) \}  is due :  $formattedDueDate. $EBOLD
+
+$PAR
+
+END_TEXT
+###########################################################
+#
+# This is a good place to issue instructions or give comments
+# for this problem set.
+#
+# EDIT BELOW 'BEGIN_TEXT'
+###########################################################
+BEGIN_TEXT
+$HR
+$PAR
+This introductory problem set (Intro2WeBWorK) is OPTIONAL. It 
+is to acquaint you with how to use WeBWorK. The ${LQ}due date${RQ} is set for the end of the term. Your mark on this set will not count
+towards your final grade.
+
+$HR
+END_TEXT
+###########################################################
+# EDIT ABOVE 'END_TEXT'
+###########################################################
+
+###########################################################
+#
+# The item below will be printed for both the screen version and the
+# hardcopy version.
+#
+###########################################################
+BEGIN_TEXT
+
+The primary purpose of WeBWorK is to let you know that you are getting the correct answer or to alert
+you if you are making some kind of mistake. Usually you can attempt a problem as many times as you want before
+the due date.  However, if you are having trouble figuring out your error, you should
+consult the book, or ask a fellow student, or ask 
+your teacher for help.  Don't spend a lot of time guessing -- it's not very efficient or effective.
+$PAR
+For (floating point) numerical answers, give 4 or 5  significant digits. However, for most problems when entering numerical answers, you can if you wish
+enter elementary expressions such as ${BBOLD} 2$CARET 3 ${EBOLD} instead of ${BBOLD}8${EBOLD}, ${BBOLD} sin(3*pi/2) ${EBOLD}instead
+of ${BBOLD}-1${EBOLD}, ${BBOLD} e$CARET (ln(2)) ${EBOLD} instead of ${BBOLD}2${EBOLD}, etc.
+$PAR
+
+Here are the 
+\{ htmlLink(qq!http://webwork.maa.org/wiki/Mathematical_notation_recognized_by_WeBWorK!,"mathematical notation and functions","target=~~"_blank~~"") \}
+ that WeBWorK understands.
+$PAR
+Here are some
+\{ htmlLink(qq!http://www.champlainww.ca/wwdoc/WWstudenttips.html!,"tips for students","target=~~"_blank~~"") \}.
+$PAR
+You can use the ${LQ}Email instructor${RQ} button on each problem
+page to send e-mail to the teachers. 
+
+
+
+END_TEXT
+
+TEXT($END_ONE_COLUMN);
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.

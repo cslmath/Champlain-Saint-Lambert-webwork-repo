@@ -1,0 +1,14 @@
+openDate          = 01/11/2016 at 12:00am EST
+dueDate           = 12/31/2016 at 01:00am EST
+answerDate        = 12/31/2016 at 02:00am EST
+paperHeaderFile   = setIntro2WeBWorK/setHeaderIntro2WeBWorKPaper.pg
+screenHeaderFile  = setIntro2WeBWorK/setHeaderIntro2WeBWorKScreen.pg
+problemList       = 
+champlainLibrary/Orientation/set0prob1.pg, 1, -1 
+champlainLibrary/Orientation/set0prob2.pg, 1, -1 
+champlainLibrary/Orientation/set0prob3.pg, 1, -1 
+champlainLibrary/Orientation/set0prob4.pg, 1, -1 
+champlainLibrary/Orientation/set0prob5.pg, 1, -1 
+champlainLibrary/Orientation/set0prob6/set0prob6.pg, 1, -1 
+champlainLibrary/Orientation/set0prob7.pg, 1, -1 
+

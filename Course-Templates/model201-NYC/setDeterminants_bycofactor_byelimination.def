@@ -1,0 +1,32 @@
+
+openDate          = 08/01/2012 at 12:00am EDT
+dueDate           = 12/31/2013 at 01:00am EST
+answerDate        = 12/31/2013 at 02:00am EST
+paperHeaderFile   = 
+screenHeaderFile  = 
+problemList       = 
+Library/maCalcDB/setLinearAlgebra6Determinants/ur_la_6_4.pg, 1, -1 
+Library/maCalcDB/setLinearAlgebra6Determinants/ur_la_6_5.pg, 1, -1 
+Library/maCalcDB/setLinearAlgebra6Determinants/ur_la_6_3.pg, 1, -1 
+Library/TCNJ/TCNJ_Determinants/problem3.pg, 1, -1 
+Library/TCNJ/TCNJ_Determinants/problem12.pg, 1, -1 
+Library/TCNJ/TCNJ_Determinants/problem1.pg, 1, -1 
+Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_12.pg, 1, -1 
+Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_8.pg, 1, -1 
+Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_4.pg, 1, -1 
+Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_6.pg, 1, -1 
+Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_7.pg, 1, -1 
+Library/Rochester/setAlgebra34Matrices/determinant_3x3a.pg, 1, -1 
+Library/TCNJ/TCNJ_Dets_CramersRule_Misc/problem1.pg, 1, -1 
+Library/TCNJ/TCNJ_Dets_CramersRule_Misc/problem2.pg, 1, -1 
+Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_25.pg, 1, -1 
+Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_26.pg, 1, -1 
+Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_24.pg, 1, -1 
+Library/Rochester/setAlgebra34Matrices/determinant_3x3a.pg, 1, -1 
+setDeterminants_bycofactor_byelimination/Anton_Linealgebra_2_30.pg, 1, -1 
+setDeterminants_bycofactor_byelimination/Anton_linearalgebra_1-2-supp-34.pg, 1, -1 
+setDeterminants_bycofactor_byelimination/cfortin_cramer1.pg, 1, -1 
+setDeterminants_bycofactor_byelimination/cfortin_cramer2.pg, 1, -1 
+Library/maCalcDB/setLinearAlgebra6Determinants/ur_la_6_4.pg, 1, -1 
+Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_4.pg, 1, -1 
+

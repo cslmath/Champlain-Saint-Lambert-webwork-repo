@@ -1,0 +1,54 @@
+assignmentType      = default
+openDate          = 10/05/2016 at 04:34pm EDT
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 10/12/2016 at 11:59pm EDT
+answerDate        = 10/14/2016 at 07:59am EDT
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = Ordered pairs. Cartesian product. Cardinality of Cartesian product.
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/SDSU/Discrete/Sets/cartesianprodB4.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/SDSU/Discrete/Sets/cartesianprodB3.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/Rochester/setSetTheory1/ur_st_1_7.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = champlainLibrary/ComputingMath/Set-Theory/MT16cartesianprod1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+

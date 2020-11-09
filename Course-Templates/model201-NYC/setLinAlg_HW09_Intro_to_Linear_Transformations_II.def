@@ -1,0 +1,12 @@
+openDate          = 08/18/2014 at 08:00am EDT
+dueDate           = 12/30/2016 at 08:00pm EST
+answerDate        = 12/31/2016 at 08:00pm EST
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+problemList       = 
+Library/Rochester/setLinearAlgebra14TransfOfRn/ur_la_14_13.pg, 1, -1 
+Library/Rochester/setLinearAlgebra14TransfOfRn/ur_la_14_15.pg, 1, -1 
+Library/Rochester/setLinearAlgebra14TransfOfRn/ur_la_14_21.pg, 1, -1 
+setLinAlg_HW09_Intro_to_Linear_Transformations_II/ur_la_14_22.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixLinearTransformation/problem5.pg, 1, -1 
+

@@ -1,0 +1,15 @@
+
+openDate          = 08/01/2012 at 12:00am EDT
+dueDate           = 12/31/2013 at 01:00am EST
+answerDate        = 12/31/2013 at 02:00am EST
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+problemList       = 
+setGaussian_Elimination/Anton_linearalgebra_1-6-17.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixInverse/problem2.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixInverse/problem3.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixInverse/problem6.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixInverse/problem8.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixInverse/problem13.pg, 1, -1 
+Library/ASU-topics/set119MatrixAlgebra/p13.pg, 1, -1 
+
