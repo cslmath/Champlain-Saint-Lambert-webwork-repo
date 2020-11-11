@@ -21,22 +21,27 @@
   - Calculus/Limits-Infinite 
   - Calculus/Linear-Approximation 
   - Calculus/Optimization 
+  - Calculus/Sequence-versus-Series 
+  - Calculus/Sequences-Geometric 
   - Calculus/Sequences-Limits 
   - Calculus/Series-Comparison-Tests 
   - Calculus/Series-Geometric 
+  - Calculus/Series-Integral-Test
   - Calculus/Series-Power 
+  - Calculus/Series-Taylor-Polynomial
 * ComputingMath
   - ComputingMath/Binary-Coded-Decimal
   - ComputingMath/Binary-Number-System
   - ComputingMath/Internal-Representation
+  - ComputingMath/Linear-Equations (symbolic link to LinearAlgebra/Linear-Equations)
   - ComputingMath/Logic-Truth-Tables
+  - ComputingMath/Matrices  (symbolic link to LinearAlgebra/Matrices)
+  - ComputingMath/Matrix-Inverse  (symbolic link to LinearAlgebra/Matrix-Inverse)
   - ComputingMath/Octal-Hexadecimal
   - ComputingMath/Set-Theory
-  - Linear-Equations (symbolic link to LinearAlgebra)
-  - Matrices  (symbolic link to LinearAlgebra)
-  - Matrix-Inverse  (symbolic link to LinearAlgebra)
 * Functions/Linear-Equations
 * LinearAlgebra
+  - LinearAlgebra/Determinants-Applications
   - LinearAlgebra/Determinants-Computing
   - LinearAlgebra/Gaussian-Elimination
   - LinearAlgebra/Linear-Programming-Geometric
@@ -49,11 +54,13 @@
   - LinearAlgebra/Matrix-Operations
   - LinearAlgebra/Simplex-Method
   - LinearAlgebra/Systems-Linear-Equations
+  - LinearAlgebra/Vectors-Unit
 * Orientation
 * VectorCalculus
   - VectorCalculus/Arc-Length-Curvature
   - VectorCalculus/Chain-Rule
   - VectorCalculus/Complex-Numbers-History
+  - VectorCalculus/Double-Integrals-General-Region
   - VectorCalculus/Limits-Continuity
   - VectorCalculus/Partial-Derivatives
   - VectorCalculus/Partial-Derivatives-Optimization
