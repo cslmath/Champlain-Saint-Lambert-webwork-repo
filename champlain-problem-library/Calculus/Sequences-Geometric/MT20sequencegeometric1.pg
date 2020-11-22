@@ -1,0 +1,82 @@
+# DESCRIPTION
+# Calculus. Geometric sequence.
+# ENDDESCRIPTION
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Infinite sequences and series)
+## DBsection(Geometric)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2020/04/30)
+## Level(2)
+## TitleText1('Calculus')
+## AuthorText1('')
+## EditionText1('')
+## Section1('')
+## Problem1('')
+
+## KEYWORDS('calculus','continuity')
+
+DOCUMENT();
+
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGchoicemacros.pl",
+# "parserNumberWithUnits.pl",
+# "parserFormulaWithUnits.pl",
+# "parserFormulaUpToConstant.pl",
+# "PGcourse.pl",
+"parserPopUp.pl",
+);
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$k1 = random(1,2,1);
+$k2 = Compute("$k1+1");
+$f = Compute("x^4 + $k1 x - $k2")->reduce();
+$a = random(-1,0,1);
+$fa = Compute("($a)^4 + $k1*$a - $k2");
+do {$b= $a + non_zero_random(2,5,1);
+      $fb = Compute("($b)^4 + $k1*$b - $k2");
+       } until ($fb > 0);
+$lessthan = PopUp( ["?", "<", "=", ">","> or =","< or ="], "<");
+$greaterthan = PopUp( ["?", "<", "=", ">"], ">" );
+$lessorequal = PopUp( ["?", "<", "=", ">","> or =","< or ="], "< or =" );
+
+TEXT(beginproblem());
+
+Context()->texStrings;
+
+BEGIN_TEXT
+$BBOLD Geometric sequence. $EBOLD $PAR
+
+The geometric sequence {\(r^k\)}: $PAR
+
+ (a) converges to \{ ans_rule(5) \} if \( r = 1 \). $PAR
+
+ (b) converges to \{ ans_rule(5) \} if \( |r| \) \{ $lessthan->menu \} \{ans_rule(5)\}.$PAR
+ 
+ (c) diverges if \(r > \) \{ ans_rule(5) \} or if \( r \) \{ $lessorequal->menu \} \{ ans_rule(5) \}.
+
+END_TEXT
+
+Context()->normalStrings;
+# Part (a) Converges to 1
+ANS(Compute(1)->cmp() );
+# Part (b) Converges to 0 interval
+ANS(Compute(0)->cmp() );
+ANS($lessthan->cmp() );
+ANS(Compute(1)->cmp() );
+# Part (c) Diverges intervals
+ANS(Compute(1)->cmp() );
+ANS($lessorequal->cmp() );
+ANS(Compute(-1)->cmp() );
+
+
+COMMENT('MathObject version');
+
+ENDDOCUMENT();
+
+

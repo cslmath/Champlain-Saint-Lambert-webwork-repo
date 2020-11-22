@@ -1,13 +1,13 @@
 ##DESCRIPTION
 ##  Calculus: Integration, substitution method
-##  M.Titcombe Fix 2020-winter exponents too big
 ##ENDDESCRIPTION
 
 ## DBsubject(Calculus - single variable)
 ## DBchapter(Techniques of integration)
 ## DBsection(Substitution (without trigonometric functions))
-## Institution(Champlain College Saint-Lamber)
+## Institution(Champlain College Saint-Lambert)
 ## Author(Michele Titcombe)
+## Date(2020/02/02)
 ## Level(2)
 ## TitleText1('')
 ## AuthorText1('')
@@ -30,30 +30,30 @@ $showPartialCorrectAnswers = 1;
 
 TEXT(beginproblem());
 Context("Numeric");
-Context()->variables->add(u=>"Real",dx=>"Real");
+Context()->variables->are(u=>"Real",y=>"Real",dy=>"Real");
 
-$a = non_zero_random(-7,7,1);
-$b = random(2,5,1);
-$m = random(2,4,1);
+$a = random(3,7,1);
+$b = random(8,15,1);
+$m = random(3,7,1);
 $m1 = Compute("$m+1");
-$n = random(4,6,1);
-$integrand = Compute("x^{$m}($a+$b x^{$m1})^{$n}");
-$uf = Compute("$a+$b*x^($m+1)");
-$uprime = $uf->D('x');
-$du = Compute("$uprime dx");
-$gu = Compute("u^$n/($b*($m+1))");
-$ansu = FormulaUpToConstant("u^($n+1)/($b*($m+1)*($n+1))");
-$ansx = FormulaUpToConstant("($a+$b*x^($m+1))^($n+1)/($b*($m+1)*($n+1))");
+$integrand = Compute("(ln($a y))^{$m}/($b y)");
+$uf = Compute("ln($a y)");
+$uprime = $uf->D('y');
+$du = Compute("$uprime dy");
+$gu = Compute("u^{$m}/($b)");
+$ansu = FormulaUpToConstant("u^{$m1}/($b $m1)");
+$ansy = FormulaUpToConstant("(ln($a y))^{$m1}/($b $m1)");
 
+Context()->texStrings;
 BEGIN_PGML
 Consider the indefinite integral:  
->> [` \displaystyle \int [$integrand] \, dx `]  <<
+>> [` \displaystyle \int \frac{(\ln ([$a] y))^[$m]}{[$b]y} \, dy `]  <<
 
 a. The most appropriate substitution to simplify this integral is:  
 [`u =`][_______________]{$uf}
 
 b. The differential [`du`] is  
-[`du =`][_______________]{$du}
+[`du =`][_______________]{$du}  (Note: the variable is [`y`] so the differential will have [`dy`])
 
 c. After making the substitution, we obtain the integral [` \int g(u)\,du `] where  
 [`g(u) =`][_______________]{$gu}
@@ -62,10 +62,10 @@ d. Evaluating this integral in terms of [`u`] gives (use C for the constant of i
 [`\int g(u)\,du =`][____________________________]{$ansu}
 
 e. After substituting back for [`u`] we obtain the following final form of the answer in terms of the original variable (use C for the constant of integration):  
-[` \int [$integrand]\,dx`] = [____________________________]{$ansx}
+[` \int \frac{(\ln ([$a] y))^[$m]}{[$b]y} \,dy`] = [____________________________]{$ansy}
 END_PGML
 BEGIN_PGML_HINT
-Part b. If [`u = f(x)`], then the differential is [`du=f'(x)dx`].
+Part a. Let [`u = \ln([$a]y)`].
 END_PGML_HINT
 BEGIN_PGML_SOLUTION
 a. Let [`u =[$uf] `]
@@ -79,8 +79,9 @@ d. Evaluating this integral in terms of [`u`] gives:
 [`\int g(u)\,du =[$ansu]`]
 
 e. After substituting back for [`u`] we obtain the following final form of the answer in terms of the original variable:  
-[` \int [$integrand]\,dx = [$ansx]`]
+[` \int [$integrand]\,dy = [$ansy]`]
 END_PGML_SOLUTION
+Context()->normalStrings;
 
 COMMENT('Uses MathObjects / PGML.');
 ENDDOCUMENT();

@@ -1,0 +1,106 @@
+## DESCRIPTION
+##   Geometric Series - State a and r
+## ENDDESCRIPTION
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Infinite sequences and series)
+## DBsection(Geometric)
+## Date(2020/04/30)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Level(2)
+## TitleText1('')
+## AuthorText1('')
+## EditionText1('')
+## Section1('')
+## Problem1('')
+## KEYWORDS('series','geometric', 'first term', 'common ratio','converge','diverge')
+DOCUMENT();
+loadMacros(
+  "PGstandard.pl",
+  "PGchoicemacros.pl",
+  "PGcourse.pl",
+  "MathObjects.pl",
+);
+
+TEXT(beginproblem());
+Context("Numeric");
+Context()->strings->add(DIV=>{});
+
+$showPartialCorrectAnswers = 0;
+$a=random(2,3);
+$b=random(4,10);
+$c=random(4,10);
+$d=$c+1;
+$e=random(3,9);
+
+# part(a)
+#$ansdiv=Compute("DIV");
+$ans1a = $d/$c;
+$ans1r = $d/$c;
+# part(b)
+$ansa=(1/($a**2))/(1-(1/$a));
+$ans2a = 1/($a**2);
+$ans2r = 1/$a;
+# part(c)
+$ans3=(1/$b)/(1-($a/($b**2)));
+$ans3a = 1/$b;
+$ans3r = $a/$b**2;
+# part(d)
+$ans4=($c**5/$d**5)/(1-($c/$d));
+$ans4a = ($c/$d)**5;
+$ans4r = $c/$d;
+# part(e)
+$ans5a = 1/$e**4;
+$ans5r = 1;
+#$ans5=($c/$d)/(1-($c/$d))+ ($a/$d)/(1-($a/$d));
+
+Context()->texStrings;
+BEGIN_TEXT
+
+The following series are geometric series. Geometric series have the form
+\( a + ar + ar^2 + ar^3 + \ldots \) where \( a \) is the first term of the series and \( r\) is the common ratio between successive terms.$BR
+
+$BR Determine whether each series converges or not: $BR
+in the first answer blank of each of the given series, if the series converges enter the sum of the series, or enter DIV if the series diverges. 
+$BR
+Also, state the first term \( a \) and the common ratio \( r \) for each series. 
+
+$BR 
+(a)  \( \displaystyle \sum_{n=1}^{\infty} \frac{$d^n}{$c^n} \) =  \{ans_rule(20)\}, first term = \{ans_rule(10) \}, common ratio = \{ans_rule(10) \} 
+$BR (b)  \( \displaystyle \sum_{n=2}^{\infty} \frac{1}{$a^n} = \) \{ans_rule(20)\}, first term = \{ans_rule(10) \}, common ratio = \{ans_rule(10) \} 
+$BR (c)  \( \displaystyle \sum_{n=0}^{\infty} \frac{$a^n}{$b^{2n+1}} = \) \{ans_rule(20)\}, first term = \{ans_rule(10) \}, common ratio = \{ans_rule(10) \} 
+$BR (d)  \( \displaystyle \sum_{n=5}^{\infty} \frac{$c^n}{$d^n} = \) \{ans_rule(20)\}, first term = \{ans_rule(10) \}, common ratio = \{ans_rule(10) \} 
+$BR (e)  \( \displaystyle \sum_{n=1}^{\infty} \frac{$e^n}{$e^{n+4}} = \) \{ans_rule(20)\}, first term = \{ans_rule(10) \}, common ratio = \{ans_rule(10) \} 
+
+END_TEXT
+Context()->normalStrings;
+
+# part(a)
+ANS(Compute("DIV")->cmp());
+ANS(num_cmp($ans1a));
+ANS(num_cmp($ans1r));
+# part (b)
+ANS(num_cmp($ans2));
+ANS(num_cmp($ans2a));
+ANS(num_cmp($ans2r));
+
+# part (c)
+ANS(num_cmp($ans3));
+ANS(num_cmp($ans3a));
+ANS(num_cmp($ans3r));
+
+# part (d)
+ANS(num_cmp($ans4));
+ANS(num_cmp($ans4a));
+ANS(num_cmp($ans4r));
+
+# part (e)
+ANS(Compute("DIV")->cmp());
+ANS(num_cmp($ans5a));
+ANS(num_cmp($ans5r));
+
+
+ENDDOCUMENT;
+		  	
+
