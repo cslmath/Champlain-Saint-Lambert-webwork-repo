@@ -93,7 +93,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 9
-source_file = 201-NYB-template_files/local/ma123DB/set4/s7_8_21.pg
+source_file = Library/Union/setIntImproper/sc5_9_19.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -103,7 +103,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 10
-source_file = 201-NYB-template_files/local/ma123DB/set4/s7_8_8.pg
+source_file = Library/Union/setIntImproper/sc5_9_6.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -113,7 +113,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 11
-source_file = 201-NYB-template_files/local/ma123DB/set4/s7_8_13.pg
+source_file = Library/Indiana/Indiana_setIntegrals18Improper/sc5_9_11.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
