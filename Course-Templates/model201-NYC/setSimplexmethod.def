@@ -5,7 +5,7 @@ answerDate        = 12/31/2013 at 02:00am EST
 paperHeaderFile   = defaultHeader
 screenHeaderFile  = defaultHeader
 problemList       = 
-setSimplexmethod/LP_simplex1.pg, 1, -1 
+Template_201-NYC/setSimplexmethod/LP_simplex1.pg, 1, -1 
 Library/ASU-topics/set119LPsimplex/p10.pg, 1, -1 
 Library/ASU-topics/set119LPsimplex/nonstand2.pg, 1, -1 
 Library/ASU-topics/set119LPsimplex/p2.pg, 1, -1 
