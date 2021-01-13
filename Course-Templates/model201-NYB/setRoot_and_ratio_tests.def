@@ -43,7 +43,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 4
-source_file = setRoot_and_ratio_tests/Library/ma123DB/set11/s11_6_5.pg
+source_file = Library/ma123DB/set11/s11_6_5.pg
 value = 1
 max_attempts = 1
 showMeAnother = 
