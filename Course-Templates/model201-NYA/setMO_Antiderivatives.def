@@ -183,7 +183,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 18
-source_file = setMO_Antiderivatives/MO_an7_2_19.pg
+source_file = Template_201-NYA/setMO_Antiderivatives/MO_an7_2_19.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

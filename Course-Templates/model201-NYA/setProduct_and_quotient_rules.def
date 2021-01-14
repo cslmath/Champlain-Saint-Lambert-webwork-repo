@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = setProduct_and_quotient_rules/mo_5-2-22.pg
+source_file = Template_201-NYA/setProduct_and_quotient_rules/mo_5-2-22.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = setProduct_and_quotient_rules/mo_5-2-31.pg
+source_file = Template_201-NYA/setProduct_and_quotient_rules/mo_5-2-31.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -43,7 +43,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 4
-source_file = setProduct_and_quotient_rules/mo_5-2-12.pg
+source_file = Template_201-NYA/setProduct_and_quotient_rules/mo_5-2-12.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -53,7 +53,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 5
-source_file = setProduct_and_quotient_rules/mo_ns3_2_4.pg
+source_file = Template_201-NYA/setProduct_and_quotient_rules/mo_ns3_2_4.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = setProduct_and_quotient_rules/mo_prob6.pg
+source_file = Template_201-NYA/setProduct_and_quotient_rules/mo_prob6.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -193,7 +193,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 19
-source_file = setProduct_and_quotient_rules/mo_3-5-51.pg
+source_file = Template_201-NYA/setProduct_and_quotient_rules/mo_3-5-51.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -203,7 +203,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 20
-source_file = setProduct_and_quotient_rules/mo_3-2-24.pg
+source_file = Template_201-NYA/setProduct_and_quotient_rules/mo_3-2-24.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = setLogarithmic_differentiation/mo_osu_dr_7_2.pg
+source_file = Template_201-NYA/setLogarithmic_differentiation/mo_osu_dr_7_2.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -53,7 +53,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 5
-source_file = setLogarithmic_differentiation/mo_mec10.pg
+source_file = Template_201-NYA/setLogarithmic_differentiation/mo_mec10.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -73,7 +73,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 7
-source_file = setLogarithmic_differentiation/mo_osu_dr_7_1.pg
+source_file = Template_201-NYA/setLogarithmic_differentiation/mo_osu_dr_7_1.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -83,7 +83,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 8
-source_file = setLogarithmic_differentiation/mo_osu_dr_7_3.pg
+source_file = Template_201-NYA/setLogarithmic_differentiation/mo_osu_dr_7_3.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -93,7 +93,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 9
-source_file = setLogarithmic_differentiation/mo_ur_dr_7_1.pg
+source_file = Template_201-NYA/setLogarithmic_differentiation/mo_ur_dr_7_1.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -103,7 +103,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 10
-source_file = setLogarithmic_differentiation/mo_1220s2p10.pg
+source_file = Template_201-NYA/setLogarithmic_differentiation/mo_1220s2p10.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -123,7 +123,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 12
-source_file = setLogarithmic_differentiation/mo_Stewart5_3_8_36.pg
+source_file = Template_201-NYA/setLogarithmic_differentiation/mo_Stewart5_3_8_36.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -133,7 +133,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 13
-source_file = setLogarithmic_differentiation/mo_Stewart5_3_8_45.pg
+source_file = Template_201-NYA/setLogarithmic_differentiation/mo_Stewart5_3_8_45.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -143,7 +143,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 14
-source_file = setLogarithmic_differentiation/mo_Stewart5_3_8_35.pg
+source_file = Template_201-NYA/setLogarithmic_differentiation/mo_Stewart5_3_8_35.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

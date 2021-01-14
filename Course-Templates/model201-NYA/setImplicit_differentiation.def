@@ -113,7 +113,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 11
-source_file = setImplicit_differentiation/mo_Stewart5_3_6_22.pg
+source_file = Template_201-NYA/setImplicit_differentiation/mo_Stewart5_3_6_22.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -153,7 +153,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 15
-source_file = setImplicit_differentiation/mo_Stewart5_3_6_24.pg
+source_file = Template_201-NYA/setImplicit_differentiation/mo_Stewart5_3_6_24.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
