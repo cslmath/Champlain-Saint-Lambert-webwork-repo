@@ -5,7 +5,7 @@ answerDate        = 12/31/2013 at 02:00am EST
 paperHeaderFile   = defaultHeader
 screenHeaderFile  = defaultHeader
 problemList       = 
-setGaussian_Elimination/Anton_linearalgebra_1-6-17.pg, 1, -1 
+Template_201-NYC/setGaussian_Elimination/Anton_linearalgebra_1-6-17.pg, 1, -1 
 Library/TCNJ/TCNJ_MatrixInverse/problem2.pg, 1, -1 
 Library/TCNJ/TCNJ_MatrixInverse/problem3.pg, 1, -1 
 Library/TCNJ/TCNJ_MatrixInverse/problem6.pg, 1, -1 

@@ -1,84 +1,15 @@
-assignmentType      = default
+
 openDate          = 08/01/2012 at 12:00am EDT
-reducedScoringDate = 12/31/1969 at 07:00pm EST
 dueDate           = 12/31/2013 at 01:00am EST
 answerDate        = 12/31/2013 at 02:00am EST
-enableReducedScoring = N
 paperHeaderFile   = defaultHeader
 screenHeaderFile  = defaultHeader
-description       = 
-restrictProbProgression = 
-emailInstructor   = 
-
-problemListV2 
-problem_start
-problem_id = 1
-source_file = setGaussian_Elimination/Anton_linearalgebra_1-6-17.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 2
-source_file = Library/TCNJ/TCNJ_MatrixInverse/problem2.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 3
-source_file = Library/TCNJ/TCNJ_MatrixInverse/problem3.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 4
-source_file = Library/TCNJ/TCNJ_MatrixInverse/problem6.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 5
-source_file = Library/TCNJ/TCNJ_MatrixInverse/problem8.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 6
-source_file = Library/TCNJ/TCNJ_MatrixInverse/problem13.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 7
-source_file = Library/ASU-topics/set119MatrixAlgebra/p13.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
+problemList       = 
+Template_201-105/setGaussian_Elimination/Anton_linearalgebra_1-6-17.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixInverse/problem2.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixInverse/problem3.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixInverse/problem6.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixInverse/problem8.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixInverse/problem13.pg, 1, -1 
+Library/ASU-topics/set119MatrixAlgebra/p13.pg, 1, -1 
 

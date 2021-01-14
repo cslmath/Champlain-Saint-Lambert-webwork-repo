@@ -1,0 +1,92 @@
+# DESCRIPTION
+## Linear Algebra
+## Problem 7 Chapter 1-Supplementary Exercises in Anton 
+## Elementary Linear Algebra, 9th edition
+## ENDDESCRIPTION
+
+## KEYWORDS('matrix')
+
+## DBsubject('Linear Algebra')
+## DBchapter('Systems of Linear Equations and Matrices')
+## DBsection('Elimination Methods')
+## Date('26 October 2011')
+## Author('Charles Fortin')
+## Institution('Champlain College')
+
+DOCUMENT(); 
+
+loadMacros("PG.pl",
+           "PGbasicmacros.pl",
+           "PGchoicemacros.pl",
+           "PGanswermacros.pl",
+           "PGmatrixmacros.pl",
+	     "MathObjects.pl",
+           "parserPopUp.pl"
+           );
+
+TEXT(beginproblem());
+
+$showPartialCorrectAnswers = 1;
+
+Context("Matrix");
+Context()->variables->add(a=>'Real');
+Context()->variables->add(b=>'Real');  
+
+$A = random(2,6);
+$B = Compute("2*$A");
+$M = Matrix([[a,0,b,$A],[a,a,$B,$B],[0,a,$A,b]]);
+$ans1 = Compute("0");
+$ans2 = Compute("$A");
+$popup1 = PopUp(["?", "equals to", "is not equal to"], "equals to");
+$popup2 = PopUp(["?", "equals to", "is not equal to"], "is not equal to");
+
+
+Context()->texStrings;
+BEGIN_TEXT
+Let
+\[$M\]
+$BR
+be the augmented matrix for a linear system. Complete the following sentences.
+$BR
+$BR
+The system has a unique solution when \(a\) \{ $popup2->menu() \} \{ans_rule(2)\} 
+and \(b\) \{ $popup2->menu() \}  \{ans_rule(2)\}.
+$BR
+$BR
+The system has a one-parameter solution when \(a\) \{ $popup2->menu() \}  \{ans_rule(2)\} 
+and \(b\) \{ $popup1->menu() \}  \{ans_rule(2)\}.
+$BR
+$BR
+The system has a two-parameter solution when \(a =\) \{ $popup1->menu() \}  \{ans_rule(2)\} 
+and \(b\) \{ $popup1->menu() \}  \{ans_rule(2)\}.
+$BR
+$BR
+The system has no solution when \(a\) \{ $popup1->menu() \}  \{ans_rule(2)\} 
+and \(b\) \{ $popup2->menu() \}  \{ans_rule(2)\}.
+
+END_TEXT
+
+Context()->normalStrings;
+
+ANS( $popup2->cmp() );
+ANS($ans1->cmp());
+ANS( $popup2->cmp() );
+ANS($ans2->cmp());
+
+ANS( $popup2->cmp() );
+ANS($ans1->cmp());
+ANS( $popup1->cmp() );
+ANS($ans2->cmp());
+
+ANS( $popup1->cmp() );
+ANS($ans1->cmp());
+ANS( $popup1->cmp() );
+ANS($ans2->cmp());
+
+ANS( $popup1->cmp() );
+ANS($ans1->cmp());
+ANS( $popup2->cmp() );
+ANS($ans2->cmp());
+
+
+ENDDOCUMENT() ;

@@ -1,0 +1,67 @@
+## DESCRIPTION
+## Linear Algebra
+## ENDDESCRIPTION
+
+## DBsubject('Linear Algebra')
+## DBchapter('Matrices')
+## DBsection('Determinants')
+## Date('')
+## Author('')
+## Institution('Rochester')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGgraphmacros.pl",
+"PGmatrixmacros.pl", 
+"PGnumericalmacros.pl",
+"PGauxiliaryFunctions.pl",
+"PGmorematrixmacros.pl"
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+$a11 = random(20,30,5);
+$a21 = random(30,50,5);
+$a12 = random(30,50,5);
+$a22 = random(20,30,5);
+
+BEGIN_TEXT
+Suppose that in a certain open economy there are two production sectors: agriculture and manufacturing. Each dollar of production in agriculture requires $a11 cents of input from the agriculture sector and $a12 cents from manufacturing. Each dollar of production in the manufacturing sector requires $a22 cents of input from itself, $a12 cents from the agriculture sector.
+$BR
+$BR
+In your answer below keep the columns and rows in alphabetical order (agriculture, then manufacturing).
+$BR
+$BR
+\{ mbox( 'The consumption matrix for this economy is \(C=\)', answer_matrix(2,2,5) ) \} 
+$BR
+
+Solve the Leontief equation \((I-C)X =D\) to find a level of production in each of the two sectors that will satisfy an external demand from the open sector for 200000 dollars of agricultural output and 150000 of manufacturing output. Enter your answer correct to the nearest dollar.
+$BR
+$BR\{ mbox( 'The required production vector is \(X=\)', answer_matrix(2,1,5) ) \} 
+END_TEXT
+
+$b11 = 1-((1/100)*$a11);
+$b12 = (-1/100)*$a12;
+$b21 = (-1/100)*$a21;
+$b22 = 1-((1/100)*$a22);
+
+$det = $b11*$b22-$b12*$b21;
+
+$agprod = (1/$det)*($b22*200000 - $b12*150000);
+$maprod = (1/$det)*(-$b21*200000 + $b11*150000);
+
+ANS(num_cmp(0.01*$a11)); ANS(num_cmp(0.01*$a12));
+ANS(num_cmp(0.01*$a21)); ANS(num_cmp(0.01*$a22));
+ANS(num_cmp($agprod)); ANS(num_cmp($maprod));
+ENDDOCUMENT();       # This should be the last executable line in the problem.

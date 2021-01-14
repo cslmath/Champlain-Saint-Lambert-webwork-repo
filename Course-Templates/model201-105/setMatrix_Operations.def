@@ -1,0 +1,32 @@
+
+openDate          = 08/01/2012 at 12:00am EDT
+dueDate           = 12/31/2013 at 01:00am EST
+answerDate        = 12/31/2013 at 02:00am EST
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+problemList       = 
+Library/maCalcDB/setLinearAlgebra3Matrices/ur_la_3_6.pg, 1, -1 
+Library/Dartmouth/setMTWCh1S5/problem_1.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixEquations/problem5.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixEquations/problem9.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixOperations/problem26.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixOperations/problem17.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixOperations/problem24.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixOperations/problem4.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixOperations/problem5.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixOperations/problem6.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixOperations/problem8.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixOperations/problem7.pg, 1, -1 
+Library/TCNJ/TCNJ_MatrixOperations/problem25.pg, 1, -1 
+Template_201-105/setMatrix_Operations/ur_la_3_22.pg, 1, -1 
+Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_1a.pg, 1, -1 
+Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_2.pg, 1, -1 
+Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_23.pg, 1, -1 
+Library/Rochester/setAlgebra34Matrices/sw7_4_17.pg, 1, -1 
+Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_34.pg, 1, -1 
+Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_33.pg, 1, -1 
+Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_25.pg, 1, -1 
+Template_201-105/setMatrix_Operations/ur_la_3_21.pg, 1, -1 
+Template_201-105/setMatrix_Operations/Anton_linearalgebra_1-3-24.pg, 1, -1 
+Template_201-105/setMatrix_Operations/Anton_linearalgebra_1-3-24b.pg, 1, -1 
+

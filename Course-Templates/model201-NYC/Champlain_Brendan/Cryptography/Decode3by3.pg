@@ -1,0 +1,75 @@
+## DESCRIPTION
+## Linear Algebra
+## ENDDESCRIPTION
+
+## DBsubject('Linear Algebra')
+## DBchapter('Matrices')
+## DBsection('Determinants')
+## Date('')
+## Author('')
+## Institution('Rochester')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGgraphmacros.pl",
+"PGmatrixmacros.pl", 
+"PGnumericalmacros.pl",
+"PGauxiliaryFunctions.pl",
+"PGmorematrixmacros.pl"
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+$a = 4;
+$b = 3;
+$c = 1;
+$d = 2;
+$e = 3;
+$f = 0;
+$g = 3;
+$h = 1;
+$i = 1;
+
+$ai = -3;
+$bi = 2;
+$ci = 3;
+$di = 2;
+$ei = -1;
+$fi = -2;
+$gi = 7;
+$hi = -5;
+$ii = -6;
+
+BEGIN_TEXT
+\{ begintable(27) \}
+\{ row( "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", " ") \}
+\{ row( "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27") \}
+\{ endtable() \}
+$BR
+Bill and Ted send secret messages to each other using the usual numbering scheme given above. You were spying on Bill when he sent the message 95,82,42,68,46,39,82,52,49. You saw the encoding matrix \(A\) below.  You even saw most of the decoding matrix, but you couldn't make out the last row. 
+$BR
+$BR
+\{ mbox( '\(A=\)', display_matrix([[$a, $b, $c], [$d, $e, $f],[$g, $h, $i]])) \} 
+$BR
+\{ mbox( '\(A^{-1}=\)', display_matrix([[$ai, $bi, $ci], [$di, $ei, $fi],[ans_rule(1), ans_rule(1), ans_rule(1)]])) \} 
+$BR
+Fill in the missing entries in the decoding matrix (note that there is a quick way to find them without computing the inverse of \(A\) from scratch), then use the decoding matrix to decode Bill's message.
+$BR
+$BR
+The decoded plaintext is \{ans_rule(20)\}.
+END_TEXT
+
+ANS(num_cmp(7)); ANS(num_cmp(-5));ANS(num_cmp(-6));
+ANS(str_cmp("excellent"));
+ENDDOCUMENT();       # This should be the last executable line in the problem.

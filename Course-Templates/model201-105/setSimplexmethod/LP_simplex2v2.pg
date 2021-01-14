@@ -1,0 +1,98 @@
+## DESCRIPTION
+##   Simplex Method
+## Author: C Fortin, Champlain College St-Lambert
+## ENDDESCRIPTION
+
+## KEYWORDS('Simplex Method')
+## Tagged by nhamblet
+
+## DBsubject('Algebra')
+## DBchapter('Linear Programming')
+## DBsection('Simplex Method')
+## Date('')
+## Author('')
+## Institution('Champlain College')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+
+
+DOCUMENT();    
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGauxiliaryFunctions.pl",
+"PGmatrixmacros.pl",
+"LinearProgramming.pl",
+"PGasu.pl"
+);
+
+TEXT(beginproblem());
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers=0;
+
+$c1 = random(2,5);
+$c2 = random(2,5);
+$c3 = random(2,5);
+$u1 = random(20,30);
+$u2 = random(20,30);
+$u3 = random(20,30);
+
+$m = [[0,2,3,2,1,0,0,$u1],
+[0,1,2,2,0,1,0,$u2],
+[0,2,1,1,0,0,1,$u3],
+[1,-$c1,-$c2,-$c3,0,0,0,0]];
+
+($m, $endcode, $pivcount) = lp_solve($m, pivot_limit=>200);
+
+$P = lp_current_value(0, $m);
+#$fin0 = ($fin0->times(-1))->print_inline();
+$xopt = lp_current_value(1, $m);#->print_inline();
+$yopt = lp_current_value(2, $m);#->print_inline();
+$zopt = lp_current_value(3, $m);#->print_inline();
+
+BEGIN_TEXT
+
+The Champlain Company wants to maximize the profits on the products A, B, C. The contribution margin for each product follows:
+$BCENTER
+\{ begintable(2) \}
+\{ row( "Product","Contribution Margin")\}
+\{ row( "A","$SPACE $SPACE$SPACE  $SPACE $SPACE $c1 dollars ")\}
+\{ row( "B","$SPACE $SPACE$SPACE  $SPACE $SPACE $c2 dollars")\}
+\{ row( "C","$SPACE $SPACE$SPACE  $SPACE $SPACE $c3 dollars")\}
+\{ endtable() \}
+$ECENTER
+
+The production requirements and departmental capacities, by departments, are as follows:
+$BCENTER
+\{ begintable(3) \}
+\{ row( "Department", "Production Requirement (hours)", "Departmental Capacity (thousand hours)" ) \}
+\{ row("$SPACE " , " $SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE A$SPACE $SPACE$SPACE $SPACE $SPACE$SPACE B $SPACE $SPACE$SPACE $SPACE$SPACE$SPACE C"," $SPACE" )\}
+\{ row( "Assembling", "$SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE 2 $SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE 3$SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE $SPACE 2","$SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE$SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE $SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE $u1 ")\}
+\{ row( "Painting", "$SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE 1 $SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE 2$SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE $SPACE 2","$SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE$SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE $SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE $u2 ")\}
+\{ row( "Packaging", "$SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE 2 $SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE 1$SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE $SPACE 1","$SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE$SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE $SPACE $SPACE$SPACE  $SPACE $SPACE$SPACE $u3 ")\}
+\{ endtable() \}
+$ECENTER
+
+
+Using the Simplex Method, find the quantity of products A, B, C (in units of a thousand) the Champlain Company should produce in order to maximize the profits.
+$BR
+(a) The maximum value profit in thousands of dollars is \{ ans_rule(10) \} (if the answer is $ 34768 , write 34.768)
+$BR
+(b) The Champlain Company should produce x= \{ ans_rule(5)\} thousand products A, y= \{ ans_rule(5)\} thousand products B, and z = \{ ans_rule(5) \} thousand products C.
+
+
+END_TEXT
+
+ANS(num_cmp($P));
+ANS(num_cmp($xopt));
+ANS(num_cmp($yopt));
+ANS(num_cmp($zopt));
+
+
+
+ENDDOCUMENT();        
