@@ -143,16 +143,6 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 14
-source_file = Library/Rochester/setDerivatives0Theory/S02.09.DerivativesAsFunction.PTP01.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 15
 source_file = Library/ASU-topics/setRateChange/3-3-01.pg
 value = 1
 max_attempts = -1
@@ -162,7 +152,7 @@ counts_parent_grade =
 att_to_open_children =  
 problem_end
 problem_start
-problem_id = 16
+problem_id = 15
 source_file = Library/ASU-topics/setDerivativeFunction/3-3-03.pg
 value = 1
 max_attempts = -1
@@ -172,7 +162,7 @@ counts_parent_grade =
 att_to_open_children =  
 problem_end
 problem_start
-problem_id = 17
+problem_id = 16
 source_file = Library/ASU-topics/setDerivativeFunction/prob4.pg
 value = 1
 max_attempts = -1
@@ -182,7 +172,7 @@ counts_parent_grade =
 att_to_open_children =  
 problem_end
 problem_start
-problem_id = 18
+problem_id = 17
 source_file = Library/ASU-topics/setDerivativeFunction/3-3-09.pg
 value = 1
 max_attempts = -1
@@ -192,7 +182,7 @@ counts_parent_grade =
 att_to_open_children =  
 problem_end
 problem_start
-problem_id = 19
+problem_id = 18
 source_file = Library/Rochester/setDerivatives1/ns2_8_31.pg
 value = 1
 max_attempts = -1
@@ -202,7 +192,7 @@ counts_parent_grade =
 att_to_open_children =  
 problem_end
 problem_start
-problem_id = 20
+problem_id = 19
 source_file = Library/Rochester/setDerivatives1/ur_dr_1_5.pg
 value = 1
 max_attempts = -1
@@ -212,7 +202,7 @@ counts_parent_grade =
 att_to_open_children =  
 problem_end
 problem_start
-problem_id = 21
+problem_id = 20
 source_file = Library/Rochester/setDerivatives1/ur_dr_1_4.pg
 value = 1
 max_attempts = -1
