@@ -48,6 +48,7 @@ $tmptwosAd = sprintf "%lb", $twosAd ;
 
 # Pad with leading zeroes if necessary:
 $length = length($tmptwosAd);
+if ($length == 8)  {$twosAb = "$tmptwosAd"} ;
 if ($length == 7)  {$twosAb = "0$tmptwosAd"} ;
 if ($length == 6)  {$twosAb = "00$tmptwosAd"} ;
 if ($length == 5)  {$twosAb = "000$tmptwosAd"} ;
