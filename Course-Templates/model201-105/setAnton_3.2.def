@@ -1,214 +1,28 @@
-assignmentType      = default
+
 openDate          = 08/01/2012 at 12:00am EDT
-reducedScoringDate = 12/31/1969 at 07:00pm EST
 dueDate           = 12/31/2013 at 01:00am EST
 answerDate        = 12/31/2013 at 02:00am EST
-enableReducedScoring = N
 paperHeaderFile   = defaultHeader
 screenHeaderFile  = defaultHeader
-description       = 
-restrictProbProgression = 
-emailInstructor   = 
-
-problemListV2 
-problem_start
-problem_id = 1
-source_file = Library/maCalcDB/setVectors2DotProduct/UR_VC_1_8.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 2
-source_file = Library/maCalcDB/setVectors2DotProduct/UR_VC_1_14.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 3
-source_file = Library/Union/setMVvectors/an12_2_15.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 4
-source_file = Library/Union/setMVvectors/an12_2_19.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 5
-source_file = Library/Union/setMVvectors/an12_2_17.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 6
-source_file = Library/Union/setMVvectors/vectors-1.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 7
-source_file = Library/Union/setMVvectors/an12_2_31.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 8
-source_file = Library/Michigan/Chap13Sec1/Q33.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 9
-source_file = Library/Michigan/Chap13Sec1/Q31.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 10
-source_file = Library/maCalcDB/setVectors2DotProduct/UR_VC_1_13.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 11
-source_file = Library/Union/setMVvectors/vectors-7.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 12
-source_file = Library/Michigan/Chap13Sec3/Q29.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 13
-source_file = Library/Michigan/Chap13Sec3/Q46.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 14
-source_file = Library/Michigan/Chap13Sec3/Q05.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 15
-source_file = Library/Rochester/setVectors2DotProduct/UR_VC_1_11.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 16
-source_file = Library/Dartmouth/setStewartCh13S3/problem_6.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 17
-source_file = Library/Union/setMVvectors/vectors-9.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 18
-source_file = Library/Union/setMVvectors/vectors-8.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 19
-source_file = Library/Dartmouth/setMTWCh1S2/problem_1.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 20
-source_file = Library/Dartmouth/setStewartCh13S3/problem_2.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
+problemList       = 
+Library/maCalcDB/setVectors2DotProduct/UR_VC_1_8.pg, 1, -1 
+Library/maCalcDB/setVectors2DotProduct/UR_VC_1_14.pg, 1, -1 
+Library/Union/setMVvectors/an12_2_15.pg, 1, -1 
+Library/Union/setMVvectors/an12_2_19.pg, 1, -1 
+Library/Union/setMVvectors/an12_2_17.pg, 1, -1 
+Library/Union/setMVvectors/vectors-1.pg, 1, -1 
+Library/Union/setMVvectors/an12_2_31.pg, 1, -1 
+Library/Michigan/Chap13Sec1/Q33.pg, 1, -1 
+Library/Michigan/Chap13Sec1/Q31.pg, 1, -1 
+Library/maCalcDB/setVectors2DotProduct/UR_VC_1_13.pg, 1, -1 
+Library/Union/setMVvectors/vectors-7.pg, 1, -1 
+Library/Michigan/Chap13Sec3/Q29.pg, 1, -1 
+Library/Michigan/Chap13Sec3/Q46.pg, 1, -1 
+Library/Michigan/Chap13Sec3/Q05.pg, 1, -1 
+Library/Rochester/setVectors2DotProduct/UR_VC_1_11.pg, 1, -1 
+Library/Dartmouth/setStewartCh13S3/problem_6.pg, 1, -1 
+Library/Union/setMVvectors/vectors-9.pg, 1, -1 
+Library/Union/setMVvectors/vectors-8.pg, 1, -1 
+Library/Dartmouth/setMTWCh1S2/problem_1.pg, 1, -1 
+Library/Dartmouth/setStewartCh13S3/problem_2.pg, 1, -1 
 

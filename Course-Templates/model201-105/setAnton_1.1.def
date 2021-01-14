@@ -1,224 +1,29 @@
-assignmentType      = 
+
 openDate          = 08/01/2012 at 12:00am EDT
-reducedScoringDate = 12/31/1969 at 07:00pm EST
 dueDate           = 12/31/2013 at 01:00am EST
 answerDate        = 12/31/2013 at 02:00am EST
-enableReducedScoring = N
 paperHeaderFile   = 
 screenHeaderFile  = 
-description       = 
-restrictProbProgression = 
-emailInstructor   = 
-
-problemListV2 
-problem_start
-problem_id = 1
-source_file = Library/TCNJ/TCNJ_RowReduction/problem4.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 2
-source_file = Library/TCNJ/TCNJ_RowReduction/problem5.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 3
-source_file = Library/TCNJ/TCNJ_RowReduction/problem7.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 4
-source_file = Library/TCNJ/TCNJ_LinearSystems/problem5.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 5
-source_file = Library/TCNJ/TCNJ_LinearSystems/problem9.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 6
-source_file = Library/TCNJ/TCNJ_LinearSystems/problem10.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 7
-source_file = Library/TCNJ/TCNJ_LinearSystems/problem7.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 8
-source_file = Library/TCNJ/TCNJ_LinearSystems/problem15.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 9
-source_file = Library/Rochester/setLinearAlgebra2SystemsApplications/ur_la_2_1.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 10
-source_file = Library/Rochester/setLinearAlgebra1Systems/ur_la_1_3.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 11
-source_file = Library/Rochester/setLinearAlgebra1Systems/ur_la_1_4.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 12
-source_file = Library/Rochester/setLinearAlgebra1Systems/ur_la_1_11.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 13
-source_file = Library/Rochester/setLinearAlgebra1Systems/ur_la_1_9.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 14
-source_file = Library/Rochester/setLinearAlgebra1Systems/ur_la_1_6.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 15
-source_file = Library/Rochester/setLinearAlgebra1Systems/ur_la_1_8.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 16
-source_file = Library/maCalcDB/setLinearAlgebra1Systems/ur_la_1_7.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 17
-source_file = Library/Rochester/setLinearAlgebra1Systems/ur_la_1_10.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 18
-source_file = champlainLibrary/LinearAlgebra/Systems-Linear-Equations/CF11Anton_linearalgebra_1-1-7.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 19
-source_file = Library/TCNJ/TCNJ_VectorEquations/problem2.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 20
-source_file = Library/TCNJ/TCNJ_RowReduction/problem9.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 21
-source_file = Library/TCNJ/TCNJ_RowReduction/problem6.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
+problemList       = 
+Library/TCNJ/TCNJ_RowReduction/problem4.pg, 1, -1 
+Library/TCNJ/TCNJ_RowReduction/problem5.pg, 1, -1 
+Library/TCNJ/TCNJ_RowReduction/problem7.pg, 1, -1 
+Library/TCNJ/TCNJ_LinearSystems/problem5.pg, 1, -1 
+Library/TCNJ/TCNJ_LinearSystems/problem9.pg, 1, -1 
+Library/TCNJ/TCNJ_LinearSystems/problem10.pg, 1, -1 
+Library/TCNJ/TCNJ_LinearSystems/problem7.pg, 1, -1 
+Library/TCNJ/TCNJ_LinearSystems/problem15.pg, 1, -1 
+Library/Rochester/setLinearAlgebra2SystemsApplications/ur_la_2_1.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_3.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_4.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_11.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_9.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_6.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_8.pg, 1, -1 
+Library/maCalcDB/setLinearAlgebra1Systems/ur_la_1_7.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_10.pg, 1, -1 
+Template_201-NYC/setSystemsofLinearEqn/Anton_linearalgebra_1-1-7.pg, 1, -1 
+Library/TCNJ/TCNJ_VectorEquations/problem2.pg, 1, -1 
+Library/TCNJ/TCNJ_RowReduction/problem9.pg, 1, -1 
+Library/TCNJ/TCNJ_RowReduction/problem6.pg, 1, -1 
 

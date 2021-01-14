@@ -1,0 +1,37 @@
+
+openDate          = 08/01/2012 at 12:00am EDT
+dueDate           = 12/31/2013 at 01:00am EST
+answerDate        = 12/31/2013 at 02:00am EST
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+problemList       = 
+Library/TCNJ/TCNJ_RowReduction/problem11.pg, 1, -1 
+Library/TCNJ/TCNJ_SolutionSetsLinearSystems/problem6.pg, 1, -1 
+Library/TCNJ/TCNJ_SolutionSetsLinearSystems/problem7.pg, 1, -1 
+Library/Rochester/setLinearAlgebra2SystemsApplications/ur_la_2_2.pg, 1, -1 
+Library/Rochester/setLinearAlgebra2SystemsApplications/ur_la_2_3.pg, 1, -1 
+Library/Rochester/setLinearAlgebra2SystemsApplications/ur_la_2_6.pg, 1, -1 
+Library/Rochester/setLinearAlgebra2SystemsApplications/ur_la_2_4.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_17.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_10.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_21.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_18.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_22.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_9.pg, 1, -1 
+Library/Rochester/setLinearAlgebra1Systems/ur_la_1_6.pg, 1, -1 
+Library/maCalcDB/setLinearAlgebra1Systems/ur_la_1_5.pg, 1, -1 
+Library/TCNJ/TCNJ_RowReduction/problem3.pg, 1, -1 
+Library/TCNJ/TCNJ_RowReduction/problem9.pg, 1, -1 
+Library/TCNJ/TCNJ_RowReduction/problem6.pg, 1, -1 
+Library/TCNJ/TCNJ_LinearSystems/problem17.pg, 1, -1 
+Library/TCNJ/TCNJ_RowReduction/problem2.pg, 1, -1 
+Library/TCNJ/TCNJ_RowReduction/problem14.pg, 1, -1 
+Library/TCNJ/TCNJ_RowReduction/problem15.pg, 1, -1 
+Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_32.pg, 1, -1 
+Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_30.pg, 1, -1 
+Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_31.pg, 1, -1 
+Template_201-NYC/setGaussian_Elimination/Anton_linearalgebra_1-2-27.pg, 1, -1 
+Template_201-NYC/setGaussian_Elimination/Anton_linearalgebra_1-6-17.pg, 1, -1 
+Template_201-NYC/setGaussian_Elimination/Anton_linearalgebra_1-supp-7.pg, 1, -1 
+Template_201-NYC/setGaussian_Elimination/cfortin_LU_with_elementarymatrices2.pg, 1, -1 
+
