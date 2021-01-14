@@ -1,0 +1,74 @@
+## DESCRIPTION
+## Integral Calculus: Taylor polynomial to approximate a definite integral
+## ENDDESCRIPTION
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Infinite sequences and series)
+## DBsection(Representations of functions as series)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2020-Nov-01)
+## MLT(intseries)
+## MLTleader(1)
+## Level(3)
+## TitleText1('Applied Calculus')
+## AuthorText1('Soo Tan')
+## EditionText1('10')
+## Section1('11.1')
+## Problem1('28')
+## KEYWORDS('Maclaurin' 'integral' 'Taylor' 'polynomial')
+
+DOCUMENT();
+loadMacros(
+  "PGstandard.pl",
+  "PGchoicemacros.pl",
+  "MathObjects.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+
+## Do NOT show partial correct answers
+$showPartialCorrectAnswers = 0;
+
+# Set limits of integration and functions
+$a = random(0.1,0.2,0.01);
+$b = Compute($a + random(.09,0.2,0.01));
+$T3 = Compute("x - x^2/2 + x^3/3");
+$fx = Compute("1 - x/2 + x^2/3");
+$Fx = Compute("x - x^2/4 + x^3/9");
+$Fb = $Fx->eval(x=>$b);
+$Fa = $Fx->eval(x=>$a);
+$ans = $Fb - $Fa;
+
+## Problem begin
+TEXT(beginproblem());
+
+Context("Numeric");
+
+BEGIN_PGML
+Use the third Taylor polynomial of [` f(x) = \ln(1+x) `] about [`x=0`] to approximate the definite integral
+[` \displaystyle  \int_{[$a]}^{[$b]} \frac{\ln(1+x)}{x}\,dx. `]  
+
+(a) First, the third Taylor polynomial of [`f(x) = \ln(1+x) `] about [`x=0`] is : [______________________________]{$T3}  
+
+(b) Thus, using the third Taylor polynomial, the integrand is approximately: 
+[` \dfrac{\ln(1+x)}{x} \approx `] [______________________________]{$fx}  
+
+(c) Finally, integrating with the approximate integrand found in part (b),  
+ [`\displaystyle  \int_{[$a]}^{[$b]} \frac{\ln(1+x)}{x}\,dx \approx `] [__________________]{$ans}
+END_PGML
+
+BEGIN_PGML_SOLUTION
+(a) The third polynomial of [` \ln(1+x) `] about [`x=0`] is: [` [$T3] `]  
+
+(b) The integrand is approximately [`\dfrac{\ln(1+x)}{x} \approx [$fx] `]  
+
+(c) [`\displaystyle  \int_{[$a]}^{[$b]} \frac{\ln(1+x)}{x}\,dx \approx 
+ \int_{[$a]}^{[$b]} \left( [$fx] \right)\,dx = \left.\left(  [$Fx] \right) \right|_{[$a]}^{[$b]} = [$ans] `]
+END_PGML_SOLUTION 
+
+ENDDOCUMENT();
+
+
+
+

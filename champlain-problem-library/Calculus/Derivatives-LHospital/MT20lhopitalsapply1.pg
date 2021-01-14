@@ -1,0 +1,85 @@
+##DESCRIPTION
+##  Calculus: determine if l'Hopital's rule applies
+##ENDDESCRIPTION
+
+########################################################################
+
+## DBsubject('Calculus - single variable')
+## DBchapter('Application of Differentiation')
+## DBsection('Indeterminate forms and L'Hopital's rule')
+## Date('2020-Nov-06')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+
+
+DOCUMENT();      
+
+loadMacros(
+  "PGstandard.pl",
+  "PGchoicemacros.pl",
+  "PGcourse.pl"
+);
+
+# Print problem number and point value (weight) for the problem
+TEXT(beginproblem());
+
+# Show which answers are correct and which ones are incorrect
+$showPartialCorrectAnswers = 0;
+
+##############################################################
+#
+#  Setup
+#
+#
+# Make a new checkbox multiple choice
+$cmc = new_checkbox_multiple_choice();
+$cmc -> qa (
+"Select the limits to which l'Hopital's Rule applies:", 
+"\( \lim\limits_{x\to 2} \frac{x^2 + x - 6}{2-x} \)", 
+"\( \lim\limits_{x\to 1} \frac{x^2 - 1}{x^2 - x} \)",                
+"\( \lim\limits_{t\to \infty} \frac{\ln t}{\sqrt{t}} \)",
+"\( \lim\limits_{t\to 0} \frac{\sin 4t}{t} \)",
+);
+$cmc -> extra(
+"\( \lim\limits_{x\to 2} \frac{x^2 + x + 6}{2-x} \)",
+"\( \lim\limits_{x\to -1} \frac{x^2 - 1}{x^2 - x} \)",
+"\( \lim\limits_{x\to 1} \frac{\ln x}{\sqrt{x}} \)",
+"\( \lim\limits_{t\to 0} \frac{\cos 4t}{t} \)",
+"\( \lim\limits_{x\to \infty} \frac{e^{-x}}{x} \)"
+);
+
+
+##############################################################
+#
+#  Text
+#
+#
+
+
+BEGIN_TEXT
+\{ $cmc -> print_q() \}
+$PAR
+\{ $cmc -> print_a() \}
+
+END_TEXT
+
+##############################################################
+#
+#  Answers
+#
+#
+install_problem_grader(~~&std_problem_grader);
+
+$showPartialCorrectAnswers = 0;
+
+ANS(checkbox_cmp($cmc->correct_ans));
+
+
+
+ENDDOCUMENT();        
+
