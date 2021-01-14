@@ -5,16 +5,16 @@ answerDate        = 12/31/2014 at 10:59pm EST
 paperHeaderFile   = defaultHeader
 screenHeaderFile  = defaultHeader
 problemList       = 
-Template_201-NYC/Champlain_Brendan/Cryptography/Crib2by2.pg, 1, -1 
-Template_201-NYC/Champlain_Brendan/Cryptography/Decode2by2.pg, 1, -1 
-Template_201-NYC/Champlain_Brendan/Cryptography/Decode3by3.pg, 1, -1 
-Template_201-NYC/Champlain_Brendan/Graphs/FindAdjacencyMatrix1.pg, 1, -1 
-Template_201-NYC/Champlain_Brendan/Graphs/FindAdjacencyMatrix2.pg, 1, -1 
-Template_201-NYC/Champlain_Brendan/Graphs/PowerRanking.pg, 1, -1 
-Template_201-NYC/Champlain_Brendan/Leontif/Closed/2by2.pg, 1, -1 
-Template_201-NYC/Champlain_Brendan/Leontif/Closed/3by3.pg, 1, -1 
-Template_201-NYC/Champlain_Brendan/Leontif/Closed/ConsumptionMatrix.pg, 1, -1 
-Template_201-NYC/Champlain_Brendan/Leontif/Open/2by2Production.pg, 1, -1 
-Template_201-NYC/Champlain_Brendan/Leontif/Open/3by3Production.pg, 1, -1 
-Template_201-NYC/Champlain_Brendan/Leontif/Open/ConsumptionMatrix.pg, 1, -1 
+Template_201-105/Champlain_Brendan/Cryptography/Crib2by2.pg, 1, -1 
+Template_201-105/Champlain_Brendan/Cryptography/Decode2by2.pg, 1, -1 
+Template_201-105/Champlain_Brendan/Cryptography/Decode3by3.pg, 1, -1 
+Template_201-105/Champlain_Brendan/Graphs/FindAdjacencyMatrix1.pg, 1, -1 
+Template_201-105/Champlain_Brendan/Graphs/FindAdjacencyMatrix2.pg, 1, -1 
+Template_201-105/Champlain_Brendan/Graphs/PowerRanking.pg, 1, -1 
+Template_201-105/Champlain_Brendan/Leontif/Closed/2by2.pg, 1, -1 
+Template_201-105/Champlain_Brendan/Leontif/Closed/3by3.pg, 1, -1 
+Template_201-105/Champlain_Brendan/Leontif/Closed/ConsumptionMatrix.pg, 1, -1 
+Template_201-105/Champlain_Brendan/Leontif/Open/2by2Production.pg, 1, -1 
+Template_201-105/Champlain_Brendan/Leontif/Open/3by3Production.pg, 1, -1 
+Template_201-105/Champlain_Brendan/Leontif/Open/ConsumptionMatrix.pg, 1, -1 
 

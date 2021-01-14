@@ -30,8 +30,8 @@ Library/TCNJ/TCNJ_RowReduction/problem15.pg, 1, -1
 Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_32.pg, 1, -1 
 Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_30.pg, 1, -1 
 Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_31.pg, 1, -1 
-Template_201-NYC/setGaussian_Elimination/Anton_linearalgebra_1-2-27.pg, 1, -1 
-Template_201-NYC/setGaussian_Elimination/Anton_linearalgebra_1-6-17.pg, 1, -1 
-Template_201-NYC/setGaussian_Elimination/Anton_linearalgebra_1-supp-7.pg, 1, -1 
-Template_201-NYC/setGaussian_Elimination/cfortin_LU_with_elementarymatrices2.pg, 1, -1 
+Template_201-105/setGaussian_Elimination/Anton_linearalgebra_1-2-27.pg, 1, -1 
+Template_201-105/setGaussian_Elimination/Anton_linearalgebra_1-6-17.pg, 1, -1 
+Template_201-105/setGaussian_Elimination/Anton_linearalgebra_1-supp-7.pg, 1, -1 
+Template_201-105/setGaussian_Elimination/cfortin_LU_with_elementarymatrices2.pg, 1, -1 
 

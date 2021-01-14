@@ -5,10 +5,10 @@ answerDate        = 12/31/2013 at 02:00am EST
 paperHeaderFile   = defaultHeader
 screenHeaderFile  = defaultHeader
 problemList       = 
-Template_201-NYC/setGaussian_Elimination/cfortin_LU_with_elementarymatrices2.pg, 1, -1 
+Template_201-105/setGaussian_Elimination/cfortin_LU_with_elementarymatrices2.pg, 1, -1 
 Library/TCNJ/TCNJ_MatrixInverse/problem14.pg, 1, -1 
 Library/TCNJ/TCNJ_MatrixInverse/problem15.pg, 1, -1 
-Template_201-NYC/setAnton1.5/Library/Rochester/setLinearAlgebra5LUfactorization/ur_la_5_8.pg, 1, -1 
+Template_201-105/setAnton1.5/Library/Rochester/setLinearAlgebra5LUfactorization/ur_la_5_8.pg, 1, -1 
 Library/Rochester/setLinearAlgebra5LUfactorization/ur_la_5_1.pg, 1, -1 
 Library/Rochester/setLinearAlgebra5LUfactorization/ur_la_5_2.pg, 1, -1 
 Library/Rochester/setLinearAlgebra5LUfactorization/ur_la_5_3.pg, 1, -1 
