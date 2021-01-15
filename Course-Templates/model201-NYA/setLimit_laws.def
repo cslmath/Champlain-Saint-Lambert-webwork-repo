@@ -163,7 +163,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 16
-source_file = setLimit_laws/mo_s1_3_48a.pg
+source_file = Template_201-NYA/setLimit_laws/mo_s1_3_48a.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -173,7 +173,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 17
-source_file = setLimit_laws/mo_3-2-72.pg
+source_file = Template_201-NYA/setLimit_laws/mo_3-2-72.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -183,7 +183,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 18
-source_file = setLimit_laws/mo_Stewart5_2_3_28.pg
+source_file = Template_201-NYA/setLimit_laws/mo_Stewart5_2_3_28.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -193,7 +193,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 19
-source_file = setLimit_laws/mo_stef2_5p1.pg
+source_file = Template_201-NYA/setLimit_laws/mo_stef2_5p1.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

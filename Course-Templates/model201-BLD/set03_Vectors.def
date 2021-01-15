@@ -33,7 +33,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 3
-source_file = set03_Vectors/MTFIX_an12_2_17.pg
+source_file = Template_201-BLD/set03_Vectors/MTFIX_an12_2_17.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1

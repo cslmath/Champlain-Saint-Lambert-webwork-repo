@@ -211,24 +211,4 @@ prPeriod =
 counts_parent_grade = 
 att_to_open_children =  
 problem_end
-problem_start
-problem_id = 21
-source_file = Library/Union/setDervChainRule/3-6-43.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 22
-source_file = Library/Union/setDervChainRule/an3_5_5.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
 

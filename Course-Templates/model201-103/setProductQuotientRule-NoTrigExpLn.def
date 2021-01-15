@@ -183,26 +183,6 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 18
-source_file = Library/Union/setDervProductQuotientRule/3-5-55.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 19
-source_file = Library/Union/setDervProductQuotientRule/d3.pg
-value = 1
-max_attempts = -1
-showMeAnother = 
-prPeriod = 
-counts_parent_grade = 
-att_to_open_children =  
-problem_end
-problem_start
-problem_id = 20
 source_file = Library/maCalcDB/setDerivatives2Formulas/ur_dr_2_1.pg
 value = 1
 max_attempts = -1
@@ -212,7 +192,7 @@ counts_parent_grade =
 att_to_open_children =  
 problem_end
 problem_start
-problem_id = 21
+problem_id = 19
 source_file = Library/UMN/calculusStewartCCC/s_3_2_42.pg
 value = 1
 max_attempts = -1
@@ -222,7 +202,7 @@ counts_parent_grade =
 att_to_open_children =  
 problem_end
 problem_start
-problem_id = 22
+problem_id = 20
 source_file = Library/UMN/calculusStewartCCC/s_3_2_46.pg
 value = 1
 max_attempts = -1
@@ -232,7 +212,7 @@ counts_parent_grade =
 att_to_open_children =  
 problem_end
 problem_start
-problem_id = 23
+problem_id = 21
 source_file = Library/UMN/calculusStewartCCC/s_3_2_24.pg
 value = 1
 max_attempts = -1
@@ -242,7 +222,7 @@ counts_parent_grade =
 att_to_open_children =  
 problem_end
 problem_start
-problem_id = 24
+problem_id = 22
 source_file = Library/UVA-Stew5e/setUVA-Stew5e-C03S02-ProdQuotRules/3-2-35.pg
 value = 1
 max_attempts = -1
@@ -252,7 +232,7 @@ counts_parent_grade =
 att_to_open_children =  
 problem_end
 problem_start
-problem_id = 25
+problem_id = 23
 source_file = Library/Michigan/Chap3Sec3/Q37.pg
 value = 1
 max_attempts = -1

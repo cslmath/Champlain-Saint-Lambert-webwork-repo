@@ -213,7 +213,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 21
-source_file = 201-103-template_files/1210s3p2.pg
+source_file = Library/Utah/AP_Calculus_I/set2_Derivatives_and_Limits/1210s3p2.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -223,7 +223,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 22
-source_file = 201-103-template_files/1210s3p4.pg
+source_file = Library/Utah/AP_Calculus_I/set2_Derivatives_and_Limits/1210s3p4.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -233,7 +233,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 23
-source_file = 201-103-template_files/1210s3p5.pg
+source_file = Library/Utah/AP_Calculus_I/set2_Derivatives_and_Limits/1210s2p23.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
