@@ -5,7 +5,7 @@
 ## DBsubject('Calculus - single variable')
 ## DBchapter('Infinite sequences and series')
 ## DBsection('Integral test')
-## Date(2020/04/22)
+## Date(2021/01/14)
 ## Author('Michele Titcombe')
 ## Institution('Champlain College Saint-Lambert')
 ## TitleText1('Applied Calculus')
@@ -24,21 +24,31 @@ loadMacros(
   "MathObjects.pl",
   "PGcourse.pl",
   "PGML.pl",
-  "parserRadioButtons.pl",
+  "parserPopUp.pl",
 );
 
-Context()->variables->are(
-	k => Real
-);
+Context("Numeric");
 
-$a = random(1, 9);
-$b = random(1, 9);
-$c1 = random(2,9,1);
-do {
-	$c = random(1, 9)
-} until (gcd($b, $c) == 1);
-$p = random(2, 5);
-$ak = Formula("$a*k / ($b*k + $c)^{$p}")->reduce;
+$popupc = PopUp(["?", "converges", "diverges"], "converges");
+$popupd = PopUp(["?", "converges", "diverges"], "diverges");
+# Part (a)
+$a1 = random(2,9,1);
+# Part (b)
+$bn = random(3,9,2);
+$bd = random(2,8,2);
+$popup2 = $popupd;
+if ($bd-$bn>1){
+   $popup2 = $popupc;
+}
+# Part (c)
+$c1 = random(-6,6,2); # Could be 0 (in exponent)
+$popup3 = $popupd;
+if ($c1 > 1){
+   $popup3 = $popupc;
+}
+# Part (d)
+$d1 = random(2,4,1);
+$d2 = random(3,9,2);
 
 # Print problem number and point value (weight) for the problem
 TEXT(beginproblem());
@@ -49,34 +59,54 @@ $showPartialCorrectAnswers = 1;
 ##############################################################
 #  Setup
 
-Context()->strings->are(
-	"converges" => {},
-	"diverges" => {}
-);
-$converges = String("converges");
-$diverges = String("diverges");
-# \{ pop_up_list([$converges->string,$diverges->string,$furthertesting->string]) \}
-
-$radio1 = RadioButtons(
-  ["converges","diverges"],
-  "converges", # correct answer
-);
 ##############################################################
 #  Text
 BEGIN_PGML
-For the following $p$-series, state the value of $p$ and whether the $p$-series is convergent or divergent.
+For the following [`p`]-series, state the value of [`p`] and whether the [`p`]-series converges or diverges.
 
-a. [` \sum\limits_{n=1}^\infty n^{-[$c1]}`]
-\[ \sum_{k=1}^\infty $ak \]  
-For this $p$-series, $p = $ [__________]{$c1}. The series [@ $radio1->buttons() @]*
+(a) [`\displaystyle \sum\limits_{n=1}^\infty n^{-[$a1]}`]  
+For this [`p`]-series, the value of [`p = `] [__________]{$a1}
+and the series 
+[@ $popupc->menu() @]*
+
 END_PGML
+ANS( $popupc->cmp() );
 
-##############################################################
-#  Answers
+BEGIN_PGML
+(b) [`\displaystyle \sum\limits_{n=1}^\infty  \frac{n^[$bn]}{n^[$bd]} `]  
+For this [`p`]-series, the value of [`p = `] [__________]{$bd-$bn} and
+the series 
+[@ $popup2->menu() @]*
+END_PGML
+ANS( $popup2->cmp() );
 
-#ANS($furthertesting->cmp());
+BEGIN_PGML
+(c) [` \displaystyle \sum\limits_{n=1}^\infty\frac{1}{ n^{[$c1]} } `]  
+For this [`p`]-series, the value of [`p = `] [__________]{$c1} and
+the series 
+[@ $popup3->menu() @]*
+END_PGML
+ANS( $popup3->cmp() );
+
+BEGIN_PGML
+(d) [` \displaystyle \sum\limits_{n=1}^\infty \frac{1}{ n^[$d1]\sqrt{n^[$d2]} }`]  
+For this [`p`]-series, the value of [`p = `] [__________]{$d1+$d2/2} and
+the series 
+[@ $popupc->menu() @]*
+END_PGML
+ANS( $popupc->cmp() );
+
+BEGIN_PGML
+(e) [` \displaystyle\sum\limits_{n=1}^\infty \frac{1}{ n}`]  
+For this [`p`]-series, the value of [`p = `] [__________]{1} and
+the series 
+[@ $popupd->menu() @]*  
+The series in part (e) is also known as the _harmonic series_.
+END_PGML
+ANS( $popupd->cmp() );
+
+
 
 COMMENT('Written in PGML');
 
 ENDDOCUMENT();        
-
