@@ -59,6 +59,7 @@
 * VectorCalculus
   - VectorCalculus/Arc-Length-Curvature
   - VectorCalculus/Chain-Rule
+  - VectorCalculus/Complex-Numbers-Arithmetic
   - VectorCalculus/Complex-Numbers-History
   - VectorCalculus/Double-Integrals-General-Region
   - VectorCalculus/Limits-Continuity
