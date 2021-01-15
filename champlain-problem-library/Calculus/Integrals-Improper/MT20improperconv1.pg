@@ -1,0 +1,87 @@
+## DESCRIPTION
+## Calculus: Improper integral converging for which values of p
+## ENDDESCRIPTION
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Integrals)
+## DBsection(Improper integrals)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2020-Nov-01)
+## Level(3)
+## Static(1)
+## TitleText1('Applied Calculus')
+## AuthorText1('Soo Tan')
+## EditionText1('10')
+## Section1('7.4')
+## Problem1('6')
+## KEYWORDS('integration', 'improper integrals')
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "PGchoicemacros.pl",
+  "MathObjects.pl",
+  "PGML.pl",
+  "parserPopUp.pl",
+  "PGcourse.pl",
+);
+Context("Numeric");
+Context()->variables->add(p=>['Real']);
+
+TEXT(&beginproblem);
+$showPartialCorrectAnswers = 1;
+
+$lopenbrace = PopUp( ["?", "(", "["], "(");
+$ropenbrace = PopUp( ["?", ")", "]"], ")");
+
+
+$ans = Compute("1/(p-1)");
+
+BEGIN_PGML
+(a) Find the values of [`p`] for which the following integral converges:  
+[`` \int_{1}^{\infty} \frac{1}{x^p} dx ``]
+
+Your answer will be an interval, such as [`(a,b)`] or [`[a,b)`] or [`(a,b]`] or [`[a,b]`]. Choose the correct brackets and enter the interval endpoints. If [`a`] or [`b`] is infinite, use INF for [`\infty`] and [`-`]INF for [`-\infty`] as needed.
+
+The improper integral converges for [`p`]  in the interval: 
+[_]{$lopenbrace}[_____]{1},[_____]{INF}[_]{$ropenbrace}  
+
+(b) For the values of [`p`] at which the integral converges, evaluate it. Your answer will have the variable [`p`] in it. 
+
+Integral = [__________________]{$ans}
+
+END_PGML
+
+BEGIN_PGML_SOLUTION
+(a) The improper integral converges for [`p > 1`], that is, for [`p`] in the interval: [`(1,\infty) `]  
+Proof: Consider three cases (i) [`p<1`], (ii) [`p=1`] and (iii) [`p>1`].  
+    (i) Case where [` p<1`].  
+    [``\int_1^\infty \frac{1}{x^p} = \lim_{b\to\infty} \int_1^b x^{-p}\,dx
+    = \lim_{b\to\infty} \left. \frac{x^{-p+1}}{-p+1} \right]_{x=1}^{x=b} 
+    = \lim_{b\to\infty} \frac{1}{1-p} \left( \frac{1}{b^{p-1}} - 1 \right) 
+    = \infty
+    ``]
+    because when [`p<1`], [` 1/b^{p-1} \to \infty `] as [`b\to\infty`]. Thus, the improper integral diverges if [`p<1`].  
+    (ii) Case where [`p=1`].  
+    [``\int_1^\infty \frac{1}{x^p} = \lim_{b\to\infty} \int_1^b x^{-1}\,dx
+    = \lim_{b\to\infty} \left. \ln|x| \right]_{x=1}^{x=b} 
+    = \lim_{b\to\infty}  \left( \ln b - \ln 1 \right) 
+    = \infty
+    ``]
+    because [`\ln b \to \infty`] as [`b\to\infty`]. Thus, the improper integral diverges if [`p=1`].  
+    (iii) Case where [`p>1`].  
+    [``\int_1^\infty \frac{1}{x^p} = \lim_{b\to\infty} \int_1^b x^{-p}\,dx
+    = \lim_{b\to\infty} \left. \frac{x^{-p+1}}{-p+1} \right]_{x=1}^{x=b} ``]
+    [`` = \lim_{b\to\infty} \frac{1}{1-p} \left( \frac{1}{b^{p-1}} - 1 \right) 
+    = \frac{1}{1-p}(0 - 1) = \frac{1}{p-1}
+    ``]
+    because when [`p>1`], [` 1/b^{p-1} \to 0 `] as [`b\to\infty`]. Thus, the improper integral converges if [`p>1`].  
+    
+(b) For [`p > 1`], the integral converges to [`\frac{1}{p-1}`].
+END_PGML_SOLUTION
+
+
+ENDDOCUMENT();
+

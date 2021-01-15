@@ -1,0 +1,66 @@
+# DESCRIPTION
+# Calculus. Geometric series.
+# ENDDESCRIPTION
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Infinite sequences and series)
+## DBsection(Geometric)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2020/11/29)
+## Level(2)
+## TitleText1('Calculus')
+## AuthorText1('')
+## EditionText1('')
+## Section1('')
+## Problem1('')
+
+## KEYWORDS('definition','geometric series')
+
+DOCUMENT();
+
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "parserPopUp.pl",
+    "PGcourse.pl",
+);
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+Context()->variables->are('a'=>['Real'],'r'=>['Real']);
+
+$lessthan = PopUp( ["?", "<", "=", ">","> or =","< or ="], "<");
+$greaterthan = PopUp( ["?", "<", "=", ">"], ">" );
+$greaterorequal = PopUp( ["?", "<", "=", ">","> or =","< or ="], "> or =" );
+$sum = Compute("a/(1-r)");
+$one = Compute("1");
+
+TEXT(beginproblem());
+
+BEGIN_TEXT
+$BBOLD Geometric series.$EBOLD $PAR  
+
+The geometric series \( \sum\limits_{n=0}^{\infty} ar^k =a + ar + ar^2 + \cdots \): $PAR
+
+ (a) converges to \{ans_rule(10) \} if \( |r|\) \{$lessthan->menu() \} \{ans_rule(5) \} $PAR
+
+ (b) diverges if \( |r|\) \{$greaterorequal->menu() \} \{ans_rule(5) \}
+END_TEXT
+
+Context()->normalStrings;
+# Part (a) Converges to a/(1-r)
+ANS(Compute("a/(1-r)")->cmp() );
+ANS($lessthan->cmp() );
+ANS(Compute(1)->cmp() );
+# Part (b) Diverges
+ANS($greaterorequal->cmp() );
+ANS(Compute(1)->cmp() );
+
+
+COMMENT('MathObject version');
+
+ENDDOCUMENT();
+
+
