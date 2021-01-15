@@ -53,7 +53,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 5
-source_file = MT_cal3/MT16Mandelbrot.pg
+source_file = champlainLibrary/VectorCalculus/Complex-Numbers-Arithmetic/MT16Mandelbrot.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
