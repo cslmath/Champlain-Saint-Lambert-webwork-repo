@@ -1,11 +1,11 @@
 # DESCRIPTION
 # Application of integration, business/economics context.
-# Find the coefficient of inequality (Gini index) of a given Lorentz curve
+# Find the coefficient of inequality (Gini index) of a given Lorenz curve
 # describing the income distribution of a certain population.
 # M.Titcombe 10/21/2009
 # ENDDESCRIPTION
 
-## KEYWORDS ('calculus','integrals','economics','lorentz curves')
+## KEYWORDS ('calculus','integrals','economics','lorenz curves')
 
 ## DBsubject('Calculus')
 ## DBchapter('Integration')
@@ -30,11 +30,11 @@ $a1 = $c1 - $b1;
 TEXT(beginproblem());
 Context()->texStrings;
 BEGIN_TEXT
-The Lorentz curve for a certain country's income distribution is described by the function
+The Lorenz curve for a certain country's income distribution is described by the function
 \[ f(x) = \frac{$a1}{$c1}x^2 + \frac{$b1}{$c1}x \]
-Compute the coefficient of inequality for the given Lorentz curve.
+Compute the coefficient of inequality for the given Lorenz curve.
 $PAR
-The coefficient of inequality, or ${BBOLD}Gini index$EBOLD, of a Lorentz curve is
+The coefficient of inequality, or ${BBOLD}Gini index$EBOLD, of a Lorenz curve is
 \(
    L = 2\int_0^1 [x - f(x)]dx
 \).

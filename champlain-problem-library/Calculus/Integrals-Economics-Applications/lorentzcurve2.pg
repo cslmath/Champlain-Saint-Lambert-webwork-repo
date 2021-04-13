@@ -1,6 +1,6 @@
 # DESCRIPTION
 # Find a linear combination of a linear and a power function 
-# to model a Lorentz curve given a Gini index
+# to model a Lorenz curve given a Gini index
 # WeBWorK problem written by Charles Fortin, 
 # <cfortin(at)champlaincollege.qc.ca(dot)ca>
 # ENDDESCRIPTION
@@ -39,7 +39,7 @@ TEXT(beginproblem());
 Context()->texStrings;
 BEGIN_TEXT
 Suppose a country has a coefficient of inequality (Gini index) of \($gini\) and that the 
-Lorentz curve for this country is of the form \(y=f(x)=$a x + $b x^p\), where p is a constant.
+Lorenz curve for this country is of the form \(y=f(x)=$a x + $b x^p\), where p is a constant.
 $BR
 (a) The value of p is \{ ans_rule(10) \}
 $BR
