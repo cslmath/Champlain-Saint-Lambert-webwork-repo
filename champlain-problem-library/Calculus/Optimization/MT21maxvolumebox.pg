@@ -1,0 +1,107 @@
+# DESCRIPTION
+#   Optimization - Maximize volume
+# ENDDESCRIPTION
+
+## DBsubject(Calculus - single variable)
+## DBchapter(Applications of differentiation)
+## DBsection(Optimization - general)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2021-Nov-29)
+## Level(5)
+## MO(1)
+## KEYWORDS('derivative', 'maximum', 'minimum', 'extrema', 'optimization')
+## RESOURCES('postalbox.png')
+
+DOCUMENT();
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "parserImplicitEquation.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+
+Context("ImplicitEquation");
+@unitschoice = ("inches","centimetres");
+$n = random(0,1,1);
+$n = 1; # test - remove later
+$units = $unitschoice[$n];
+$k = random(18,22,1);
+if ($n == 0){ # inches
+    $k = random(8,10,1);
+    $k = 9; # test -remove later
+}
+
+$L = 4*3*$k;  # for integer solutions want length L to be a multiple of 12
+$xb = $L/5;
+Context()->variables->set(
+x=>{limits=>[0,$xb]},
+y=>{limits=>[0,$L]}
+);
+$eqn = ImplicitEquation("4*x + y = $L");
+
+Context("Interval");
+# to allow open or closed intervals, uncomment
+#    the following line.
+Context()->flags->set(ignoreEndpointTypes=>1);
+$domInt = Compute("(0,$xb)");
+
+Context("Numeric");
+Context()->variables->add(y=>"Real");
+
+$volxy = Compute("x^2*y");
+$yasx = Compute("$L-4*x");
+$Vx = Compute("x^2*($L-4*x)");
+$optX = Compute("$L/6");
+$optY = Compute("$L/3");
+$maxVol = $optY*($optX)**2;
+
+TEXT(beginproblem());
+Context()->texStrings;
+BEGIN_PGML
+According to postal regulations, the length plus the girth of a
+parcel sent by mail may not exceed [`[$L]`] [$units]. 
+What is the largest possible volume of a rectangular parcel with height [`y`] and a square end of side length [`x`] that can be sent by mail?  Such a package is shown below, with [`x`] and [`y`] measured in [$units]. Assume that [`y>x`]. What are the dimensions of the package of largest volume?
+
+[@ image( "postalbox.png", width=>183, height=>200,  
+tex_size=>700, extra_html_tags=>'alt="Rectangular parcel."' ) @]*
+
+a. Find a formula for the volume of the parcel in terms of [`x`] and [`y`].  
+Volume = [_________________________]{$volxy} cubic [$units]
+
+b. The problem statement tells us that the girth plus length of the parcel may not exceed [`[$L]`] [$units]. In order to maximize volume, we assume that we will actually need the girth plus length to equal [`[$L]`] [$units]. What equation does this produce involving [`x`] and [`y`]? Hint: The girth is [`4x`].  
+Equation: [_________________________]{$eqn} 
+
+c. Solve the equation in Part b for [`y`] in terms of [`x`].  
+[`y= `][__________________________]{$yasx}
+
+d. Find a formula for the volume [`V(x)`] in terms of [`x`].  
+[` V(x) = `][__________________________]{$Vx} cubic [$units]
+
+e. What is the domain of the function [`V`]? Note that [`x`] must
+be positive and [`y>x`]; consider how these facts, and the constraint that girth plus length is [`[$L]`] [$units], limit the possible values for [`x`]. Give your answer using interval notation.  
+Domain: [__________________________]{$domInt}
+
+f. Find the absolute maximum of the volume of the parcel on the domain you
+established above and hence also determine the dimensions of the box of greatest
+volume.  
+    i. Maximum Volume = [__________________________]{$maxVol} cubic [$units]  
+    ii. Optimal dimensions:  [`x = `] [_____________________]{$optX} [$units]  
+    and [`y= `] [_____________________]{$optY} [$units]
+END_PGML
+
+BEGIN_PGML_SOLUTION
+a. The volume of the parcel is [`x^2y`].  
+b. The constraints say that [`4x+y=[$L]`].
+c. Isolating [`y`] gives [`[$L] - 4x`].
+d. Thus, the volume is [`V(x) = x^2([$L]-4x)`].  
+e. We know [`x>0`], also [`x<y=[$L]-4x`] so [`5x<[$L]`], hence [`x<[$xb]`].  
+Thus the domain of [`V`] is [`(0,[$xb])`]. 
+f. Note that [`V'(x)=2\cdot [$L]x -12x^2=2x([$L]-6x)`], so [`V'(x)>0`] and [`V`] is increasing when [`0<x<[$optX]`], and [`V'(x)<0`] and [`V`] is decreasing when [`[$optX]<x`]. Thus,  
+  i. Maximum volume is [`[$maxVol]`] cubic [$units],  
+  ii. Optimal dimensions are [`x=[$optX]`] [$units] and [`y=[$optY]`] [$units].
+END_PGML_SOLUTION
+
+ENDDOCUMENT();
+

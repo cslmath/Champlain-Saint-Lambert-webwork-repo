@@ -1,3 +1,10 @@
+##DESCRIPTION
+##  Calculus: Chain rule with trigonometry
+##  M.Titcombe Fall2021 Fix display of coefficients 1x and -1x etc. 
+##                      Write in PGML.
+##                      Include a solution.
+##ENDDESCRIPTION
+
 ## DBsubject(Calculus - single variable)
 ## DBchapter(Differentiation)
 ## DBsection(Derivatives of trigonometric functions)
@@ -16,44 +23,39 @@
 DOCUMENT();
 
 loadMacros(
-"PG.pl",
-"PGbasicmacros.pl",
-"PGchoicemacros.pl",
-"PGanswermacros.pl",
-"PGauxiliaryFunctions.pl",
-"PGstandard.pl",
-"MathObjects.pl"           # Math Object Macro
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "PGML.pl",
+    "PGcourse.pl",
 );
 
 TEXT(&beginproblem);
 Context("Numeric");
 $showPartialCorrectAnswers = 1;
-$a=random(1,10,1)*random(-1,1,2);
-$b=random(1,10,1)*random(-1,1,2);
-$c=random(1,10,1)*random(-1,1,2);
-$ansa=Compute("($a)*(sec(x))*(tan(x))+($b)*(sec(x))^2");
-$ansb =Compute("($c)*(sec($c*x))*(tan($c*x))-($a)*($b)*(sec($b*x))^2")->reduce;
+$a=non_zero_random(-10,10,1);
+$b=non_zero_random(-10,10,1);
+$c=non_zero_random(-10,10,1);
+$g = Compute("$a sec(x) + $b  tan(x)")->reduce()->TeX;
+$h = Compute("sec($c x) - $a tan($b x)")->reduce()->TeX;
+$ansa=Compute("($a)(sec(x))(tan(x))+($b)(sec(x))^2")->reduce();
+$ansa->{test_points} = [[-3],[-2],[2],[3],[4]];
+$ansb =Compute("($c)(sec($c x))(tan($c*x))-($a)($b)(sec($b x))^2")->reduce();
+$ansb->{test_points} = [[-3],[-2],[2],[3],[4]];
+BEGIN_PGML
 
-# Insert problem text between the $PAR, and space for the
-# answer, like this   \(y =\) \{ans_rule(50)\(}
-# just before the END_TEXT.
+(a) If  [`g(x) =[$g]`], then 
 
-Context()->texStrings;
-BEGIN_TEXT
+[`g'(x) =`][______________________________]{$ansa}
 
-$PAR
-(a) If  \(g(x) =$a \sec{x} +$b  \tan{x}\), then 
-$BR
-\(g'(x) =\) \{ans_rule(50)\}
-$PAR
-(b) If \( h(x) =  \sec({$c x}) - $a \tan({$b x}) \), then
-$BR 
-\( h'(x) = \) \{ans_rule(50)\}
-END_TEXT
-Context()->normalStrings;
+(b) If [` h(x) =  [$h] `], then
 
-ANS($ansa->cmp);
-ANS($ansb->cmp);
+[` h'(x) = `][______________________________]{$ansb}
+END_PGML
 
-COMMENT('MathObject version.');
+BEGIN_PGML_SOLUTION
+a. If [`g(x)=[$g]`], then [`g'(x)=[$ansa]`]  
+b. If [`h(x)=[$h]`], then [`h'(x)=[$ansb]`]
+END_PGML_SOLUTION
+
+COMMENT('Written in PGML.');
 ENDDOCUMENT();
