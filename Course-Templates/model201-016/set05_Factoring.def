@@ -13,7 +13,7 @@ emailInstructor   = 0
 problemListV2 
 problem_start
 problem_id = 1
-source_file = set05_Factoring/CommonFactorsI.pg
+source_file = Template_201-016/set05_Factoring/CommonFactorsI.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -73,7 +73,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 7
-source_file = set05_Factoring/GroupingI.pg
+source_file = Template_201-016/set05_Factoring/GroupingI.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -83,7 +83,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 8
-source_file = set05_Factoring/GroupingII.pg
+source_file = Template_201-016/set05_Factoring/GroupingII.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -93,7 +93,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 9
-source_file = set05_Factoring/GroupingIII.pg
+source_file = Template_201-016/set05_Factoring/GroupingIII.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1

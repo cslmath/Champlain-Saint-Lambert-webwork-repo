@@ -73,7 +73,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 7
-source_file = set01_Background/ExponentialNotation.pg
+source_file = Template_201-016/set01_Background/ExponentialNotation.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -113,7 +113,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 11
-source_file = set01_Background/OrderOfOperations.pg
+source_file = Template_201-016/set01_Background/OrderOfOperations.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -183,7 +183,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 18
-source_file = set01_Background/OperationsWithFractions.pg
+source_file = Template_201-016/set01_Background/OperationsWithFractions.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -193,7 +193,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 19
-source_file = set01_Background/WordProblem1.pg
+source_file = Template_201-016/set01_Background/WordProblem1.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -203,7 +203,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 20
-source_file = set01_Background/WordProblem2.pg
+source_file = Template_201-016/set01_Background/WordProblem2.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1

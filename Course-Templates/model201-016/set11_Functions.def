@@ -173,7 +173,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 17
-source_file = set11_Functions/DomainRadical.pg
+source_file = Template_201-016/set11_FunctionsDomainRadical.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -223,7 +223,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 22
-source_file = set11_Functions/SolveForInputGivenOutput.pg
+source_file = Template_201-016/set11_FunctionsSolveForInputGivenOutput.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -263,7 +263,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 26
-source_file = set11_Functions/PiecewiseLinearGraph.pg
+source_file = Template_201-016/set11_FunctionsPiecewiseLinearGraph.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1

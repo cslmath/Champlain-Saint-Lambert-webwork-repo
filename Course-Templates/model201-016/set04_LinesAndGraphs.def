@@ -43,7 +43,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 4
-source_file = set04_LinesAndGraphs/SlopeInterceptFromGraph.pg
+source_file = Template_201-016/set04_LinesAndGraphs/SlopeInterceptFromGraph.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -53,7 +53,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 5
-source_file = set04_LinesAndGraphs/MatchGraphs.pg
+source_file = Template_201-016/set04_LinesAndGraphs/MatchGraphs.pg
 value = 1
 max_attempts = 2
 showMeAnother = -1
@@ -93,7 +93,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 9
-source_file = set04_LinesAndGraphs/SlopeFromTwoPoints.pg
+source_file = Template_201-016/set04_LinesAndGraphs/SlopeFromTwoPoints.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -123,7 +123,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 12
-source_file = set04_LinesAndGraphs/InterceptFromPointAndSlope.pg
+source_file = Template_201-016/set04_LinesAndGraphs/InterceptFromPointAndSlope.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -133,7 +133,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 13
-source_file = set04_LinesAndGraphs/HorizontalLineFromTwoPoints.pg
+source_file = Template_201-016/set04_LinesAndGraphs/HorizontalLineFromTwoPoints.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -163,7 +163,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 16
-source_file = set04_LinesAndGraphs/LinesTrueFalse.pg
+source_file = Template_201-016/set04_LinesAndGraphs/LinesTrueFalse.pg
 value = 1
 max_attempts = 3
 showMeAnother = -1
@@ -173,7 +173,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 17
-source_file = set04_LinesAndGraphs/ParallelThroughNewPoint.pg
+source_file = Template_201-016/set04_LinesAndGraphs/ParallelThroughNewPoint.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -183,7 +183,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 18
-source_file = set04_LinesAndGraphs/PerpendicularThroughNewPoint.pg
+source_file = Template_201-016/set04_LinesAndGraphs/PerpendicularThroughNewPoint.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -193,7 +193,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 19
-source_file = set04_LinesAndGraphs/PerpendicularToAxis.pg
+source_file = Template_201-016/set04_LinesAndGraphs/PerpendicularToAxis.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1

@@ -13,7 +13,7 @@ emailInstructor   = 0
 problemListV2 
 problem_start
 problem_id = 1
-source_file = set07_RationalExpressions/DomainI.pg
+source_file = Template_201-016/set07_RationalExpressions/DomainI.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -23,7 +23,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 2
-source_file = set07_RationalExpressions/DomainII.pg
+source_file = Template_201-016/set07_RationalExpressions/DomainII.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -53,7 +53,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 5
-source_file = set07_RationalExpressions/OperationsI.pg
+source_file = Template_201-016/set07_RationalExpressions/OperationsI.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -103,7 +103,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 10
-source_file = set07_RationalExpressions/OperationsII.pg
+source_file = Template_201-016/set07_RationalExpressions/OperationsII.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -153,7 +153,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 15
-source_file = set07_RationalExpressions/RationaIEquationI.pg
+source_file = Template_201-016/set07_RationalExpressions/RationaIEquationI.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -163,7 +163,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 16
-source_file = set07_RationalExpressions/RationaIEquationII.pg
+source_file = Template_201-016/set07_RationalExpressions/RationaIEquationII.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -173,7 +173,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 17
-source_file = set07_RationalExpressions/RationaIEquationIII.pg
+source_file = Template_201-016/set07_RationalExpressions/RationaIEquationIII.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -183,7 +183,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 18
-source_file = set07_RationalExpressions/RationaIEquationIV.pg
+source_file = Template_201-016/set07_RationalExpressions/RationaIEquationIV.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -193,7 +193,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 19
-source_file = set07_RationalExpressions/RationaIEquationV.pg
+source_file = Template_201-016/set07_RationalExpressions/RationaIEquationV.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -203,7 +203,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 20
-source_file = set07_RationalExpressions/RationaIEquationVI.pg
+source_file = Template_201-016/set07_RationalExpressions/RationaIEquationVI.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -213,7 +213,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 21
-source_file = set07_RationalExpressions/RationaIEquationVIII.pg
+source_file = Template_201-016/set07_RationalExpressions/RationaIEquationVIII.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -243,7 +243,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 24
-source_file = set07_RationalExpressions/UpstreamDownstream.pg
+source_file = Template_201-016/set07_RationalExpressions/UpstreamDownstream.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1

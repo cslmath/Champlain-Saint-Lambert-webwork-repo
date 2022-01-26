@@ -23,7 +23,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 2
-source_file = set09_Radicals/SumLikeRadicals.pg
+source_file = Template_201-016/set09_Radicals/SumLikeRadicals.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -163,7 +163,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 16
-source_file = set09_Radicals/ExpandRadicalBinomials.pg
+source_file = Template_201-016/set09_Radicals/ExpandRadicalBinomials.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -193,7 +193,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 19
-source_file = set09_Radicals/RationalizeI.pg
+source_file = Template_201-016/set09_Radicals/RationalizeI.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -213,7 +213,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 21
-source_file = set09_Radicals/RationalizeII.pg
+source_file = Template_201-016/set09_Radicals/RationalizeII.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1

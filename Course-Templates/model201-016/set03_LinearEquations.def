@@ -43,7 +43,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 4
-source_file = set03_LinearEquations/SolveLinearI.pg
+source_file = Template_201-016/set03_LinearEquations/SolveLinearI.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -53,7 +53,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 5
-source_file = set03_LinearEquations/SolveLinearII.pg
+source_file = Template_201-016/set03_LinearEquations/SolveLinearII.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -83,7 +83,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 8
-source_file = set03_LinearEquations/IsolateVariableI.pg
+source_file = Template_201-016/set03_LinearEquations/IsolateVariableI.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -93,7 +93,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 9
-source_file = set03_LinearEquations/IsolateVariableII.pg
+source_file = Template_201-016/set03_LinearEquations/IsolateVariableII.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -103,7 +103,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 10
-source_file = set03_LinearEquations/IsolateVariableIII.pg
+source_file = Template_201-016/set03_LinearEquations/IsolateVariableIII.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -113,7 +113,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 11
-source_file = set03_LinearEquations/ChangePurse.pg
+source_file = Template_201-016/set03_LinearEquations/ChangePurse.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -123,7 +123,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 12
-source_file = set03_LinearEquations/PoolDimensions.pg
+source_file = Template_201-016/set03_LinearEquations/PoolDimensions.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -133,7 +133,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 13
-source_file = set03_LinearEquations/TriangleLengths.pg
+source_file = Template_201-016/set03_LinearEquations/TriangleLengths.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -143,7 +143,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 14
-source_file = set03_LinearEquations/PaintRoom.pg
+source_file = Template_201-016/set03_LinearEquations/PaintRoom.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -163,7 +163,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 16
-source_file = set03_LinearEquations/Velocity.pg
+source_file = Template_201-016/set03_LinearEquations/Velocity.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -173,7 +173,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 17
-source_file = set03_LinearEquations/AbsValueI.pg
+source_file = Template_201-016/set03_LinearEquations/AbsValueI.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -183,7 +183,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 18
-source_file = set03_LinearEquations/AbsValueII.pg
+source_file = Template_201-016/set03_LinearEquations/AbsValueII.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -193,7 +193,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 19
-source_file = set03_LinearEquations/AbsValueIII.pg
+source_file = Template_201-016/set03_LinearEquations/AbsValueIII.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
@@ -203,7 +203,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 20
-source_file = set03_LinearEquations/AbsValueIV.pg
+source_file = Template_201-016/set03_LinearEquations/AbsValueIV.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1
