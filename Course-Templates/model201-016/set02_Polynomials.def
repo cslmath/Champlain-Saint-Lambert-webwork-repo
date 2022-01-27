@@ -1,0 +1,254 @@
+assignmentType      = default
+openDate          = 12/14/2021 at 10:00am EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 12/20/2021 at 10:00pm EST
+answerDate        = 12/20/2021 at 10:00pm EST
+enableReducedScoring = N
+paperHeaderFile   = ASimpleHardCopyHeaderFile.pg
+screenHeaderFile  = ASimpleScreenHeaderFile.pg
+description       = Exponent Laws, Polynomial Terminology, Operations on Polynomials.
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/CollegeOfIdaho/setAlgebra_01_06_Exponents/16IntAlg_28_Exponents.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = Template_201-016/set02_Polynomials/ExponentLaws.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/CollegeOfIdaho/setAlgebra_01_06_Exponents/16IntAlg_30_Exponents.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/CollegeOfIdaho/setAlgebra_05_06_Factoring/56IntAlg_35_Exponents_Review.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 5
+source_file = Library/PCC/BasicAlgebra/Exponents/exponentsMultiplication55.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 6
+source_file = Library/PCC/BasicAlgebra/AlgebraicProperties/ExpressionAlgebraSkill70.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 7
+source_file = Template_201-016/set02_Polynomials/Terminology.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 8
+source_file = Library/UMN/algebraKaufmannSchwitters/ks_3_1_16.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 9
+source_file = Library/UMN/algebraKaufmannSchwitters/ks_3_1_70.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 10
+source_file = Library/PCC/BasicAlgebra/PolynomialBasics/polyMultVar20.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 11
+source_file = Library/CollegeOfIdaho/setAlgebra_05_01_IntroPolynomials/51IntAlg_03_Polynomial.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 12
+source_file = Library/Mizzou/Intermediate_Algebra/Polynomials_Addition_Subtraction/Add_Sub_Three_Parts.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 13
+source_file = Template_201-016/set02_Polynomials/ExpandAndSimplifyI.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 14
+source_file = Template_201-016/set02_Polynomials/ExpandAndSimplifyII.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 15
+source_file = Template_201-016/set02_Polynomials/ExpandAndSimplifyIII.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 16
+source_file = Template_201-016/set02_Polynomials/ExpandAndSimplifyIV.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 17
+source_file = Library/PCC/BasicAlgebra/PolynomialMultiplication/polyMultVar140.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 18
+source_file = Template_201-016/set02_Polynomials/AddAndMultiplyTerms.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 19
+source_file = Library/FortLewis/Algebra/2-3-Expanding-and-factoring/MCH1-2-3-24-Expanding-and-factoring.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 20
+source_file = Library/FortLewis/Algebra/2-3-Expanding-and-factoring/MCH1-2-3-70-Expanding-and-factoring.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 21
+source_file = Library/Mizzou/Algebra/polynomials_add_sub_mult/poly_expand_two_parts_01.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 22
+source_file = Template_201-016/set02_Polynomials/Identities.pg
+value = 1
+max_attempts = 3
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 23
+source_file = Template_201-016/set02_Polynomials/ProductCoefficients.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 24
+source_file = Template_201-016/set02_Polynomials/ProductTerminology.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+

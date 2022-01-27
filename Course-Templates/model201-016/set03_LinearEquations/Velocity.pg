@@ -1,0 +1,60 @@
+##DESCRIPTION
+##  Algebra: linear equations 
+##ENDDESCRIPTION
+
+
+## DBsubject(Algebra)
+## DBchapter(Linear equations and functions)
+## DBsection(Applications and models)
+## Date(09/09/2009)
+## Institution(University of Minnesota)
+## Author(Justin Sukiennik)
+## MLT(FindingIntersection)
+## Level(5)
+## MO(1)
+## TitleText1('Algebra for College Students')
+## AuthorText1('Kaufmann, Schwitters')
+## EditionText1('8')
+## Section1('2.4')
+## Problem1('56')
+## KEYWORDS('algebra', 'linear equations', 'word problem')
+
+########################################################################
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGcourse.pl"
+);
+
+########################################################################
+
+TEXT(beginproblem());
+
+########################################################################
+
+Context("Numeric");
+
+$a = random(60,120,12);
+
+$ans1 = Compute("$a/10");
+$ans2 = Compute("2*$a/5");
+
+##############################################################
+
+Context()->texStrings;
+BEGIN_TEXT
+Two cyclists start from the same point and ride in opposite directions, one cyclist riding four times as fast as the other. After two hours they are $a km apart.
+$PAR
+The slower cyclist rode at \{ans_rule(20)\} km/h, and the faster cyclist rode at \{ans_rule(20)\} km/h.
+END_TEXT
+Context()->normalStrings;
+
+##############################################################
+
+ANS($ans1->cmp);
+ANS($ans2->cmp);
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.

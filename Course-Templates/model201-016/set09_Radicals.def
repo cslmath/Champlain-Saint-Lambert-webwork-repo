@@ -1,0 +1,234 @@
+assignmentType      = default
+openDate          = 02/05/2022 at 10:00am EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 02/15/2022 at 10:00pm EST
+answerDate        = 02/15/2022 at 10:00pm EST
+enableReducedScoring = N
+paperHeaderFile   = ASimpleHardCopyHeaderFile.pg
+screenHeaderFile  = ASimpleScreenHeaderFile.pg
+description       = Properties of Radicals, Combining and Simplifying Radicals, Exponent Laws with Fractional Exponents, Simplifying Radical Expressions, Rationalizing Numerator and Denominator.
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/ma117DB/set1/srw1_2_11.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = Template_201-016/set09_Radicals/SumLikeRadicals.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/Mizzou/College_Algebra/Rational_and_Radical_Exponents_Simplifying_Rational_Exponents/RealProduct1.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/Mizzou/College_Algebra/Rational_and_Radical_Exponents_Simplifying_Radicals/Two_Terms_With_Vars.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 5
+source_file = Library/Mizzou/College_Algebra/Rational_and_Radical_Exponents_Simplifying_Radicals/Two_Terms_With_Vars_Frac_01.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 6
+source_file = Library/ma117DB/set1/srw1_2_1_5.pg
+value = 1
+max_attempts = 3
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 7
+source_file = Library/Rochester/setAlgebra02ExponentsRadicals/srw1_2_41.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 8
+source_file = Library/FortLewis/Algebra/6-2-Fractional-exponents/MCH1-6-2-10-Fractional-exponents.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 9
+source_file = Library/Mizzou/Algebra/exponents_rational/conv_exp_to_exp_two_term_div_04.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 10
+source_file = Library/Mizzou/Algebra/exponents_rational/conv_rad_to_exp_two_term_frac_02.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 11
+source_file = Library/Mizzou/Algebra/radicals_simplifying/single_rad_fractions_02.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 12
+source_file = Library/Mizzou/Algebra/exponents_rational/conv_rad_to_rad_two_term_mult_01.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 13
+source_file = Library/Mizzou/Algebra/radicals_simplifying/two_rad_mult_03.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 14
+source_file = Library/Mizzou/College_Algebra/Rational_and_Radical_Exponents_Simplifying_Radicals/FractionofRadical.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 15
+source_file = Library/Mizzou/College_Algebra/Rational_and_Radical_Exponents_Simplifying_Radicals/MultiplyRadicals.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 16
+source_file = Template_201-016/set09_Radicals/ExpandRadicalBinomials.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 17
+source_file = Library/Mizzou/Algebra/radicals_simplifying/foiling_05.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 18
+source_file = Library/Mizzou/College_Algebra/Rational_and_Radical_Exponents_Simplifying_Radicals/Two_Factors_Sqrt_Var_01.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 19
+source_file = Template_201-016/set09_Radicals/RationalizeI.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 20
+source_file = Library/Mizzou/Algebra/radicals_rationalizing/denominator_01.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 21
+source_file = Template_201-016/set09_Radicals/RationalizeII.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 22
+source_file = Library/Mizzou/College_Algebra/Rational_and_Radical_Exponents_Rationalizing/Rationalize4.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+

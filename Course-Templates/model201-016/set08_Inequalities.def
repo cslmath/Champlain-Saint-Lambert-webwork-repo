@@ -1,0 +1,274 @@
+assignmentType      = default
+openDate          = 01/28/2022 at 10:00am EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 02/08/2022 at 10:00pm EST
+answerDate        = 02/08/2022 at 10:00pm EST
+enableReducedScoring = N
+paperHeaderFile   = ASimpleHardCopyHeaderFile.pg
+screenHeaderFile  = ASimpleScreenHeaderFile.pg
+description       = Interval Notation, Solving Linear Inequalities, Solving Compound Inequalities, Solving Absolute Value Inequalities, Solving Polynomial and Rational Inequalities.
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Template_201-016/set08_Inequalities/LinearIneqI.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = Template_201-016/set08_Inequalities/LinearIneqII.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = Template_201-016/set08_Inequalities/LinearIneqIII.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = Template_201-016/set08_Inequalities/LinearIneqIV.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 5
+source_file = Template_201-016/set08_Inequalities/LinearIneqV.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 6
+source_file = Template_201-016/set08_Inequalities/LinearIneqVI.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 7
+source_file = Library/Mizzou/Intermediate_Algebra/NPL_Files/Compound_Inequalities/42IntAlg_03_CompoundIneq.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 8
+source_file = Library/Mizzou/Intermediate_Algebra/NPL_Files/Compound_Inequalities/42IntAlg_04_CompoundIneq.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 9
+source_file = Library/Mizzou/Intermediate_Algebra/NPL_Files/Compound_Inequalities/42IntAlg_05_CompoundIneq.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 10
+source_file = Template_201-016/set08_Inequalities/CompoundIneqI.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 11
+source_file = Template_201-016/set08_Inequalities/CompoundIneqII.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 12
+source_file = Template_201-016/set08_Inequalities/CompoundIneqIII.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 13
+source_file = Template_201-016/set08_Inequalities/CompoundIneqIV.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 14
+source_file = Library/PCC/BasicAlgebra/AbsoluteValue/absoluteValueInequality40.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 15
+source_file = Library/PCC/BasicAlgebra/AbsoluteValue/absoluteValueInequality30.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 16
+source_file = Template_201-016/set08_Inequalities/AbsValIneqI.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 17
+source_file = Template_201-016/set08_Inequalities/AbsValIneqII.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 18
+source_file = Template_201-016/set08_Inequalities/AbsValIneqIII.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 19
+source_file = Template_201-016/set08_Inequalities/AbsValIneqIV.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 20
+source_file = Template_201-016/set08_Inequalities/PolynomialIneqI.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 21
+source_file = Template_201-016/set08_Inequalities/PolynomialIneqII.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 22
+source_file = Template_201-016/set08_Inequalities/PolynomialIneqIII.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 23
+source_file = Template_201-016/set08_Inequalities/RationalIneqI.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 24
+source_file = Template_201-016/set08_Inequalities/RationalIneqII.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 25
+source_file = Template_201-016/set08_Inequalities/RationalIneqIII.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 26
+source_file = Template_201-016/set08_Inequalities/RationalIneqIV.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+

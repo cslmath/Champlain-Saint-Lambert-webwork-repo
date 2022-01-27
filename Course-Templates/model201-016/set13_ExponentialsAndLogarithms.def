@@ -1,0 +1,194 @@
+assignmentType      = default
+openDate          = 03/08/2022 at 12:00pm EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 03/19/2022 at 12:00am EDT
+answerDate        = 03/19/2022 at 12:00am EDT
+enableReducedScoring = N
+paperHeaderFile   = ASimpleHardCopyHeaderFile.pg
+screenHeaderFile  = ASimpleScreenHeaderFile.pg
+description       = Exponential and Logarithmic Functions, Solving Exponential Equations by Matching Bases and Solving in the Exponent, Solving Logarithmic Equations by Converting to Exponential Form.
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = Library/Rochester/setAlgebra28ExpFunctions/sw6_1_3.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/FortLewis/Algebra/10-1-Exponential-Functions/MCH1-10-1-1thru4.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/FortLewis/Algebra/10-2-Working-with-the-Base/MCH-10-2-49_50.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/NAU/setExpLog/ExpEq5.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 5
+source_file = Library/NAU/setExpLog/ExpEq4.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 6
+source_file = Library/WHFreeman/Rogawski_Calculus_Early_Transcendentals_Second_Edition/1_Precalculus_Review/1.6_Exponential_and_Logarithmic_Functions/1.6.31.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 7
+source_file = Library/Rochester/setAlgebra29LogFunctions/srw4_3_17-20.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 8
+source_file = Library/Union/setFunctionLogarithmic/srw4_2_17.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 9
+source_file = Library/Union/setFunctionLogarithmic/srw4_2_21.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 10
+source_file = Library/UMN/algebraKaufmannSchwitters/ks_10_5_prob04.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 11
+source_file = Library/Mizzou/Algebra/log_eqns_properties/determine_domain_02.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 12
+source_file = Library/Mizzou/Algebra/log_eqns_convert_to_and_from_exp/log_to_exp_03.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 13
+source_file = Library/ma117DB/set7/srw4_2_23.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 14
+source_file = Library/Rochester/setAlgebra30LogExpEqns/problem4.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 15
+source_file = Template_201-016/set13_ExponentialsAndLogarithms/FunctionThroughPoint.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 16
+source_file = Library/FortLewis/Algebra/11-2-Solving-with-Logs/MCH-11-2-46.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 17
+source_file = Template_201-016/set13_ExponentialsAndLogarithms/LogEquation.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 18
+source_file = Library/Rochester/setAlgebra30LogExpEqns/srw4_3_48.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+

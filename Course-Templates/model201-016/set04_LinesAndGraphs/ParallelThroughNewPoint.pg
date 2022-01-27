@@ -1,0 +1,139 @@
+# WeBWorK problem written by Carl Yao
+# Portland Community College
+#
+# Line k's equation is given in y=Mx+B form.
+# Line ell is parallel to k, and a point on line ell is given.
+# Find line ell's equation.
+#
+# Last edited: Yao 9/12/13
+#
+# ENDDESCRIPTION
+
+## DBCCSS('8.F.3','A-CED')
+## DBsubject(Algebra)
+## DBchapter(Linear equations and functions)
+## DBsection(Equations of lines: general)
+## Institution(PCC)
+## Author(Alex Jordan, Carl Yao, Chris Hughes)
+## MLT(PointAndParallelLine)
+## MLTleader(1)
+## Level(3)
+## MO(1)
+## KEYWORDS('slope','linear','equation','point-slope','slope-intercept','parallel')
+
+##############################################
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGML.pl",
+  "parserImplicitPlane.pl",
+  "parserAssignment.pl",
+  "PGcourse.pl"
+);
+
+##############################################
+
+Context("ImplicitPlane");
+Context()->flags->set(showExtraParens=>0);
+Context()->variables->are(x=>'Real',y=>'Real');
+Context()->noreduce('(-x)-y','(-x)+y','(-x)*y','x*(-y)','-n');
+
+do {$m=non_zero_random(-5,5,1);} until (abs($m)!=1);
+$b=non_zero_random(-5,5,1);
+
+$x1=non_zero_random(-5,5,1);
+$y1=$m*$x1+$b;
+
+$lineNSI = Compute("$m*x+$b")->reduce;
+
+Context()->texStrings;
+$absX1 = abs($x1);
+$absY1 = abs($y1);
+if (($x1>0) && ($y1>=0)) {
+   $ansPSstringTeX = $y1==0 ? "y=$m(x-$x1)" : "y-$y1=$m(x-$x1)"; 
+} elsif (($x1<0) && ($y1>=0)) {
+   $ansPSstringTeX = $y1==0 ? "y=$m(x+$absX1)" : "y-$y1=$m(x+$absX1)"; 
+} elsif (($x1>0) && ($y1<=0)) {
+   $ansPSstringTeX = $y1==0 ? "y=$m(x-$x1)" : "y+$absY1=$m(x-$x1)"; 
+} else {
+   $ansPSstringTeX = $y1==0 ? "y=$m(x+$absX1)" : "y+$absY1=$m(x+$absX1)"; 
+}
+$ansSIstringTeX = "y=$lineNSI";
+Context()->normalStrings;
+
+
+$ansPS = ImplicitPlane($ansPSstringTeX);
+
+Context("Numeric");
+Context()->flags->set(showExtraParens=>0);
+Context()->variables->are(x=>'Real', y=>'Real');
+Context()->noreduce('(-x)-y','(-x)+y','(-x)*y','x*(-y)','-n');
+parser::Assignment->Allow;
+$ansSI=Formula("y=$m*x+$b");
+
+do {$b1=non_zero_random(-10,10,1);} until ($b1!=$b);
+$lineM = Compute("$m*x+$b1")->reduce;
+$lineNSI = Compute("$m*x+$b")->reduce;
+$lineNPSLeft = Compute("y-$y1")->reduce;
+$lineNPSRight = Compute("$m*(x-$x1)")->reduce;
+
+##############################################
+
+TEXT(beginproblem());
+
+BEGIN_PGML
+
+Line [`k`] has the equation [`y=[$lineM]`].
+
+Line [`\ell`] is parallel to line [`k`], but passes through the point [`([$x1],[$y1])`]. 
+
+An equation for [`\ell`] in slope-intercept form is: [_______________]{$ansSI->cmp(correct_ans_latex_string => $ansSIstringTeX)}.
+END_PGML
+
+##############################################
+
+Context()->flags->set(reduceConstants=>0);
+Context()->flags->set(reduceConstantFormulas=>0);
+
+$s1 = $m*$x1;
+
+$negX1 = -$x1;
+$x1Output = $negX1>0 ? "$negX1" : "(-$x1)";
+if ($m>0) {
+   $output1 = "$m x+$m \cdot $x1Output \\";
+} else {
+   $output1 = "($m) x+($m) \cdot $x1Output \\";
+}
+
+$absY1 = abs($y1);
+Context()->texStrings;
+$right1 = Compute("$m*x-$s1")->reduce;
+$left1 = $y1>0 ? "+$y1" : "-$absY1";
+
+$s2 = $s1-$y1;
+$absS2 = abs($s2);
+if ($s2>0) {
+   $right2 = "-$s2";
+} elsif ($s2<0) {
+   $right2 = "+$absS2";
+} else {
+   $right2 = "";
+}
+
+
+if ($y1!=0) {
+   $output2 = "$lineNPSLeft \mathbf{{} $left1} &= $right1 \mathbf{{} $left1}\\";
+   $output3 = "y &= $m x $right2 \\";
+} else {
+   $output2 = "";
+   $output3 = "";
+}
+Context()->normalStrings;
+
+#####################################
+
+ENDDOCUMENT();
+

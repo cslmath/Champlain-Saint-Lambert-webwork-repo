@@ -1,0 +1,157 @@
+# WeBWorK problem written by Carl Yao
+# Portland Community College
+#
+# Line k's equation is given in y=Mx+B form. M is either 1 or -1.
+# Line ell is perpendicular to k, and a point on line ell is given.
+# Find line ell's equation.
+#
+# Last edited: Yao 9/12/13
+#
+# ENDDESCRIPTION
+
+## DBCCSS('8.F.3','A-CED')
+## DBsubject(Algebra)
+## DBchapter(Linear equations and functions)
+## DBsection(Equations of lines: general)
+## Institution(PCC)
+## Author(Alex Jordan, Carl Yao, Chris Hughes)
+## Level(3)
+## MO(1)
+## KEYWORDS('slope','linear','equation','point-slope','slope-intercept','perpendicular')
+
+##############################################
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGML.pl",
+  "parserImplicitPlane.pl",
+  "parserAssignment.pl",
+  "PGcourse.pl"
+);
+
+##############################################
+
+Context("ImplicitPlane");
+Context()->flags->set(showExtraParens=>0);
+Context()->variables->are(x=>'Real',y=>'Real');
+Context()->noreduce('(-x)-y','(-x)+y');
+
+#Set line m's equation
+$m1=random(-1,1,2);
+$b1=non_zero_random(-10,10,1);
+
+#Set line n's equation
+$m2 = -$m1;
+do {$b2 = non_zero_random(-5,5,1);} until ($b2!=$b1);
+
+#This is a point on line n
+do {
+   $x1=non_zero_random(-5,5,1);
+   $y1= $m2*$x1+$b2;
+} until ($y1!=0);
+
+$lineNSI = Compute("$m2*x+$b2")->reduce;
+
+#set Correct Answer field for both answers
+Context()->texStrings;
+$absX1 = abs($x1);
+$absY1 = abs($y1);
+if ($m1>0) {
+   if (($x1>0) && ($y1>0)) {
+      $ansPSstringTeX = "y-$y1=-(x-$x1)"; 
+   } elsif (($x1<0) && ($y1>0)) {
+      $ansPSstringTeX = "y-$y1=-(x+$absX1)"; 
+   } elsif (($x1>0) && ($y1<0)) {
+      $ansPSstringTeX = "y+$absY1=-(x-$x1)"; 
+   } else {
+      $ansPSstringTeX = "y+$absY1=-(x+$absX1)"; 
+   }
+} else {
+   if (($x1>0) && ($y1>0)) {
+      $ansPSstringTeX = "y-$y1=x-$x1"; 
+   } elsif (($x1<0) && ($y1>0)) {
+      $ansPSstringTeX = "y-$y1=x+$absX1"; 
+   } elsif (($x1>0) && ($y1<0)) {
+      $ansPSstringTeX = "y+$absY1=x-$x1"; 
+   } else {
+      $ansPSstringTeX = "y+$absY1=x+$absX1"; 
+   }
+}
+
+$ansSIstringTeX = "y=$lineNSI";
+Context()->normalStrings;
+
+
+$ansPS = ImplicitPlane($ansPSstringTeX);
+
+Context("Numeric");
+Context()->flags->set(showExtraParens=>0);
+Context()->variables->are(x=>'Real', y=>'Real');
+Context()->noreduce('(-x)-y','(-x)+y');
+parser::Assignment->Allow;
+$ansSI=Formula("y=$m2*x+$b2");
+
+$lineM = Compute("$m1*x+$b1")->reduce;
+$lineNSI = Compute("$m2*x+$b2")->reduce;
+$lineNPSLeft = Compute("y-$y1")->reduce;
+$lineNPSRight = Compute("$m2*(x-$x1)")->reduce;
+
+##############################################
+
+TEXT(beginproblem());
+
+BEGIN_PGML
+
+Line [`k`] has the equation [`y=[$lineM]`].
+
+Line [`\ell`] is perpendicular to line [`k`], and passes through the point [`([$x1],[$y1])`]. 
+
+An equation for [`\ell`] in slope-intercept form is: [_______________]{$ansSI->cmp(correct_ans_latex_string => $ansSIstringTeX)}.
+
+END_PGML
+
+##############################################
+
+Context()->flags->set(reduceConstants=>0);
+Context()->flags->set(reduceConstantFormulas=>0);
+
+#######################################################
+
+Context("Numeric");
+Context()->flags->set(showExtraParens=>0);
+Context()->variables->are(x=>'Real', y=>'Real');
+Context()->noreduce('(-x)-y','(-x)+y');
+
+$lineNPSLeft = Compute("y-$y1")->reduce;
+$t1 = Compute("x-$x1")->reduce;
+Context()->texStrings;
+if (($m2==-1)&&($y1!=0)) {
+   $output1 = "$lineNPSLeft &= -x+$x1 \\";
+   if ($y1>0) {
+      $output2 = "$lineNPSLeft \mathbf{{}+$y1} &= -x+$x1 \mathbf{{}+$y1}\\";
+   } elsif ($y1<0) {
+      $output2 = "$lineNPSLeft \mathbf{{}-$absY1} &= -x+$x1 \mathbf{{}-$absY1}\\";
+   } else {
+      $output2 = "";
+   }
+} else {
+   $output1 = "";
+   if ($y1>0) {
+      $output2 = "$lineNPSLeft \mathbf{{}+$y1} &= $t1 \mathbf{{}+$y1}\\";
+   } elsif ($y1<0) {
+      $output2 = "$lineNPSLeft \mathbf{{}-$absY1} &= $t1 \mathbf{{}-$absY1}\\";
+   } else {
+      $output2 = "";
+   }
+}
+
+
+
+Context()->normalStrings;
+
+
+ENDDOCUMENT();
+
