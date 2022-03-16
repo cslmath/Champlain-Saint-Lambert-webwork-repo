@@ -20,6 +20,6 @@ Library/Rochester/setAlgebra34Matrices/determinant_3x3a.pg, 1, -1
 Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_25.pg, 1, -1 
 Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_26.pg, 1, -1 
 Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_24.pg, 1, -1 
-Template_201-105/setDeterminants_bycofactor_byelimination/Anton_linearalgebra_1-2-supp-34.pg, 1, -1 
+champlainLibrary/LinearAlgebra/Determinants-Computing/CF11Anton_linearalgebra_1-2-supp-34.pg, 1, -1 
 Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_16.pg, 1, -1 
 
