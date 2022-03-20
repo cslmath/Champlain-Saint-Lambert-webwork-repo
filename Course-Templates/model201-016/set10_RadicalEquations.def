@@ -93,7 +93,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 9
-source_file = local/Library/PCC/BasicAlgebra/RadicalEquations/SolvingRadicalEquation90.pg
+source_file = Template_201-016/set10_RadicalEquations/SolvingRadicalEquation90.pg
 value = 1
 max_attempts = 9
 showMeAnother = -1

@@ -1,0 +1,74 @@
+# WeBWorK problem written by Carl Yao
+# Portland Community College
+#
+# Solve sqrt(x+p)=r-sqrt(x)
+#
+# Last updated: Yao 1/7/2017
+# ENDDESCRIPTION
+
+## DBCCSS('A-REI.4.b')
+## DBsubject(Algebra)
+## DBchapter(Functions with fractional exponents and radical functions)
+## DBsection(Equations)
+## Institution(PCC)
+## Author(Alex Jordan, Carl Yao, Chris Hughes)
+## Level(3)
+## KEYWORDS('solve','quadratic','equation','square root')
+
+## Original location: OPL/PCC/BasicAlgebra/RadicalEquations/SolvingRadicalEquation90.pg
+
+##############################################
+DOCUMENT();
+
+loadMacros(
+   "PGstandard.pl",
+   "MathObjects.pl",
+   "parserImplicitPlane.pl",
+   "PGML.pl",
+   "PCCmacros.pl",
+   "PGcourse.pl",
+);
+
+##############################################
+    
+Context("ImplicitPlane");
+$var = RandomVariableName(type=>'variable');
+Context()->variables->are($var=>'Real');
+
+#do {
+#   do {
+#      $r = non_zero_random(-10,10,1);
+#      do {$p = non_zero_random(-10,10,1);} until (abs($r)!=abs($p));
+#      $s = ($r**2-$p)/(2*$r);
+#   } until ( $s>0 );
+#} until (sqrt($s)==int(sqrt($s)));
+
+# ensure that solution $s**2 works 
+$r = random(1,3,1);
+$s = random($r+1,4,1);
+$p = $r**2 - 2*$r*$s;
+
+$solution = $s**2;
+
+$left = Compute("sqrt($var+$p)")->reduce;
+$right = Compute("sqrt($var)-$r")->reduce;
+
+##############################################
+
+TEXT(beginproblem());
+Context()->texStrings;
+BEGIN_PGML
+Solve the equation.
+
+     [`` [$left] = [$right] ``]
+
+The only solution is [`[$var] `] = [__________________________________]{$solution}.
+
+END_PGML
+
+##############################################
+
+
+##############################################
+
+ENDDOCUMENT();
