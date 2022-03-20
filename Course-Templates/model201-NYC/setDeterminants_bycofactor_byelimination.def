@@ -21,8 +21,8 @@ Library/TCNJ/TCNJ_Dets_CramersRule_Misc/problem2.pg, 1, -1
 Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_25.pg, 1, -1 
 Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_26.pg, 1, -1 
 Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_24.pg, 1, -1 
-Template_201-NYC/setDeterminants_bycofactor_byelimination/Anton_Linealgebra_2_30.pg, 1, -1 
-Template_201-NYC/setDeterminants_bycofactor_byelimination/Anton_linearalgebra_1-2-supp-34.pg, 1, -1 
-Template_201-NYC/setDeterminants_bycofactor_byelimination/cfortin_cramer1.pg, 1, -1 
-Template_201-NYC/setDeterminants_bycofactor_byelimination/cfortin_cramer2.pg, 1, -1 
+champlainLibrary/LinearAlgebra/Determinants-Computing/CF11Anton_Linealgebra_2_30.pg, 1, -1 
+champlainLibrary/LinearAlgebra/Determinants-Computing/CF11Anton_linearalgebra_1-2-supp-34.pg, 1, -1 
+champlainLibrary/LinearAlgebra/Determinants-Computing/CF11cfortin_cramer1.pg, 1, -1 
+champlainLibrary/LinearAlgebra/Determinants-Computing/CF11cfortin_cramer2.pg, 1, -1 
 

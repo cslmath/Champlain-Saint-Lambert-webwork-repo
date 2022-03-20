@@ -16,7 +16,7 @@
 ## EditionText1('10')
 ## AuthorText1('Anton')
 ## Section1('Supplementary exercises p.117')
-## Problem1('')
+## Problem1('30')
 
 DOCUMENT(); 
 
@@ -51,7 +51,7 @@ $BR
 \[
 \begin{array}{rcl}
 $c x- t x + $a y &=& 0, \\
-x - $c y + t y &=& 0.
+x - $c y - t y &=& 0.
 \end{array}
 \]
 $BR
