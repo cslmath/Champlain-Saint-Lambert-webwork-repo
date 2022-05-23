@@ -1,0 +1,133 @@
+## DESCRIPTION
+## Radio button template for quiz questions
+## adapted from MH21quiz-template-radiobutton.pg
+## The student is presented a list of statements and asked to select
+## the single statement that falls in a specified category.
+## The remaining statements all fall in a (presumably disjoint) category.
+## Currently only two categories are supported (true and false for example).
+## The category requested is randomized, as are the correct choice
+## and the incorrect choices.
+## ENDDESCRIPTION
+
+## DBsubject(WeBWorK)
+## DBchapter(template)
+## DBsection('radio button')
+## KEYWORDS('multiple choice', 'template','quiz','reading comprehension')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Feb-15')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "parserRadioButtons.pl",
+  "PGchoicemacros.pl",      # needed for NchooseK()
+  "PGML.pl",
+  "PGcourse.pl"
+);
+
+TEXT(beginproblem());
+
+###########################
+#  Setup
+
+# The context is not used and may be changed if needed
+Context("Numeric");
+
+$nbuttons = 5;      # The number of buttons to present to the students
+$ncorrect = 1;      # The number of correct buttons (currently must be one)
+$nincorrect = $nbuttons - $ncorrect;    
+
+# The choices
+# Currently only two categories are supported
+
+$nlists = 2;
+
+# Each category requires a descriptive title to use in the text
+# and a list of statements fitting that category
+# The number of statements in each category must be >= $nincorrect
+
+$title[0] = 'false';
+$list[0] = ["false 1",
+        "false 2",
+        "false 3",
+        "false 3",
+        "false 5",
+        "false 6",
+        "false 7",
+        ];
+
+$title[1] = 'true';
+$list[1] = ["true 1",
+        "true 2",
+        "true 3",
+        "true 4",
+        "true 5",
+        "true 6",
+        "true 7",
+        ];
+
+$rightlist = random(0,$nlists-1,1); # Select the category to request 
+
+# TODO add code to create @choices if there are more than two categories
+
+# select the incorrect choices
+@slice = NchooseK((scalar @{$list[$rightlist-1]}),$nincorrect);
+@choices = @{$list[$rightlist-1]}[@slice];
+
+# add a single correct choice
+# TODO replace the following 6 by the ultimate index in $list[$rightlist]
+push @choices, $list[$rightlist][random(0,6,1)];
+
+$radio = RadioButtons(
+    [[@choices]],       # double [[ to randomize the presentation
+    $nbuttons-1,        # the correct answer is the last choice in the list (pre randomization)
+);
+
+##########
+# Options
+
+# For formatting of labels (untested)
+# labelFormat => string  # default "${BBOLD}%s. ${EBOLD}"
+
+###########################
+#  Main text
+
+BEGIN_PGML
+One of the following statements is _[$title[$rightlist]]_.
+
+The [$title[$rightlist]] statement is:  
+[__]{$radio}
+
+END_PGML
+
+############################
+#  Answer evaluation
+
+# This is automagically done in PGML
+# There is no need for $showPartialCorrectAnswers = 0 with one question.
+
+############################
+#  Solution
+
+BEGIN_PGML_SOLUTION
+The correct answer is [$radio->correct_ans()].
+END_PGML_SOLUTION
+
+COMMENT("Random category (T/F) requested.  Random correct and incorrect responses presented.");
+COMMENT("Restrict the number of attempts to limit guessing, there are only $nbuttons choices presented to students.");
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

@@ -1,0 +1,93 @@
+## DESCRIPTION
+## Template for WeBWorKification of 201-901 labs
+## using normal distribution calculations
+## for confidence interval questions
+## ENDDESCRIPTION
+
+## DBsubject('Statistics')
+## DBchapter('Confidence intervals')
+## DBsection('One sample mean - z')
+## KEYWORDS('statistics', 'inference', 'confidence interval','large sample','estimates','confidence interval')## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-May-04')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+DOCUMENT();
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+#     "weightedGrader.pl",      # Uncomment and below if weighted grader needed
+  "answerHints.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+###########################
+#  Setup
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+##########
+# Confidence levels and corresponding critical z's
+
+@CL = (  50,   60,   70,   80,   90,   95,   96,   98,   99, 99.5, 99.8, 99.9);
+@cv = (0.67, 0.84, 1.04, 1.28, 1.65, 1.96, 2.05, 2.33, 2.58, 2.81, 3.09, 3.29);
+
+##########
+# Select CL or CLs
+
+$level = list_random(6,7,8);
+#@levels = ...
+
+##########
+# Problem parameters
+
+$sigma = 4;
+# $sigma = random(3,5,1);
+$n = 64;
+# $n = list_random(49,64,81);
+$mean = 21;
+# $mean = random(19,23,1);
+
+##########
+# Answer tolerances
+
+$min_tol = 0.01;
+$cv_tol = 0.005;
+
+$comp_tol = $sigma*$cv_tol/sqrt($n);
+$abs_tol = max($comp_tol,$min_tol);
+
+Context()->flags->set(tolType=>'absolute',tolerance=>$abs_tol);
+
+#install_weighted_grader();
+
+##########
+# Answers
+
+$a = Compute("$mean - $cv[$level]*$sigma/sqrt($n)");
+$b = Compute("$mean + $cv[$level]*$sigma/sqrt($n)");
+
+TEXT(beginproblem());
+
+BEGIN_PGML
+#### Problem title
+
+* Population deviation: [$sigma]
+* Sample size: [$n]
+* Sample mean: [$mean]
+* Confidence level: [$CL[$level]]%
+
+The [$CL[$level]]% confidence interval is  
+[______]{$a} [`<\mu<`] [______]{$b}
+
+END_PGML
+
+#WEIGHTED_ANS($heavynum->cmp,40);
+
+ENDDOCUMENT();

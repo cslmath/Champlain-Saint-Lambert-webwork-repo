@@ -1,0 +1,67 @@
+## DESCRIPTION
+## A template file
+## For numeric, answer blank type problems
+## ENDDESCRIPTION
+
+## DBsubject(WeBWorK)
+## DBchapter(template)
+## DBsection('numeric')
+## KEYWORDS('numeric', 'weighted grader', 'template')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Feb-02')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "weightedGrader.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+###########################
+#  Setup
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$somenum = Compute(7);
+$anothernum = Compute(10*$somenum);
+$heavynum = Compute(100+$anothernum);
+
+$anothernumchecker = $anothernum ->cmp(tolType => 'relative',tolerance => 0.1,);
+
+install_weighted_grader();
+
+TEXT(beginproblem());
+
+###########################
+#  Main text
+
+BEGIN_PGML
+#### 
+
+Enter [$somenum]: [___]{$somenum->cmp(tolType => 'absolute',tolerance => 0.1,)}
+
+Enter [$anothernum]: [___]{$anothernumchecker}
+
+Enter [$heavynum]: [___][@ WEIGHTED_ANS($heavynum->cmp,30) @] 
+
+Enter [$heavynum]: [___]
+
+END_PGML
+
+WEIGHTED_ANS($heavynum->cmp,40);
+
+ENDDOCUMENT();

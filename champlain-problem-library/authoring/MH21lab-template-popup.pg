@@ -1,0 +1,77 @@
+## DESCRIPTION
+## popup template for lab questions
+## copied from 
+## Paul Pearson, Hope College
+## https://github.com/openwebwork/webwork-open-problem-library/blob/master/OpenProblemLibrary/FortLewis/Authoring/Templates/Misc/MultipleChoicePopup2_PGML.pg
+## ENDDESCRIPTION
+
+## DBsubject(WeBWorK)
+## DBchapter(template)
+## DBsection('radio button')
+## KEYWORDS('multiple choice', 'template')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Jan-19')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "parserPopUp.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+
+TEXT(beginproblem());
+
+
+###########################
+#  Setup
+
+Context("Numeric");
+
+$popup = PopUp(
+  ["?","Red","Blue","Green"],
+  "Blue",
+);
+
+
+###########################
+#  Main text
+
+BEGIN_PGML
+My favorite color is 
+
+[@ $popup->menu() @]*
+END_PGML
+
+############################
+#  Answer evaluation
+
+install_problem_grader(~~&std_problem_grader);
+
+$showPartialCorrectAnswers = 0;
+
+ANS( $popup->cmp() );
+
+############################
+#  Solution
+
+BEGIN_PGML_SOLUTION
+The correct answer is [$popup->correct_ans()].
+END_PGML_SOLUTION
+
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

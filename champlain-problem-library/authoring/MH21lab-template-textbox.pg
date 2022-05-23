@@ -1,0 +1,44 @@
+## DESCRIPTION
+## 
+## ENDDESCRIPTION
+
+## DBsubject('')
+## DBchapter('')
+## DBsection('')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Jan-19')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGessaymacros.pl",
+"PGML.pl",
+"PGcourse.pl",
+);
+
+# make sure we're in the context we want
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+TEXT(beginproblem());
+
+BEGIN_PGML
+#### Sometimes the WeBWorK question just asks you to type something into a text entry box.
+
+Enter the names of your group members for today's lab here.
+
+[@ ANS(essay_cmp()); essay_box(8,60) @]*
+
+END_PGML
+
+ENDDOCUMENT();
