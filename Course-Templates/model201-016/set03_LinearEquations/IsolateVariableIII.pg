@@ -49,7 +49,7 @@ $BR
 \( $var[$n] = \) \{ans_rule(15) \}
 $BR
 $BR
-Note: Recall \( t^2 \) can be written as t^2.
+Note: Recall \( t^2 \) can be written as t${CARET}2.
 END_TEXT
 
 ######################################
