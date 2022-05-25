@@ -1,0 +1,91 @@
+## DESCRIPTION
+## WeBWorKification of 201-901 lab 09
+## Question 2
+## Roulette Game
+## Requests some work as pdf
+## No randomization
+## ENDDESCRIPTION
+
+## DBsubject('Probability')
+## DBchapter('Random variables')
+## DBsection('Expectation')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Apr-19')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+
+###########################
+#  Setup
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+# Round answers to the penny
+Context()->flags->set(
+  tolerance => 0.0051,
+  tolType => "absolute",
+);
+
+$bet = Compute("5");
+
+$number = 7;
+$category = 'odd';
+
+$numberbetpayout = Compute("36*$bet");
+$categorybetpayout = 2*$bet;
+
+$pnumberbet = Compute("1/38");
+$pcategorybet = 18/38;
+
+$Enumberbet = Compute("$pnumberbet*($numberbetpayout - $bet) - (1-$pnumberbet)*$bet");
+$Ecategorybet = $pcategorybet*($categorybetpayout - $bet) - (1-$pcategorybet)*$bet;
+
+###########################
+#  Main text
+
+BEGIN_PGML
+#### Roulette Game
+
+The American roulette wheel has  pockets numbered 1 to 36 and two more pockets labeled with 0 and 00 respectively, for a total of 38 pockets.
+When you give the Venetian Casino in Las Vegas $[$bet] for a bet on the number [$number] in roulette, and you win,
+you make  a net profit of $[$numberbetpayout - $bet] (the prize is $[$numberbetpayout], but your $[$bet] bet is not returned).
+If you bet $[$bet] that the outcome is an odd number, and you win, you make a net  profit of $[$categorybetpayout-$bet]
+(you are given \$[$categorybetpayout] that includes your bet, so the net profit is $[$categorybetpayout - $bet]).
+In both cases, when you lose, you just lose your $[$bet] bet.
+
+a) If you bet $[$bet] on the number [$number], what is your expected net profit?  
+$[____]{$Enumberbet}
+
+a) If you bet $[$bet] that the outcome is [$category], what is your expected net profit?  
+$[____]{$Ecategorybet}
+
+Round your answers to the nearest penny.
+
+END_PGML
+
+COMMENT('STATIC');
+COMMENT('Requests some work as PDF.');
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

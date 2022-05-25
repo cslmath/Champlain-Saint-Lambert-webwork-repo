@@ -1,0 +1,124 @@
+## DESCRIPTION
+## WeBWorKification of 201-901 lab 04
+## Question 3
+## Density Curves
+## The original lab problem randomized
+## ENDDESCRIPTION
+
+## DBsubject('Probability')
+## DBchapter('Continuous distributions')
+## DBsection('Other distribution')
+## KEYWORDS('density curve')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Feb-09')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static(0)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "PGgraphmacros.pl",
+    "weightedGrader.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+##########
+# Set up
+
+$xmin = random(2,6,2); # 2; #
+$xpeak = random($xmin+2,$xmin+6,2); # 6; #
+$xmax = random($xpeak+4,$xpeak+6,2); # 12; #
+$yrecip = $xmax - ($xpeak + $xmin)/2;
+$ypeak = 1/$yrecip;
+
+$xb = Compute($xpeak + random(0.4,1.4,0.1)); # + 0.4); #
+
+##########
+# Graph the density curve
+
+$curve = init_graph(-1.5,-$ypeak/2,$xmax+2,1.5*$ypeak,
+    axes=>[0,0],
+    size=>[400,200],
+);
+$curve->lb(new Label( -0.375,-0.1*$ypeak,0,'black','center','middle'));
+$curve->v_ticks(0,'black',$ypeak);
+$curve->lb(new Label( -0.75,$ypeak,"1/$yrecip",'black','center','middle'));
+$curve->h_ticks(0,'black',(1..$xmax+1));
+$curve->moveTo(0,$ypeak);
+$curve->lineTo($xmax+1,$ypeak,'gray',1,'dashed');
+for (my $i=2; $i<=$xmax; $i += 2) {
+    $curve->lb(new Label($i,-0.1*$ypeak,$i,'black','center','middle'));
+    $curve->moveTo($i,0);
+    $curve->lineTo($i,1.5*$ypeak,'gray',1,'dashed');
+}
+$curve->moveTo(0,0);
+$curve->lineTo($xmin,0,"red",2);
+$curve->lineTo($xpeak,$ypeak,"red",2);
+$curve->lineTo($xmax,$ypeak,"red",2);
+$curve->lineTo($xmax,0,"red",2);
+$curve->lineTo($xmax+2,0,"red",2);
+
+##########
+# Answers
+
+install_weighted_grader();
+
+$ansai = Compute((1/2)*($xpeak-$xmin)*$ypeak);
+$ansaii = Compute(($xmax-$xpeak)*$ypeak);
+$ansb = Compute($ansai + ($xb-$xpeak)*$ypeak);
+if ($ansai le 0.5){
+    $ansc = Compute($xpeak + (0.5-$ansai)/$ypeak);
+    $hintc = $xpeak.' and '.$xmax;
+    }
+    else{
+    $ansc = Compute($xmin + 0.5*($xpeak - $xmin)/$ansai);
+    $hintc = $xmin.' and '.$xpeak;
+}    
+
+###########################
+#  Main text
+
+BEGIN_PGML
+#### Density Curves
+
+Suppose that the distribution of a certain statistical variable [`x`] in a data set has the density curve shown.
+
+>>[@ image( insertGraph($curve), width=>400,height=>200,tex_size=>800) @]*<<
+
+a) Show that this is a density curve by finding the total amount of area enclosed under it:
+    i. The area of the triangular region is [___]
+    i. The area of the rectangular region is [___]
+b) Find [`P(x<[$xb])`]: [___] (your answer should be a proportion not a percentage).
+c) (BONUS)
+Find the median of this density curve, that is the value on the horizontal axis that splits the area under the curve into two parts of equal area 0.5.
+(Hint: it is somewhere between [$hintc]).  
+[__]
+
+END_PGML
+
+##########
+# Evaluate using weights from lab pdf
+
+WEIGHTED_ANS($ansai->cmp(),1);
+WEIGHTED_ANS($ansaii->cmp(),1);
+WEIGHTED_ANS($ansb->cmp(),2);
+WEIGHTED_ANS($ansc->cmp(),3);
+
+ENDDOCUMENT();

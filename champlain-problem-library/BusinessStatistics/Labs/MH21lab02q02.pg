@@ -1,0 +1,73 @@
+## DESCRIPTION
+## WeBWorKification of the 201-901 labs
+## Lab02
+## Q02 pros and cons of pie charts
+## ENDDESCRIPTION
+
+## DBsubject('Statistics')
+## DBchapter('Exploratory data analysis/descriptive statistics')
+## DBsection('Graphical representations')
+## KEYWORDS('pie chart')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Jan-26')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGessaymacros.pl",
+"PGML.pl",
+"PGcourse.pl",
+);
+
+###########################
+#  Setup
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+###########################
+#  Main text
+
+TEXT(beginproblem());
+
+BEGIN_PGML
+#### Criticisms of Pie Charts
+
+There are many different opinions about the use of Pie Charts for categorical data. Read at least one of the anti Pie Chart web pages and at least one of the pro Pie Chart web pages and come up with at two reasons to use Pie Charts and at least two reasons not to use Pie Charts.
+
+#### Some websites discussing Pie Charts:
+- [@ htmlLink("https://www.geckoboard.com/blog/pie-charts/","What do you mean I'm not supposed to use Pie Charts?!","TARGET='_blank'" ) @]*
+- [@ htmlLink("http://www.perceptualedge.com/articles/visual_business_intelligence/save_the_pies_for_dessert.pdf","Save the Pies for Dessert","TARGET='_blank'" ) @]*
+- [@ htmlLink("http://speakingppt.com/why-tufte-is-flat-out-wrong-about-pie-charts/","Why Tufte is Flat-Out Wrong about Pie Charts","TARGET='_blank'" ) @]*
+- [@ htmlLink("http://www.neoformix.com/2007/InDefenseOfPieCharts.html","In Defense of Pie Charts","TARGET='_blank'" ) @]*
+- [@ htmlLink("https://10e11.com/blog/pie-charts-hurt-your-outcomes-data-pros-and-cons-of-pie-charts/","Pros and Cons of Pie Charts","TARGET='_blank'" ) @]*
+
+You are not limited to just reading these sites.
+
+Two reasons or situations to use pie charts:  
+[@ essay_box(8,60) @]*
+
+Two reasons or situations to avoid pie charts:  
+[@ essay_box(8,60) @]*
+
+END_PGML
+
+###########################
+#  Answers
+
+ANS( essay_cmp() );
+ANS( essay_cmp() );
+
+ENDDOCUMENT();

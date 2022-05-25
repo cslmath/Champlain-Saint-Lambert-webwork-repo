@@ -1,0 +1,81 @@
+## DESCRIPTION
+## WeBWorKification of 201-901 lab 07
+## Question 2
+## Tendon Surgery
+## Requests some work as pdf
+## ENDDESCRIPTION
+
+## DBsubject('Probability')
+## DBchapter('')
+## DBsection('')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Mar-16')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static(0)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "weightedGrader.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+##########
+# Set up
+
+$I = random(2,5);
+$F = random(12,16);
+$FI = 1;
+
+##########
+# Answers and checking
+
+$FUI = $F + $I - $FI;
+$FCIC = 100 - $FUI;
+$FCI = 100 -$F - $FCIC;
+
+TEXT(beginproblem());
+
+###########################
+#  Main text
+
+BEGIN_PGML
+#### Tendon Surgery (pdf and here).
+
+You have torn a tendon and are facing surgery to repair it.
+The surgeon explains the risks to you:
+infection (event [`I`]) occurs in [$I]% of such operations,
+the repair fails (event [`F`]) [$F]% of the time,
+and both infection and failure occur together in [$FI]% of cases.
+
+Answer the questions on paper, using correct notation and showing clearly the probability laws you are using.
+Check your answers below, entering your answers as percentages.
+
+a) (on pdf)
+b) [`P(F\cup I) =`] [___]{$FUI}%
+c) (on pdf)
+d) [`P(\text{the operation succeeds and there is no infection}) =`] [___]{$FCIC}%
+e) (on pdf)
+f) [`P(\text{the operation succeeds and infection occurs}) =`] [___]{$FCI}%
+END_PGML
+
+COMMENT('Requests some work as PDF.');
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

@@ -1,0 +1,114 @@
+## DESCRIPTION
+## WeBWorKification of Lab 03 Question 02
+## Five number summary
+## ENDDESCRIPTION
+
+## DBsubject('Statistics')
+## DBchapter('Exploratory data analysis/descriptive statistics')
+## DBsection('Summary statistics')
+## KEYWORDS('five number summary')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Feb-02')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static('0')
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGessaymacros.pl",
+"PGstatisticsmacros.pl",    # for five_point_summary() and insertDataLink()
+"PGML.pl",
+"PGcourse.pl",
+);
+
+# make sure we're in the context we want
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+#########
+# Set up
+
+COMMENT('No randomization.');
+
+@none =     (12.9, 15.9, 15.9, 15.9, 16.0, 16.1, 16.1, 16.5, 16.5, 16.6, 17.8,
+             18.5, 18.5, 18.5, 18.9, 18.9, 19.1, 19.5, 19.5, 19.7, 21.9, 25.5);
+@lemon =    (15.9, 15.9, 15.9, 15.9, 16.1, 16.3, 17.2, 17.5, 17.5, 18.0, 18.5,
+             18.5, 18.6, 18.7, 18.9, 18.9, 18.9, 19.0, 19.2, 19.5, 21.5, 25.9);
+@lavender = (16.3, 18.5, 18.5, 18.5, 18.5, 18.5, 18.5, 19.2, 19.2, 19.5, 19.8,
+             19.8, 20.2, 20.8, 21.1, 21.3, 21.9, 22.8, 22.8, 23.5, 24.9, 24.9);
+
+##########
+# csv data file link
+
+# Label datasets
+    push(@none,"None");
+    push(@lemon,"Lemon");
+    push(@lavender,"Lavender");
+
+$csvlink = insertDataLink($PG,'Effects of Odours on Sales Data',(~~@none,~~@lemon,~~@lavender));
+
+##########
+# Answers
+
+$none5nummanual = List(12.9, 16.1, 18.15, 19.1, 25.5);
+$lemon5nummanual = List(15.9, 16.3, 18.5, 18.9, 25.9);
+$lavender5nummanual = List(16.3, 18.5, 19.8, 21.9, 24.9);
+
+$none5nummacro = List(five_point_summary(@none));
+$lemon5nummacro = List(five_point_summary(@lemon));
+$lavender5nummacro = List(five_point_summary(@lavender));
+
+# $none5nummacro = $none5nummanual;
+# $lemon5nummacro = $lemon5nummanual;
+# $lavender5nummacro = $lavender5nummanual;
+
+TEXT(beginproblem());
+
+BEGIN_PGML
+### Effects of Odours on Sales
+#### (a)
+
+Businesses know that customers often respond to background music.
+Do they respond to odours?
+A study carried out on Saturday evenings at a pizza restaurant attempted to answer this question.
+Every Saturday, either a lemon odour, a lavender odour, or no odour was released in the restaurant.
+The average amounts (in euros) spent by customers are listed on the pdf and are available here, [$csvlink]*, in csv format.
+
+Compute the five-number summary for each of the three data sets using the procedure from the class notes.
+
+The five-number summary for no odour:  
+[__]{$none5nummacro}{40}
+Use commas to separate the numbers.
+
+The five-number summary for the lemon odour:  
+[__]{$lemon5nummacro}{40}
+Use commas to separate the numbers.
+
+The five-number summary for the lavender odour:  
+[__]{$lavender5nummacro}{40}
+Use commas to separate the numbers.
+
+#### (b) in Excel
+
+#### (c)
+
+Which odour appears to be the best choice for the restaurant? Justify your
+answer referring to the box-and-whisker plot you created in Excel.  
+[@ ANS(essay_cmp()); essay_box(8,60) @]*
+
+END_PGML
+
+COMMENT('STATIC. MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

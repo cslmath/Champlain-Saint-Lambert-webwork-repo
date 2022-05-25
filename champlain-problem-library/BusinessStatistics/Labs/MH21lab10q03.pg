@@ -1,0 +1,116 @@
+## DESCRIPTION
+## WeBWorKification of 201-901 lab 10
+## Question 3
+## Mineral Water Supply
+## Requests some work as pdf
+## ENDDESCRIPTION
+
+## DBsubject('Statistics')
+## DBchapter('Statistical Inference')
+## DBsection('Central Limit Theorem')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Apr-27')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+## Modified 2022-04-18 to keep the z-score in a reasonable range.
+
+## MO(1)
+## Static(0)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "weightedGrader.pl",
+    "PGnumericalmacros.pl",     # required by PGstatisticsmacros.pl
+    "PGstatisticsmacros.pl",    # provides normal_prob()
+    "PGauxiliaryFunctions.pl",  # provides ceil(), floor()
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+
+##########
+# Set up
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$mean = random(17,19,1);
+#$mean = 19;
+
+# keep the z-score in reasonable range
+$sdevmin = ceil(50 - 2.5*$mean);
+$sdevmax = $sdevmin + 4;
+$sdev = random($sdevmin, $sdevmax,1);
+#$sdev = 5;
+
+$watersupply = 2000;
+$samplesize = 100;
+$samplesdev = $sdev/sqrt($samplesize);
+
+##########
+# My functions
+
+sub popproportion {
+    my $a = $_[0];
+    my $b = $_[1];
+    
+    return Real(normal_prob($a,$b,mean=>$mean,deviation=>$sdev))
+        ->cmp(tolType => 'absolute',tolerance => 0.0005,);
+}
+
+sub sampproportion {
+    my $a = $_[0];
+    my $b = $_[1];
+    
+    return Real(normal_prob($a,$b,mean=>$mean,deviation=>$samplesdev))
+        ->cmp(tolType => 'absolute',tolerance => 0.0005,);
+}
+
+##########
+# Answers and checking
+
+install_weighted_grader();
+
+###########################
+#  Main text
+
+BEGIN_PGML
+#### Mineral Water Supply
+
+The mean amount of mineral water consumed by a person per day on the job has  mean of [$mean] ounces
+and standard deviation of [$sdev] ounces.
+A company supplies its employees with [$watersupply] ounces of mineral water daily.
+The company has [$samplesize] employees.
+
+a) How  much water must an employee in this sample of [$samplesize] consume, on average, 
+for the  total daily water demand to be over [$watersupply] ounces?  
+[% Standard weightings
+[`\bar{x}>`][_____]{$watersupply/$samplesize} ounces. %]
+[% Weighted grading
+%][`\bar{x}>`][_____][@ WEIGHTED_ANS(Compute("$watersupply/$samplesize")->cmp,1); '' @] ounces. (one mark)
+a) Use the Central Limit Theorem to find the probability
+that the mineral water supplied by the company
+will not satisfy the  water demanded by its employees on a given day.  
+[% Standard weightings
+[_____]{sampproportion($watersupply/$samplesize,'infty')} %]
+[% Weighted grading
+%][_____][@ WEIGHTED_ANS(sampproportion($watersupply/$samplesize,'infty'),2); '' @] (two marks)
+
+END_PGML
+
+COMMENT('Requests some work as PDF.');
+COMMENT('Uses a weighted grader.');
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

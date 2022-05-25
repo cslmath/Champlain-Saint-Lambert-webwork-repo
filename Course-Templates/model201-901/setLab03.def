@@ -1,0 +1,64 @@
+assignmentType      = default
+openDate          = 02/01/2022 at 09:00am EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 02/01/2022 at 06:00pm EST
+answerDate        = 02/03/2022 at 11:00am EST
+enableReducedScoring = N
+paperHeaderFile   = champlainLibrary/BusinessStatistics/Labs/setHeaderPaperLab.pg
+screenHeaderFile  = champlainLibrary/BusinessStatistics/Labs/setHeaderScreenLab.pg
+description       = Lab03 WeBWorK component.
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = champlainLibrary/BusinessStatistics/Labs/MH21lab03q01a.pg
+value = 2
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = champlainLibrary/BusinessStatistics/Labs/MH21lab03q01b.pg
+value = 2
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = champlainLibrary/BusinessStatistics/Labs/MH21lab03q02a.pg
+value = 5
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = champlainLibrary/BusinessStatistics/Labs/MH21lab03q03.pg
+value = 4
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 5
+source_file = champlainLibrary/BusinessStatistics/Labs/MH21lab03q04/MH21lab03q04.pg
+value = 6
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+

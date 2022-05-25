@@ -1,0 +1,77 @@
+## DESCRIPTION
+## WeBWorKification of 201-901 lab 09
+## Question 4
+## Sampling Distribution of the Mean
+## Requests some work submitted as pdf
+## Very limited randomization (only four versions)
+## ENDDESCRIPTION
+
+## DBsubject('Statistics')
+## DBchapter('Sampling distributions')
+## DBsection('Sample mean')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Apr-19')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static(0)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+
+##########
+# Set up
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$b = random(6,8,2);
+$c = random(10,12,2);
+
+$popmean = (4+$b+$c+14)/4;
+
+$Esamplemean = $popmean;
+
+###########################
+#  Main text
+
+BEGIN_PGML
+#### Sampling Distribution of the Mean
+
+Consider a population of four individuals.
+The shoe sizes of these four individuals are 4, [$b], [$c], and 14.
+In this exercise you will construct the population distribution of the shoe size and the sampling distribution of the average shoe size for simple random samples of size 2 (with replacement).
+
+The random variable [`X`] is _the shoe size of a randomly chosen individual_.
+
+Following the instructions in the pdf, find [`\mu = E(X)`], the expected value for [`X`].  
+[`E(X)=`] [____]{$popmean}
+
+The random variable [`\bar{x}`] is _the average shoe size in a simple random sample of size 2_.
+
+Following the instructions in the pdf, find [`\mu_{\bar{x}} = E(\bar{x})`], the expected value for [`\bar{x}`].  
+[`E(\bar{x})=`] [____]{$Esamplemean}
+
+END_PGML
+
+COMMENT('Only four different randomizations.');
+COMMENT('Requests some work as PDF.');
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

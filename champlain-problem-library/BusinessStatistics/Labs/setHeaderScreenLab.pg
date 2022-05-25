@@ -1,0 +1,49 @@
+&DOCUMENT;
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl"
+);
+
+
+
+BEGIN_TEXT
+
+This is the WeBWorK part of ${BBOLD}Lab Assignment $setNumber${EBOLD}.
+It is due on : ${BBOLD}$formatedDueDate${EBOLD}.
+
+$PAR
+This is where you do the WeBWorK part of your lab using your group login.
+$PAR
+To do the questions you will have to refer to the instructions downloaded from Lea and the Excel sheet also found on Lea.
+$PAR
+Only one student at a time can use your group login.  If another memebr of the group logs in the first student is automatically logged out.
+$PAR
+The primary purpose of WeBWorK is to let you know if you are getting the right answer or to alert you if you get the wrong answer.
+For questions with numeric answers, you can usually attempt a problem as many times as you want before the due date.
+However, if you are having trouble figuring out your error, you should
+consult the notes, or ask a fellow student or
+your teacher for help.  Don't spend a lot of time guessing -- it's not very efficient or effective.
+$PAR
+For multiple choice or true or false questions, usually the number of attempts will be limited to discourage guessing.
+$PAR
+For numerical answers, if you are sure that your answer is correct, but WeBWorK is telling you that it is wrong, try increasing the precision of your answer.  If you are entering your answer with no fractional part, try entering one or two decimal palces.  If you are already entering one or two decimals, increase the number of decimal places to four or five.
+$PAR
+
+Here are the 
+\{ htmlLink(qq!http://webwork.maa.org/wiki/Mathematical_notation_recognized_by_WeBWorK!,"mathematical notation and functions","target=~~"_blank~~"") \}
+ that WeBWorK understands.
+$PAR
+Here are some
+\{ htmlLink(qq!http://webwork.champlainww.ca/wwdoc/WWstudenttips.html!,"tips for students","target=~~"_blank~~"") \}.
+$PAR
+There is a little more information for students on the 
+\{ htmlLink(qq!http://webwork.maa.org/wiki/Student_Information!,"MAA WeBWorK wiki","target=~~"_blank~~"") \}.
+$PAR
+END_TEXT
+
+ENDDOCUMENT();
+
+

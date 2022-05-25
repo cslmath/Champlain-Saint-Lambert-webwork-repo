@@ -1,0 +1,141 @@
+## DESCRIPTION
+## WeBWorKification of the 201-901 labs
+## Lab 2
+## Q01 based on a histogram created in Excel
+## ENDDESCRIPTION
+
+## DBsubject('Statistics')
+## DBchapter('Exploratory data analysis/descriptive statistics')
+## DBsection('Graphical representations')
+## KEYWORDS('histogram')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Jan-26')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "parserRadioButtons.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+
+TEXT(beginproblem());
+
+
+###########################
+#  Setup
+
+Context("Numeric");
+
+$radio = RadioButtons(
+  ["Red","Blue","Green","None of these"],
+  "Blue", # correct answer
+  last => ["None of these"], # can be a list
+);
+
+$histopeaks = RadioButtons(
+    ["One peak (unimodal)",
+    "Two peaks (bimodal)",
+    "Many peaks (multimodal)",
+    "Other"],
+    "One peak (unimodal)", # correct answer
+    last => ["Other"],
+);
+
+$histoshape = RadioButtons(
+    ["Symmetric",
+    "Right-tailed",
+    "Left-tailed",
+    "No special shape"],
+    "Right-tailed", # Correct
+    last => ["No special shape"],
+);
+
+$fastestrunners = RadioButtons(
+    ["To the left",
+    "In the middle",
+    "To the right",
+    "All over the histogram"],
+    "To the left", #Correct
+    last => ["All over the histogram"],
+);
+
+$slowestrunners = RadioButtons(
+    ["To the left",
+    "In the middle",
+    "To the right",
+    "All over the histogram"],
+    "To the right", #Correct
+    last => ["All over the histogram"],
+);
+
+$stretchoutlonger = RadioButtons(
+    ["The fast runners",
+    "The slow runners",
+    "Both stretch out equally"],
+    "The slow runners",
+    last => ["Both stretch out equally"],
+);
+
+###########################
+#  Main text
+
+BEGIN_PGML
+The questions all refer to the histogram from Question 1 of the lab assignment
+*Marathon Finishing Times*
+
+1. How many peaks does the histogram have?  
+[@ $histopeaks->buttons() @]*
+1. What is the general shape of the histogram?  
+[@ $histoshape->buttons() @]*
+1. In which part of the histogram are the finishing times of the fastest runners located?  
+[@ $fastestrunners->buttons() @]*
+1. In which part are the finishing times of the slowest runners located?  
+[@ $slowestrunners->buttons() @]*
+1. Which stretch out longer from the centre: the fast ones or the slow ones?  
+[@ $stretchoutlonger->buttons() @]*
+
+END_PGML
+
+############################
+#  Answer evaluation
+
+install_problem_grader(~~&std_problem_grader);
+
+$showPartialCorrectAnswers = 0;
+
+ANS( $histopeaks->cmp() );
+ANS( $histoshape->cmp() );
+ANS( $fastestrunners->cmp() );
+ANS( $slowestrunners->cmp() );
+ANS( $stretchoutlonger->cmp() );
+
+############################
+#  Solution
+
+BEGIN_PGML_SOLUTION
+The correct answers are:
+
+1.  [$histopeaks->correct_ans()]
+1.  [$histoshape->correct_ans()]
+1.  [$fastestrunners->correct_ans()]
+1.  [$slowestrunners->correct_ans()]
+1.  [$stretchoutlonger->correct_ans()]
+END_PGML_SOLUTION
+
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

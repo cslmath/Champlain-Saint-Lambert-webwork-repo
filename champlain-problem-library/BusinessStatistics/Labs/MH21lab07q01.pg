@@ -1,0 +1,76 @@
+## DESCRIPTION
+## WeBWorKification of 201-901 lab 07
+## Question 1
+## Sample Spaces and Events
+## Requests some work as pdf
+## ENDDESCRIPTION
+
+## DBsubject('Probability')
+## DBchapter('Sample Space')
+## DBsection('Probability: direct computation, inclusion/exclusion')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Mar-16')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "weightedGrader.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+##########
+# Set up
+
+$L = Compute("2/6");
+$T = Compute("3/6");
+
+##########
+# Answers and checking
+
+# All static
+
+TEXT(beginproblem());
+
+###########################
+#  Main text
+
+BEGIN_PGML
+#### Sample Spaces and Events (pdf and here)
+
+Suppose I have a loonie, a quarter and a dime in my pocket. I reach into my pocket and pick out a coin at random (assume each is equally likely), and then flip it. I  record  both the coin that is picked and the result of the flip (heads or tails).
+
+Enter your answers as fractions (not percentages).
+    a) (on pdf)
+    b) (on pdf)
+    c) [`P(L) =`] [___]{$L}
+       [`P(T) =`] [___]{$T}
+    d) (on pdf)
+    e) [`P(L\cap T) =`] [___]{$L*$T}
+       [`P(L\cup T) =`] [___]{$L+$T-($L*$T)}
+       [`P(\overline{L})`] [___]{1-$L}
+    f) (on pdf)
+END_PGML
+
+COMMENT('STATIC');
+COMMENT('Requests some work as PDF.');
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

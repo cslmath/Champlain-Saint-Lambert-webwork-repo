@@ -1,0 +1,73 @@
+## DESCRIPTION
+## WeBWorKification of 201-901 lab 09
+## Question 5
+## Tree diagram
+## Requests some work as pdf
+## ENDDESCRIPTION
+
+## DBsubject('Probability')
+## DBchapter('Random variables')
+## DBsection('Expectation')
+## KEYWORDS('expected value')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2022-Mar-28')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static(0)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+
+##########
+# Set up
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$red = 2;
+$green = random(3,7,1);
+
+###########################
+#  Main text
+
+BEGIN_PGML
+#### Expected number of green marbles
+
+There are [$red] red marbles and [$green] green marbles in a bag.
+Three marbles are drawn randomly, without replacement, [`X`] counts the number of green marbles chosen.
+Find the expected value, [`E(X)`].
+
+[`E(X)=`][______]{(3*$green)/($green+2)}
+END_PGML
+
+
+BEGIN_PGML_HINT
+Since there are only [$red] red marbles, [`P(X=0) = 0`].
+END_PGML_HINT
+BEGIN_PGML_HINT
+For this problem setup the probability of drawing RRG is the same as that of drawing RGR and of GRR.
+You can just compute one of the three probabilities and multiply it by three to find [`P(X=1)`].
+
+The same type of reasoning applies for [`P(X=2)`] (RGG, GRG, and GGR).
+END_PGML_HINT
+
+COMMENT('Requests some work as PDF.');
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();
