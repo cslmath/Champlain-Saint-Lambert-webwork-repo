@@ -1,0 +1,78 @@
+## DESCRIPTION
+## Radio button template for lab questions
+## copied from 
+## Paul Pearson, Hope College
+## https://github.com/openwebwork/webwork-open-problem-library/blob/master/OpenProblemLibrary/FortLewis/Authoring/Templates/Misc/MultipleChoiceRadio1_PGML.pg
+## ENDDESCRIPTION
+
+## DBsubject(WeBWorK)
+## DBchapter(template)
+## DBsection('radio button')
+## KEYWORDS('multiple choice', 'template')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Jan-19')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "parserRadioButtons.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+
+TEXT(beginproblem());
+
+
+###########################
+#  Setup
+
+Context("Numeric");
+
+$radio = RadioButtons(
+  ["Red","Blue","Green","None of these"],
+  "Blue", # correct answer
+  last => ["None of these"], # can be a list
+);
+
+
+###########################
+#  Main text
+
+BEGIN_PGML
+My favorite color is 
+
+[@ $radio->buttons() @]*
+END_PGML
+
+############################
+#  Answer evaluation
+
+install_problem_grader(~~&std_problem_grader);
+
+$showPartialCorrectAnswers = 0;
+
+ANS( $radio->cmp() );
+
+############################
+#  Solution
+
+BEGIN_PGML_SOLUTION
+The correct answer is [$radio->correct_ans()].
+END_PGML_SOLUTION
+
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

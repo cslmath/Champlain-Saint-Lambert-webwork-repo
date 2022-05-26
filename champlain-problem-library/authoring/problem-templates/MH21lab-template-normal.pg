@@ -1,0 +1,104 @@
+## DESCRIPTION
+## Template for WeBWorKification of 201-901 labs
+## using normal distribution calculations
+## ENDDESCRIPTION
+
+## DBsubject('Probability')
+## DBchapter('Continuous distributions')
+## DBsection('Gaussian normal')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Apr-27')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static(0)
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGnumericalmacros.pl",     # required by PGstatisticsmacros.pl
+"PGstatisticsmacros.pl",    # provides normal_prob()
+"PGML.pl",
+"PGcourse.pl",
+);
+
+TEXT(beginproblem());
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+##########
+# Set up
+
+$mean = random(400, 450, 5);
+#$mean = 425;
+$sdev = random(26, 29, 1);
+#$sdev = 28;
+
+
+$a = int($mean-$sdev*random(1.4,1.6,0.05));
+#$a = $mean - 1.5*$sdev;
+$b = int($mean+$sdev*random(1.4,1.6,0.05));
+#$b = $mean + 1.5*$sdev;
+
+$c = int(($mean+0.9*$sdev)/5 +1)*5;
+#$c = 450;
+
+##########
+# Answers and checking
+
+sub proportion {
+    my $a = $_[0];
+    my $b = $_[1];
+    
+    return Compute(normal_prob($a,$b,mean=>$mean,deviation=>$sdev))
+        ->cmp(tolType => 'absolute',tolerance => 0.002,);
+}
+
+$ansd = Compute(
+    sprintf("%0.0f",
+        normal_distr($d/100-0.5, mean=>$mean, deviation=>$sdev)
+    )
+    )->cmp(tolType => 'absolute',tolerance => 0.5,);
+
+$ansd1 = Compute(
+    normal_distr($d/100-0.5, mean=>$mean, deviation=>$sdev)
+    )->cmp(tolType => 'absolute',tolerance => 0.005,);
+
+###########################
+#  Main text
+
+BEGIN_PGML
+#### Normal Distributions Review
+
+Density curves can be interpreted as distributions of random variables.
+This is an example.
+
+Suppose the weights of  bags of _Choco Rocks_ cookies are normally distributed,
+with mean [$mean]\ g
+and standard deviation [$sdev]\ g.
+If [`X`] denotes  the weight of a randomly selected cookie bag,
+then [`X`] is a random variable whose distribution is the normal density curve with  mean [$mean] and standard deviation [$sdev].
+We call [`X`] a continuous random variable as its values vary on a continuous scale (two weights can be arbitrarily close).
+We can interpret the area under the curve over a given range as the probability that the weight of a randomly selected bag will fall in that range.
+
+a) If a cookie bag is selected at random, what is the probability that it weighs more than [$b]\ g?  
+[`P(X>[$b])=`][_____]{{proportion($b,'infty')}}
+a) If a cookie bag is selected at random, what is the probability that it weighs between
+    [$a] and [$b]\ g?  
+    [`P([$a]<X<[$b])=`][_____]{{proportion($a,$b)}}
+a) If a cookie bag weighs [$c]\ g, is it in the 20% heaviest bags?  
+    [`P(X>[$c])=`][_____]{{proportion($c,'infty')}}
+
+END_PGML
+
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();
