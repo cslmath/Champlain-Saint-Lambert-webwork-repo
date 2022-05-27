@@ -1,0 +1,119 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Simplifying: square roots
+##     Multiple Select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+# display different variables
+@var = qw(y t u v w z);
+$x = $var[random(0,$#var,1)];
+do {$y = $var[random(0,$#var,1)]} until ($x ne $y);
+
+# random a and b not equal
+$a = random(3,9,1);
+do {$b = random(3,9,1);} until ($b != $a);
+$c = $a + 1;
+$asq = $a**2;
+$csq = $c**2;
+$q = list_random(2,3,5,6,7,8); # not a perfect square
+
+@typearray = ("false","true");
+$n = random(0,1,1);  # choose one of the types
+$numc = random(0,4,1);  # how many correct to display
+$type = $typearray[$n];
+
+# The full list of answers, FALSE or TRUE
+#   Note! put at least 4 answers of each type
+# all false
+@allF = ("\( \dfrac{\sqrt{$x + $asq}}{\sqrt{$x + $csq}} = \dfrac{$a}{$c} \)",
+    "\( \sqrt{$x + $y} = \sqrt{$x} + \sqrt{$y} \)",
+     "\( \sqrt{$asq $x} = $a $x \)",
+     "\( \sqrt{$x^2} = $x \) for all real \($x\)",
+    "\( \sqrt{$x - $y} = \sqrt{$x} - \sqrt{$y} \)",
+   );
+
+# all true
+@allT = ("\( \sqrt{$x $y} = \sqrt{$x} + \sqrt{$y} \)",
+         "\( \sqrt{$asq $x} = $a\sqrt{$x} \)",
+         "\( \sqrt{$x^2} = |$x| \)",
+         "\( (\sqrt{$x})^2 = $x \)",
+         "\( \dfrac{1}{\sqrt{$q}} = \dfrac{\sqrt{$q}}{$q} \)",
+         );  
+
+# set conditions of correctness
+if ($n == 0){    # type 0
+    @corrAns = @allF;
+    @incorrAns = @allT;
+    }
+else {   # type 1
+    @corrAns = @allT;
+    @incorrAns = @allF;
+    }
+# Correct answers to display:
+#   $numc : how many correct answers to display
+#   @slicec : from the correct answers, choose a subset of indices
+#             e.g. if $numc = 2, 0 1 2 3 => 0 3, or 1 4, or 2 3, etc
+#   scalar(@corrAns) : total number of possible correct answers (usually 4)
+@slicec = NchooseK(4,$numc);  
+@randc = @corrAns[@slicec];
+
+# Incorrect answers to display
+$numi = 4 - $numc;   # the 4 is the number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+# Display the question, and the choices:
+$quest = "Select the value(s), if any, that are $type.";
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){  # at least one correct answer
+    $multichoice -> qa ( $quest, @randc,);
+    $multichoice -> extra( @randi, "None of the above",);
+    }
+else {            # no correct answers
+    $multichoice -> qa ( $quest, "None of the above",);
+    $multichoice -> extra( @randi, );
+}
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+Select the statements(s), if any, that are [$type]. Assume that the square root expressions are always defined.
+[@ $multichoice->print_a() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

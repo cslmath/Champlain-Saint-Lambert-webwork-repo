@@ -1,0 +1,155 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Math Vocabulary with Theory: real number or integer
+##     Multiple Select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display## DESCRIPTION
+## Precalculus diagnostic test question with theory
+##   vocabulary : real versus integer
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+
+@numtype = ("not real numbers","real numbers",
+            "not integers","integers");
+$n = random(0,3,1);   # see next comment line
+# n = 0 not real numbers, n = 1 real, n=2 not integer, n=3 integer
+if ($n < 2){
+    $defname = "real numbers";
+    $deftext = "A real number is any rational or irrational number.";
+    $defex = "-1, \, 0, \, 3.58, \, \frac{7}{9}, \, 
+               \sqrt{2}, \, \pi, \, e, \, ...";
+    $defnot = "\sqrt{-1}, \, \sqrt[4]{-2}, \, 3+4i, \, ...";
+}
+else {
+    $defname = "integers";
+    $deftext = "An integer is a number that can be 
+                expressed without a decimal part.";
+    $defex = "-4, \, -19, \, 0, \, 2, \, 66, \, ...";
+    $defnot = "-5.1, \, \frac{3}{7}, \, \pi, \, \sqrt[3]{5}, \, ...";
+}
+$type = $numtype[$n];
+$d = random(2,9,1);  # positive
+$a = random(2,100,2);  # positive even
+$b = random(3,99,1);  # positive > 2
+$c = $d*$d + 1; # not a perfect square
+$p = list_random(3,5,7,11,13,17,19,23,29,31);  # some primes
+do {$q = list_random(2,3,5,7,11,13)} until ($q != $p);
+$pdq = $p/$q;
+$m = random(3,5,1);
+$e = $d*$d; # a perfect square
+$f = $b - random(1,2,1);
+
+# The full list of answers:
+@allAns = ("\( 0 \)",  # index 0
+             "\( $a \)",   
+             "\( - $c \)", 
+             "\( $b.0 \)",  
+             "\( - $d \)", 
+            "\( e^0 \)", 
+             "\(  \sqrt{$e} \)", 
+             "\( |- $f | \)",  #index 7
+             "\( \pi \)", 
+             "\( \sqrt{$c} \)",  
+             "\( - \frac{$p}{$q} \)", 
+             "\( e \)",         
+             "\( 0.$p$q$d \)",   
+             "\( $c.0$a \)",  
+             "\( - \sqrt[$m]{$p} \)",
+             "\( $a.$b \)" );  # index 15
+
+# set conditions of correctness
+@corrAns = @allAns;  # all are real numbers
+if ($n == 0){ # not real; None of the above is correct
+    @incorrAns = @allAns;
+    @slicei = NchooseK(scalar(@incorrAns),4);
+    @randc = ();
+    @randi = @incorrAns[@slicei];
+    }
+elsif ($n == 3){    # integer
+    @corrAns = @allAns[0..7]; 
+    }
+elsif ($n == 2) {   # not integer
+    @corrAns = @allAns[8..15];
+}
+$numc = 4; # all reals
+if ($n != 1){  # if not all reals
+    $numc = random(0,4,1); 
+}
+
+if ($n != 0){
+    @slicec = NchooseK(scalar(@corrAns),$numc);  
+    @randc = @corrAns[@slicec];
+# using map and grep to create an array of incorrects
+    if ($n > 1){  # integer or non-integer real
+        %yes = map{$_=>1} @corrAns;
+        @incorrAns = grep(!defined $yes{$_}, @allAns);
+        $numi = 4 - $numc;
+        @slicei = NchooseK(scalar(@incorrAns),$numi);
+        @randi = @incorrAns[@slicei];
+        }   
+}
+
+$quest = "";
+$multichoice = new_checkbox_multiple_choice();
+if ($n != 0){
+    if ($numc != 0){
+        $multichoice -> qa ( $quest, @randc,);
+        if ($n != 1){
+           $multichoice -> extra( @randi, "None of the above",);
+           }
+        else {  #all real
+            $multichoice -> extra( "None of the above", );
+        }
+    }
+}
+if (($n == 0) || ($numc == 0)){ # no correct answers
+    $multichoice -> qa ( $quest, "None of the above",);
+    $multichoice -> extra( @randi, );
+}
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+_Definition_: [$deftext]  
+_For example_: [`[$defex]`] are [$defname],  
+whereas [`[$defnot]`] are not [$defname].
+
+Select the value(s), if any, that are *[@ $type@]****.
+[@ $multichoice->print_a() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

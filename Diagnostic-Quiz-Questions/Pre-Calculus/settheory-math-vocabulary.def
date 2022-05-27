@@ -1,0 +1,144 @@
+assignmentType      = default
+openDate          = 06/20/2021 at 03:50pm EDT
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 12/30/2021 at 11:59pm EST
+answerDate        = 12/30/2021 at 11:59pm EST
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = vocabulary with theory: divide by zero, zero versus does not exist, integer, real number, polynomial, operations, composite functions, ... more to come
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = pre-cal-diagnostic-quiz/settheory-math-vocabulary/theory-divide-by-zero-tf1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = pre-cal-diagnostic-quiz/settheory-math-vocabulary/theory-divide-by-zero-tf2.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = pre-cal-diagnostic-quiz/settheory-math-vocabulary/theory-real-vs-integer-ms1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = pre-cal-diagnostic-quiz/settheory-math-vocabulary/theory-slope_does_not_exist-mc1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 5
+source_file = pre-cal-diagnostic-quiz/settheory-math-vocabulary/theory-polynomial-or-not-ms1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 6
+source_file = pre-cal-diagnostic-quiz/settheory-math-vocabulary/theory-one-or-zero-ms1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 7
+source_file = pre-cal-diagnostic-quiz/settheory-math-vocabulary/theory-operations-mc1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 8
+source_file = pre-cal-diagnostic-quiz/settheory-math-vocabulary/theory-composite-mc1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 9
+source_file = pre-cal-diagnostic-quiz/settheory-math-vocabulary/theory-dependent-independent-tf1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 10
+source_file = pre-cal-diagnostic-quiz/settheory-math-vocabulary/theory-dependent-independent-tf2.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 11
+source_file = pre-cal-diagnostic-quiz/settheory-math-vocabulary/theory-polynomial-vocab-tf1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 12
+source_file = pre-cal-diagnostic-quiz/settheory-math-vocabulary/theory-polynomial-mc1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 13
+source_file = pre-cal-diagnostic-quiz/settheory-math-vocabulary/theory-argument-tf1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+

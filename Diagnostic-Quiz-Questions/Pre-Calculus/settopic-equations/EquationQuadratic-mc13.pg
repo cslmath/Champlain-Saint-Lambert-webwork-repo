@@ -1,0 +1,215 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Equations: Solve an exponential equation, which reduces to quadratic
+## Display of form 
+##   e^{c}e^{m x^2}= (e^{x^2})^{n}e^{ bx} 
+## Quadratic of form c + mx^2 = nx^2 + bx
+## Solution reduces to form
+## (x - r1)(x-r2) = 0 where r1 != 0 and r2 != 0. 
+##     Multiple Choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+
+#########################
+# Reducing a fraction   #
+#########################
+
+sub fraction_reduce_tex {
+  my ($numerator, $denominator) = @_;
+    my $sign = "";
+    my $num_red = $numerator;
+    my $denom_red = $denominator;
+    my $reduced = "";
+    my $gcd = 1;
+    if($denominator == 0){
+        $reduced = "You are dividing by zero! Bad!!!";
+        return $reduced;
+    }
+    if($numerator/$denominator < 0){
+        $sign = "-";
+    }
+    $gcd = gcd($numerator, $denominator);
+    if($gcd == abs($denominator)){
+    $fraction = abs($numerator/$denominator);
+    $reduced = "\($sign $fraction\)";
+    }
+    elsif($gcd == 1){
+        $num_red = abs($numerator);
+        $denom_red = abs($denominator);
+        $reduced = "\($sign \frac{$num_red}{$denom_red}\)";
+    }
+    else{
+        $num_red = abs($numerator/$gcd);
+        $denom_red = abs($denominator/$gcd);
+        $reduced = "\($sign \frac{$num_red}{$denom_red}\)";
+    }
+  return $reduced;
+  }
+##########################################
+# end reduce_fraction_tex
+##########################################
+
+# display different variables
+@var = qw(x y t u v z n a p q s A S T N H);
+$x = $var[random(0,$#var,1)];
+Context()->variables->are($x=>"Real");
+
+####################
+# Problem variables
+####################
+
+######
+# Type 3, easy split
+# Generate a basic quadratic equation with
+# distinct non-zero (?) integer roots 
+
+######
+# Generate the coeffcients of the base quadratic: a, b, c 
+# r1= p1/q1, r2=p2/q2
+# (x - r1)(x-r2) = 0 iff q1q2 x^2 -(q1p2+p1q2)x + p1p2  = 0
+# a = q1q2, b = -(q1p2+p1q2), c = p1p2
+
+
+$q1 = non_zero_random(-5,5,1);
+
+####
+# Choose p1, p2 so that c/m will be a perfect square
+$i = non_zero_random(0,5,1);
+do{
+    # m is even to ensure c != 1, and m!= +/- 1 for display reasons
+    $m = non_zero_random(-10,10,2);
+    # make sure the equation has two distinct solutions
+    $shiftQ = non_zero_random(-3,3,1);   # SV - possible fix 
+    $q2 = $m*$q1 + $shiftQ;              # lines from after the loop moved here
+
+    $n = $m-$q1*$q2;
+# If b is zero or +/- 1 it messes up the display of e^{bx}
+    $bIsUgly = $m*$q1 + $q2;
+}
+until(($n != 0) and ($n != 1) and ($bIsUgly != 0) and ($bIsUgly != 1) and ($bIsUgly != -1));
+
+$c = $i*$i*$m; 
+$p1 = $i;
+$p2= $i*$m;
+
+$b = -($q1*$p2 + $q2*$p1);
+# For display in exponent (note b!=0 because of above)
+if($b<0){
+    # -bx is positive
+    $bexp = abs($b);
+}
+else{
+    # -bx is negative
+    $bexp = -abs($b) ;
+}
+
+######
+# Generate possible solutions 
+# 1. correct solutions 
+# 2. sign mistake
+# 3. RHS = 0, i.e, x = -b/n
+# 4. LHS = 0 
+
+$solution1 = fraction_reduce_tex($p1,$q1);
+$solution2 = fraction_reduce_tex($p2,$q2);
+
+# sign mistake
+$solution7 = fraction_reduce_tex(-$p1,$q1);;
+$solution8 = fraction_reduce_tex(-$p2,$q2);
+
+# RHS = 0
+$solution3 = fraction_reduce_tex($b, $n);
+$solution4 = 0;
+# LHS = 0
+$solution5 = $i;
+$solution6 = -$i;
+
+
+####################
+# Generating answers
+#####################
+
+$correct = "\($x\) = $solution1, \($x\) = $solution2";
+$distractor1 = "\($x\) = $solution7, \($x\) = $solution8";
+$distractor2 = "\($x\) = $solution3, \($x = $solution4\)";
+$distractor3 = "\($x = $solution5, $x = $solution6\)";
+$distractor4 = "\($x\) = $solution3, \($x = $solution4\), \($x = $solution5\), \($x = $solution6\)";
+$distractor5 = "\($x\) = $solution3";
+
+###################################
+## RADIO BUTTONS
+###################################
+
+@incorrAns = ($distractor1,
+	$distractor2,
+	$distractor3,
+	$distractor4);
+
+
+# Display correct answer 1 out of 10 times
+$showc = random(0,9,1);
+$numc = 1; # Display the correct answer
+if ($showc == 0){$numc = 0;} # Don't display the correct answer
+
+# Incorrect answers to display
+$numi = 4 - $numc;   # the 4 is the total number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+if ($numc != 0){  # at least one correct answer
+    $radio1 = RadioButtons([[$correct,@randi],
+    "None of the above"],0);  # the 0 is the index of the correct answer    
+    }
+else {            # no correct answers
+    $radio1 = RadioButtons([[@randi,],"None of the above",],4);  # the 4 is the index of the correct answer
+}
+
+###########################################
+
+
+BEGIN_PGML
+
+Select the option, if any, that contains all solutions to 
+[`` e^{[$c]}e^{[$m][$x]^2}= \left(e^{[$x]^2}\right)^{[$n]}e^{ [$bexp][$x]} ``].
+
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework. ");
+ENDDOCUMENT();

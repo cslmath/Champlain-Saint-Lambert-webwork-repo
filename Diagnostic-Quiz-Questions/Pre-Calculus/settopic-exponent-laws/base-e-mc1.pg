@@ -1,0 +1,92 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Exponent Laws: base is e 
+##     Multiple Choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "niceTables.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+$a = random(2,9,1);
+do {$b = random(2,9,1);} until ($b != $a);
+$c = random(1,9,1);
+do {$d = random(1,9,1);} until ($d != $c);
+$c1 = $a + $b - 1;
+$c2 = $c + $d;
+$i1 = $a + $b + 1;
+$i2 = $a + $b;
+@allAns = (
+  "\( $c1 x - $c2 \)",
+  "\( $i1 x - $c2 \)",
+  "\( $i2 x - $c2 \)",
+  "\( $c1 x + $c2 \)",
+  "\( $i1 x + $c2 \)",
+  "\( $i2 x + $c2 \)",
+);
+
+$correct = $allAns[0];
+@corrAns = (); 
+push(@corrAns,$correct);
+@incorrAns = @allAns[1..5];
+
+# Display correct answer more times than not
+$showc = random(0,9,1);
+$numc = 1; # Display the correct answer
+if ($showc == 0){$numc = 0;} # Don't display the correct answer
+
+# Incorrect answers to display
+$numi = 4 - $numc;   # the 4 is the total number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+if ($numc != 0){  # at least one correct answer
+    $radio1 = RadioButtons([[$correct,@randi],
+    "None of the above"],0);  # the 0 is the index of the correct answer    
+    }
+else {            # no correct answers
+    $radio1 = RadioButtons([[@randi,],"None of the above",],4);  # the 4 is the index of the correct answer
+}
+
+BEGIN_PGML
+Assume that [`x`] is any real number. The expression 
+>>[``\frac{e^{[$a]x}\cdot e^{[$b]x-[$c]}}{e^{x + [$d]}}``]<<  
+simplifies to [`e^a`], where the exponent [`a`] equals:  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

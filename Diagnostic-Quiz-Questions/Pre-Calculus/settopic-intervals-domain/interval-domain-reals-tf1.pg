@@ -1,0 +1,56 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Domain (interval notation): domain of rational function is all reals
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+Context()->reductions->set("(-x)-y" => 0);
+
+$a = non_zero_random(-9,9,1);
+$b = random(-9,9,1);
+$c = random(-9,9,1);
+$discrim = $b**2 - 4*($a)*($c); 
+$denom = Compute("$a x^2 + $b x + $c")->reduce()->TeX;
+
+$correct = "False";
+# When statement would be true
+if ($discrim < 0){$correct = "True";}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:* The domain of [`f(x)=\dfrac{1}{[$denom]}`] is [`(-\infty,\infty)`].
+ 
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct].
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

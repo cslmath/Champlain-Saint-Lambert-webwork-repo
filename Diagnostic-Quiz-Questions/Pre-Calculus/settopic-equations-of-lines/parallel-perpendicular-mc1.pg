@@ -1,0 +1,105 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Equations: parallel and perpendicular lines
+##     Multiple Choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+DOCUMENT();
+
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+# show the correct answer more often than not
+$showc = random(0,9,1);
+$numc = 1; # show the correct answer
+if ($showc == 0){$numc = 0;} # don't show the correct answer
+
+$a = random(4,6,1); # choose the slope of the given line
+$i = random(0,1,1);  # i choose word (parallel or perpendicular)
+$j = random(0,1,1);   # j choose sign of line with c
+@sign = ("+","-");
+@dir = ("parallel","perpendicular");
+
+$p = random(2,5,1);
+do {$q = random(-15,15,2);} until (($q != $p) and ($q != $a));
+
+$f = "y = $a x + $p";
+$g = "y = $q $sign[$j] c x";
+
+@allAns = ("\( $a \)",
+           "\( - $a \)",
+           "\( -\frac{1}{$a} \)",
+           "\( \frac{1}{$a} \)",
+           "\( $p \)",
+           "\( $q \)",
+           "\( 0 \)",
+           );
+
+if ($i == 0){  # parallel
+   $correct = $allAns[0];
+   if ($j == 1){$correct = $allAns[1];}
+    }
+else {  # perpendicular
+    $correct = $allAns[2];
+    if ($j == 1){$correct = $allAns[3];}
+}
+
+@corrAns = ($correct);  # correct answer is always displayed
+# Array of incorrect answers (@incorrAns)
+#   use map and grep to extract the correct answers (@corrAns)
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+    
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+#########################################################
+
+BEGIN_PGML
+Select the value of [` c `], if any, so that the two given lines are [$dir[$i]]:
+>> [``[$f] \qquad [$g] ``]<<  
+[@ $radio1->buttons() @]*  
+END_PGML
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

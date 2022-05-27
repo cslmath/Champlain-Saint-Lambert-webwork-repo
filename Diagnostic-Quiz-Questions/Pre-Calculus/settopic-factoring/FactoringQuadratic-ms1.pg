@@ -1,0 +1,198 @@
+## DESCRIPTION
+## Precalculus. Factoring. 
+## Multi-select expressions equivalent to ax^2 +/- (a+b)x +/- bc
+## Svetla - coefficient of x wasn't correct, nor were the signs
+##        - please check my possible fixes below
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+#    "parserRadioButtons.pl",
+        # Added for this question by me
+      "littleneck.pl",
+    "contextFraction.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+
+
+#########################
+# Reducing a fraction   #
+#########################
+
+sub fraction_reduce_tex {
+  my ($numerator, $denominator) = @_;
+    my $sign = "";
+    my $num_red = $numerator;
+    my $denom_red = $denominator;
+    my $reduced = "";
+    my $gcd = 1;
+    if($denominator == 0){
+        $reduced = "You are dividing by zero! Bad!!!";
+        return $reduced;
+    }
+    if($numerator/$denominator < 0){
+        $sign = "-";
+    }
+    $gcd = gcd($numerator, $denominator);
+    if($gcd == abs($denominator)){
+    $fraction = abs($numerator/$denominator);
+    $reduced = "\($sign $fraction\)";
+    }
+    elsif($gcd == 1){
+        $num_red = abs($numerator);
+        $denom_red = abs($denominator);
+        $reduced = "\($sign \frac{$num_red}{$denom_red}\)";
+    }
+    else{
+        $num_red = abs($numerator/$gcd);
+        $denom_red = abs($denominator/$gcd);
+        $reduced = "\($sign \frac{$num_red}{$denom_red}\)";
+    }
+  return $reduced;
+  }
+##########################################
+# end reduce_fraction_tex
+##########################################
+
+
+
+
+
+
+
+###########
+# Factoring a quadratic using the quadratic formula
+###########
+
+#########
+# Factor 
+# (ax-b)(x-c), where a divides b
+#########
+
+
+
+@var = qw(A B F G L R S T U V W);
+$x = $var[random(0,$#var,1)];
+#Context()->variables->are( $x => 'Real' );
+
+$a = non_zero_random(2,10,1);
+do{
+$b = non_zero_random(-50,50,1);
+}
+until($b%$a != 0);
+$c = non_zero_random(-20,20,1);
+#$b = 21; $c = 10; # test - remove later
+$b = -21; $c = -10; # test - remove later
+#$b = -21; $c = 10; # test - remove later
+#$b = 21; $c = -10; # test - remove later
+
+$apb = $a*$c + $b; 
+#if($apb < 0){  # original code
+if ($apb > 0){  # MT possible fix for sign
+    $sign = "-";
+}
+else{
+    $sign = "+";
+}
+$apb = abs($apb);
+
+## MT added next 2 lines code to fix sign of constant term bc (See $quest below)
+$signct = "+";
+if ($b*$c < 0){$signct = "-";}
+
+$btc = abs($b*$c);
+$atc = abs($a*$c);
+$babs = abs($b);
+$cabs = abs($c);
+
+
+# For display purposes, reduce the fraction b/a
+$d = gcd($a,$b); 
+$b_red = fraction_reduce_tex($b,$d);
+$a_red = $a/$d;
+$brabs = abs($b_red);
+
+#@corrAns = ();                  # initialize empty array
+
+# Fix the signs for display purposes
+if($b > 0){
+    if($c > 0){
+    $correct1 = "\( \left($a$x - $b\right)\left($x - $c\right) \)";
+    $correct2 = "\( \left($x-\frac{$b_red}{$a_red}\right)\left($a$x-$atc\right) \)";
+    
+    $distractor1 = "\( \left($x-\frac{$b_red}{$a_red}\right)\left($x-$c\right) \)";
+    $distractor2 = "\( \left($x + $c\right)\left($a$x - $b\right) \)";
+    }
+    else{ #b>0, c<0
+    $correct1 = "\( \left($a$x - $b\right)\left($x + $cabs\right) \)";
+    $correct2 = "\( \left($x-\frac{$b_red}{$a_red}\right)\left($a$x + $atc\right) \)";
+    
+    $distractor1 = "\( \left($x-\frac{$b_red}{$a_red}\right)\left($x + $cabs\right) \)";
+    $distractor2 = "\( \left($x + $cabs\right)\left($a$x - $b\right) \)";
+    }
+}
+else{
+    if($c > 0){
+    $correct1 = "\( ($a$x + $babs)($x - $c) \) ";
+    $correct2 = "\( ($x + \frac{$brabs}{$a_red})($a$x-$atc) \)";
+
+    $distractor1 = "\( ($x + \frac{$brabs}{$a_red})($x-$c) \)";
+    $distractor2 = "\( ($x + $c)($a$x + $babs) \)";
+    }
+    else{ # b and c negative
+    $correct1 = "\( ($a$x + $babs)($x + $cabs) \)";
+    $correct2 = "\( ($x + \frac{$brabs}{$a_red})($a$x + $atc) HELLO \)";
+
+    $distractor1 = "\( ($x + \frac{$brabs}{$a_red})($x + $cabs) \)";
+    $distractor2 = "\( ($x - $cabs)($a$x + $babs) \)";
+    }
+}
+
+@corrAns = ($correct1, $correct2);
+@incorrAns = ($distractor1, $distractor2);
+
+# The full list of answers:
+@allAnswers = @corrAns;
+@allAnswers = push(@allAnswers,@incorrAns);
+
+
+#$quest = "Select the expression(s), if any, that are equivalent to \($a$x^2 $sign $apb$x + $btc\).";   # original code
+$quest = "
+sign = \($sign\), signct = \($signct\), a = \($a\), b= \($b\), c = \($c\).  Also, d=\($d\), bred = \($b_red\), brabs = $brabs ared = \($a_red\).  
+Select the expression(s), if any, that are equivalent to \($a$x^2 $sign $apb$x $signct $btc\).";  #MT modified sign before $btc to change sign if btc<0
+$multichoice = new_checkbox_multiple_choice();
+$multichoice -> qa (
+    $quest, 
+@corrAns,
+);
+$multichoice -> extra(
+@incorrAns,
+);
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+
+
+[@ $multichoice->print_q() @]*  
+[@ $multichoice->print_a() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*.  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework. ");
+ENDDOCUMENT();

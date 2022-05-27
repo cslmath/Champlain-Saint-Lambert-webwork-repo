@@ -1,0 +1,108 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Domain (interval notation):  domain all reals, rational functions
+##     Multiple Select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+$a = random(1,9,1);
+
+# Basic curves: 
+@allY = ("\( \frac{1}{x^2+$a} \)",
+        "\( \frac{1}{e^x} \)",
+        "\( \frac{1}{x^2+x + $a} \)", # discrim < 0
+        "\( \frac{1}{e^x + $a} \)",
+        "\( \frac{1}{\sin x + 2} \)",
+        "\( \frac{1}{\cos x - 2} \)",
+        "\( \frac{1}{\sin x - 2} \)",
+        "\( \frac{1}{\cos x + 2} \)",
+        "\( \frac{1}{a x^2 + bx + c} \) where \(b^2-4ac < 0\)",
+        );
+@allN = ("\( \frac{1}{x^2-$a} \)",
+         "\( \frac{1}{e^x - $a} \)",
+         "\( \frac{1}{x^2 + x - $a} \)",  #discrim > 0
+         "\( \frac{1}{\sin x + 1} \)",
+         "\( \frac{1}{\cos x - 1} \)",
+         "\( \frac{1}{\sin x - 1} \)",
+         "\( \frac{1}{\cos x + 1} \)",
+         "\( \frac{1}{a x^2 + bx + c} \) where \( b^2 - 4ac \ge 0\)",
+         );
+@type = ("is not","is");
+$tj = random(0,1,1);
+$yesno = $type[$tj];
+
+if ($tj == 1){ # is
+    @corrAns = @allY;
+    @incorrAns = @allN;
+    }
+else {  # is not
+     @corrAns = @allN;
+     @incorrAns = @allY;
+}
+
+# $numc : number of correct answers to display (up to 4)
+# @randc : random subset array of correct answers
+# $numi : number of incorrect answers (4 - $numc)
+# @randi : random subset array of incorrect answers
+$numc = random(0,4,1);  # choose number of correct to display 
+@slicec = NchooseK(scalar(@corrAns),$numc);  
+@randc = @corrAns[@slicec];
+
+# Incorrect answers to display: @randi
+$numi = 4 - $numc;   # the 4 is the number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+$quest = "";
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){  # at least one correct answer
+    $multichoice -> qa ( $quest, @randc,);
+    $multichoice -> extra( @randi, "None of the above",);
+    }
+else {            # no correct answers
+    $multichoice -> qa ( $quest, "None of the above",);
+    $multichoice -> extra( @randi, );
+}
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+Select the functions, if any, whose domain [$yesno] [`(-\infty,\infty)`].
+[@ $multichoice->print_a() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

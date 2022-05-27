@@ -1,0 +1,61 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Domain (interval notation): domain of rational function is all reals (2)
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+Context()->reductions->set("(-x)-y" => 0);
+
+@symbol = ("\lt","\ge",);
+$k = random(0,1,1);
+$ineq = $symbol[$k];
+
+@type = ("is not","is");
+$j = random(0,1,1);
+$yesno = $type[$j];
+
+$correct = "False";
+# When statement would be true
+if (($j == 1) and ($k == 0)){$correct = "True";}
+if (($j == 0) and ($k == 1)){$correct = "True";}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+Let [`f(x)=\dfrac{1}{ax^2+bx+c}`] where [`b^2-4ac [$ineq] 0`].  
+*True or false:* The domain of [`f`] [$yesno] [`(-\infty,\infty)`].
+ 
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct].
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

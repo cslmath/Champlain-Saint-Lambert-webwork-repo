@@ -1,0 +1,135 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Trigonometry: given quadrant & trig value, find the specified trig value
+##     Multiple Choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+$a = list_random(2,4,5,8);
+$b = list_random(3,7,9,11);
+if ($a == 4){   # so that c^2 is not a perfect square
+   $b = list_random(5,7,9,11);
+   }
+$c2 = $a*$a + $b*$b;
+
+@allTrig = ("\sin\theta", 
+           "\cos\theta", 
+           "\tan\theta", 
+           "\csc\theta",
+           "\sec\theta", 
+           "\cot\theta",
+           );
+
+# Right triangle with sides: a = opposite, b = adjacent, and c = hypotenuse
+#                            c2 = c^2 which is not a perfect square
+@allAns = ("\( \frac{$a}{\sqrt{$c2}} \)", # + sin Q1, Q2
+           "\( - \frac{$a}{\sqrt{$c2}} \)", # - sin Q3, Q4
+           "\( \frac{$b}{\sqrt{$c2}} \)", # + cos Q1, Q4
+           "\( - \frac{$b}{\sqrt{$c2}} \)", # - cos Q2, Q3
+           "\( \frac{$a}{$b} \)", # + tan Q1, Q3
+           "\( - \frac{$a}{$b} \)", # - tan Q2, Q4
+           "\( \frac{\sqrt{$c2}}{$a} \)", # + csc Q1, Q2
+           "\( - \frac{\sqrt{$c2}}{$a} \)", # - csc Q3, Q4
+           "\( \frac{\sqrt{$c2}}{$b} \)", # + sec Q1, Q4
+           "\( - \frac{\sqrt{$c2}}{$b} \)", # - sec Q2, Q3
+           "\( \frac{$b}{$a} \)", # + cot Q1, Q3
+           "\( -\frac{$b}{$a} \)", # - cot Q2, Q4
+);
+
+@allQuad = ("in Quadrant I", # qI
+            "in Quadrant II", # qII
+            "in Quadrant III", # qIII
+            "in Quadrant IV", # qIV
+            "between \(0\) radians and \(\frac{\pi}{2}\) radians", # q1
+            "between \(\frac{\pi}{2}\) radians and \(\pi\) radians", # q2
+            "between \(\pi\) radians and \(\frac{3\pi}{2}\) radians", # q3
+            "between \(\frac{3\pi}{2}\) radians and \(2\pi\) radians", # q4
+            );
+              
+$i = random(0,$#allTrig,1);  # choose trig to display
+$trig = $allTrig[$i];
+$j = random(0,$#allQuad,1); # choose quadrant
+$quad = $allQuad[$j];
+do {$noti = random(0,$#allTrig,1);} until ($noti != $i);
+$findtrig = $allTrig[$noti];
+
+if ($j%4 == 0) {# q1 if j=0 or j=4
+    @ansInd = (0,2,4,6,8,10);  # sin cos tan csc sec cot
+   }
+elsif ($j%4 == 1) {# q2 if j=1 or j=5
+    @ansInd = (0,3,5,6,9,11);  # sin cos tan csc sec cot
+    }
+elsif ($j%4 == 2) {# q3 if j=2 or j=6
+    @ansInd = (1,3,4,7,9,10);  # sin cos tan csc sec cot
+    }
+else { # q4 if j=3 or j=7
+    @ansInd = (1,2,5,7,8,11);   # sin cos tan csc sec cot
+}
+$val = $allAns[$ansInd[$i]];
+
+@corrAns = ();
+$correct = $allAns[$ansInd[$noti]];
+push(@corrAns,$correct);
+# using map and grep to create an array of incorrects
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+
+# show the correct answer more often than not
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+if ($numc == 1){   # display 1 correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3);  #choose 3 incorrect ans
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[$correct,@randi,],
+    "None of the above"],0);  # correct index 0
+    }
+else {
+    @slicei = NchooseK(scalar(@incorrAns),4);  #choose 4 incorrect ans
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4); # correct index 4
+}
+
+BEGIN_PGML
+If [`[$trig]`] = [@ $val @]* and the angle [`\theta`] lies [@ $quad @]*, then [`[$findtrig]`] equals:  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

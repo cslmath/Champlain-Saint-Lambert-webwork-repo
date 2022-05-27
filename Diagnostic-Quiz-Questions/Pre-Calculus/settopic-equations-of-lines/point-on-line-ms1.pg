@@ -1,0 +1,114 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Equations: point on line or not
+##     Multiple Select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();     # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+
+@typename = ("not on","on");
+$n = random(0,1,1);   # n = 1 on, n = 0 not on
+$type = $typename[$n];
+$mc = non_zero_random(-10,10,1); 
+$bc = $mc + non_zero_random(-10,10,1);
+$offset = random(2,5,1);
+$numc = random(0,4,1);  # number correct answers up to max 4
+$f = Compute("$mc x + $bc")->reduce();
+$g = Compute("$mc x + $bc + $offset");
+@xn = ();
+@yn = ();
+@xy = ();
+@yy = ();
+my @k = (0..5);
+for my $i (@k){
+    $xn[$i] = random(-9+$i*3,-7+$i*3);
+    $xy[$i] = random(-9+$i*3,-7+$i*3);
+    $yn[$i] = $g ->eval(x=>"$xn[$i]");
+    $yy[$i] = $f ->eval(x=>"$xy[$i]");
+}
+
+# The full list of answers:
+@allAns = ();
+my @k = (0..5);
+for my $i (@k){
+    $j = $i+6;
+    $allAns[$i] = "\( ($xn[$i],$yn[$i]) \)";  #n is for "no" not on the line
+    $allAns[$j] = "\( ($xy[$i],$yy[$i]) \)";  #y is for "yes" on the line
+}
+
+if ($n == 0){ # not on
+    @corrAns = @allAns[0..5];
+    @incorrAns = @allAns[6..11];  
+}
+else {
+    @incorrAns = @allAns[0..5];  # on
+    @corrAns = @allAns[6..11];   
+}
+@slicec = NchooseK(scalar(@corrAns),$numc);
+@corrAns = @corrAns[@slicec];
+$numi = 4 - $numc;
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@incorrAns = @incorrAns[@slicei];
+
+$quest = ();
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){
+    $multichoice -> qa (
+        $quest, 
+    @corrAns,
+    );
+    $multichoice -> extra(
+    @incorrAns,
+    );
+} else { # none of the above
+   $multichoice -> qa (
+        $quest, 
+        "None of the above",
+    );
+    $multichoice -> extra(
+    @incorrAns,
+    );
+}
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+Select the point(s), if any, that are [$type] the line [` y = `] [`[$f]`].
+[@ $multichoice->print_a() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

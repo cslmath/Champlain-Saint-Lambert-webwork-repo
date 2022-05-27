@@ -1,0 +1,55 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Math Vocabulary: divide by zero is equal to 0 ?
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+$n = random(0,1,1);  # Toggle to display either a/0 and 0/b 
+
+$correct1 = "False";
+$b = 0;
+$a = non_zero_random(-9,9,1);
+# To set a condition based on a variable in the code
+if ($n == 1) {
+    $a = 0;
+    $b = non_zero_random(-9,9,1);
+    $correct1 = "True";
+    }
+   
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct1,  # Correct answer
+	);
+
+BEGIN_PGML
+True or false: [`\frac{[$a]}{[$b]}`] equals *zero*.  
+[@ $radio1->buttons() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct1].  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

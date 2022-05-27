@@ -1,0 +1,99 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Equations: select all the linear functions
+##     Multiple Choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();  
+
+loadMacros(
+    "PGstandard.pl",
+    "PGchoicemacros.pl",
+    "MathObjects.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+#TEXT(beginproblem());
+TEXT();           # So no problem number given 
+Context("Numeric");
+$showPartialCorrectAnswers = 0;
+
+# Some coefficients
+$a = random(2,9,1);
+$b = non_zero_random(-9,9,1);
+$c = random(2,9,1);
+$d = random(2,9,1);
+@var = qw(x y t u v);
+@fun = qw(f g h r s);
+$n = random(0,$#var,1);
+$m = random(0,$#var,1);
+$x = $var[$n];
+$y = $var[$m];
+$f = $fun[$m];
+$g = $fun[$n];
+
+@allAns = (
+    "\( $f($x)= $a $x + $c\)",
+    "\( $g($x) = $b $x \)",                
+    "\( $f($x) = $d \)",
+    "\( $g($x) = $d - $x \)",                
+    "\( $f($x) = \sqrt{$c}\,$x + \pi \)", # index 4
+    "\( $g($x) = $c\sqrt{$x} \)",
+    "\( $f($x) = \frac{$a}{$x} - $c \)",
+    "\( $g($x) = $d - $x^2 \)",
+    "\( $f($x) = $b \sin($x) \)",
+    "\( $g($x) = $c e^$x \)", # index 9
+);
+
+@corrAns = @allAns[0..4]; # linear
+@incorrAns = @allAns[5..9];
+
+$numc = random(0,4,1);  # choose number of correct to display 
+@slicec = NchooseK(scalar(@corrAns),$numc);  
+@randc = @corrAns[@slicec];
+
+# Incorrect answers to display (from array @incorrAns)
+$numi = 4 - $numc;   # the 4 is the number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+$quest = "Select the function(s), if any, that are linear.";
+$mc = new_checkbox_multiple_choice();
+if ($numc != 0){  # at least one correct answer
+    $mc -> qa ( $quest, @randc,);
+    $mc -> extra( @randi, "None of the above",);
+    }
+else {            # no correct answers
+    $mc -> qa ( $quest, "None of the above",);
+    $mc -> extra( @randi, );
+}
+$mc -> makeLast("None of the above");
+
+BEGIN_PGML
+Select the function(s), if any, that are linear.  
+[@ $mc -> print_a() @]*  
+END_PGML
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $mc->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [$mc->correct_ans()].  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

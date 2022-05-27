@@ -1,0 +1,211 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Equations: Solve a quartic equation, which reduces to quadratic
+##     Multiple Choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+
+#########################
+# Reducing a fraction   #
+#########################
+
+sub fraction_reduce_tex {
+  my ($numerator, $denominator) = @_;
+    my $sign = "";
+    my $num_red = $numerator;
+    my $denom_red = $denominator;
+    my $reduced = "";
+    my $gcd = 1;
+    if($denominator == 0){
+        $reduced = "You are dividing by zero! Bad!!!";
+        return $reduced;
+    }
+    if($numerator/$denominator < 0){
+        $sign = "-";
+    }
+    $gcd = gcd($numerator, $denominator);
+    if($gcd == abs($denominator)){
+    $fraction = abs($numerator/$denominator);
+    $reduced = "\($sign $fraction\)";
+    }
+    elsif($gcd == 1){
+        $num_red = abs($numerator);
+        $denom_red = abs($denominator);
+        $reduced = "\($sign \frac{$num_red}{$denom_red}\)";
+    }
+    else{
+        $num_red = abs($numerator/$gcd);
+        $denom_red = abs($denominator/$gcd);
+        $reduced = "\($sign \frac{$num_red}{$denom_red}\)";
+    }
+  return $reduced;
+  }
+##########################################
+# end reduce_fraction_tex
+##########################################
+
+
+
+# display different variables
+@var = qw(x y t u v z n a p q s A S T N H);
+$x = $var[random(0,$#var,1)];
+
+####################
+# Problem variables
+####################
+
+######
+# Type 1
+# Generate a basic quadratic equation with
+# repeated non-zero (?) intger roots 
+# Make a quartic out of it
+# Quadratic always has a solution, quartic maybe not
+
+
+######
+# Generate the coeffcients of the base quadratic: a, b, c 
+# r1=r2=k
+# (x - k^2)^2= 0
+# a = 1, b = -2k^2, c = k^4
+
+
+######
+# Split up the coefficients b and c
+# b = m - n = -2k^2
+# c = s - t = k^4
+
+
+$sqrti = random(1,5,1);
+$i = $sqrti*$sqrti;
+do{
+$j = non_zero_random(-5,5,1);
+}
+until( ($j != $sqrti) and ($j != -$sqrti) );
+
+do{
+# Make sure k != +/-1 because then k^2=k: 
+# the quadratic and quartic will have the same solution, 
+# messing up the distractors 
+$k = non_zero_random(2,7,1);
+}
+until($k*$k != $j);
+
+#$D_LHS = 4*$i;
+
+$m = 2*$j;
+$s = $j*$j-$i;
+$n = $m + 2*$k*$k;
+$t = $s - $k*$k*$k*$k;
+
+######
+# Split up the coefficients b and c
+# b = m - n = -2k
+# c = s - t = k^2
+
+
+######
+# Generate possible solutions 
+# 1. correct solution (only one b/c repeated)
+# 2. sign mistake
+# 3. RHS = 0, i.e, x = -t/n
+# 4. LHS = 0 (0,1, or two solutions)
+
+# Numberic is legacy from Quadratic mc1
+
+$QuadSolution3 = fraction_reduce_tex(-$t, $n);
+$QuadSolution4 = -$j + $sqrti;
+$QuadSolution5 = -$j - $sqrti;
+
+
+####################
+# Generating answers
+#####################
+
+# The quadric has two solutions b/c k>1 always
+$k2 = $k*$k;
+$correct = "\($x = $k, $x=-$k\)";
+$distractor1 = "\($x = $k2\)";
+$distractor2 = "\($x = -$k2\)";
+$distractor3 = "\($x\) = $QuadSolution3, \($x = $QuadSolution4, $x = $QuadSolution5\)";
+$distractor4 = "\($x = $QuadSolution4, $x = $QuadSolution5\)";
+$distractor5 = "\($x\) = $QuadSolution3";
+
+
+
+###################################
+## RADIO BUTTONS
+###################################
+
+@incorrAns = ($distractor1,
+	$distractor2,
+	$distractor3,
+	$distractor4);
+
+
+# Display correct answer 1 out of 10 times
+$showc = random(0,9,1);
+$numc = 1; # Display the correct answer
+if ($showc == 0){$numc = 0;} # Don't display the correct answer
+
+
+# Incorrect answers to display
+$numi = 4 - $numc;   # the 4 is the total number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+if ($numc != 0){  # at least one correct answer
+    $radio1 = RadioButtons([[$correct,@randi],
+    "None of the above"],0);  # the 0 is the index of the correct answer    
+    }
+else {            # no correct answers
+    $radio1 = RadioButtons([[@randi,],"None of the above",],4);  # the 4 is the index of the correct answer
+}
+
+###########################################
+
+
+BEGIN_PGML
+
+Select the option, if any, that contains all solutions to [`` [$x]^4 + [$m] [$x]^2 + [$s] = [$n][$x]^2 + [$t] ``].
+
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework. ");
+ENDDOCUMENT();

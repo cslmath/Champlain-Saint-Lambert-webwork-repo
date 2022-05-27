@@ -1,0 +1,59 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Math Vocabulary: argument of a function
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+@var = qw(x y t u v w z);
+@fun = qw(f g h q p r s);
+@xslice = NchooseK(scalar(@var),2);
+@v = @var[@xslice];
+$j = random(0,1,1); # choose which variable to display
+$x = $v[0];
+$y = $v[1];
+$vdisp = $v[$j];
+$f = $fun[random(0,$#fun,1)];
+
+$correct = "False";
+if ($vdisp eq $x) {  # argument equals displayed variable
+    $correct = "True";
+}
+
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+True or false: [`[$vdisp]`] is the *argument* of the function [`[$y]=[$f]([$x])`].  
+[@ $radio1->buttons() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct].  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

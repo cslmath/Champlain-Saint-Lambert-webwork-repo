@@ -1,0 +1,161 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Equations: Solve a cubic equation
+##     Multiple Choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+
+
+# display different variables
+@var = qw(x y t u v z n a p q s A S T N H);
+$x = $var[random(0,$#var,1)];
+
+####################
+# Problem variables
+####################
+
+# Quartic as a hidden quadratic
+# Equation of the type ax^4 + bx^2 + c = 0
+# Presented as x^3(ax + d) = dx^3 - bx^2 - c
+# For simplicity, a=1
+
+
+# Choose the absolute value of solutions to the quadric: 
+# Random m>0 and n>0, with m != n
+
+do{
+$m = random(1,7,1);
+$n = random(1,7,1);
+}
+until($m!=$n);
+
+$b = -$m*$m - $n*$n;
+#$i = $m*$m - $n*$n;
+$c = $m*$m*$n*$n;
+
+# choose d to be one of the two k's
+$j = random(0,3,1);
+if($j == 0){
+$d = $m;
+}
+elsif($j == 1){
+$d = -$m;
+}
+elsif($j == 2){
+$d = $n;
+}
+else{
+$d = -$n;
+}
+
+# Don't display 1*x^2 if d=1
+# and don't display -1*x^2 if d=-1
+
+if($d == 1){
+$dDisplay = "";
+}
+elsif($d == -1){   # MT possible fix
+$dDisplay = "-";   # MT possible fix
+}                  # MT possible fix
+else{
+$dDisplay = $d;
+}
+
+
+######
+# Generate possible solutions 
+
+$m2 = $m*$m;
+$n2 = $n*$n;
+$dSolution = -$d;
+
+####################
+# Generating answers
+#####################
+
+# The quadric has two solutions b/c k>1 always
+$correct = "\($x = $m, $x = -$m, $x=$n, $x = -$n\)";
+$distractor1 = "\($x = $m2, $x = $n2\)";
+$distractor2 = "\($x = $m, $x = $n\)";
+$distractor3 = "\($x = 0, $x = $dSolution\)";
+$distractor4 = "\($x = $dSolution\)";
+#$distractor5 = "\($x\) = $QuadSolution3";
+
+
+
+###################################
+## RADIO BUTTONS
+###################################
+
+@incorrAns = ($distractor1,
+	$distractor2,
+	$distractor3,
+	$distractor4);
+
+
+# Display correct answer 1 out of 10 times
+$showc = random(0,9,1);
+$numc = 1; # Display the correct answer
+if ($showc == 0){$numc = 0;} # Don't display the correct answer
+
+# Incorrect answers to display
+$numi = 4 - $numc;   # the 4 is the total number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+if ($numc != 0){  # at least one correct answer
+    $radio1 = RadioButtons([[$correct,@randi],
+    "None of the above"],0);  # the 0 is the index of the correct answer    
+    }
+else {            # no correct answers
+    $radio1 = RadioButtons([[@randi,],"None of the above",],4);  # the 4 is the index of the correct answer
+}
+
+###########################################
+
+
+BEGIN_PGML
+
+Select the option, if any, that contains all solutions to [`` [$x]^3 ([$x] + [$d]) = [$dDisplay][$x]^3 - [$b][$x]^2 - [$c] ``].  
+
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework. ");
+ENDDOCUMENT();

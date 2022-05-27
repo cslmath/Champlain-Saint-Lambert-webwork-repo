@@ -1,0 +1,114 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Math Vocabulary: polynomial or not
+##     Multiple Select 
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+@var = qw(x y t u z s m n k);
+@fun = qw(f g r F G h q w R);
+$j = random(0,2,1);
+$x = $var[$j]; # one variable x y or t
+$y = $var[$j+3]; # another variable 
+$z = $var[$j+6];
+
+@typearray = ("polynomials","not polynomials");
+$n = random(0,$#typearray,1); 
+$type = $typearray[$n];
+$a = random(2,20,1);  # positive
+$b = random(2,20,1);  # positive
+$c = non_zero_random(-99,99,1);  # non-zero
+
+@corrAns = ();                  # initialize empty array
+# The full list of answers:
+@allAns = ("\( f($x) = $a $x + $b \)",  # type 0
+             "\( f($y) = $y^2 - $a \)",   
+             "\( f($z) = $c \)", 
+             "\( f($x) = $a $x^2 + $b $x + $c \)",  
+             "\( f($y) = $c - $y \)", 
+            "\( f($z) = ($a $z + $b)($b $z + $a) \)", 
+             "\( f($x) = $x^n \) where \(n\) is a nonnegative integer", 
+             "\( f($y) = \frac{$y}{$b} \)",  #index 7
+             "\( f($x) = $a $x^{-1} + $b \)", 
+             "\( f($y) = \sqrt{$y} - $a \)",  
+             "\( f($z) = \frac{$c}{$z} \)",  
+             "\( f($x) = $a $x^2 + \frac{$b}{$x} + $c\)", 
+             "\( f($y) = \frac{1}{$c - $y} \)",   
+             "\( f($z) = ($a $z + $b)($b $z + $a)^{-1} \)",  
+             "\( f($x) = x^n \) where \( n \) is an integer",
+             "\( f($y) = e^{$y} \)" );  # index 15
+
+# set conditions of correctness
+@corrAns = @allAns;  # all are real
+if ($n == 0){    # polynomial
+    @corrAns = @allAns[0..7];
+    @incorrAns = @allAns[8..15];
+    }
+else { # not polynomial
+    @corrAns = @allAns[8..15];
+    @incorrAns = @allAns[0..7];
+}
+
+$numc = random(0,4,1); # multi-select: number of correct answers to display
+# correct answers   
+@slicec = NchooseK(scalar(@corrAns),$numc);  
+@randc = @corrAns[@slicec];
+# incorrect answers (from @incorrAns array)
+$numi = 4 - $numc;   # display 4 choices total
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+$quest = "Select the function(s), if any, that are $BBOLD $type$EBOLD.";
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){
+    $multichoice -> qa ( $quest, @randc,);
+    $multichoice -> extra( @randi, "None of the above",);
+    }
+else {  # no correct answers
+    $multichoice -> qa ( $quest, "None of the above",);
+    $multichoice -> extra( @randi, );
+}
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+[@ $multichoice->print_q() @]*
+[@ $multichoice->print_a() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*  
+
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

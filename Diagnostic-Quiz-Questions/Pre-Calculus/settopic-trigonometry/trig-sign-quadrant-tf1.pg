@@ -1,0 +1,89 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Trigonometry: given quadrant, what is sign of trig ratio
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+@allAns = ("\sin\theta > 0",  # QI,II qj 01  ind 0
+           "\cos\theta > 0",  # QI,IV qj 03  ind 1
+           "\tan\theta > 0",  # QI,III qj 02  ind 2
+           "\csc\theta > 0",  # QI,II qj 01  ind 3
+           "\sec\theta > 0",  # QI,IV qj 03  ind 4
+           "\tan\theta > 0",  # QI,III qj 02  ind 5
+           "\sin\theta < 0",  # Qiii,iv qj 23  ind 6
+           "\cos\theta < 0",  # Qii,iii qj 12  ind 7
+           "\tan\theta < 0",  # Qii,iv qj 13  ind 8
+           "\csc\theta < 0",  # Qiii,iv qj 23  ind 9
+           "\sec\theta < 0",  # Qii,iii qj 12  ind 10
+           "\tan\theta < 0",  # Qii,iv qj 13  ind 11
+           );
+$tj = random(0,11,1);
+#$tj = 10; #test - remove later
+$trigsign = $allAns[$tj];
+$qj = random(0,3,1);
+#$qj = 3; # test - remove later
+@quad = ("Quadrant I","Quadrant II","Quadrant III","Quadrant IV");
+$quadrant = $quad[$qj];
+
+# Index set of true statements for each quadrant
+# These refer to the indices of the array @allAns
+@q1Ind = (0,1,2,3,4,5);  # q1
+@q2Ind = (0,3,7,8,10,11); # q2
+@q3Ind = (2,5,6,7,9,10);  # q3
+@q4Ind = (1,4,6,8,9,11);  #q4
+
+if ($qj == 0){@qInd = @q1Ind;}
+elsif ($qj == 1){@qInd = @q2Ind;}
+elsif ($qj == 2){@qInd = @q3Ind;}
+else {@qInd = @q4Ind;}
+
+# Set condition for "true" and "false"
+# If the index $tj is found in the index list of true statements of that quadrant
+$n = 0;
+if ( grep $_ == $tj, @qInd ){$n = 1;}
+
+# To set a condition based on a variable in the code
+if ($n == 1) {  
+    $correct = "True";
+    }
+else {
+    $correct = "False";
+}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:* If the angle [`\theta`] lies in [$quadrant], then [`[$trigsign]`].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct].
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

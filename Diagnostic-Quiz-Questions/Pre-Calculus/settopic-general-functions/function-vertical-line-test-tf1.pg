@@ -1,0 +1,67 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Basic functions: vertical line test
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+## DESCRIPTION
+## Precalculus: function vertical line test - true or *false*
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+@fun = qw(g F G);
+$f = $fun[random(0,$#fun,1)];
+
+@allAns = ("exactly one",
+         "no more than one",
+         "no",
+         "more than one",
+         );
+
+$j = random(0,$#allAns,1);
+$howmany = $allAns[$j];
+
+# To set a condition based on a variable in the code
+if ($j == 1) {
+    $correct = "True";
+    }
+else {
+    $correct = "False";
+}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:* The _Vertical Line Test_ states that a curve in the [`xy`]-plane is the graph of a function if and only if every vertical line intersects the curve at [$howmany] point.  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct].
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

@@ -1,0 +1,118 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: pre-calculus
+##     Factoring
+##     Factor x (x - a) + b into (x - r1)(x + r2)
+##     Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+
+@var = qw(A B F G L R S T U V W);
+$x = $var[random(0,$#var,1)];
+#Context()->variables->are( $x => 'Real' );
+
+## the problem is to factor into a product of monomials
+##    x (x - a) + b = (x - r1)(x - r2)
+
+$r2 = random(1,3,1);
+$r1 = $r2 + random(1,3,1);
+$a = $r1 + $r2;
+$b = $r1*$r2;
+
+## distrators are obtained by
+## 1. factoring error: = (x - a)(x + b)
+## 2. random error: = (x - a)(x + |a - b|)
+## 3. random error: = x (x - |a - b|)
+## 4. sign error: = (x - r1)(x + r2)
+
+$s = ( $a - $b < 0 ) ? '+' : '-';
+$absamb = abs($a - $b);
+
+
+$correct = "\(($x - $r1)($x - $r2)\)";
+$distractor1 = "\(($x - $a)($x + $b)\)";
+$distractor2 = "\(($x - $a)($x + $absamb)\)";
+$distractor3 = "\($x\,($x $s $absamb)\)";
+$distractor4 = "\(($x - $r1)($x + $r2)\)";
+
+
+
+###################################
+## RADIO BUTTONS
+###################################
+
+@incorrAns = ($distractor1,
+	$distractor2,
+	$distractor3,
+	$distractor4);
+
+# Display correct answer 1 out of 10 times
+$showc = random(0,9,1);
+$numc = 1; # Display the correct answer
+if ($showc == 0){$numc = 0;} # Don't display the correct answer
+
+
+# Incorrect answers to display
+$numi = 4 - $numc;   # the 4 is the total number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+if ($numc != 0){  # at least one correct answer
+    $radio1 = RadioButtons([[$correct,@randi],
+    "None of the above"],0);  # the 0 is the index of the correct answer    
+    }
+else {            # no correct answers
+    $radio1 = RadioButtons([[@randi,],"None of the above",],4);  # the 4 is the index of the correct answer
+}
+
+###########################################
+
+
+
+
+BEGIN_PGML
+
+Select the expression, if any, which is equivalent to [``[$x]\,([$x] - [$a]) + [$b] ``].
+
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework. ");
+ENDDOCUMENT();

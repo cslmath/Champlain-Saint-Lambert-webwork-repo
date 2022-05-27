@@ -1,0 +1,73 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: pre-calculus
+##     Factoring
+##     Can a quadratic be factored
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+
+
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+
+@var = qw(A B F G L R S T U V W);
+$x = $var[random(0,$#var,1)];
+#Context()->variables->are( $x => 'Real' );
+
+
+$a = non_zero_random(-6,6,2);
+$b = random(-10,10,1);
+$c = random(-20,20,1);
+
+$D = $b**2-4*$a*$c;
+
+# To set a condition based on a variable in the code
+if ($D >= 0) {
+    $correct = "True";
+    }
+else {
+    $correct = "False";
+}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+
+[`` [$a][$x]^2 + [$b][$x] + [$c] ``] can be factored over the reals.
+
+ 
+
+ 
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+
+ENDDOCUMENT();

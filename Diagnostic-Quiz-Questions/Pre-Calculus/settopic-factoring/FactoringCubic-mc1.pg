@@ -1,0 +1,152 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: pre-calculus
+##     Factoring
+##     Factor a^3x^3 + b^3
+##     Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+
+
+########################
+# In this problem, we factor
+# a^3x^3 + b^3 = (ax + b)(a^2 - ab + b^2)
+
+
+@var = qw(A B F G L R S T u V W);
+$x = $var[random(0,$#var,1)];
+Context()->variables->are( $x => 'Real' );
+
+
+
+# Choose a and b
+$a = random(1, 5, 1);  
+$b = random(1, 5, 1);
+
+
+#### For dislplay in the PGML
+$acube = ($a != 1) ? $a**3 : "";
+$bcube = $b**3;
+
+# Compute the factors for the correct answer
+    $factor1 = Compute("($a*$x + $b)");
+    $factor2 = Compute("($a*$a*$x**2 - $a*$b*$x + $b*$b)");
+    $product = Compute(" ($factor1)*($factor2) ")->reduce()->TeX;
+
+# Compute the factors for the distractors
+
+# 1. Sign mistake in factor 1
+    $factor3 = Compute("($a * $x - $b)");
+# 2. Sign mistake in factor 2
+    $factor4 = Compute("($a*$a*$x**2 + $a*$b*$x + $b*$b)");
+# 3. Constant mistake in factor 2
+    $factor5 = Compute("($a*$a*$x**2 + 2*$a*$b*$x + $b*$b)");
+# 4. Constant and sign mistake in factor 2
+    $factor6 = Compute("($a*$a*$x**2 -2*$a*$b*$x + $b*$b)");
+
+# The main distractor is the usual sign mistake in the second factor
+#$product1 = Formula(" ($factor1)*($factor4) ")->reduce()->TeX;
+#$product2 = Formula(" ($factor3)*($factor2) ")->reduce()->TeX;    
+
+# Make an array of extra distractors and select some at random
+# Make an array of first factors, and an array of second factors
+@FirstFactor = ($factor1, $factor3);
+@SecondFactor = ($factor2, $factor4, $factor5, $factor6);
+
+# Construct all possible answers
+# The first one in the array is the correct one
+@allAnswers = ();
+
+#@num1 = (1..2);
+#@num2 = (1..4);
+for ($i=0; $i<=1; $i++){
+    for ($j=0; $j<=3; $j++){
+        $factorA = $FirstFactor[$i];
+        $factorB = $SecondFactor[$j];
+        $tempproduct= Compute(" ($factorA)*($factorB) ")->reduce()->TeX;
+        push(@allAnswers, "\($tempproduct\)");
+    }
+}
+
+$correct = $allAnswers[0];
+
+
+###################################
+## RADIO BUTTONS
+###################################
+
+# All answers except the correct one
+@corrAns = (); 
+push(@corrAns,$correct);
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAnswers);
+
+
+
+# Display correct answer 1 out of 10 times
+$showc = random(0,9,1);
+$numc = 1; # Display the correct answer
+if ($showc == 0){$numc = 0;} # Don't display the correct answer
+
+# Incorrect answers to display
+$numi = 4 - $numc;   # the 4 is the total number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+if ($numc != 0){  # at least one correct answer
+    $radio1 = RadioButtons([[$correct,@randi],
+    "None of the above"],0);  # the 0 is the index of the correct answer    
+    }
+else {            # no correct answers
+    $radio1 = RadioButtons([[@randi,],"None of the above",],4);  # the 4 is the index of the correct answer
+}
+
+###########################################
+
+
+
+
+
+BEGIN_PGML
+
+Select the expression, if any, which is equivalent to [`` [$acube][$x]^3 + [$bcube]  ``].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework. ");
+ENDDOCUMENT();

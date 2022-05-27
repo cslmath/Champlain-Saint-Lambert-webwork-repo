@@ -1,0 +1,143 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Intervals:  notation (interval from graph)
+##     Multiple Choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+#    "niceTables.pl",
+    "PGgraphmacros.pl",
+    "PGchoicemacros.pl",
+    "PGtikz.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given
+#$refreshCachedImages = 1;  # REMOVE AFTER TESTING
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+
+# Parameters
+$low = -7;    # xmin to display on real number line
+$high = non_zero_random(-2,6,1);  # xmax to display on real number line
+$c1 = random(0,1,1);   # c1=0 less than, c1=1 less than or equal
+@ineqchoice = ("less than",
+                "less than or equal to",
+                "greater than",
+                "greater than or equal to");
+
+# Calculations
+$lessch = $ineqchoice[$c1];
+
+# Show the correct answer more often than not
+$showc = random(0,9,1);  # weighted - how often to show correct
+$numc = 1; # by default, show the correct answer among the choices
+if ($showc == 0){$numc = 0;} # Don't show the correct answer
+$numi = 4 - $numc;   # 4 is the total number of choices to display
+
+#  Inequality form x<high 
+$diff = $high - $low;
+$a = $low;
+$b = $high;
+$ap1 = $a + 1;   # other possible endpoints to display
+$bm1 = $b - 1;
+$bp1 = $b + 1;
+@allAns = ("\( (-\infty,$b) \)", 
+          "\( (-\infty,$b] \)",
+          "\( ($b,\infty) \)", 
+          "\( [$b,\infty) \)",
+          "\( (-\infty,$bm1] \)", # extra
+          "\( (-\infty,$bm1) \)",
+          "\( [-\infty,$b] \)", # incorrect square bracket on infty
+          "\( [-\infty,$b) \)",
+          "\( ($bm1,\infty) \)", 
+          "\( [$bm1,\infty) \)",
+          "\( (-\infty,$bp1] \)", 
+          "\( (-\infty,$bp1) \)",
+          "\( ($bp1,\infty) \)", 
+          "\( [$bp1,\infty) \)",
+);
+
+# Extract the correct answer from the list of all answers
+$correct = $allAns[$c1];
+@corrAns = (); 
+push(@corrAns,$correct);
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+
+# Choose the incorrect answers to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+if ($numc != 0){  # at least one correct answer
+    $radio1 = RadioButtons([[$correct,@randi],
+    "None of the above"],0);  # 0=correct index   
+    }
+else { # no correct answers
+    $radio1 = RadioButtons([[@randi,],"None of the above",],4);  # 4=correct index
+}
+
+# Graph setup
+$graph_image = createTikZImage();
+$graph_image->tikzLibraries("arrows.meta");
+
+# Randomization: upper endpoint $b, and whether included or not
+
+if ($c1 == 0){  # don't include endpoint
+    $graph_image->BEGIN_TIKZ
+    \draw[thick] (-5,0) -- (7,0) node[anchor=north west] {\(x\)};
+    \foreach \x in {-6,...,6}
+    \draw (\x cm,2pt) -- (\x cm,-2pt) node[anchor=north] {\( \x \)};
+    \draw[ultra thick,blue,<-] ($low,0) -- ($b,0);
+    \filldraw [inner color = white] ($b,0) circle (3pt);
+    \draw (-8,-1) rectangle (8,1);
+    END_TIKZ
+    }
+else { # include endpoint
+    $graph_image->BEGIN_TIKZ
+    \draw[thick] (-5,0) -- (7,0) node[anchor=north west] {\(x\)};
+    \foreach \x in {-6,...,6}
+    \draw (\x cm,2pt) -- (\x cm,-2pt) node[anchor=north] {\( \x \)};
+    \draw[ultra thick,blue,<-] ($low,0) -- ($b,0);
+    \filldraw [blue] ($b,0) circle (3pt);
+    \draw (-8,-1) rectangle (8,1);
+    END_TIKZ
+}
+
+BEGIN_PGML
+  
+>>[@ image(insertGraph($graph_image), width=>640, height=>100, tex_size=>850); @]*<<  
+Select the interval, if any, that describes the set of real numbers in the graph. Assume the arrow continues in its direction.  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

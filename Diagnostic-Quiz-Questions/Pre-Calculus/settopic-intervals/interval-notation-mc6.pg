@@ -1,0 +1,175 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Intervals:  notation (finite interval from graph)
+##     Multiple Choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+#    "niceTables.pl",
+    "PGgraphmacros.pl",
+    "PGchoicemacros.pl",
+    "PGtikz.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+Context("Numeric");
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+#$refreshCachedImages = 1; # REMOVE AFTER TESTING
+
+@ineqchoice = ("less than",
+                "less than or equal to",
+                "greater than",
+                "greater than or equal to");
+$ca = random(2,3,1);
+$cb = random(0,1,1);
+
+$morech = $ineqchoice[$ca];
+$lessch = $ineqchoice[$cb];
+
+# Answer key of intervals:
+# ($a,$b)  $d = 0  if $ca == 2 and $cb == 0
+# [$a,$b]  $d = 1  if $ca == 3 and $cb == 1
+# [$a,$b)  $d = 2  if $ca == 3 and $cb == 0
+# ($a,$b]  $d = 3  if $ca == 2 and $cb == 1
+if ($ca == 2){
+    $d = 0;                 # ($a,$b)
+    if ($cb == 1){$d = 3;}  # ($a,$b]
+    }
+else {
+    $d = 2;                 # [$a,$b)
+    if ($cb == 1){$d = 1;}  # [$a,$b]
+    }
+
+#  Inequality form x between a and b
+$low = -7;
+$high = non_zero_random(-5,7,1);
+
+$a = random($low+1,$high-1,1);
+$b = $high;
+$am1 = $a - 1;
+$bp1 = $b + 1;
+
+@allAns = (
+  "\( ($a,$b) \)","\( [$a,$b] \)","\( [$a,$b) \)", "\( ($a,$b] \)",
+          "\( (-\infty,$a)\cup($b,\infty) \)", 
+          "\( (-\infty,$a]\cup [$b,\infty) \)",
+          "\( (-\infty,$a]\cup ($b,\infty) \)", 
+          "\( (-\infty,$a)\cup [$b,\infty) \)",   
+          "\( ($am1,$bp1) \)",
+          "\( [$am1,$bp1] \)",
+          "\( [$am1,$bp1) \)", 
+          "\( ($am1,$bp1] \)", 
+          );
+
+$correct = $allAns[$d];
+@corrAns = (); 
+push(@corrAns,$correct);
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+
+# Incorrect answers to display
+$showc = random(0,9,1);
+$numc = 1; # Display the correct answer
+if ($showc == 0){$numc = 0;} # Don't display the correct answer
+
+$numi = 4 - $numc;   # the 4 is the total number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+if ($numc != 0){  # at least one correct answer
+    $radio1 = RadioButtons([[$correct,@randi],
+    "None of the above"],0);  # correct index 0   
+    }
+else {            # no correct answers
+    $radio1 = RadioButtons([[@randi,],"None of the above",],4);  # correct index 4
+}
+
+# Graph
+$graph_image = createTikZImage();
+$graph_image->tikzLibraries("arrows.meta");
+
+if ($ca == 2){
+    if ($cb == 0){# Case ($a,$b)
+        $graph_image->BEGIN_TIKZ
+        \draw[->] (-6,0) -- (7,0) node[anchor=north west] {\(x\)};
+        \foreach \x in {-6,...,6}
+            \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {\( \x \)};
+        \draw[ultra thick,blue] ($a,0) -- ($b,0);
+        \filldraw [inner color = white] ($a,0) circle (3pt);
+        \filldraw [inner color = white] ($b,0) circle (3pt);
+        \draw (-7,-1) rectangle (8,1);
+        END_TIKZ    
+    }
+    else{# Case ($a,$b]
+        $graph_image->BEGIN_TIKZ
+        \draw[->] (-6,0) -- (7,0) node[anchor=north west] {\(x\)};
+        \foreach \x in {-6,...,6}
+            \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {\( \x \)};
+        \draw[ultra thick,blue] ($a,0) -- ($b,0);
+        \filldraw [inner color = white] ($a,0) circle (3pt);
+        \filldraw [blue] ($b,0) circle (3pt);
+        \draw (-7,-1) rectangle (8,1);
+        END_TIKZ
+    }
+}
+else{
+    if ($cb == 0){# Case [$a,$b)
+        $graph_image->BEGIN_TIKZ
+        \draw[->] (-6,0) -- (7,0) node[anchor=north west] {\(x\)};
+        \foreach \x in {-6,...,6}
+            \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {\( \x \)};
+        \draw[ultra thick,blue] ($a,0) -- ($b,0);
+        \filldraw [blue] ($a,0) circle (3pt);
+        \filldraw [inner color = white] ($b,0) circle (3pt);
+        \draw (-7,-1) rectangle (8,1);
+        END_TIKZ    
+    }
+    else{# Case [$a,$b]
+        $graph_image->BEGIN_TIKZ
+        \draw[->] (-6,0) -- (7,0) node[anchor=north west] {\(x\)};
+        \foreach \x in {-6,...,6}
+            \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {\( \x \)};
+        \draw[ultra thick,blue] ($a,0) -- ($b,0);
+        \filldraw [blue] ($a,0) circle (3pt);
+        \filldraw [blue] ($b,0) circle (3pt);
+        \draw (-7,-1) rectangle (8,1);
+        END_TIKZ
+    }
+}
+
+BEGIN_PGML
+>>[@ image(insertGraph($graph_image), width=>640, height=>100, tex_size=>850); @]*<<  
+Select the interval or union of intervals that expresses the set of real numbers in the graph.  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

@@ -1,0 +1,108 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Logarithms: log law quotients
+##     Multiple Select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+# display different variables
+@var = qw(a b x y t u w z);
+$x = $var[random(0,$#var,1)];
+do {$y = $var[random(0,$#var,1)];} until ($y ne $x);
+
+# random a and b not equal
+$a = random(2,10,1);
+do {$b = random(2,10,1);} until ($a != $b);
+
+@typearray = ("false","true");
+$n = random(0,1,1);  # choose one of the types
+$numc = random(0,4,1);  # how many correct to display
+$type = $typearray[$n];
+
+# The full list of answers
+# Contained in two arrays allF and allT. Note! At least 4 in each.
+@allF = ( "\( \ln($x/$y) = \ln $x \cdot \ln $y \)",
+            "\( \ln($y/$x) = \ln $x - \ln $y \)",
+          "\( \ln($x/$y) = \ln $x + \ln $y \)",
+          "\( \log_{$a}($x/$y) = \log_{$a}$x \div \log_{$a}$y  \)", 
+          "\( \log_{$b}($x/$y) = \log_{$b}$y - \log_{$b}$x  \)",          
+        );
+@allT = ( "\( \ln($x/$y) = \ln $x - \ln $y \)",
+           "\( \ln($y/$x) = \ln $y - \ln $x \)",
+          "\( \ln $x - \ln $y = \ln($x/$y)  \)",
+          "\( \log_{$a} ($x/$y) = \log_{$a} $x - \log_{$a} $y \)",
+         "\( \log_{$b} $x - \log_{$b} $y = \log_{$b} ($x/$y) \)",
+ );
+
+# set conditions of correctness
+if ($n == 0){    # type 0
+    @corrAns = @allF;
+    @incorrAns = @allT;
+    }
+else {   # type 1
+    @corrAns = @allT;
+    @incorrAns = @allF;
+    }
+# Correct answers to display:
+@slicec = NchooseK(4,$numc);  
+@randc = @corrAns[@slicec];
+
+# Incorrect answers to display
+$numi = 4 - $numc;   # the 4 is the number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+# Display the question, and the choices:
+#$quest = "Select the value(s), if any, that are $type.";
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){  # at least one correct answer
+    $multichoice -> qa ( $quest, @randc,);
+    $multichoice -> extra( @randi, "None of the above",);
+    }
+else {            # no correct answers
+    $multichoice -> qa ( $quest, "None of the above",);
+    $multichoice -> extra( @randi, );
+}
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+Select the statement(s), if any, that are [$type]. Assume that [`[$x]>0`] and [`[$y]>0`].
+[@ $multichoice->print_a() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

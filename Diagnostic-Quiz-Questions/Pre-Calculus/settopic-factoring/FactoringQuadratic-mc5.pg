@@ -1,0 +1,149 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: pre-calculus
+##     Factoring
+##     Factor (x + a)^2 - a^2 into x(x+2a)
+##     Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+
+
+@var = qw(A B F G L R S T U V W);
+$x = $var[random(0,$#var,1)];
+#Context()->variables->are( $x => 'Real' );
+
+## problem is to factor into a product of monomials
+##    (x + a)^2 - b
+## which is
+##    (x + r1)(x + r2)
+## with two possiblilities: 
+##
+## a^2 = b (and so r2 = 0)
+## or 
+## a^2 != b (and r2 !=0)
+
+
+$r2 = random(0,4,1);
+
+if(r2 == 0){
+    ## the problem is now to factor into a product of monimals
+    ##    (x + a)^2 - a^2
+    ##    = x(x + 2a)
+
+    $a = random(2,5,1);
+    $twoa = 2*$a;
+    $b  = $a*$a;
+
+    $correct = "\($x ($twoa + $x)\)";
+
+    $distractor1 = "\((($x + $a) - $a)^2\)";
+    $distractor2 = "\($x^2\)";   ## Note: reduced to same as distractor1
+    $distractor3 = "\($x($x + $a)\) ";
+    $distractor4 = "\(($x + $a)($x - $a)\) ";
+}
+
+## if r2 != 0, then 
+else{
+    $r1 = $r2 + random(2,4,2);
+    ## then
+    $a = ($r1 + $r2)/2;              # = 2m
+    $b = ($r1 - $r2)*($r1 - $r2)/4;  # = 1 or 4
+    $sqrtb = ($r1 - $r2)/2;
+
+    $correct = "\(($x + $r2)($x + $r1)\)";
+
+    ## distractors are obtained by
+    ## 1. factoring error: = ((x + a) - sqrt(b))^2
+    ## 2. random guess error: = (x + a)(x - |a - b|)
+    ## 3. sign error: = (x - r1)(x - r2)
+    ## 4. sign/factoring error: = (x + r1)(x - r2)
+
+    $amb = abs($a - $b);
+    
+    $distractor1 = "\((($x + $a) - $sqrtb)^2\)";
+    $distractor2 = "\(($x + $a)($x - $amb)\)";
+    $distractor3 = "\(($x - $r1)($x - $r2)\)";
+    $distractor4 = "\(($x + $r1)($x - $r2)\)";
+}#end else
+
+
+
+###################################
+## RADIO BUTTONS
+###################################
+
+@incorrAns = ($distractor1,
+	$distractor2,
+	$distractor3,
+	$distractor4);
+
+# Display correct answer 1 out of 10 times
+$showc = random(0,9,1);
+$numc = 1; # Display the correct answer
+if ($showc == 0){$numc = 0;} # Don't display the correct answer
+
+
+
+# Incorrect answers to display
+$numi = 4 - $numc;   # the 4 is the total number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+if ($numc != 0){  # at least one correct answer
+    $radio1 = RadioButtons([[$correct,@randi],
+    "None of the above"],0);  # the 0 is the index of the correct answer    
+    }
+else {            # no correct answers
+    $radio1 = RadioButtons([[@randi,],"None of the above",],4);  # the 4 is the index of the correct answer
+}
+
+###########################################
+
+
+
+BEGIN_PGML
+
+Select the expression, if any, which is equivalent to [``([$x] + [$a])^2 - [$b] ``].
+
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework. ");
+ENDDOCUMENT();

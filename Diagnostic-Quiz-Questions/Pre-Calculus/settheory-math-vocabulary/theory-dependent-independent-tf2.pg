@@ -1,0 +1,63 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Math Vocabulary with Theory: dependent versus independent variable (2 of 2)
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+@var = qw(x y t u v w z);
+@fun = qw(f g h q p r s);
+@xslice = NchooseK(7,2);
+@v = @var[@xslice];
+$x = $v[0];
+$y = $v[1];
+$f = $fun[random(0,6,1)];
+
+@choice = ("dependent","independent");
+$j = random(0,1,1);
+$type = $choice[$j];
+
+$correct1 = "False";
+if ($j == 0) {  # dependent
+    $correct1 = "True";
+}
+
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct1,  # Correct answer
+	);
+
+BEGIN_PGML
+_Definition:_ In the function [`y=f(x)`], the *independent* variable is [`x`] and the *dependent* variable is [`y`].  
+
+True or false: [`[$y]`] is the *[@$type@]**** variable of the function [`[$y]=[$f]([$x])`].  
+[@ $radio1->buttons() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct1].  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

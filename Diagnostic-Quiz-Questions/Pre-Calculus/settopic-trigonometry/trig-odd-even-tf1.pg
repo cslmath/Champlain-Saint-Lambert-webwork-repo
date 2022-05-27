@@ -1,0 +1,69 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Trigonometry: odd / even
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+@allTrig= ("\sin","\tan","\csc","\cot", # odd functions
+           "\cos","\sec",);             # even functions
+$tj = random(0,5,1);
+#$tj = 0; # test - remove later
+$trig = $allTrig[$tj];
+$pj = random(0,1,1);
+#$pj = 1; # test - remove later
+@sign = ("-","");
+$pm = $sign[$pj]; # if sign is positive, do not display anything
+
+# Set condition for "true" and "false"
+# If the index $tj is found in the index list of true statements of that quadrant
+$n = 0;
+if (($pj == 0) and ($tj<4)){ # negative for odd functions
+   $n = 1;}
+if (($pj == 1) and ($tj>3)){ # positive for even functions
+   $n = 1;}
+
+# To set a condition based on a variable in the code
+if ($n == 1) {  
+    $correct = "True";
+    }
+else {
+    $correct = "False";
+}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:*  [`[$trig](-\theta) = [$pm][$trig](\theta)`]  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct].
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();
