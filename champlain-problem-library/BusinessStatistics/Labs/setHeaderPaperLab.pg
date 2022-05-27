@@ -1,0 +1,62 @@
+##Problem set header for Model Course, Champlain College Saint-Lambert MATHEMATICS
+
+&DOCUMENT;
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl"
+);
+
+$dateTime = $formatedDueDate;
+$instructor = 'Malcolm Harper';
+$course = protect_underbar($courseName);
+$setNumber = protect_underbar($setNumber);
+$sectionNumber = protect_underbar($sectionNumber);
+
+TEXT(EV2(<<EOT));
+$BEGIN_ONE_COLUMN
+\begin{center}
+{\LARGE \bf CHAMPLAIN COLLEGE SAINT-LAMBERT}
+
+{\large \bf Department of Mathematics}
+
+% Replace the following line by something like 
+% {\large \bf Course: $course $sectionNumber \qquad Instructor: \emph{Your name here}}
+% if you would like your name to appear on the students' printouts.
+%
+% You will have to make a local copy of the set header in your course to do this.
+
+{\large \bf Course: $course $sectionNumber \qquad Instructor: \emph{$instructor}}
+
+
+This is the WeBWorK part of ${BBOLD}Lab Assignment $setNumber${EBOLD}
+for $studentName. ${BR}
+It is due on : ${BBOLD}$formatedDueDate${EBOLD}.
+
+\vspace{2ex}
+
+\end{center}
+\noindent {\bf INSTRUCTIONS:} 
+Do the WeBWorK part of the lab using your group login.
+$PAR
+To do the questions you will have to refer to the instructions downloaded from L\'{e}a and the Excel sheet also found on L\'{e}a.
+$PAR
+The primary purpose of WeBWorK is to let you know if you are getting the right answer or to alert you if you get the wrong answer.
+For questions with numeric answers, you can usually attempt a problem as many times as you want before the due date.
+However, if you are having trouble figuring out your error, you should
+consult the notes, or ask a fellow student or
+your teacher for help.  Don't spend a lot of time guessing -- it's not very efficient or effective.
+$PAR
+For multiple choice or true or false questions, usually the number of attempts will be limited to discourage guessing.
+$PAR
+For numerical answers, if you are sure that your answer is correct, but WeBWorK is telling you that it is wrong, try increasing the precision of your answer.  If you are entering your answer with no fractional part, try entering one or two decimal palces.  If you are already entering one or two decimals, increase the number of decimal places to four or five.
+
+$END_ONE_COLUMN
+EOT
+
+&ENDDOCUMENT;
+
+
+

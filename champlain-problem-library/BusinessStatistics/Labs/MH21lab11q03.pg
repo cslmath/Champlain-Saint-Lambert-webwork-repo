@@ -1,0 +1,94 @@
+## DESCRIPTION
+## WeBWorKification of 201-901 lab 11
+## Question 3
+## Homework Time
+## Requests some work as pdf
+## ENDDESCRIPTION
+
+## DBsubject('Statistics')
+## DBchapter('Confidence intervals')
+## DBsection('One sample mean - z')
+## KEYWORDS('statistics', 'inference', 'confidence interval','large sample','estimates','confidence interval')## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-May-04')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static(0)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "answerHints.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+##########
+# Set up
+
+Context("Numeric");
+Parser::Number::NoDecimals();    # force integer responses
+$showPartialCorrectAnswers = 1;
+
+##########
+# Confidence levels and corresponding critical z's
+
+@CL = (  50,   60,   70,   80,   90,   95,   96,   98,   99, 99.5, 99.8, 99.9);
+@cv = (0.67, 0.84, 1.04, 1.28, 1.65, 1.96, 2.05, 2.33, 2.58, 2.81, 3.09, 3.29);
+$cv_tol = 0.005;
+
+##########
+# Select CL or CLs
+
+#@levels = ...
+
+##########
+# set up
+
+# Choose a randomization that is unlikely to cause rounding problems in the answer
+
+    $level = list_random(3,4,5);
+    $E = random(4,6,1);
+    $sigma = random(30,40,1);
+
+#do {
+#    $sigma = random(30,40,1);
+#}
+#until (ceil(($sigma*($cv[$level]+$cv_tol)/$E)**2) == ceil(($sigma*($cv[$level]-$cv_tol)/$E)**2));
+
+##########
+# Answers
+
+$n = ceil(($sigma*$cv[$level]/$E)**2);
+
+TEXT(beginproblem());
+
+###########################
+#  Main text
+
+BEGIN_PGML
+#### Homework Time
+
+It is known that the amount of time spent per week on homework by the students in a large introductory statistics course at a large university
+has a standard deviation of [$sigma] minutes.
+We want to construct a [$CL[$level]]% confidence interval for the mean amount of time [`\mu`] spent by the students on homework each week.
+For this purpose we select a simple random sample of [`n`] study times.
+How large must [`n`] be if we want to estimate [`\mu`] to within [$E] minutes.  (The margin of error should be at most [$E].)
+
+The sample size should be at least [____]{$n}.
+
+END_PGML
+
+COMMENT('Requests some work as PDF.');
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

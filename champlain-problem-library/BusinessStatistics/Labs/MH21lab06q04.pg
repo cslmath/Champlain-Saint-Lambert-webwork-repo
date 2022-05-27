@@ -1,0 +1,74 @@
+## DESCRIPTION
+## WeBWorKification of Lab 06 Question 04
+## Logic/game puzzle
+## ENDDESCRIPTION
+
+## DBsubject('Probability')
+## DBchapter('Sample Space')
+## DBsection('Outcomes & events')
+## KEYWORDS('dice','game strategy')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Mar-10')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static(1)
+
+###########################
+# Initialization
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGessaymacros.pl",
+"PGML.pl",
+"PGcourse.pl",
+);
+
+###########################
+#  Setup
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+###########################
+#  Main text
+
+TEXT(beginproblem());
+
+BEGIN_PGML
+*This is an optional (bonus) question.*
+
+Review the rules of the game from the question sheet.
+Play a few trial games in your lab group to get a feel for how the rules work.
+Come up with a _best strategy_ for player A and a _best strategy_ for player B.
+Your answers below need to be explained fully.
+
+*Part (a)*
+
+The best strategy for player A is:
+[@ ANS(essay_cmp()); essay_box(8,60) @]*
+
+*Part (b)*
+
+The best strategy for player B is:
+[@ ANS(essay_cmp()); essay_box(8,60) @]*
+
+Hint: Each player has an advantage.
+Player A chooses a number first.
+That rules out one of the numbers that Player B can choose.
+
+Player B chooses the dice, already knowing what number player A has chosen.
+
+END_PGML
+
+COMMENT('STATIC. Essay answer.');
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

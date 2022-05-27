@@ -1,0 +1,102 @@
+## DESCRIPTION
+## WeBWorKification of 201-901 lab 04
+## Question 1
+## Normal Distribution with Lengths of Pregnancies
+## Requests sketches submitted as pdf
+## ENDDESCRIPTION
+
+## DBsubject('Probability')
+## DBchapter('Continuous distributions')
+## DBsection('Application of a normal distribution')
+## KEYWORDS('normal distribution')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Feb-09')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGnumericalmacros.pl",     # required by PGstatisticsmacros.pl
+"PGstatisticsmacros.pl",    # provides normal_prob()
+"PGML.pl",
+"PGcourse.pl",
+);
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+##########
+# Set up
+
+$mean = 266;
+$sdev = 16;
+
+$a = random(235,240,1);
+$b = random(270,275,1);
+$c1 = random(255,260,1);
+$c2 = random(275,280,1);
+$d  = random(75,85,5);
+
+##########
+# Answers and checking
+
+sub proportion {
+    my $a = $_[0];
+    my $b = $_[1];
+    
+    return Compute(normal_prob($a,$b,mean=>$mean,deviation=>$sdev))
+        ->cmp(tolType => 'absolute',tolerance => 0.005,);
+}
+
+$ansd = Compute(
+    sprintf("%0.0f",
+        normal_distr($d/100-0.5, mean=>$mean, deviation=>$sdev)
+    )
+    )->cmp(tolType => 'absolute',tolerance => 0.5,);
+
+$ansd1 = Compute(
+    normal_distr($d/100-0.5, mean=>$mean, deviation=>$sdev)
+    )->cmp(tolType => 'absolute',tolerance => 0.005,);
+
+###########################
+#  Main text
+
+TEXT(beginproblem());
+
+BEGIN_PGML
+#### Lengths of Pregnancies
+
+The length of complete pregnancies in humans, from conception to birth,
+has an approximately normal distribution
+with a mean of [$mean] days and a standard deviation of [$sdev] days.
+
+For each question below, **sketch the appropriate normal curve and shade the appropriate region**.
+Submit your sketchs as pdf on Lea.
+Answer the following questions.
+
+Enter your answers as proportions (not percentages) and keep at least three decimal places of accuracy.
+    a) What proportion of pregnancies last less than [$a] days?
+        [____]{proportion('-infty',$a)}
+    a) What proportion of pregnancies last longer than [$b] days?
+        [____]{proportion($b,'infty')}
+    a) What proportion of pregnancies last between than [$c1] and [$c2] days?
+        [____]{proportion($c1,$c2)}
+    a) What is the pregnancy length that marks the [$d]th percentile?
+        [____]{$ansd} (to the closest day)
+
+END_PGML
+
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

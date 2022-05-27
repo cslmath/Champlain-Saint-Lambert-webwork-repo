@@ -1,0 +1,94 @@
+## DESCRIPTION
+## WeBWorKification of 201-901 lab 10
+## Question 1
+## Kindergarten Desks
+## Requests some work as pdf
+## ENDDESCRIPTION
+
+## DBsubject('Statistics')
+## DBchapter('Statistical Inference')
+## DBsection('Central Limit Theorem')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Apr-27')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static(0)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGnumericalmacros.pl",     # required by PGstatisticsmacros.pl
+"PGstatisticsmacros.pl",    # provides normal_prob()
+"PGML.pl",
+"PGcourse.pl",
+);
+
+TEXT(beginproblem());
+
+##########
+# Set up
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$mean = random(60.5, 62.0, 0.1);
+#$mean = 61.2;
+$sdev = random(2.8, 3.4, 0.1);
+#$sdev = 3.1;
+
+$sittingheight = 63;
+$samplesize = 25;
+$samplesdev = $sdev/sqrt($samplesize);
+
+##########
+# Answers and checking
+
+sub popproportion {
+    my $a = $_[0];
+    my $b = $_[1];
+    
+    return Real(normal_prob($a,$b,mean=>$mean,deviation=>$sdev))
+        ->cmp(tolType => 'absolute',tolerance => 0.002,);
+}
+
+sub sampproportion {
+    my $a = $_[0];
+    my $b = $_[1];
+    
+    return Real(normal_prob($a,$b,mean=>$mean,deviation=>$samplesdev))
+        ->cmp(tolType => 'absolute',tolerance => 0.002,);
+}
+
+###########################
+#  Main text
+
+BEGIN_PGML
+#### Kindergarten Desks
+
+In designing new desks for an incoming class of 25 kindergarten girls, an important characteristic of the desks is that they must accommodate the sitting heights of those students
+(the sitting height is the height of a seated student measured from bottom of the feet to the top of the knee).
+Kindergarten girls have normally distributed sitting heights with a mean of [$mean] cm and a standard deviation of [$sdev] cm.
+
+a) What is the probability that a randomly chosen kindergarten girl has a sitting height of more than [$sittingheight] cm?  
+[_____]{popproportion($sittingheight,'infty')}
+a) What is the probability that for a randomly selected group of [$samplesize] kindergarten girls
+the mean sitting height is greater than [$sittingheight] cm? (Use the Central Limit Theorem.)  
+[_____]{sampproportion($sittingheight,'infty')}
+
+END_PGML
+
+COMMENT('Requests some work as PDF.');
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

@@ -1,0 +1,83 @@
+## DESCRIPTION
+## WeBWorKification of Lab 03 Question 04
+## Computations from a histogram
+## ENDDESCRIPTION
+
+## DBsubject('Statistics')
+## DBchapter('Exploratory data analysis/descriptive statistics')
+## DBsection('Summary statistics')
+## KEYWORDS('quartiles', 'histogram')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Feb-02')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+
+## MO(1)
+## Static('0')
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"parserPopUp.pl",      # for drop down lists
+"PGessaymacros.pl",    # for text box
+"PGML.pl",
+"PGcourse.pl",
+);
+
+TEXT(beginproblem());
+
+###########################
+#  Setup
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$bins = [qw(? 0.0-9.9 10.0-19.9 20.0-29.9 30.0-39.9 40.0-49.9 
+    50.0-59.9 60.0-69.9 70.0-79.9 80.0-89.9)];
+
+$meanmedianpopup = PopUp(['?','larger','smaller','about the same'],1);
+
+$histogram = image( "tornadodamage.png", width=>600,  
+tex_size=>700, extra_html_tags=>'alt="Histogram of toronado damage"' );
+
+###########################
+#  Main text
+
+BEGIN_PGML
+## Quartiles from a Histogram
+
+The histogram below shows the average property damage in millions of dollars caused by tornadoes over a 50-year period in each of the fifty US states and  Puerto Rico.
+The first class is 0.0-9.9 (states with an average damage between 0 and 9.9 million dollars) the second class is 10.0-19.9 and so on.
+
+>>[@ $histogram @]*  
+(Click on the histogram for a full size view)<<
+
+a) How many observations (data values) were used to construct the histogram?  
+[__]{51}
+
+a. In which class must the median be?  
+[___]{PopUp($bins,2)}
+
+a) In which class must the first quartile be?  
+[___]{PopUp($bins,1)}
+
+a) In which class must the third quartile be?  
+[___]{PopUp($bins,5)}
+
+a) By looking at this histogram would you expect the mean to be larger or smaller than the median for this data set?  
+[__]{PopUp(['?','larger','smaller','about the same'],1)}
+
+    Briefly explain why.  
+    [@ ANS(essay_cmp()); essay_box(2,80) @]*
+END_PGML
+
+ENDDOCUMENT();

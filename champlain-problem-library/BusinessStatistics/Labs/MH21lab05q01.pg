@@ -1,0 +1,167 @@
+## DESCRIPTION
+## 201-901 Lab 05 Correlation
+## Sector Fund' Return
+## ENDDESCRIPTION
+
+## DBsubject('Statistics')
+## DBchapter('Simple linear regression')
+## DBsection('Correlation')
+## KEYWORDS('correlation')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Feb-16')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    # "PGstatisticsmacros.pl",
+    "parserPopUp.pl",
+    "parserRadioButtons.pl",
+    "PGessaymacros.pl",
+#    "parserMultiAnswer.pl",
+    "weightedGrader.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+###########################
+#  Setup
+
+#$showPartialCorrectAnswers = 1;
+
+TEXT(beginproblem());
+
+Context("Numeric");
+Context()->flags->set(
+  tolerance => 0.1,
+  tolType => "absolute",
+);
+
+##########
+# The problem is static, it's all answers
+
+##########
+# Answers
+
+install_weighted_grader();
+
+$ansa = PopUp(
+    ["?","2002 returns","2003 returns",],
+    "2002 returns",
+    );
+
+$ansbi = Compute(-0.61560);                # from Excel
+
+$ansbii = RadioButtons(
+    ["positive","negative"],1,
+    separator => " or ",
+    );
+
+$ansbiii = PopUp(
+    ["?",
+    "It was likely to lose a lot in 2003",
+    "It was likely to gain a lot in 2003",
+    "It is impossible to tell",
+    ],
+    2,
+    );
+
+$ansdi = Compute("($ansbi)**2");
+
+$ansdii = RadioButtons(
+    ["Yes","no"],1,
+    separator => " or ",
+    );
+    
+$ansei = Compute(-0.83799);
+
+$anseii = RadioButtons(
+    ["weaker","stronger"],1,
+    separator => " or ",
+    );
+
+$ansgi =Compute("($ansei)**2");
+
+$ansgii = RadioButtons(
+    ["a better job","a worse job"],0,
+    separator => " or ",
+    );
+
+###########################
+#  Main text
+
+BEGIN_PGML
+
+###  Sector Funds' Returns
+
+>>Enter numerical answers with at least two decimal places of accuracy.<<
+>>---<<
+
+a. You want to test the validity of the warning _past performance does not guarantee future results_ by studying the relationship between the 2002 and the 2003 returns.
+    Which variable should you choose as the explanatory variable [`x`]?
+[@ $ansa->menu() @]*
+
+b.  Use Excel to compute [`r`]:
+    * Enter the value of [`r`] that you got from Excel: [__]
+    * Is the correlation [@ $ansbii->buttons() @]*?
+    * If some particular fund lost a lot of value in 2002 what was most likely to happen to it in 2003? [@ $ansbiii->menu() @]*
+    [%Explain.  
+    [@ essay_box() @]*
+    %]
+
+c.  Use Excel to plot the scatterplot.
+
+d.  Enter the value of [`r^2`] that you got from Excel: [__]
+    *  Does it seem like the regression line does a good job in predicting the 2003 return of a sector fund given its 2002 return?  
+    [@ $ansdii->buttons() @]*?
+    
+    [% Explain.  [@ essay_box() @]* %]
+
+e.  Exclude _Fidelity Gold Fund_ from the computations.
+    * The new value of [`r`] is [__].
+    * Did the correlation grow
+    [@ $anseii->buttons() @]*
+    when you excluded this outlier?
+[%    * Explain  
+    [@ essay_box() @]* %]
+
+f. Use Excel to plot the new scatterplot.
+
+g. Excluding _Fidelity Gold Fund_,
+    * the new [`r^2`] is [__].
+    * Does the new least-squares line do [@ $ansgii->buttons() @]*
+     in predicting the 2003 returns?
+     
+END_PGML
+
+WEIGHTED_ANS($ansa->cmp(),2);
+WEIGHTED_ANS($ansbi->cmp(),2);
+WEIGHTED_ANS($ansbii->cmp(),1);
+WEIGHTED_ANS($ansbiii->cmp(),1);
+# WEIGHTED_ANS(essay_cmp(),2);
+WEIGHTED_ANS($ansdi->cmp(),1);
+WEIGHTED_ANS($ansdii->cmp(),1);
+# WEIGHTED_ANS(essay_cmp(),2);
+WEIGHTED_ANS($ansei->cmp(),1);
+WEIGHTED_ANS($anseii->cmp(),1);
+# WEIGHTED_ANS(essay_cmp(),1);
+WEIGHTED_ANS($ansgi->cmp(),1);
+WEIGHTED_ANS($ansgii->cmp(),1);
+
+COMMENT('STATIC');
+COMMENT('MathObject version. Uses PGML.');
+
+# The combination of weighted_grader and essay answers makes the grading a little flakey"
+ENDDOCUMENT();

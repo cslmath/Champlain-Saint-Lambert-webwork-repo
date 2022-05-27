@@ -1,0 +1,44 @@
+assignmentType      = default
+openDate          = 10/26/2021 at 09:30am EDT
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 10/26/2021 at 12:00pm EDT
+answerDate        = 10/28/2021 at 07:00pm EDT
+enableReducedScoring = N
+paperHeaderFile   = champlainLibrary/BusinessStatistics/Labs/setHeaderPaperLab.pg
+screenHeaderFile  = champlainLibrary/BusinessStatistics/Labs/setHeaderScreenLab.pg
+description       = This lab has questions to be done on WeBWorK and on paper.
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = champlainLibrary/BusinessStatistics/Labs/MH21lab07q01.pg
+value = 5
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = champlainLibrary/BusinessStatistics/Labs/MH21lab07q02.pg
+value = 6
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = champlainLibrary/BusinessStatistics/Labs/MH21lab07q03.pg
+value = 9
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+

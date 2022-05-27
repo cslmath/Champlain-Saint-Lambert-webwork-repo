@@ -1,0 +1,76 @@
+## DESCRIPTION
+## WeBWorKification of 201-901 lab 08
+## Question 3
+## Playing Cards
+## Requests some work as pdf
+## ENDDESCRIPTION
+
+## DBsubject('Probability')
+## DBchapter('Sample Space')
+## DBsection('Conditional probability -- direct')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Feb-02')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+###########################
+#  Setup
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$ans_a = Compute("(1/2)(26/52)(26/52)+(1/2)(26/52)(26/52)+(1/2)(26/52)(25/51)+(1/2)(26/52)(25/51)");
+$ans_b = Compute("4*(13/52)(12/51)(11/50)(10/49)(9/48)");
+
+TEXT(beginproblem());
+
+###########################
+#  Main text
+
+
+BEGIN_PGML
+#### Playing Cards
+
+For each of the following two parts write up your solutions and submit them in pdf format. 
+Check your answers below
+
+a)  Consider the following chance procedure.
+You first flip a coin. If you flip tails, you pick two cards _without replacement_ from a shuffled deck of 52.
+If you flip heads you pick two cards _with replacement_ from a shuffled deck of 52.
+What is the probability that at the end of this procedure you end up with two cards of the same colour (two red cards or two black cards)? 
+[@ knowlLink("Hint", value=>'Use a tree diagram.
+For a shortcut, recognize that the probability that both cards are black has to be the same as the probability that both cards are red.
+So compute one probability and double it.') @]*  
+P(_the cards are the same colour_): [__________]{$ans_a}
+
+b)  Suppose you pick five cards from a shuffled deck of 52, _without replacement_.
+What is the probability that the five cards are all of the same suit (all hearts, all diamonds, all clubs or all spades)? 
+[@ knowlLink("Hint", value=>'Use logic, not a tree diagram. Figure out the probability that the cards are all clubs and multiply by four (all suits should have equal probability).') @]*  
+P(_the cards are the same suit_): [__________]{$ans_b}
+
+END_PGML
+
+COMMENT('STATIC');
+COMMENT('Requests some work as PDF.');
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

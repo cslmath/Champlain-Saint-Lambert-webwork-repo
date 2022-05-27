@@ -1,0 +1,115 @@
+## DESCRIPTION
+## WeBWorKification of 201-901 lab 10
+## Question 2
+## Team Marathon
+## Requests some work as pdf
+## ENDDESCRIPTION
+
+## DBsubject('Statistics')
+## DBchapter('Statistical Inference')
+## DBsection('Central Limit Theorem')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Apr-27')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static(0)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "weightedGrader.pl",
+    "PGnumericalmacros.pl",     # required by PGstatisticsmacros.pl
+    "PGstatisticsmacros.pl",    # provides normal_prob()
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+
+##########
+# Set up
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$mean = random(250, 260, 1);
+#$mean = 256;
+$sdev = random(40, 50, 1);
+#$sdev = 45;
+
+$teamtime = 240;
+$samplesize = 30;
+$samplesdev = $sdev/sqrt($samplesize);
+
+##########
+# My functions
+
+sub popproportion {
+    my $a = $_[0];
+    my $b = $_[1];
+    
+    return Real(normal_prob($a,$b,mean=>$mean,deviation=>$sdev))
+        ->cmp(tolType => 'absolute',tolerance => 0.002,);
+}
+
+sub sampproportion {
+    my $a = $_[0];
+    my $b = $_[1];
+    
+    return Real(normal_prob($a,$b,mean=>$mean,deviation=>$samplesdev))
+        ->cmp(tolType => 'absolute',tolerance => 0.002,);
+}
+
+##########
+# Answers and checking
+
+install_weighted_grader();
+
+###########################
+#  Main text
+
+BEGIN_PGML
+#### Team Marathon
+
+The mean finishing time for all participants in last year's Montreal marathon was about [$mean] minutes,
+and the standard deviation of the finishing times was about [$sdev] minutes.
+Suppose that next year, in order to encourage participation, the organizers have a new strategy.
+Each runner is randomly assigned to a team of [$samplesize] when they enter, and their team's time is simply the average of the times of all [$samplesize] members.
+The teams with the lowest average times are eligible for extra prizes.
+This way slower runners might, by chance, end up on a fast team and win a prize, and newer runners would have a chance to talk with more experienced athletes.
+
+a) Assuming that the mean and standard deviation for individual finishing times won't change from this year to the next,
+what would the mean and standard deviation for the team times be?  
+[% Standard grading
+[`\mu_{\bar{x}}=`] [_____]{$mean}
+[`\sigma_{\bar{x}}=`] [_____]{$samplesdev} %]
+[% Weighted grading
+%][`\mu_{\bar{x}}=`] [_____][@ WEIGHTED_ANS(Compute("$mean")->cmp,1); '' @] 
+[`\sigma_{\bar{x}}=`] [_____][@ WEIGHTED_ANS(Compute("$samplesdev")->cmp,1); '' @] (one half mark each)
+
+
+a) Suppose that a certain team thinks they can finish with a team time of [$teamtime] minutes.
+Should they expect to be among the top 10% fastest teams?  
+[% Standard grading
+Compute [`P(\bar{x}<[$teamtime])`]. [_____]{sampproportion('-infty',$teamtime)} %]
+[% Weighted grading
+%]Compute [`P(\bar{x}<[$teamtime])`]. [_____][@ WEIGHTED_ANS(sampproportion('-infty',$teamtime),4); '' @] (two marks)
+
+END_PGML
+
+COMMENT('Requests some work as PDF.');
+COMMENT('Uses a weighted grader.');
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

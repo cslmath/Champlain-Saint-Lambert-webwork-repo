@@ -1,0 +1,73 @@
+## DESCRIPTION
+## WeBWorKification of 201-901 lab 11
+## Question 1 (c).  (a) and (b) are separate problems
+## Waiting Time
+## Requests some work as pdf
+## ENDDESCRIPTION
+
+
+## DBsubject('Statistics')
+## DBchapter('Confidence intervals')
+## DBsection('One sample mean - z')
+## KEYWORDS('statistics', 'inference', 'confidence interval','large sample','estimates','confidence interval')## TitleText1('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-May-04')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "parserRadioButtons.pl",
+  "PGessaymacros.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+
+TEXT(beginproblem());
+
+
+###########################
+#  Setup
+
+Context("Numeric");
+
+$radio = RadioButtons(
+  ["be larger","not change","be smaller","be larger or smaller, depending on the sample taken","None of these",],
+  2, # correct answer
+  last => ["None of these"], # can be a list
+);
+
+
+###########################
+#  Main text
+
+BEGIN_PGML
+#### Waiting Times (c)
+
+If in part (a) the manager had selected a larger sample of  customer wait times
+the margin of error in the confidence interval constructed in part (a) would:  
+[@ ANS( $radio->cmp() ); $radio->buttons() @]*
+
+Justify (explain) your answer.  
+[@ ANS(essay_cmp()); essay_box(8,60) @]*
+
+You only have *one attempt* for this question.
+END_PGML
+
+COMMENT('Continuation of parts (a) and (b).');
+COMMENT('MathObject version. Uses PGML. STATIC.');
+
+ENDDOCUMENT();

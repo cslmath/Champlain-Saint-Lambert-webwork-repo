@@ -1,0 +1,105 @@
+## DESCRIPTION
+## WeBWorKification of 201-901 lab 11
+## Question 2
+## Electricity Usage
+## Requests some work as pdf
+## ENDDESCRIPTION
+
+## DBsubject('Statistics')
+## DBchapter('Confidence intervals')
+## DBsection('One sample mean - z')
+## KEYWORDS('statistics', 'inference', 'confidence interval','large sample','estimates','confidence interval')## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-May-04')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static(0)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "answerHints.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+##########
+# Set up
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+##########
+# Confidence levels and corresponding critical z's
+
+@CL = (  50,   60,   70,   80,   90,   95,   96,   98,   99, 99.5, 99.8, 99.9);
+@cv = (0.67, 0.84, 1.04, 1.28, 1.65, 1.96, 2.05, 2.33, 2.58, 2.81, 3.09, 3.29);
+
+##########
+# Select CL or CLs
+
+$level = list_random(4,5,6);
+#@levels = ...
+
+##########
+# Problem parameters
+
+# $sigma = 80;
+$sigma = random(75,85,1);
+# $n = 81;
+$n = list_random(64,81,100);
+# $mean = 375;
+$mean = random(360,395,5);
+
+##########
+# Answer tolerances
+
+$min_tol = 0.01;
+$cv_tol = 0.005;
+
+$comp_tol = $sigma*$cv_tol/sqrt($n);
+$abs_tol = max($comp_tol,$min_tol);
+
+Context()->flags->set(tolType=>'absolute',tolerance=>$abs_tol);
+
+#install_weighted_grader();
+
+##########
+# Answers
+
+$a = Compute("$mean - $cv[$level]*$sigma/sqrt($n)");
+$b = Compute("$mean + $cv[$level]*$sigma/sqrt($n)");
+
+TEXT(beginproblem());
+
+###########################
+#  Main text
+
+BEGIN_PGML
+#### Electricity Usage
+
+To conduct a study on electricity usage, a consumers association selected
+a random sample of [$n] households in Montreal and  recorded the usage for each household in the sample for the month of May 2014.
+For the  households in the sample the average usage was [$mean] kWh.
+The standard deviation of the electricity usage in general is known to be [$sigma] kWh.
+
+Assuming that the sample is random,  construct a [$CL[$level]]% confidence interval for the mean electricity usage in May 2014 for all households in Montreal.
+
+The [$CL[$level]]% confidence interval is  
+([______]{$a} , [______]{$b})
+
+END_PGML
+
+COMMENT('Requests some work as PDF.');
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();
