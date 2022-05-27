@@ -1,0 +1,103 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Domain (interval notation):  nth root (infinite interval if n odd)
+##     Multiple Choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "niceTables.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+$a = random(1,11,1);  # a positive
+$ap1 = $a + 1;
+$am1 = $a - 1;
+$n = list_random(3,4,5,6,7);
+
+@allAns = ("\( [$a,\infty) \)", 
+            "\( ($a,\infty) \)", 
+          "\( (-\infty,$a] \)", 
+          "\( (-\infty,$a) \)", 
+          "\( (-\infty,$am1]\cup[$ap1,\infty) \)", 
+          "\( (-\infty,$am1)\cup($ap1,\infty) \)",
+          "\( (-\infty,\infty) \)", 
+          "\( (-\infty,$a)\cup ($a,\infty)\)",
+);
+
+@fun = ("\sqrt[$n]{x - $a}",
+        "\frac{1}{\sqrt[$n]{x - $a}}",
+        "\sqrt[$n]{$a - x}",
+        "\frac{1}{\sqrt[$n]{$a - x}}"
+        );
+$c = random(0,3,1);
+$f = $fun[$c];  
+if ($n%2)  # if n is odd (remainder when div by 2 is 1)
+    {$d = 6;
+    if ($c%2){$d = 7;} # if c is odd (remainder 1 when div by 2)
+    }
+else {   # if n is even
+    $d = $c;
+    }
+$correct = $allAns[$d];
+@corrAns = (); 
+push(@corrAns,$correct);
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+
+# Show the correct answer more often than not
+$showc = random(0,9,1);
+$numc = 1; # show the correct answer
+if ($showc == 0){$numc = 0;} # don't show the correct answer
+
+# Incorrect answers to display
+$numi = 4 - $numc;   # the 4 is the total number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+if ($numc != 0){  # at least one correct answer
+    $radio1 = RadioButtons([[$correct,@randi],
+    "None of the above"],0);  # correct index 0  
+    }
+else {            # no correct answers
+    $radio1 = RadioButtons([[@randi,],"None of the above",],4);  # correct index 4
+}
+
+BEGIN_PGML
+Select the interval, if any, that describes the domain of the function [`f(x)=[$f]`].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp( ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

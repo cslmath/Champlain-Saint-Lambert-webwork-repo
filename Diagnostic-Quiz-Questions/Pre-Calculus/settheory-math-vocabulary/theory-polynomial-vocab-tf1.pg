@@ -1,0 +1,66 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Math Vocabulary with Theory: polynomial degree, leading coefficient
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+@vocab = ("degree","leading coefficient","constant term");
+$j = random(0,$#vocab,1);
+$k = random(0,$#vocab,1);
+$thing = $vocab[$j];
+$lc = random(-9,-1,1);
+$c1 = random(-9,9,1);
+$c2 = random(-9,9,1);
+$deg = random(4,8,1);
+$d1 = $deg - random(1,2,1);
+$d2 = $d1 - 1;
+$ct = random(10,20,1);
+$p = Compute("$lc x^($deg) + $c1 x^($d1) + $c2 x^($d2) + $ct")->reduce();
+@ans = ($deg,$lc,$ct);
+
+$correct1 = "False";
+# To set a condition based on a variable in the code
+if ($k == $j) {
+    $correct1 = "True";
+    }
+   
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct1,  # Correct answer
+	);
+
+BEGIN_PGML
+_Definition:_ The *degree* of a polynomial in one variable is the value of the largest exponent. The *leading coefficient* is the coefficient of the term with the largest exponent. The *constant term* is the value of the term without a variable in it.  
+_Example:_ In the polynomial [`p(x) = -8x^3 +  7x^4 - x^5 + 9x^2 + 4x - 6`], the degree is [`5`], the leading coefficient is [`-1`], and the constant term is [`-6`].  
+
+True or false: The *[@$thing@]**** of the polynomial [`p(x)=[$p]`] equals [`[$ans[$k]]`].  
+[@ $radio1->buttons() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct1].  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

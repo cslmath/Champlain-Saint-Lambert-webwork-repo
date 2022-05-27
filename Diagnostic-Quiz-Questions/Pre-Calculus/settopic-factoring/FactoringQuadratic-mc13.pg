@@ -1,0 +1,132 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: pre-calculus
+##     Factoring
+##     Factor a - (x - b)^2 into (x - r1)(x - r2)
+##     Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+
+## the problem is to factor into a product of monomials
+##    a - (x + b)^2
+## a and b are chosen so that the factored form is
+##    (-r1 - x)(x + r2),
+## where r1 and r2 are given by
+$r2 = random(1,4,1);
+$r1 = $r2 + random(2,4,2);
+
+@var = qw(A B F G L R S T U V W);
+$x = $var[random(0,$#var,1)];
+#Context()->variables->are( $x => 'Real' );
+
+$b = ($r1 + $r2)/2;
+$a = ($r1 - $r2)*($r1 - $r2)/4;
+$sqrta = ($r1 - $r2)/2;
+
+## this gives two roots that sum to a + b^2
+$apb2 = $a + $b*$b;
+if ( $apb2 - $r1 > 0) {
+    $r3 = $r1;
+    $r4 = $apb2 - $r1;
+} else {
+    $r3 = $r2;
+    $r4 = $apb2 - $r2;
+}
+
+## distractors are obtained by:
+## 1. factoring error: (sqrt(a) - (x + b))^2
+## 2. a sign error: a - (x + b)^2 = -x^2 - 2 b x + (b^2 - a)
+##    which we factor incorrectly as -(x - r1)(x + r2)
+## 3. a sign error, and error in factoring:
+##    a - (x + b)^2 = -x^2 + 2 b x + a + b^2 = (-x + r3)(x + r4),
+##    where r3 + r4 = a + b^2
+## 4. a sign error: a - (x + b)^2 = x^2 - 2 b x + (a - b^2)
+
+
+$correct = "\((-$r1 - $x)($x + $r2)\)";
+$distractor1 = "\(($sqrta - ($x + $b))^2\)";
+$distractor2 = "\(-($x - $r1)($x + $r2)\)";
+$distractor3 = "\((-$x + $r3)($x + $r4)\)";
+$distractor4 = "\(($x - $r1)($x - $r2)\)";
+
+
+
+###################################
+## RADIO BUTTONS
+###################################
+
+@incorrAns = ($distractor1,
+	$distractor2,
+	$distractor3,
+	$distractor4);
+
+# Display correct answer 1 out of 10 times
+$showc = random(0,9,1);
+$numc = 1; # Display the correct answer
+if ($showc == 0){$numc = 0;} # Don't display the correct answer
+
+
+# Incorrect answers to display
+$numi = 4 - $numc;   # the 4 is the total number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+if ($numc != 0){  # at least one correct answer
+    $radio1 = RadioButtons([[$correct,@randi],
+    "None of the above"],0);  # the 0 is the index of the correct answer    
+    }
+else {            # no correct answers
+    $radio1 = RadioButtons([[@randi,],"None of the above",],4);  # the 4 is the index of the correct answer
+}
+
+###########################################
+
+
+
+
+
+BEGIN_PGML
+
+Select the expression, if any, which is equivalent to [`` [$a] - ([$x] + [$b])^2 ``].
+
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework. ");
+ENDDOCUMENT();

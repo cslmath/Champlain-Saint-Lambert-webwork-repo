@@ -1,0 +1,69 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Logic Symbols With Theory: symbols such as equal, not equal, implies, iff
+##                                variables squared
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGgraphmacros.pl",
+    "PGchoicemacros.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+@var = qw(x y z w t r s u v);
+$x = $var[random(0,$#var,1)];
+do {$y = $var[random(0,$#var,1)];} until ($x ne $y);
+
+@allsymbs = ("\Longleftrightarrow","\Longrightarrow");
+$j = random(0,$#allsymbs,1);
+$j = 0; #test remove later
+$symb = $allsymbs[$j];
+
+# To set a condition based on a variable in the code
+if ($j == 1) {
+    $correct = "True";
+    }
+else {
+    $correct = "False";
+}
+
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+_Symbols and Their Meaning:_  
+[`=`]: equals. Example: [`x^2 - 4x + 4 = (x-2)^2`]  
+[`\ne`]: not equal to. Example: [`(x-2)^2 \ne x^2 - 4 `]  
+[`\Rightarrow`]: implies. Example: [`x=y \Rightarrow x^2 = y^2`]  
+[`\Leftrightarrow`]: if and only if. Example: [` x-y=0 \Leftrightarrow x=y `]  
+
+*True or false*: [`` [$x] = [$y] \,[$symb]\, [$x]^2 = [$y]^2 ``]  for all values of [`[$x]`] and [`[$y]`].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @].
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

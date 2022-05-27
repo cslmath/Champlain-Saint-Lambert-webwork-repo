@@ -1,0 +1,131 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##   Equations: Select all the lines with (positive, negative) x- or y-intercept
+##     Multiple Select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+
+@sign = ("positive","negative");
+@var = qw(x y);
+$n = random(0,1,1);   # n = 1 negative, n = 0 positive
+$j = random(0,1,1);  # j = 0 for x, j = 1 for y
+$posneg = $sign[$n];
+$v = $var[$j];   # variable x or y
+$m = random(2,9,1);  # positive
+$a = random(2,8,2);  # positive even
+$b = random(3,9,1);  # positive odd
+$c = random(1,9,1);  # positive
+
+# The full list of answers:
+@allAns = ("\( y + $m x = - $b \)",  # x-int <0, y-int < 0   index 0
+             "\( y = - $m x + $b \)",  # x-int >0, y-int > 0   1
+             "\( $a x + $b y = $c \)", #  x-y-int > 0   2
+             "\( - $a x - $b y + $m = 0 \)", # x-y-int >0   3
+             "\( $a y + $b x + $m = 0 \)", # x-y-int<0    4
+            "\( y - $m x = - $b \)", # x-int > 0,  y-int < 0    5
+             "\( - $a y + $b = - x  \)", # x-int < 0, y-int > 0   6
+             "\(- $a x + $b y = - $c \)", #  x-int >0 y-int < 0  7
+             "\( $a x - $b y + $m = 0 \)",   # x-int<0, y-int>0   8 
+             "\( $a y - $b x + $m = 0 \)",    # x-int>0, y-int<0  9 
+             "\( $v = $m \)",   # $v-int > 0   10  
+             "\( $v = - $m \)",  # $v-int < 0  11
+             "\( $v + $b = 0 \)",  # $v-int < 0   12
+             "\( -$v + $a = 0\)");  #  $v-int > 0   13
+
+# set conditions of correctness
+if ($n == 1){    # int < 0
+    if ($j == 0) {  # x-int < 0
+        @corrAns = @allAns[0,4,6,8,11,12]; 
+        }
+    else {  # j = 1  meaning y-int < 0
+        @corrAns = @allAns[0,4,5,7,9,11,12];
+    }
+}
+else {
+    if ($j == 0) { # x-int >0 
+    @corrAns = @allAns[1,2,3,5,7,9,10,13];
+    }
+    else {  # y-int >0
+    @corrAns = @allAns[1,2,3,6,8,10,13];
+    }
+}
+$numc = random(0,4,1); 
+@slicec = NchooseK(scalar(@corrAns),$numc);  
+# subset of indices e.g. if $numc=3,  0 1 2 3 4 => 1 2 4, or 0 2 4, ...
+@randc = @corrAns[@slicec];
+
+# using map and grep to create an array of incorrects
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+
+$numi = 4 - $numc;
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+$quest = "Select the line(s), if any, that have $posneg \($v\)-intercept.";
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){
+$multichoice -> qa (
+    $quest, 
+    @randc,
+);
+$multichoice -> extra(
+    @randi,
+    "None of the above",
+);
+}
+else {
+$multichoice -> qa (
+    $quest, 
+    "None of the above",
+);
+$multichoice -> extra(
+    @randi,
+);
+}
+
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+Select the line(s), if any, that have [$posneg] [`[$v]`]-intercept.
+[@ $multichoice->print_a() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*  
+
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

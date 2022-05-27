@@ -1,0 +1,104 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Math Vocabulary with Theory: value 1 or 0 
+##     Multiple Select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+@var = qw(x y t u v z n);
+$x = $var[random(0,$#var,1)];
+@typearray = ("0","1");
+$n = random(0,1,1);   # see next comment line
+$type = $typearray[$n];
+$d = random(2,9,1);  # positive
+
+# The full list of answers:
+@allAns = ("\( \ln 1 \)",  
+             "\( \sin\pi \)",   
+             "\( \cos(\pi/2) \)", 
+             "\( \tan(-\pi) \)",  
+             "\( 0/$d \)", # index 4
+             "\( e^0 \)", 
+             "\( \cos(0) \)",  
+             "\( |\cos(\pi)| \)", 
+             "\( \sin(\pi/2) \)",         
+             "\( \tan(\pi/4) \)",   #index 9
+             "\( $d/0 \)",           #index 10
+             "\( \cos(\pi) \)",
+             "\( \sin(3\pi/2) \)" );  # index 12
+
+# set conditions of correctness
+@corrAns = @allAns;  # all are real
+if ($n == 0){    # equal 0
+    @corrAns = @allAns[0..4]; 
+    @incorrAns = @allAns[5..12];
+    }
+else { # equal 1
+    @corrAns = @allAns[5..9];
+    @incorrAns = @allAns[0..4,10..12];
+}
+$numc = random(0,4,1); # multi-select: number of correct to display
+    
+@slicec = NchooseK(scalar(@corrAns),$numc);  
+@randc = @corrAns[@slicec];
+
+$numi = 4 - $numc;
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+$quest = "Select the value(s), if any, that are equal to $type.";
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){
+    $multichoice -> qa ( $quest, @randc,);
+        $multichoice -> extra( @randi, "None of the above",);
+    }
+else {  # no correct answers
+    $multichoice -> qa ( $quest, "None of the above",);
+    $multichoice -> extra( @randi, );
+}
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+_Value Zero:_  The sine function has value *zero* when the argument is an integer multiple of [`\pi`], and the cosine function has value *zero* when the argument is an integer multiple of [`\pi/2`]. That is, [`\sin(k\pi)=0`] and [`\cos(k\pi/2)=0`] where [`k`] is an integer. The tangent function has value *zero* whenever the sine function is zero. The logarithm base [`a`] has value *zero* when the argument is 1: that is, [`\log_a 1 = 0`] (note that [`\log_e x`] is often written as [`\ln x`]). A simple fraction has value *zero* when the numerator is zero and the denominator is nonzero.  
+_Value One:_ The sine function has value *one* when the argument is an integer multiple of [`\pi/2`], and the cosine function has value *one* when the argument is an integer multiple of [`2\pi`]. That is, [`\sin(k\pi/2)=1`] and [`\cos(2 k \pi)=1`] where [`k`] is an integer. The exponential function base [`a`] has value *one* when the exponent is 0: that is, [`a^0 = 1`]. The tangent function has value *one* when the argument is an integer multiple of [`\pi/4`] or [`5\pi/4.`] 
+
+Select the value(s), if any, that are equal to *[@$type@]****.
+[@ $multichoice->print_a() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

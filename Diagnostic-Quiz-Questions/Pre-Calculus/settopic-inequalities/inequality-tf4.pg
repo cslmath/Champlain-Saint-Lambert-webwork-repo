@@ -1,0 +1,69 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Inequalities: reciprocal
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+@var = qw(a b u v p q s t);
+$x = $var[random(0,$#var,1)];
+do {$y = $var[random(0,$#var,1)];} until ($y ne $x);
+
+@type = ("<",">");
+$n = random(0,1,1);
+$m = random(0,1,1);
+#$n = 0; $m = 0; # test - remove later
+#$n = 0; $m = 1; # test - remove later
+#$n = 1; $m = 0; # test - remove later
+#$n = 1; $m = 1; # test - remove later
+if ($n == 0){$m = 0;} # if x<0 and x>y, then y cannot be >0
+$ineqx = $type[$n];
+$ineqy = $type[$m];
+
+# To set a condition based on a variable in the code
+if (($n == 1) and ($m == 0)) {
+    $correct = "True";
+    }
+else {
+    $correct = "False";
+}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+Let [`[$x]`] and [`[$y]`] be real numbers where [`[$x][$ineqx]0`] and [`[$y][$ineqy]0`], and such that [`[$x]>[$y]`].
+
+*True or false:* [`\dfrac{1}{[$x]} > \dfrac{1}{[$y]} `]  
+ 
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct].
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

@@ -1,0 +1,64 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Exponent Laws: negative fractional exponent
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+$c = random(2,9,1);
+$m = random(3,7,1);
+@var = qw(y t p r u v z);
+$d = random(0,$#var,1);
+$x = $var[$d];
+@possStr = ("\frac{1}{\sqrt[$m]{$c $x}}",
+         "\frac{$c}{\sqrt[$m]{$x}}",
+         "\frac{1}{($c $x)^{$m} }",
+         "\frac{$c}{$x^{$m}}");
+$n = random(0,$#possStr,1);
+$rhs = $possStr[$n];
+
+# To set a condition based on a variable in the code
+if ($n == 1) {
+    $correct = "True";
+    }
+else {
+    $correct = "False";
+}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:* [` [$c][$x]^{-1/[$m]} = `][`[$rhs]`]. Assume [`[$x] \ne 0`].  
+ 
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct].
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

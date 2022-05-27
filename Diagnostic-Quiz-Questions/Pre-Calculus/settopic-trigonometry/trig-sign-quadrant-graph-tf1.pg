@@ -1,0 +1,132 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Trigonometry: sign quadrant with graph
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGtikz.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+@allAns = ("\sin\theta > 0",  # QI,II qj 01  ind 0
+           "\cos\theta > 0",  # QI,IV qj 03  ind 1
+           "\tan\theta > 0",  # QI,III qj 02  ind 2
+           "\csc\theta > 0",  # QI,II qj 01  ind 3
+           "\sec\theta > 0",  # QI,IV qj 03  ind 4
+           "\tan\theta > 0",  # QI,III qj 02  ind 5
+           "\sin\theta < 0",  # Qiii,iv qj 23  ind 6
+           "\cos\theta < 0",  # Qii,iii qj 12  ind 7
+           "\tan\theta < 0",  # Qii,iv qj 13  ind 8
+           "\csc\theta < 0",  # Qiii,iv qj 23  ind 9
+           "\sec\theta < 0",  # Qii,iii qj 12  ind 10
+           "\tan\theta < 0",  # Qii,iv qj 13  ind 11
+           );
+$tj = random(0,11,1);
+$trigsign = $allAns[$tj];
+$qj = random(1,3,1);  # skip quadrant I -- too easy.
+$c = random(0.1,0.9,0.1);  # cosine
+$csq = $c**2;
+$ssq = 1 - $csq;
+$s = sqrt($ssq); # sine
+@quad = ("Quadrant I","Quadrant II","Quadrant III","Quadrant IV");
+$quadrant = $quad[$qj];
+$r = 0.3;  # radius for angle arc in graph
+$th = arctan($s/$c)*180/pi;   #angle in degrees
+
+# Index set of true statements for each quadrant
+# These refer to the indices of the array @allAns
+@q1Ind = (0,1,2,3,4,5);  # q1
+@q2Ind = (0,3,7,8,10,11); # q2
+@q3Ind = (2,5,6,7,9,10);  # q3
+@q4Ind = (1,4,6,8,9,11);  #q4
+
+if ($qj == 0){@qInd = @q1Ind;} # q1
+elsif ($qj == 1){$c = -1*$c; $th = 180 - $th; @qInd = @q2Ind;}  #q2
+elsif ($qj == 2){$c = -1*$c; $s = -1*$s; $th = 180 + $th; @qInd = @q3Ind;} #q3
+else {$s = -1*$s; $th = 360 - $th; @qInd = @q4Ind;}
+$thhalf = $th/2;
+$r2 = 0.5;   # for position of angle label on graph
+$xt = $r2*cos($thhalf/180*pi);
+$yt = $r2*sin($thhalf/180*pi);
+
+# Set condition for "true" and "false"
+# If the index $tj is found in the index list of true statements of that quadrant
+$n = 0;
+if ( grep $_ == $tj, @qInd ){$n = 1;}
+
+# To set a condition based on a variable in the code
+if ($n == 1) {  
+    $correct = "True";
+    }
+else {
+    $correct = "False";
+}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+##############################################################
+#
+#  Graph Setup
+#
+# modify h and k depending on quadrant (h,k untouched in Q1 when qj = 1)
+if ($qj == 2) {$h = -1*$h;}
+if ($qj == 3) {$h = -1*$h; $k = -1*$k;}
+if ($qj == 4) {$k = -1*$k;}
+
+# set domain of parabola to appear in grid (-7,-7) to (7,7)
+$xmin = max(-7,$h - sqrt(7 - $k));
+$xmax = min(7,$h + sqrt(7 - $k));
+
+$graph_image = createTikZImage();
+$graph_image->tikzLibraries("arrows.meta");
+
+# Randomization: radius
+
+$graph_image->BEGIN_TIKZ
+\draw[thick,->] (-1,0) -- (1,0) node[right] {\(x\)};
+\draw[thick,->] (0,-1) -- (0,1) node[above] {\(y\)};
+\draw[blue, thick,->] (0,0) -- ({$c},{$s});
+\draw ({$r},0) arc
+    [
+        start angle=0,
+        end angle={$th},
+        x radius=0.3cm,
+        y radius=0.3cm
+    ] ;
+\node at ({$xt},{$yt}) { \( \theta \) };
+END_TIKZ
+
+BEGIN_PGML
+>>[@ image(insertGraph($graph_image), width=>150, height=>150, tex_size=>200); @]*<<  
+
+*True or false:* If angle [`\theta`] is as shown, then [`[$trigsign]`].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct].
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

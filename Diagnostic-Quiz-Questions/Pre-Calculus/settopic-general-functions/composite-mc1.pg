@@ -1,0 +1,112 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Basic functions: composite 
+##     Multiple Choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+## DESCRIPTION
+##   Precalculus - composite functions
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+DOCUMENT();
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+Context("Numeric");
+# Show the correct answer more often than not
+$showc = random(0,9,1);
+$numc = 1; # show the correct answer
+if ($showc == 0){$numc = 0;} # don't show the correct answer
+
+@type = ("(f \circ g)", "(g \circ f)", "(f \circ f)", "(g \circ g)");
+$j = random(0,$#type,1);
+$comp = $type[$j];
+$a = non_zero_random(-9,9,1);
+$m = non_zero_random(-9,9,1);
+$b = non_zero_random(-9,9,1);
+$f = Formula("x^2 + $a")->reduce();
+$g = Formula("$m x + $b")->reduce();
+$fog = Formula("($m x + $b)^2 + $a")->reduce()->TeX;
+$gof = Formula("$m (x^2 + $a) + $b")->reduce()->TeX;
+$fof = Formula("(x^2 + $a)^2 +$a")->reduce()->TeX;
+$gog = Formula("($m x + $b)x + $b")->reduce()->TeX;
+$fg = Formula("(x^2+ $a)($m x + $b)")->reduce()->TeX;
+$ff = Formula("(x^2 + $a)^2")->reduce()->TeX;
+$gg = Formula("($m x + $b)^2")->reduce()->TeX;
+#$fgx = Formula("x(x^2+ $a)($m x + $b)")->reduce()->TeX;
+#$ffx = Formula("x(x^2+ $a)^2")->reduce()->TeX;
+#$ggx = Formula("x($m x + $b)^2")->reduce()->TeX;
+#$gfx = Formula("x($m x + $b)(x^2+ $a)")->reduce()->TeX;
+
+$i = random(0,1,1); # which x-value to display
+$xv = ($x1,$x2)[$i];
+@allAns = ("\( $fog \)",
+           "\( $gof \)",
+           "\( $fof \)",
+           "\( $gog \)",
+           "\( $fg \)", # distractors
+           "\( $ff \)",
+           "\( $gg \)",
+#           "\( $fgx \)", # distractors
+#           "\( $ffx \)",
+#           "\( $ggx \)",
+#           "\( $gfx \)",
+           );
+$numi = 4 - $numc;   # the 4 is the total number of choices to display
+$correct = $allAns[$j];
+@corrAns = (); 
+push(@corrAns,$correct);
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+
+# Incorrect answers to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+if ($numc != 0){  # at least one correct answer
+    $radio1 = RadioButtons([[$correct,@randi],
+    "None of the above"],0);  # correct index 0    
+    }
+else {            # no correct answers
+    $radio1 = RadioButtons([[@randi,],"None of the above",],4);  # correct index 4
+}
+
+#########################################################
+
+BEGIN_PGML
+Select the function [`[$comp]`], if any, where [`f(x)=[$f]`] and [`g(x)=[$g]`].  
+[@ $radio1->buttons() @]*  
+END_PGML
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The answer is [@ $radio1->correct_ans @]*.
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

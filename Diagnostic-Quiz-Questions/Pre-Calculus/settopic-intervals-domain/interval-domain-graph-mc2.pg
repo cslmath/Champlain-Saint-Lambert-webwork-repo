@@ -1,0 +1,193 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Domain (interval notation):   given the graph of a piecewise function with a vertical asymptote
+##     Multiple Choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGtikz.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context('Numeric');
+########################################################################
+# Problem Set-up section
+# Definition of variables and functions
+#$refreshCachedImages = 1;  # REMOVE AFTER TESTING
+
+# parameters to determine intervals of pieces of piecewise-function
+$c1 = random(-4,0,1);
+$c2 = $c1 + random(1,3); # so that c1 != c2, and c2 nonzero so V.A. != y-axis
+$d1 = random(-1.5,4.5,1);
+do {$d2 = random(-4,4,1);} until (($d2 != $c1) and ($d2 != $c2));
+do {$d0 = random(-4.5,4.5,1);} until ($d0 != $d1);  # so that piece 1 and 2 don't line up
+do {$d4 = random(-5,5,1);} until ($d4 != $d2);
+
+# calculations
+$c2m = $c2 + ($c1 - $c2)/(($d1 + 5)*($c2 - $c1) + 1);
+$b = $d1 - 1/($c1 - ($c2));
+$m = ($d4 - $d2)/(5 - $c2);    # no division by 0 since c2 != 5
+# how to pass domain, put in curly brackets {}
+
+$j = random(0,3,1); # domain choice
+#$j = 3; # test - remove later
+
+##############################################################
+#
+#  Graph Setup
+#
+$graph_image = createTikZImage();
+$graph_image->tikzLibraries("arrows.meta");
+
+# Randomization: vertical shift of the pieces of the graph
+
+if ($j == 0){ # j=0 domain all reals
+    $graph_image->BEGIN_TIKZ
+    \draw [help lines] (-5,-5) grid (5,5);
+    \draw [->, ultra thick] (-5,0) -- (5.1,0) node [right] {\(x\)};
+    \draw [->, ultra thick] (0,-5) -- (0,5.2) node [right] {\(y\)};
+    \node [right,blue] at (1,5.5) {\(f(x)\)};
+    \foreach \x in {-4,-3,-2,-1,1,2,3,4}
+      \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {\( \x \)};
+    \foreach \y in {-4,-3,-2,-1,1,2,3,4}
+      \draw (1pt,\y cm) -- (-1pt,\y cm) node[anchor=east] {\( \y \)};
+    \draw[blue, ultra thick, domain=-5:{$c1}] plot (\x, {$d1});
+    \draw[blue, ultra thick, domain={$c1}:{$c2m}] plot (\x, {1/(\x - $c2)  + $b});
+    \draw[blue, ultra thick, domain={$c2}:5] plot (\x, {$m*(\x - $c2) + $d2});
+    \filldraw [blue] ($c2,$d2) circle (3pt);
+    \draw[dashed, thick] ($c2,-5)--($c2,5);
+    END_TIKZ
+}
+elsif ($j == 1){ # j=0 domain excludes c1
+    $graph_image->BEGIN_TIKZ
+    \draw [help lines] (-5,-5) grid (5,5);
+    \draw [->, ultra thick] (-5,0) -- (5.1,0) node [right] {\(x\)};
+    \draw [->, ultra thick] (0,-5) -- (0,5.2) node [right] {\(y\)};
+    \node [right,blue] at (1,5.5) {\(f(x)\)};
+    \foreach \x in {-4,-3,-2,-1,1,2,3,4}
+      \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {\( \x \)};
+    \foreach \y in {-4,-3,-2,-1,1,2,3,4}
+      \draw (1pt,\y cm) -- (-1pt,\y cm) node[anchor=east] {\( \y \)};
+    \draw[blue, ultra thick, domain=-5:{$c1}] plot (\x, {$d1});
+    \draw[blue, ultra thick, domain={$c1}:{$c2m}] plot (\x, {1/(\x - $c2)  + $b});
+    \draw[blue, ultra thick, domain={$c2}:5] plot (\x, {$m*(\x - $c2) + $d2});
+    \filldraw [inner color = white] ($c1,$d1) circle (3pt);
+    \filldraw [blue] ($c2,$d2) circle (3pt);
+    \draw[dashed, thick] ($c2,-5)--($c2,5);
+    END_TIKZ
+}
+elsif ($j == 2){ # j=0 domain excludes c2
+    $graph_image->BEGIN_TIKZ
+    \draw [help lines] (-5,-5) grid (5,5);
+    \draw [->, ultra thick] (-5,0) -- (5.1,0) node [right] {\(x\)};
+    \draw [->, ultra thick] (0,-5) -- (0,5.2) node [right] {\(y\)};
+    \node [right,blue] at (1,5.5) {\(f(x)\)};
+    \foreach \x in {-4,-3,-2,-1,1,2,3,4}
+      \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {\( \x \)};
+    \foreach \y in {-4,-3,-2,-1,1,2,3,4}
+      \draw (1pt,\y cm) -- (-1pt,\y cm) node[anchor=east] {\( \y \)};
+    \draw[blue, ultra thick, domain=-5:{$c1}] plot (\x, {$d1});
+    \draw[blue, ultra thick, domain={$c1}:{$c2m}] plot (\x, {1/(\x - $c2)  + $b});
+    \draw[blue, ultra thick, domain={$c2}:5] plot (\x, {$m*(\x - $c2) + $d2});
+    \draw[dashed, thick] ($c2,-5)--($c2,5);
+    \filldraw [inner color = white] ($c2,$d2) circle (3pt);
+    END_TIKZ
+}
+elsif ($j == 3){ # j=0 domain excludes c1 and c2
+    $graph_image->BEGIN_TIKZ
+    \draw [help lines] (-5,-5) grid (5,5);
+    \draw [->, ultra thick] (-5,0) -- (5.1,0) node [right] {\(x\)};
+    \draw [->, ultra thick] (0,-5) -- (0,5.2) node [right] {\(y\)};
+    \node [right,blue] at (1,5.5) {\(f(x)\)};
+    \foreach \x in {-4,-3,-2,-1,1,2,3,4}
+      \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {\( \x \)};
+    \foreach \y in {-4,-3,-2,-1,1,2,3,4}
+      \draw (1pt,\y cm) -- (-1pt,\y cm) node[anchor=east] {\( \y \)};
+    \draw[blue, ultra thick, domain=-5:{$c1}] plot (\x, {$d1});
+    \draw[blue, ultra thick, domain={$c1}:{$c2m}] plot (\x, {1/(\x - $c2)  + $b});
+    \draw[blue, ultra thick, domain={$c2}:5] plot (\x, {$m*(\x - $c2) + $d2});
+    \draw[dashed, thick] ($c2,-5)--($c2,5);
+    \filldraw [inner color = white] ($c1,$d1) circle (3pt);
+    \filldraw [inner color = white] ($c2,$d2) circle (3pt);
+    END_TIKZ
+}
+
+
+@allAns = ("\( (-\infty,\infty) \)",
+           "\( (-\infty,$c1)\cup($c1,\infty) \)", 
+          "\( (-\infty,$c2)\cup($c2,\infty) \)", 
+          "\( (-\infty,$c1) \cup ($c1,$c2) \cup ($c2,\infty) \)", 
+          "\(  (-\infty,$c1)\cup($c2,\infty) \)", 
+          "\( (-\infty,$d1)\cup($d1,\infty)   \)",
+          "\( (-\infty,$d1)\cup($d2,\infty)   \)",
+          "\( (-\infty,$d2)\cup($d2,\infty)   \)",
+);
+# to fix: condition of correctness
+$correct = $allAns[$j];
+
+@corrAns = (); 
+push(@corrAns,$correct);
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+
+# Show the correct answer more often than not
+$showc = random(0,9,1);
+$numc = 1; # show the correct answer
+if ($showc == 0){$numc = 0;} # don't show the correct answer
+
+# Incorrect answers to display
+$numi = 4 - $numc;   # the 4 is the total number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+if ($numc != 0){  # at least one correct answer
+    $radio1 = RadioButtons([[$correct,@randi],
+    "None of the above"],0);  # correct index 0    
+    }
+else {            # no correct answers
+    $radio1 = RadioButtons([[@randi,],"None of the above",],4);  # correct index 4
+}
+
+
+BEGIN_PGML
+>>[@ image($graph_image, width => 300, tex_size => 300) @]* <<
+
+Select the interval, if any, that describes the domain of the function shown in the graph. Assume that the function continues beyond the display.  
+[@ $radio1->buttons() @]*
+END_PGML
+
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp( ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+
+ENDDOCUMENT();

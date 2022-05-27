@@ -1,0 +1,175 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Equations: Solve a quadratic equation
+## x^2 + s = nx + t which has no solution
+## Written as x^2 + s  = nx + t
+##    Coefficients  s: nonzero
+##                  n: nonzero, not 1 or -1
+##     Multiple Choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+
+
+#########################
+# Reducing a fraction   #
+#########################
+
+sub fraction_reduce_tex {
+  my ($numerator, $denominator) = @_;
+    my $sign = "";
+    my $num_red = $numerator;
+    my $denom_red = $denominator;
+    my $reduced = "";
+    my $gcd = 1;
+    if($denominator == 0){
+        $reduced = "You are dividing by zero! Bad!!!";
+        return $reduced;
+    }
+    if($numerator/$denominator < 0){
+        $sign = "-";
+    }
+    $gcd = gcd($numerator, $denominator);
+    if($gcd == abs($denominator)){
+    $fraction = abs($numerator/$denominator);
+    $reduced = "\($sign $fraction\)";
+    }
+    elsif($gcd == 1){
+        $num_red = abs($numerator);
+        $denom_red = abs($denominator);
+        $reduced = "\($sign \frac{$num_red}{$denom_red}\)";
+    }
+    else{
+        $num_red = abs($numerator/$gcd);
+        $denom_red = abs($denominator/$gcd);
+        $reduced = "\($sign \frac{$num_red}{$denom_red}\)";
+    }
+  return $reduced;
+  }
+##########################################
+# end reduce_fraction_tex
+##########################################
+
+
+
+# display different variables
+@var = qw(x y t u v z n a p q s A S T N H);
+$x = $var[random(0,$#var,1)];
+
+
+#########################
+# This equation will have no solution
+# ax^2 + bx + c = 0
+# Written as x^2 + s  = nx + t where s = -i^2
+# with i,b,t != 0
+
+####################
+# Problem variables
+####################
+
+# Make b even so that b^2 is divisible by 4
+# Make t > b^2/4 + i^2 to make the discriminant negative
+$i = random(1,9,1);
+$b = non_zero_random(-8,8,2);
+$m = 0; #legacy
+$n = -$b; #legacy
+$s = -$i*$i; #legacy
+$j = non_zero_random(2,10,2); #even
+$t = -($b*$b + 4*$i*$i + $j*$j)/4;
+
+
+#########################
+# Possible Solutions
+########################
+
+
+# Distractors
+# LHS = 0
+$solution3 = $i;
+$solution4 = -$i;
+# RHS = 0
+$solution5 = fraction_reduce_tex(-$t,$n);
+# Sign mistake in discriminant
+$solution6 = (-$b-$j)/2;
+$solution7 = (-$b+$j)/2;
+
+####################
+# Generating answers
+#####################
+
+$distractor1 = "\($x = $solution3, $x = $solution4\)";
+$distractor2 = "\($x = $solution3, $x = $solution4\), \($x =\) $solution5";
+$distractor3 = "\($x = $solution6, $x = $solution7\)";
+$distractor4 = "\($x =\) $solution5";
+
+###################################
+## RADIO BUTTONS
+###################################
+
+@incorrAns = ($distractor1,
+	$distractor2,
+	$distractor3,
+	$distractor4);
+
+
+# Incorrect answers to display
+$numc = 0; # there are no solutions, so no correct answers
+$numi = 4 - $numc;   # the 4 is the total number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+if ($numc != 0){  # at least one correct answer
+    $radio1 = RadioButtons([[$correct,@randi],
+    "None of the above"],0);  # the 0 is the index of the correct answer    
+    }
+else {            # no correct answers
+    $radio1 = RadioButtons([[@randi,],"None of the above",],4);  # the 4 is the index of the correct answer
+}
+
+###########################################
+
+
+BEGIN_PGML
+
+Select the option, if any, that contains all solutions to [`` [$x]^2 + [$s] = [$n][$x] + [$t]  ``].
+
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework. ");
+ENDDOCUMENT();

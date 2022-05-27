@@ -1,0 +1,63 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Math Vocabulary with Theory: slope equals 0 versus slope does not exist
+##     Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+$a = non_zero_random(-9,9,1);
+
+@allAns = ("The slope equals zero","The slope does not exist",
+    "The line doesn't have a slope","There is no slope","The slope equals \($a\)");
+$correct = $allAns[0];  # Always show the correct answer
+@incorrAns = @allAns[1..4];
+@slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to display
+@randi = @incorrAns[@slicei];
+
+$radio1 = RadioButtons(
+    [[$correct,@randi],"None of the above"],0); # correct index 0
+
+BEGIN_PGML
+_Zero Slope versus No Slope_: The *slope* of a line is its "rise" (change in [`y`]) divided by its "run" (change in [`x`]). A slope of zero is not the same as no slope. The slope of a horizontal line is zero: that is, a horizontal line has a slope because the "rise" is zero. The slope of a vertical line is undefined: that is, a vertical line has no slope because the "run" is zero and division by zero is undefined.  
+
+Select the best way to describe the *slope* of the horizontal line [`y = [$a]`].  
+[@ $radio1->buttons() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The answer is: [$correct1] ([@ $radio1->correct_ans() @]*)  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

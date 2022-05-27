@@ -1,0 +1,120 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Trigonometry: given quadrant, find sign
+##     Multiple Choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGgraphmacros.pl",
+    "PGchoicemacros.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+$cq1 = list_random(3,4,6); # q1
+$cpy = random(5,17,4); # +y
+$cq1m1 = $cq1 - 1;
+$cq1p1 = $cq1 + 1;
+$cnx = random(3,9,2); # -x
+$cny = random(3,15,4); # -y
+$twocq1m1 = 2*$cq1 - 1; # q4
+$cpx = random(2,8,2); # +x
+
+@allAns = ("Greater than \(1\)", 
+           "Equal to \(1\)",  
+           "Between \(0\) and \(1\)",
+           "Equal to \(0\)",
+           "Between \(-1\) and \(0\)",
+           "Equal to \(-1\)",
+           "Less than \(-1\)",
+           );
+
+@allAngles = ("in Quadrant I", # qI
+              "on the positive \(y\)-axis", # +y
+              "in Quadrant II", # qII
+              "on the negative \(x\)-axis", # -x
+              "in Quadrant III", # qIII
+              "on the negative \(y\)-axis", # -y
+              "in Quadrant IV", # qIV
+              "on the positive \(x\)-axis", # +x
+              );
+
+@trig = ("\sin\theta",
+         "\cos\theta",
+         );
+$t = random(0,$#trig,1);
+$trigvalue = $trig[$t];
+
+@sinInd = (2,1,2,3,4,5,4,3);
+@cosInd = (2,3,4,5,4,3,2,1);
+              
+$j = random(0,7,1);
+$angle = $allAngles[$j];
+@corrAns = ();
+if ($t == 0) { # sine
+    $correct = $allAns[$sinInd[$j]];
+    }
+else {
+    $correct = $allAns[$cosInd[$j]];
+    }
+push(@corrAns,$correct);
+# using map and grep to create an array of incorrects
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+
+# show the correct answer more often than not
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+if ($numc == 1){   # display 1 correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3);  #choose 3 incorrect ans
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[$correct,@randi,],
+    "None of the above"],0);  # correct index 0
+    }
+else {
+#   $correct = "None of the above";
+    @slicei = NchooseK(scalar(@incorrAns),4);  #choose 4 incorrect ans
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4); # correct index 4
+}
+
+BEGIN_PGML
+Let [`\theta`] be an angle that lies [@ $angle @]*.
+Then [`[$trigvalue]`] is:  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

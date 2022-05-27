@@ -1,0 +1,121 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Equations: Select all the lines with (positive, negative, zero) slope
+##     Multiple Select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+
+@sign = ("positive slope","negative slope","slope equal to zero");
+$n = random(0,2,1);   # n = 1 negative, n = 0 positive, n=2 slope is zero
+$posneg = $sign[$n];
+$m = random(2,9,1);  # positive
+$a = random(2,8,2);  # positive even
+$b = random(3,9,1);  # positive odd
+$c = non_zero_random(-9,9,1);
+
+# The full list of answers:
+@allAns = ("\( y + $m x = - $b \)", #ind0 
+             "\( y = - $m x + $b \)",   
+             "\( $a x + $b y = $c \)", 
+             "\( - $a x - $b y + $m = 0 \)",  
+             "\( $a y + $b x + $m = 0 \)", #ind4
+            "\( y - $m x = - $b \)", #ind5
+             "\( - $a y + $b = - x  \)", 
+             "\(- $a x + $b y = $c \)", 
+             "\( $a x - $b y + $m = 0 \)",  
+             "\( $a y - $b x + $m = 0 \)", 
+             "\( y = $m \)",  #ind10 
+             "\( y = - $m \)",   
+             "\( y + $b = 0 \)",  
+             "\( -y + $a = 0\)");  #ind13
+
+# set conditions of correctness
+if ($n == 1){    # m < 0
+    @corrAns = @allAns[0..4]; 
+    }
+elsif ($n == 0) {  # m > 0
+    @corrAns = @allAns[5..9];
+}
+else { # m = 0
+    @corrAns = @allAns[10..13];
+}
+$numc = random(0,4,1); 
+@slicec = NchooseK(scalar(@corrAns),$numc);  
+# subset of indices e.g. if $numc=3,  0 1 2 3 4 => 1 2 4, or 0 2 4, ...
+@randc = @corrAns[@slicec];
+
+# using map and grep to create an array of incorrects
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+
+$numi = 4 - $numc;
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+#$quest = "Select the line(s) that have $posneg, if any.";
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){
+$multichoice -> qa (
+    $quest, 
+    @randc,
+);
+$multichoice -> extra(
+    @randi,
+    "None of the above",
+);
+}
+else {
+$multichoice -> qa (
+    $quest, 
+    "None of the above",
+);
+$multichoice -> extra(
+    @randi,
+);
+}
+
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+Select the line(s), if any, that have [$posneg]. 
+[@ $multichoice->print_a() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*  
+
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

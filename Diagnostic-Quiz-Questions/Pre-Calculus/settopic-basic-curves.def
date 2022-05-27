@@ -1,0 +1,114 @@
+assignmentType      = default
+openDate          = 05/04/2021 at 11:35am EDT
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 12/30/2021 at 11:59pm EST
+answerDate        = 12/30/2021 at 11:59pm EST
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = basic curves: name that curve(parabola, hyperbola, logarithm, exponential, absolute value), equation of a circle by description, equation of a circle from graph.
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = pre-cal-diagnostic-quiz/settopic-basic-curves/name-that-curve-mc1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = pre-cal-diagnostic-quiz/settopic-basic-curves/equation-that-curve-mc1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = pre-cal-diagnostic-quiz/settopic-basic-curves/circle-mc1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = pre-cal-diagnostic-quiz/settopic-basic-curves/circle-mc2.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 5
+source_file = pre-cal-diagnostic-quiz/settopic-basic-curves/circle-graph-mc1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 6
+source_file = pre-cal-diagnostic-quiz/settopic-basic-curves/circle-graph-mc2.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 7
+source_file = pre-cal-diagnostic-quiz/settopic-basic-curves/parabola-graph-mc1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 1 
+problem_end
+problem_start
+problem_id = 8
+source_file = pre-cal-diagnostic-quiz/settopic-basic-curves/logarithm-graph-mc1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 1 
+problem_end
+problem_start
+problem_id = 9
+source_file = pre-cal-diagnostic-quiz/settopic-basic-curves/exponential-graph-mc1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 1 
+problem_end
+problem_start
+problem_id = 10
+source_file = pre-cal-diagnostic-quiz/settopic-basic-curves/absolutevalue-graph-mc1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 1 
+problem_end
+

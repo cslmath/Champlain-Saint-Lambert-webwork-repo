@@ -1,0 +1,157 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Inequalities: ((ax-b)(x-k)^2) / ((x-c)(x-d)^3) >= 0
+##     Multiple Choice 
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+
+loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "contextFraction.pl",
+    "PGchoicemacros.pl",
+    # Added for this question by me
+      "MathObjects.pl",
+      "littleneck.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+rand_button();
+#
+# Set Up - Set up variable context and formulation of problem
+#
+Context("Interval");
+
+#*************************************************************
+#  Create function of form ((ax-b)(x-k)^2) / ((x-c)(x-d)^3).
+#  Choose a!=1 to make it more interesting. 
+#**************************************************************
+
+$x = x;
+$a = random(2,6,1);
+$afrac = 3*$a;
+# Make sure the fraction b/a is always reduced
+do{
+$b = random(-$afrac,$afrac,1);
+}
+until(gcd($a,$b) == 1);
+$c = random(-10,-4,1);
+$d = random(4,10,1);
+do{
+$k = random(-10,10,1);
+}
+until(($k != $c) and ($k != $d));
+$frac = "\frac{$b}{$a}";
+
+#**************
+#   Answers
+#**************
+
+
+
+#*****************
+# Correct choice
+#*****************
+
+# The interval, without taking k into account
+$Interval = "\( \left( $c, $frac\right] \cup \left($d, \infty\right) \)";
+
+
+# Depending on whether k is already in range or not it needs to be added because (x-k) = 0 needs to be included
+
+$WrongInterval1 = "\( (-\infty,\infty) \)";
+if( ($k < $c) or (($k > $frac) and ($k <$d)) ){
+    $WrongInterval1 = $Interval;
+    $Interval = "\( \left( $c, $frac\right] \cup \left($d, \infty\right) \cup \left\{$k\right\}\)";
+}
+
+$correct = $Interval;
+
+#*****************
+# Disruptor choices
+#*****************
+
+# correct, but wrong closed brackets
+$WrongInterval2 = "\( \left[ $c, $frac\right] \cup \left[$d, \infty\right) \)";
+$WrongInterval3 = "\( \left( $c, $frac\right) \cup \left($d, \infty\right) \)";
+# opposite set of intervals (with various bracketing)
+$WrongInterval4 = "\( \left(-\infty, $c\right) \cup ($frac, $d) \)";
+$WrongInterval5 = "\( \left(-\infty, $c\right) \cup [$frac, $d) \)";
+$WrongInterval6 = "\( \left(-\infty, $c\right] \cup [$frac, $d] \)";
+# only one of the correct intervals
+$WrongInterval7 = "\( \left($c, $frac\right]\)";
+$WrongInterval8 = "\( \left($d, \infty\right)\)";
+
+
+
+@incorrAns = (
+    $WrongInterval1,
+    $WrongInterval2,
+    $WrongInterval3,
+    $WrongInterval4,
+    $WrongInterval5,
+    $WrongInterval6,
+    $WrongInterval7,
+    $WrongInterval8
+); 
+
+# Display correct answer 1 out of 10 times
+$showc = random(0,9,1);
+$numc = 1; # Display the correct answer
+if ($showc == 0){$numc = 0;} # Don't display the correct answer
+
+# Incorrect answers to display
+$numi = 4 - $numc;   # the 4 is the total number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+if ($numc != 0){  # at least one correct answer
+    $radio1 = RadioButtons([[$correct,@randi],
+    "None of the above"],0);  # the 0 is the index of the correct answer    
+    }
+else {            # no correct answers
+    $radio1 = RadioButtons([[@randi,],"None of the above",],4);  # the 4 is the index of the correct answer
+}
+
+
+
+BEGIN_PGML
+
+Solve the inequality [`` \frac{([$a][$x] - [$b])([$x] - [$k])^2}{([$x] - [$c])^3([$x] - [$d])} \geq 0``]. 
+
+
+
+[@ $radio1->buttons() @]*
+
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework. ");
+ENDDOCUMENT();

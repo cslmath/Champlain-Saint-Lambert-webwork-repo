@@ -1,0 +1,118 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Exponent Laws: simplify expression (2 of 2)
+##     Multiple Choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "niceTables.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+@var = qw(x y z t u v);
+$x = $var[random(0,$#var,1)];
+
+$showc = random(0,9,1);
+$numc = 1; # display the correct answer
+if ($showc == 0){$numc = 0;} # don't display the correct answer
+
+@typechoice = ("exponent","exponent","coefficient");
+@letter = ("m","n","c");
+$j = random(0,$#typechoice,1);
+$type = $typechoice[$j];
+$dispvar = $letter[$j];
+do {$y = $var[random(0,$#var,1)];} until ($x ne $y);
+
+$d = random(2,7,1);
+$a = random(2,7,1);
+$b = random(-5,-2,1);
+$c = random(2,9,1);
+$csq = $c*$c;
+do {$a = random(2,7,1);} until ($d != $a);
+$m = 1 + $a*$d;
+$n = 1 + ($b)*$d; # b is negative
+$e = $d - 2*($b);
+$im1 = $a*$d;
+$im2 = 1 + $a + $d;
+$im3 = $a + $d;
+$in1 = ($b)*$d;
+$in2 = 1 + $b + $d;
+$in3 = $b + $d;
+$ie1 = $d - 2;
+
+@allAns = (
+  "\(  $m \) ",  # correct if j=0
+  "\(  $n \)",   # correct if j=1
+  "\(  $c^{$e} \)",   # correct if j=2
+  "\(  $im1 \)", 
+  "\( $im2 \)", 
+  "\( $im3 \)",
+  "\( $in1 \)",
+  "\( $in2 \)", 
+  "\( $in3 \)",
+  "\( 1/$c \)", 
+  "\( $c^{$ie1} \)",
+  "\( $csq \)",
+  "\( 1/$csq \)", 
+);
+$correct = $allAns[$j]; 
+
+@corrAns = (); 
+push(@corrAns,$correct);
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+
+# Incorrect answers to display
+$numi = 4 - $numc;   # the 4 is the total number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+if ($numc != 0){  # at least one correct answer
+    $radio1 = RadioButtons([[$correct,@randi],
+    "None of the above"],0);  # the 0 is the index of the correct answer    
+    }
+else {            # no correct answers
+    $radio1 = RadioButtons([[@randi,],"None of the above",],4);  # the 4 is the index of the correct answer
+}
+
+BEGIN_PGML
+Assume that [`[$x]`] and [`[$y]`] are nonzero real numbers. The expression 
+>>[`` \frac{[$x]([$c] [$x]^[$a])^[$d]}{[$y] ([$csq] [$y]^[$d])^{[$b]}} ``]<<  
+can be written in the form [` c [$x]^m / [$y]^{n} `]. Select the correct value of the [$type] [`[$dispvar]`].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

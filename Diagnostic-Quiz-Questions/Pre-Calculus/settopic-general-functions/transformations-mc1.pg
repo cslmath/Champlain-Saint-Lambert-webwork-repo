@@ -1,0 +1,102 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Basic functions: transformations of functions
+##     Multiple Choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+## DESCRIPTION
+##   Precalculus - transformations of functions
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+DOCUMENT();
+
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+$a = random(2,9,1);
+
+@fun = ("f(x+ $a)",
+        "f(x- $a)",
+        "f(x) + $a",
+        "f(x) - $a",
+        "f(- x)",
+        "- f(x)",
+        "$a f(x)",
+        "f($a x)", #index 7
+        );
+@allAns = ("Shift $a units to the left",
+           "Shift $a units to the right",
+           "Shift $a units upward",
+           "Shift $a units downward",
+           "Reflect about the \(y\)-axis",
+           "Reflect about the \(x\)-axis",
+           "Stretch vertically by a factor of $a",
+           "Stretch horizontally by a factor of $a",
+           );
+# Show the correct answer more often than not
+$showc = random(0,9,1);
+$numc = 1; # show the correct answer
+if ($showc == 0){$numc = 0;} # don't show the correct answer
+
+$numi = 4 - $numc;   # the 4 is the total number of choices to display
+$j = random(0,$#fun,1);
+$g = $fun[$j];
+          
+$correct = $allAns[$j];
+@corrAns = (); 
+push(@corrAns,$correct);
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+
+# Incorrect answers to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+if ($numc != 0){  # at least one correct answer
+    $radio1 = RadioButtons([[$correct,@randi],
+    "None of the above"],0);  # correct index 0   
+    }
+else {            # no correct answers
+    $radio1 = RadioButtons([[@randi,],"None of the above",],4);  # correct index 4
+}
+
+#########################################################
+
+BEGIN_PGML
+Select the option, if any, that describes how the graph of the function [`g(x)=[$g]`] is obtained from the graph of [`f(x)`].  
+
+[@ $radio1->buttons() @]*  
+END_PGML
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The answer is [@ $radio1->correct_ans @]*.
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

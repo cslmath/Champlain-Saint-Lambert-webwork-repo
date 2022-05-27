@@ -1,0 +1,67 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Pre-Calculus
+##     Basic functions: function evaluation "implies"
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+## DESCRIPTION
+## Precalculus: function evaluation "implies" - true or *false*
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+@fun = qw(g F G);
+$f = $fun[random(0,$#fun,1)];
+
+$j = random(0,1,1);
+@allAns = ("$f(a) = $f(b)",
+         "a = b",
+         );
+
+# To set a condition based on a variable in the code
+if ($j == 1) {
+    $lhs = $allAns[1];
+    $rhs = $allAns[0];
+    $correct = "True";
+    }
+else {
+    $lhs = $allAns[0];
+    $rhs = $allAns[1];
+    $correct = "False";
+}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:* If [`[$f](x)`] is a function and [`[$lhs]`], then [`[$rhs]`].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct].
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();
