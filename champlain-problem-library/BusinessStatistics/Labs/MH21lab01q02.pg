@@ -1,0 +1,101 @@
+## DESCRIPTION
+## WeBWorKification of the 201-901 labs
+## Introductory lab
+## Q02 based on some concepts
+## ENDDESCRIPTION
+
+## DBsubject('WeBWorK')
+## DBchapter('WeBWorK tutorial')
+## DBsection('WeBWorK tutorial')
+## KEYWORDS('WeBWorK tutorial')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Jan-19')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGchoicemacros.pl",
+"PGML.pl",
+"PGcourse.pl",
+);
+
+$showPartialCorrectAnswers = 0;
+
+###########################
+#  Setup
+
+Context("Numeric");
+Context()->strings->are(Quantitative => {}, Categorical => {});
+# Create and use pop up lists 
+$qc = new_select_list();
+$qc->rf_print_q(~~&pop_up_list_print_q);
+
+# Specify choices presented to students
+$qc->ra_pop_up_list( 
+[ No_answer => "?", "Quantitative"=>"Quantitative", "Categorical"=>"Categorical"] );
+
+# Questions and answers
+$qc -> qa ( 
+"Life Expectancy",
+"Quantitative",
+"Child Mortality",
+"Quantitative",
+"Major Export Partner",
+"Categorical",
+"Subregion",
+"Categorical",
+"Balance",
+"Quantitative",
+);
+
+# How many questions to use
+$qc->choose(3);
+
+###########################
+#  Main text
+
+TEXT(beginproblem());
+
+BEGIN_PGML
+#### Sometimes the WeBWorK questions will be about the data in the spreadsheet.
+
+The _01 Individuals, variables, distributions_ handout talks about the difference between *quantitative variables* and *categorical variables*.
+* A *quantitative variable*  takes numerical values and it counts or measures something.
+* A *categorical variable*   places individuals into different groups or categories.
+
+Are the following variables from the African Stats spreadsheet quantitative or categorical?
+
+        [@ $qc-> print_q @]*
+
+Usually a problem like this with only a small nember of choices will have a limited number of attempts to discourage guessing.
+For this warm up assignment, you have an unlimited number of attempts.
+END_PGML
+
+install_problem_grader(~~&std_problem_grader);
+
+ANS(str_cmp($qc->ra_correct_ans));
+
+###########################
+#  Solution
+
+BEGIN_PGML_SOLUTION
+* Life Expectancy is *Quantitative*
+* Child Mortality is *Quantitative*
+* Major Export Partner is *Categorical*
+* Subregion is *Categorical*
+* Balance is *Quantitative*
+END_PGML_SOLUTION
+
+ENDDOCUMENT();

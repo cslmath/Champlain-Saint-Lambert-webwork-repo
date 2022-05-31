@@ -1,0 +1,98 @@
+## DESCRIPTION
+## WeBWorKification of 201-901 lab 04
+## Question 2
+## Normal or not?
+## Multiple choice not randomized
+## ENDDESCRIPTION
+
+## DBsubject('Probability')
+## DBchapter('Continuous distributions')
+## DBsection('Gaussian normal')
+## KEYWORDS('normal distribution', 'concepts')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Feb-09')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGchoicemacros.pl",
+  "PGessaymacros.pl",
+  "PGML.pl",
+  "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+
+###########################
+#  Setup
+
+Context("Numeric");
+
+$choices = new_checkbox_multiple_choice();
+
+##########
+# Question and correct answers
+
+$choices -> qa (
+    "Select the distributions that are *not* likely to be normal.  There may be more than one correct answer.",
+    "salaries of all NFL players",
+    "outcomes of 10000 throws of a six-sided die",
+);
+
+# Wrong answers (they are approx normal)
+
+$choices -> extra(
+    "shoe sizes of 5000 adult Canadian women",
+    " lengths of 500 leaves of a full grown Japanese maple tree",
+);
+
+$choices -> makeLast("None of these is normal");
+
+###########################
+#  Main text
+
+BEGIN_PGML
+#### Normal or not?
+
+[@ $choices -> print_q() @]**
+[@ ANS( checkbox_cmp( $choices->correct_ans() ) ); $choices -> print_a() @]*
+
+Briefly explain your answers.  
+[@ ANS(essay_cmp()); essay_box() @]*
+
+END_PGML
+# [@ $radio->buttons() @]*
+
+############################
+#  Answer evaluation
+
+# install_problem_grader(~~&std_problem_grader);
+
+$showPartialCorrectAnswers = 0;
+
+# ANS( checkbox_cmp( $choices->correct_ans() ) );
+#ANS(Compute("7")->cmp());
+############################
+#  Solution
+
+BEGIN_PGML_SOLUTION
+The correct answer is [$choices->correct_ans()].
+END_PGML_SOLUTION
+
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

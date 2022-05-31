@@ -1,0 +1,144 @@
+## DESCRIPTION
+## WeBWorKification of Lab 06 Question 02
+## Probabilities of dice rolls
+## ENDDESCRIPTION
+
+## DBsubject('Probability')
+## DBchapter('Sample Space')
+## DBsection('Probability: direct computation, inclusion/exclusion')
+## KEYWORDS('dice')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Mar-10')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+
+###########################
+# Initialization
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGchoicemacros.pl",
+  "niceTables.pl",
+  "weightedGrader.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+
+install_weighted_grader();
+$showPartialCorrectAnswers = 1;
+
+TEXT(beginproblem());
+Context("Numeric");
+
+############################
+# Setup
+
+$showPartialCorrectAnswers = 1;
+
+$n1 = 8;    # shown on the horizontal
+$n2 = 4;    # shown on the vertical
+
+@table2;
+@answers2;
+
+$table2[0][0] = ['2nd die',b=>1];
+$table2[$n2+1][3] = ['1st die',b=>1];
+
+foreach  my $r (0..$n2-1){
+    $i = $n2 - $r;
+    $table2[$r][1] = $i;
+    foreach my $j (1 .. $n1){
+        push @{$table2[$r]}, labeled_ans_rule("$i.$j",1);
+    }
+    push @answers2, ($i+1 .. $i+$n2);
+}
+$table2[$n2] = [ ('','') , ( 1 .. $n1) ];
+
+@tableb;
+$tableb[0] = [['Outcome',b=>1], (1+1 .. $n1+$n2)];
+$tableb[1][0] = ['Probability',b=>1];
+foreach my $j (2 .. $n1+$n2){
+    push @{$tableb[1]}, labeled_ans_rule("b.$j",2);
+}
+
+# Part (c)
+
+# $eventA = random(8,10,1);
+$eventB = random(5,7,1);
+
+############################
+# Main Text
+
+BEGIN_PGML
+*Part (a)*
+
+Complete the table below by writing the sums when you roll a $n1-sided die and a $n2-sided die.
+
+[@
+DataTable(
+~~@table2
+, caption => "Count of outcomes summing a ${n1}-sided die and a ${n2}-sided die",
+);
+@]*
+
+*Part (b)*
+
+Determine the probability of each sum.
+It may be easier to enter your answers as rational fractions,
+i.e. enter 1/[@ $n1*$n2 @] instead of [@ sprintf("%.5f", 1/($n1*$n2)) @].
+
+[@
+DataTable(
+~~@tableb
+, caption => 'The probability of each sum',
+);
+@]*
+
+*Part (c)*
+
+What is the probability of the event  
+_B = The sum is smaller than [$eventB]? [______]{name=>"partc"}_
+END_PGML
+
+############################
+# Answer Evaluation
+
+$weightparta = 1;
+
+foreach my $d2 (1 .. $n2 ) {
+    foreach my $d1 ( 1 .. $n1 ) {
+        NAMED_WEIGHTED_ANS( "$d2.$d1", num_cmp($d1+$d2), $weightparta/($n1*$n2) );
+    }
+}
+
+$weightpartb = 2;
+
+foreach my $d2 (1 .. $n2 ) {
+    foreach my $d1 ( 1 .. $n1 ) {
+        $probb[$d1+$d2] += 1;
+    }
+}
+foreach my $sum (1+1 .. $n1+$n2){
+    NAMED_WEIGHTED_ANS( "b.$sum", Compute($probb[$sum]/($n1*$n2))->cmp(), $weightpartb/($n1+$n2-1) );
+}
+        
+$weightpartc = 2;
+$probc = 0;
+foreach my $sum (1+1 .. $eventB-1){
+    $probc += $probb[$sum];
+}
+
+NAMED_WEIGHTED_ANS( "partc", num_cmp($probc/($n1*$n2)), $weightpartc );
+
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

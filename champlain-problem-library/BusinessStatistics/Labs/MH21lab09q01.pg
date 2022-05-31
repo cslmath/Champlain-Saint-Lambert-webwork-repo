@@ -1,0 +1,74 @@
+## DESCRIPTION
+## WeBWorKification of 201-901 lab 09
+## Question 1
+## Insurance Premium
+## Requests some work as pdf
+## ENDDESCRIPTION
+
+## DBsubject('Probability')
+## DBchapter('Random variables')
+## DBsection('Expectation')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Apr-19')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static(0)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+
+###########################
+#  Setup
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+$value = random(85000, 115000, 5000);
+#$value = 85000;
+$totalloss = random(0.001, 0.003, 0.001);
+#$totalloss = 0.001;
+$partialloss = random(0.01, 0.02, 0.005);
+#$partialloss = 0.01;
+
+$partialvalue = $value/2;
+
+###########################
+#  Answer
+
+$A = Compute($value*$totalloss+$partialvalue*$partialloss);
+
+###########################
+#  Main text
+
+BEGIN_PGML
+#### Insurance Premium
+
+A potential customer for an $[$value] fire insurance policy possesses a home in an area which, according to the company's best estimates,
+has a probability of [$totalloss] of completely burning down over the next year (in which case the company would pay out $[$value]),
+and a probability of [$partialloss] for a 50% loss (in which case the company would pay out half of the $[$value]).
+How much must the company charge the customer this year if they want to keep their expected net profit positive?
+
+The break-even premium that the company must charge is $[____]{$A}
+END_PGML
+
+COMMENT('Requests some work as PDF.');
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

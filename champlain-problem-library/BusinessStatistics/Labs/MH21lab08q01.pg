@@ -1,0 +1,156 @@
+## DESCRIPTION
+## WeBWorKification of 201-901 lab 08
+## Question 1
+## Shipwreck Survivors
+## Requests some work as pdf
+## ENDDESCRIPTION
+
+## DBsubject('Probability')
+## DBchapter('Sample Space')
+## DBsection('Conditional probability -- direct')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Mar-23')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static(0)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "weightedGrader.pl",
+    "niceTables.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+
+###########################
+#  Setup
+
+Context("Numeric");
+Context()->flags->set(      # the question specifies exact or three decimal places, this gives some slack to the students.
+  tolerance => 0.002,
+  tolType => "absolute",
+);
+$showPartialCorrectAnswers = 1;
+
+# Initialize the number of passengers
+
+$passengers[0][0] = random(185,220);    # First class survived.  Actual 203
+$passengers[1][0] = random(110,135);    # First class died. Actual 122
+
+$passengers[0][1] = random(105,130);    # Second class survived.  Actual 118
+$passengers[1][1] = random(150,185);    # Second class died. Actual 167
+
+$passengers[0][2] = random(160,195);    # Third class survived.  Actual 178
+$passengers[1][2] = random(475,580);    # Third class died. Actual 528
+
+$passengers[0][3] = random(190,235);    # Crew survived.  Actual 212
+$passengers[1][3] = random(605,740);    # Crew died. Actual 673
+
+# Compute the subtotals
+
+foreach my $j (0..3){
+    $class[$j] = $passengers[0][$j] + $passengers[1][$j];
+}
+
+foreach my $i (0..1){
+    $status[$i] = 0;
+    foreach my $j (0..3){
+        $status[$i] += $passengers[$i][$j];
+    }
+}
+
+$grand_total = $status[0] + $status[1];
+
+#$anothernumchecker = $anothernum ->cmp(tolType => 'relative',tolerance => 0.1,);
+
+##########
+# Answers and checking
+
+install_weighted_grader();
+
+$ans_agf = Compute("$passengers[0][0]/$class[0]");
+$ans_ags = Compute("$passengers[0][1]/$class[1]");
+$ans_agt = Compute("$passengers[0][2]/$class[2]");
+$ans_agc = Compute("$passengers[0][3]/$class[3]");
+$ans_fga = Compute("$passengers[0][0]/$status[0]");
+$ans_cga = Compute("$passengers[0][3]/$status[0]");
+
+##########
+# Display table
+
+$table[0] = [['', headerrow => 1,midrule=>1,],'First','Second','Third','Crew','Total'];
+$table[1] = ['Stayed Alive'];
+$table[2] = [['Died',midrule=>1,]];
+$table[3] = ['Total'];
+foreach my $i (1,2){
+    push @{$table[$i]}, @{$passengers[$i-1]};
+    push @{$table[$i]}, $status[$i-1];
+}
+push @{$table[3]}, @class;
+push @{$table[3]}, $grand_total;
+
+
+###########################
+#  Main text
+
+BEGIN_PGML
+#### Shipwreck Survivors.
+
+This problem is modelled on the survival rates of various passenger classes from the _Titanic_.
+The numbers given are not the exact survivor numbers from the _Titanic_ shipwreck, they have been varied a bit from the actual numbers in order to randomize the problem.
+
+Of the [$grand_total] passengers on an unsinkable ship only [$status[0]] survived the shipwreck.
+The _women and children first_ protocol was generally followed for the loading of the lifeboats, and most of the male passengers and crew members were left aboard.
+Another part of the protocol stated that passengers enter lifeboats by ticket class.
+Here is a table showing survival by ticket class:
+[@
+DataTable(
+~~@table
+, caption => 'Shipwreck survivors by class',
+align => '>{\bfseries} r|rrrr|r',
+);
+@]*
+
+Suppose you select a passenger at random.
+Define events as follows:
+* [`F`]: _The selected passenger had a first class ticket_
+* [`S`]: _The  selected passenger had a second class ticket_
+* [`T`]: _The selected passenger had a third class ticket_
+* [`C`]: _The selected passenger was a crew member_
+* [`A`]: _The selected passenger stayed alive_
+* [`D`]: _The selected passenger died_
+
+a) (on pdf)
+b) [`P(A|F)`]: [_______][@ WEIGHTED_ANS($ans_agf->cmp,1); '' @]
+[`P(A|S)`]: [_______][@ WEIGHTED_ANS($ans_ags->cmp,1); '' @]
+[`P(A|T)`]: [_______][@ WEIGHTED_ANS($ans_agt->cmp,1); '' @]
+[`P(A|C)`]: [_______][@ WEIGHTED_ANS($ans_agc->cmp,1); '' @]
+c) (on pdf)
+d) [`P(F|A)`]: [_______][@ WEIGHTED_ANS($ans_fga->cmp,2); '' @]
+[`P(C|A)`]: [_______][@ WEIGHTED_ANS($ans_cga->cmp,2); '' @]
+e) (on pdf)
+
+Write out your solutions on paper showing your work and using proper notation.
+Check your answers in b) and d) above.
+Enter your answers as exact rational fractions or as decimal fractions with at least three decimal places of accuracy.
+END_PGML
+
+COMMENT('Requests some work as PDF.');
+COMMENT('Uses a weighted grader.');
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

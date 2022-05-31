@@ -1,0 +1,56 @@
+## DESCRIPTION
+## WeBWorKification of the 201-901 labs
+## Introductory lab
+## Q04 asks for lab groups going forward
+## ENDDESCRIPTION
+
+## DBsubject('WeBWorK')
+## DBchapter('WeBWorK tutorial')
+## DBsection('WeBWorK tutorial')
+## KEYWORDS('WeBWorK tutorial')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Jan-19')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGessaymacros.pl",
+"PGML.pl",
+"PGcourse.pl",
+);
+
+###########################
+#  Setup
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+###########################
+#  Main text
+
+TEXT(beginproblem());
+
+BEGIN_PGML
+#### Sometimes the WeBWorK question just asks you to type something into a text entry box.
+
+If you know the names of your group members for the rest of the labs on the course, enter them here.  If you don't know them yet, talk with other students in the course and come up with a lab group of two or three students before next week.
+
+[@ essay_box(8,60) @]*
+
+END_PGML
+
+ANS( essay_cmp() );
+
+ENDDOCUMENT();

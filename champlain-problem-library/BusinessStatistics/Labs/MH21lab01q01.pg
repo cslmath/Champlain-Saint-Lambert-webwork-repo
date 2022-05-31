@@ -1,0 +1,73 @@
+## DESCRIPTION
+## WeBWorKification of the 201-901 labs
+## Introductory lab
+## Q01 based on some Excel work
+## ENDDESCRIPTION
+
+## DBsubject('WeBWorK')
+## DBchapter('WeBWorK tutorial')
+## DBsection('WeBWorK tutorial')
+## KEYWORDS('WeBWorK tutorial')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Jan-19')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGML.pl",
+"PGcourse.pl",
+);
+
+###########################
+#  Setup
+
+Context("Numeric");
+Context()->flags->set(
+  tolerance => 0.05,
+  tolType => "absolute",
+);
+$showPartialCorrectAnswers = 1;
+
+TEXT(beginproblem());
+
+###########################
+#  Main text
+
+BEGIN_PGML
+#### Sometimes you will enter the answers you obtain in your Excel work into WeBWorK for correction.
+
+Answer the following questions from the Excel computations you did in question 1.
+
+Referring to the African Countries' Stats spreadsheet:
+
+* The average income per capita is [________]{num_cmp(5394.43)} dollars
+* The average life expectancy is [________]{num_cmp(64.870)} years
+* The average child mortality is [________]{num_cmp(63.95)} deaths per 1000 live births
+* The average trade balance    is [________]{"-1345.98"} dolars
+
+Enter at least one decimal place.  WeBWorK will mark your answer wrong if you don't use enough precision.
+
+END_PGML
+
+###########################
+#  Solution
+
+BEGIN_PGML_SOLUTION
+*SOLUTION*
+
+Enter the answers from the spreadsheet into the answer blanks.
+END_PGML_SOLUTION
+
+ENDDOCUMENT();

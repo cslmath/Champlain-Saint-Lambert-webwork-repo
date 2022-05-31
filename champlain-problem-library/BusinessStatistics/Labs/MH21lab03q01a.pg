@@ -1,0 +1,66 @@
+## DESCRIPTION
+## WeBWorKification of Lab 03 Question 01
+## Computation with means
+## ENDDESCRIPTION
+
+## DBsubject('Statistics')
+## DBchapter('Exploratory data analysis/descriptive statistics')
+## DBsection('Summary statistics')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Feb-02')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGessaymacros.pl",
+"PGML.pl",
+"PGcourse.pl",
+);
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+#########
+# Set up
+
+$classsize = 25;
+$origmean = 72.0;
+$regradeup = random(6,10,1);
+$regradedown = random(2,5,1);
+
+$newmean = Compute((($classsize*$origmean) + $regradeup - $regradedown)/$classsize);
+
+###########################
+#  Main text
+
+TEXT(beginproblem());
+
+BEGIN_PGML
+### Thinking About Means (a)
+
+The mean mark for a test in a class of [$classsize] students is [$origmean].
+Two students ask for a re-mark.
+The mark of one of the students goes up by [$regradeup] points
+and the mark of the other goes down by [$regradedown] points.
+
+What is the mean test mark after these changes?  
+The new mean is [______]{$newmean->cmp(tolType => 'absolute',tolerance => 0.03,)}
+
+Explain your result briefly:  
+[@ ANS(essay_cmp()); essay_box(2,80) @]*
+END_PGML
+
+ENDDOCUMENT();

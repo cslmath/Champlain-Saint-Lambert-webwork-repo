@@ -1,0 +1,68 @@
+## DESCRIPTION
+## WeBWorKification of Lab 03 Question 01 (b)
+## Computation with means
+## ENDDESCRIPTION
+
+## DBsubject('Statistics')
+## DBchapter('Exploratory data analysis/descriptive statistics')
+## DBsection('Summary statistics')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Feb-02')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"PGessaymacros.pl",
+"PGML.pl",
+"PGcourse.pl",
+);
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+#########
+# Set up
+
+$sectionAsize = random(40,50,5);
+$sectionBsize = random(25,35,5);
+COMMENT('Nine randomizations.');
+
+$sectionAmean = 60.0;
+$sectionBmean = 70.0;
+
+$classmean = Compute( ($sectionAsize*$sectionAmean + $sectionBsize*$sectionBmean)/($sectionAsize + $sectionBsize));
+
+$tolmean = 0.9/($sectionAsize + $sectionBsize);
+$cmpmean = $classmean->cmp(tolType => 'absolute',tolerance => $tolmean,);
+
+TEXT(beginproblem());
+
+BEGIN_PGML
+### Thinking About Means (b)
+
+A teacher gives the same test to a class which is divided into two sections.
+
+In Section A there are [$sectionAsize] students and the mean test mark is [$sectionAmean].
+In Section B there are [$sectionBsize] students and the mean test mark is [$sectionBmean].
+
+What is the mean test mark for the entire class?  
+The class mean is [______]{$cmpmean}
+
+Explain your result briefly:  
+[@ ANS(essay_cmp()); essay_box(2,80) @]*
+END_PGML
+
+ENDDOCUMENT();

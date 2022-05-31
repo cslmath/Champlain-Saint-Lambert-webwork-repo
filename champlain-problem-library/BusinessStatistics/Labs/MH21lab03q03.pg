@@ -1,0 +1,123 @@
+## DESCRIPTION
+## WeBWorKification of Lab 03 Question 03
+## Reasoning from mean and standard deviation
+## ENDDESCRIPTION
+
+## DBsubject('Statistics')
+## DBchapter('Exploratory data analysis/descriptive statistics')
+## DBsection('Summary statistics')
+## KEYWORDS('')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2021-Feb-02')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+## MO(1)
+## Static('0')
+
+###########################
+#  Initialization
+
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"niceTables.pl",
+"PGessaymacros.pl",
+"PGstatisticsmacros.pl",    # for mean and sd
+"PGML.pl",
+"PGcourse.pl",
+);
+
+TEXT(beginproblem());
+
+# make sure we're in the context we want
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+#########
+# Set up
+
+COMMENT('No randomization (yet).');
+
+@bobs =  (93, 14, 59, 105, 22, 21, 34, 21, 34, 12, 88, 19);
+
+@dougs = (53, 32, 38,  78, 43, 65, 31, 55, 67, 35, 60, 42);
+
+##########
+# csv data file link
+
+# Label datasets
+    push(@bobs,"Bob's");
+    push(@dougs,"Doug's");
+
+$csvlink = insertDataLink($PG,"Refrigerator Repair Data",(~~@bobs,~~@dougs,));
+# labels get popped back off during this operation
+
+##########
+# Answers
+
+$answidth = 5;
+$anstol = 0.05;
+$cmpbobsmean = Compute(stats_mean(@bobs))
+    -> cmp(tolType => "absolute",tolerance => $anstol,);
+$cmpbobssd = Compute(stats_sd(@bobs))
+    -> cmp(tolType => "absolute",tolerance => $anstol,);
+$cmpdougsmean = Compute(stats_mean(@dougs))
+    -> cmp(tolType => "absolute",tolerance => $anstol,);
+$cmpdougssd = Compute(stats_sd(@dougs))
+    -> cmp(tolType => "absolute",tolerance => $anstol,);
+$anstable = DataTable(
+    [
+        [[' ',headerrow => 1], 'Mean','Standard Deviation'],
+        ["Bob's Fridge Repair",
+            PGML('[__]{$cmpbobsmean}{$answidth}'),
+            PGML('[__]{$cmpbobssd}{$answidth}'),
+            ],
+        ["Dougs's Fridge Repair",
+            PGML('[__]{$cmpdougsmean}{$answidth}'),
+            PGML('[__]{$cmpdougssd}{$answidth}'),
+            ],
+    ],
+    caption => 'Repair Time Summary',
+    );
+
+$bobsmean = stats_mean(@bobs);
+
+BEGIN_PGML
+### Refrigerator Repair
+
+Suppose your refrigerator breaks down.
+In your area, there are only two competing repair services,
+Bob's Fridge Repair and Doug's Fridge Repair,
+and they both charge the same price.
+Being a discerning and statistically literate customer, you ask each company for data on how long it took them to finish repairs for their last twelve clients in your area (in hours).
+Amazingly enough, both companies give you this information.
+
+The times are listed on the pdf handout or are available here, [$csvlink]*, in csv format.
+
+#### (a) (Excel and here)
+
+Type or copy the repair time data into a _Question4_ sheet in your Excel file. Use the Excel functions [|=AVERAGE()|] and [|=STDEV.S()|] to find the mean and standard deviation of each data set.  Enter the results here.
+
+[@ $anstable @]*
+
+#### (b)
+
+According to this data, the two companies have different strengths.
+
+There is a good reason to choose Bob's fridge repair, what is it?  
+[@ ANS(essay_cmp()); essay_box(8,60) @]*
+
+There is also a good reason to choose Doug's fridge repair, what is it?  
+[@ ANS(essay_cmp()); essay_box(8,60) @]*
+
+END_PGML
+
+COMMENT('STATIC. MathObject version. Uses PGML.');
+
+ENDDOCUMENT();

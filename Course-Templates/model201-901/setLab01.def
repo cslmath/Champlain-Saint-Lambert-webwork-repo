@@ -1,0 +1,54 @@
+assignmentType      = default
+openDate          = 01/18/2022 at 11:30am EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 01/18/2022 at 02:00pm EST
+answerDate        = 01/25/2022 at 02:00pm EST
+enableReducedScoring = N
+paperHeaderFile   = champlainLibrary/BusinessStatistics/Labs/setHeaderPaperLab01.pg
+screenHeaderFile  = champlainLibrary/BusinessStatistics/Labs/setHeaderScreenLab01.pg
+description       = A WeBWorK set to accompany lab 01
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = champlainLibrary/BusinessStatistics/Labs/MH21lab01q01.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = champlainLibrary/BusinessStatistics/Labs/MH21lab01q02.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = champlainLibrary/BusinessStatistics/Labs/MH21lab01q03.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = champlainLibrary/BusinessStatistics/Labs/MH21lab01q04.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+
