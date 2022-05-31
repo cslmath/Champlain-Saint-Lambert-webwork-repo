@@ -1,0 +1,97 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Related rates
+##      Word problem: learning to read the problem, Surface area
+##      (Stewart 7ed, 3.9, 12)
+##      Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+# Set parameters
+$diam = random(8,12,2);  # even numbers
+$dAdt = random(0.9,1.1,0.05);
+
+$radius = $diam/2; 
+
+
+# Answer arrays
+@allAns = ("Find \(dD/dt\) at the moment that \( D = $diam \) cm, given that \(dA/dt = - $dAdt\) cm\(^2\)/min.",
+   "Find \(dD/dt\) at the moment that \( D = $radius \) cm, given that \(dA/dt = - $dAdt\) cm\(^2\)/min.",  # error : radius instead of diameter
+    "Find \(dD/dt\) at the moment that \( D = $diam \) cm, given that \(dA/dt =  $dAdt\) cm\(^2\)/min.",  # error: rate should be negative (because decreasing) 
+    "Find \(dr/dt\) at the moment that \( r = $diam \) cm, given that \(dA/dt =  $dAdt\) cm\(^2\)/min.",  # error: radius instead of diameter, dAdt positive  
+    "Find \(dA/dt\) at the moment that \( A = $dAdt \) cm, given that \(dD/dt = $diam\) cm/min.",  # error: incorrect rates
+    "Find \(dA/dt\) at the moment that \( D = $diam \) cm, given that \(dr/dt = - $radius\) cm/min.",  # error: incorrect rates
+);
+
+$correct = $allAns[0];
+@incorrAns = @allAns[1..$#allAns];
+
+# Use map and grep to extract the correct answer, and 
+#   create an array of incorrects.
+@corrAns = ($correct); 
+ 
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+
+BEGIN_PGML
+As a snowball melts, its surface area decreases at a rate of [`[$dAdt]`] square centimetres per minute. Consider the moment when the diameter [`D`] of the snowball is [`[$diam]`] centimetres. At what rate is the diameter of the snowball decreasing at that moment? 
+
+Notes: The surface area of a sphere of radius [`r`] is [`A = 4\pi r^2 = \pi D^2 `]. If a quantity is decreasing, its rate of change with respect to [`t`] is negative.
+
+Select the statement, if any, that describes the goal of the related rates word problem.  
+[@ $radio1->buttons() @]*  
+END_PGML
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

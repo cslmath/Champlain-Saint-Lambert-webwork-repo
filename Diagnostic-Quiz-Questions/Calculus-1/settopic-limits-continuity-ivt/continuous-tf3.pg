@@ -1,0 +1,54 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##     Continuity : product of (dis)continuous and discontinuous at a
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+
+# Condition that determines the truth of the statement:
+#   Here, the order of terms in the difference.
+@words = ("discontinuous","continuous");
+$i = random(0,$#words,1);
+$cond = $words[$i];
+
+# Correctness condition checked:
+$correct = "False";
+if ($i == 1){$correct = "True";}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:* If [`f`] is [$cond] at [`a`] and [`g`] is discontinuous at [`a`], then the product [`fg`] is discontinuous at [`a`].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct].
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

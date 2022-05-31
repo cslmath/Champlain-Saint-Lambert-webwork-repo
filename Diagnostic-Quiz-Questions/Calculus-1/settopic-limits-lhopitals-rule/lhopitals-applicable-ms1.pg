@@ -1,0 +1,118 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Determine if l'Hopital's rule applies
+##      Multiple select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+
+
+
+DOCUMENT();  
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+loadMacros(
+  "PGstandard.pl",
+  "PGchoicemacros.pl",
+  "PGML.pl",
+  "PGcourse.pl",
+);
+#  Set parameters
+$a = random(3,6,1);
+$b = random(2,5,1);
+$c = random(2,4,1);
+$d = $c + 1;
+$cd = $c*$d;
+$csq = $c**2;
+
+# all choices
+@allC = ("\( \lim\limits_{x\to $c} \dfrac{x^2 + x - $cd}{$c-x} \)", 
+"\( \lim\limits_{x\to $c} \dfrac{x^2 - $csq}{x^2 - $c x} \)",                
+"\( \lim\limits_{t\to \infty} \dfrac{\ln t}{\sqrt{t}} \)",
+"\( \lim\limits_{t\to 0} \dfrac{\sin $b t}{t} \)",
+"\( \lim\limits_{t\to 0} \dfrac{\cos t - 1}{e^t - 1 + t} \)",
+"\( \lim\limits_{x\to \infty} \dfrac{e^{$b x}}{$a x} \)",
+"\( \lim\limits_{t \to 1} \dfrac{\ln t}{\sqrt{t-1}} \)",
+"\( \lim\limits_{x\to \infty} \dfrac{e^x}{x^$c} \)",
+);
+
+@allI = ("\( \lim\limits_{x\to $c} \dfrac{x^2 + x + $cd}{$c-x} \)",
+"\( \lim\limits_{x\to -$c} \dfrac{x^2 - $csq}{x^2 - $c x} \)",
+"\( \lim\limits_{x\to 1} \dfrac{\ln x}{\sqrt{x}} \)",
+"\( \lim\limits_{t\to 0} \dfrac{\cos $b t}{t} \)",
+"\( \lim\limits_{x\to \infty} \dfrac{e^{-x}}{x} \)",
+"\( \lim\limits_{t\to 0} \dfrac{\cos t - 1}{e^t + 1 + t} \)",
+"\( \lim\limits_{t\to 0} \dfrac{\sin t - 1}{e^t - 1 + t} \)",
+"\( \lim\limits_{t\to 1} \dfrac{\cos t - 1}{e^t - 1 + t} \)",
+"\( \lim\limits_{x\to \infty} \dfrac{e^{-$b x}}{$a x} \)",
+);
+
+@type = ("does not apply","applies",);
+$tj = random(0,$#type,1);
+$applyorno = $type[$tj];
+
+if ($tj == 0){ # does not apply
+   @corrAns = @allI;
+   @incorrAns = @allC;
+   }
+else { # applies
+    @corrAns = @allC;
+    @incorrAns = @allI;
+    }
+
+# Choose subset of correct to display
+$numc = random(0,4,1); # number correct to display
+@slicec = NchooseK(scalar(@corrAns),$numc);
+@randc = @corrAns[@slicec];
+
+# Choose subset of incorrect to display
+$numi = 4 - $numc;   # display 4 in total
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+# Display the question, and the choices:
+$quest = ();
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){  # at least one correct answer
+    $multichoice -> qa ( $quest, @randc,);
+    $multichoice -> extra( @randi, "None of the above",);
+    }
+else {            # no correct answers
+    $multichoice -> qa ( $quest, "None of the above",);
+    $multichoice -> extra( @randi, );
+}
+$multichoice -> makeLast("None of the above");
+
+##############################################################
+#  Text
+BEGIN_PGML
+Select the limit(s), if any, to which l'Hopital's Rule [$applyorno].
+[@ $multichoice -> print_a() @]*
+END_PGML
+
+##############################################################
+#  Answers
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS(checkbox_cmp($multichoice->correct_ans));
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*
+END_PGML_SOLUTION
+
+ENDDOCUMENT();        

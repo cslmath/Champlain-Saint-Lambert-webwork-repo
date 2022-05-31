@@ -1,0 +1,114 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##     Vertical asymptote in terms of limits
+##     Multiple Select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+# Set parameters:
+$a = non_zero_random(-9,9,1);
+$ma = -1*$a;
+
+# The full list of answers:
+@allF = (
+"\( \lim\limits_{x\to \infty} f(x) = $a \)",
+"\( \lim\limits_{x\to -\infty} f(x) = $a \)",
+"\( \lim\limits_{x\to $ma^+} f(x) = \infty \)",
+"\( \lim\limits_{x\to $ma^-} f(x) = \infty \)",
+"\( \lim\limits_{x\to $ma^+} f(x) = -\infty\)",
+"\( \lim\limits_{x\to $ma^-} f(x) = -\infty \)",
+"\( \lim\limits_{x\to $ma} f(x) = \infty \)",
+"\( \lim\limits_{x\to $ma} f(x) = -\infty \)",
+     );
+@allT = (
+"\( \lim\limits_{x\to $a^+} f(x) = \infty\)",
+"\( \lim\limits_{x\to $a^-} f(x) = \infty \)",
+"\( \lim\limits_{x\to $a^+} f(x) = -\infty \)",
+"\( \lim\limits_{x\to $a^-} f(x) = -\infty \)",
+"\( \lim\limits_{x\to $a} f(x) = \infty \)",
+"\( \lim\limits_{x\to $a} f(x) = -\infty \)",
+);
+
+@corrAns = @allT;
+@incorrAns = @allF;
+
+# Correct answers to display
+#     $numc: Display 0 to 4 correct answers
+#     @slicec: indices of subset of correct answers
+#     @randc: subset of correct answers
+$numc = random(0,4,1);  # number correct answers up to max 4
+@slicec = NchooseK(scalar(@corrAns),$numc);
+@corrAns = @corrAns[@slicec];
+# Incorrect answers to display
+#     $numi: Display 4-$numc incorrect answers
+#     @slicei: indices of subset of incorrect answers
+#     @randi: subset of incorrect answers
+$numi = 4 - $numc;
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@incorrAns = @incorrAns[@slicei];
+
+$quest = ();
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){ # show at least one correct
+    $multichoice -> qa (
+        $quest, 
+    @corrAns,
+    );
+    $multichoice -> extra(
+    @incorrAns,
+    );
+} else { # show no correct choice ("None of the above" is correct answer)
+   $multichoice -> qa (
+        $quest, 
+        "None of the above",
+    );
+    $multichoice -> extra(
+    @incorrAns,
+    );
+}
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+If [`\rule{3.5cm}{.4pt}`] , then the graph of [`f(x)`] has a vertical asymptote at [`x=[$a]`]. 
+
+Select the limits, if any, to fill in the blank.
+[@ $multichoice->print_a() @]*  
+ 
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

@@ -1,0 +1,99 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##     Logarithmic differentiation
+##     Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+# Set parameters
+$a = random(2,9,1);
+$f = "\ln x";
+$g = "\sin x";
+$fun = "($f)^{$g}";
+$fp = "x^{-1}";
+$gp = "\cos x";
+
+# All possible displayed answers
+@allAns = ("\( $gp  \ln ($f) + $g\big(\frac{$fp}{$f}\big) \)",
+  "\( \frac{1}{y} \big[ $gp  \ln ($f) + $g\big(\frac{$fp}{$f}\big) \big] \)",
+	"\( $g ($f)^{$g-1} \)",
+	"\( $gp (\frac{$fp}{$f}) \)",
+    "\( $gp ($f) + $g($fp) \)",
+    "\( y \big[ $gp \ln ($f) + $g\big( \frac{$fp}{$f} \big) \big]\)",
+    "\( $gp \ln ($f) + $g \big( \frac{$f}{$fp} \big) \)",
+    );
+$correct = $allAns[0];
+@incorrAns = @allAns[1..$#allAns];
+
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+
+BEGIN_PGML
+Logarithmic differentiation to find the derivative of [`y=[$fun]`] begins with the following steps:
+
+* [`\ln y = \ln[$fun] `]
+
+* [`\ln y = [$g] \ln([$f]) `]
+
+* [`\dfrac{1}{y}\dfrac{dy}{dx} = \ldots `] 
+
+Select the option, if any, to replace the three dots ([`\ldots`]).  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

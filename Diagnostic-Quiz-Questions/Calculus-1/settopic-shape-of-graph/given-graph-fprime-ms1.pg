@@ -1,0 +1,242 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      given the graph of the derivative
+##      identify intervals of increase / decrease
+## To fix : rethink this problem so that "false" are not "true" if graph of f
+##      Multiple select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+
+
+## KEYWORDS('calculus','minimum','maximum','concavity')
+
+DOCUMENT();  
+
+loadMacros(
+  "PGstandard.pl",
+  "PGchoicemacros.pl",
+  "PGgraphmacros.pl",
+  "MathObjects.pl",
+  "PGML.pl",
+  "PGtikz.pl",
+  "PGcourse.pl",
+);
+ 
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+Context("Numeric");
+
+#$refreshCachedImages = 1;  # <= COMMENT OUT THIS LINE OF CODE AFTER TESTING
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+# Set parameters
+$a = random(-6,-2,1);
+$b = $a + random(3,6,1);
+$c = $b + random(3,6,1);
+$s = random(-1,1,2);
+
+# x-values of important points: 
+# P (x=a), Q (x=qp), R (x=b), S (x=sp),  T (x=c)
+$u = 3;
+$v = -2*($a + $b + $c);
+$w = ($a)*($b) + ($a)*($c) + ($b)*($c);
+$discrim = sqrt(($v)**2 - 4*($u)*($w));
+$qp = (-($v) - $discrim)/(2*$u);
+$sp = (-($v) + $discrim)/(2*$u);
+
+$fp = Compute("$s*(x- $a)*(x - $b)*(x - $c)");
+$fpp = Compute("$s*((x - $b)*(x - $c)+(x - $a)*(x - $b)+(x - $a)*(x - $c))");
+
+$d = sqrt($a**2+$b**2+$c**2- $a*$b - $a*$c - $b*$c)/3;
+$e = ($a+$b+$c)/3;
+
+$x[0] = $a;
+$y[0] = 0;
+$x[1] = $e - $d;
+$y[1] = $fpp->eval(x=>$x[1]);
+$x[2] = $b;
+$y[2] = 0;
+$x[3] = $e + $d;
+$y[3] = $fpp->eval(x=>$x[3]);
+$x[4] = $c;
+$y[4] = 0;
+$x[5] = $a -2;
+$x[6] = $c +2;
+
+$min = 0;
+$max = 0;
+
+for($i=0;$i<7;$i++) {
+    $t = $fp->eval(x=>$x[$i]);
+    if ($t<$min) {$min = $t;}
+    if ($t>$max) {$max = $t;}
+}
+
+@labels = ('P','Q','R','S','T');
+
+# Variable $graphtikz contains the TikZ graph:
+$graphtikz = createTikZImage();
+$graphtikz->tikzLibraries("arrows.meta");
+$xmin = $x[5] + 1;
+$xmax = $x[6] - 1;
+$tick = 0.2;
+$yval = $s*3;
+
+# Check for highest and lowest y-values to set scale
+#                             s=1    s=-1
+# Evaluate at : x = xmin      Low    High
+#               x = qp  (Q)   High   Low
+#               x = sp  (S)   Low    High
+#               x = xmax      High   Low
+$yA = $fp -> eval(x=>$xmin);
+$yB = $fp -> eval(x=>$xmax);
+$yQ = $fp -> eval(x=>$qp);
+$yS = $fp -> eval(x=>$sp);
+if ($s == 1){
+   $low = min($yA,$yS);
+   $high = max($yB,$yQ);
+   }
+else {
+    $low = min($yB,$yQ);
+    $high = max($yA,$yS);
+}
+$scale = ($xmax - $xmin)/($high - $low);
+$fun = "$scale*$s*(\x- $a)*(\x- $b)*(\x- $c)";  # scale so that it fits
+$high = $scale*$high;
+$low = $scale*$low;
+
+$graphtikz->BEGIN_TIKZ
+  \draw[thick,->] ({$xmin},0) -- ({$xmax},0) node[anchor=north west,scale=1.5] {\(x\)};
+  \draw[thick,->] (0,{$low}) -- (0,{$high}) node[anchor=south east,scale=1.5] {\(y\)};
+  \draw[blue, ultra thick, domain={$xmin}:{$xmax},samples=50] plot (\x, {$fun});
+  \draw ($a,-$tick) -- ($a,$tick);
+  \draw ($qp,-$tick) -- ($qp,$tick);
+  \draw ($b,-$tick) -- ($b,$tick);
+  \draw ($sp,-$tick) -- ($sp,$tick);
+  \draw ($c,-$tick) -- ($c,$tick);
+  \node[below,scale=1.5] at ($a+.1,0) {\(P\)};
+  \node[below,scale=1.5] at ($qp+.1,0) {\(Q\)};
+  \node[below,scale=1.5] at ($b+.1,0) {\(R\)};
+  \node[below,scale=1.5] at ($sp+.1,0) {\(S\)};
+  \node[below,scale=1.5] at ($c+.1,0) {\(T\)};
+  \node[right,blue,scale=1.5] at ($xmax,$yval) {\( f^{\prime}(x) \)};
+END_TIKZ
+
+# Choices if cubic has positive leading coefficient
+@allTs1 = ("\(f\) has a local (relative) maximum at \( R \)",
+         "\(f\) has a local (relative) minimum at \( P \)",
+         "\(f\) has a local (relative) minimum at \( T \)",
+         "\(f\) is increasing on the interval \( (P, R) \)",
+         "\(f\) is decreasing on the interval \( (R, T) \)",
+         "\(f\) is concave downward on the interval \( (Q, S) \)",
+         );
+@allFs1 = ("\(f\) has a local (relative) maximum at  \( Q \)",
+         "\(f\) has a local (relative) minimum at  \( S \)",
+         "\(f\) is decreasing on the interval \( (Q, S) \)",
+         "\(f\) has a zero at \( P \)", 
+         "\(f\) has a zero at \( R \)",
+         "\(f\) has a zero at \( T \)",
+          );
+
+# Choices if cubic has negative leading coefficient
+@allTsm = ("\(f\) has a local (relative) minimum at \( R \)",
+         "\(f\) has a local (relative) maximum at \( P \)",
+         "\(f\) has a local (relative) maximum at \( T \)",
+         "\(f\) is decreasing on the interval \( (P, R) \)",
+         "\(f\) is increasing on the interval \( (R, T) \)",
+         "\(f\) is concave upward on the interval \( (Q, S) \)",
+         );
+@allFsm = ("\(f\) has a local (relative) maximum at  \( S \)", # f -checked
+         "\(f\) has a local (relative) minimum at \( Q \)", # f
+         "\(f\) is increasing on the interval \( (Q,S) \)", # f
+         "\(f\) has a zero at \( P \)", 
+         "\(f\) has a zero at \( R \)",
+         "\(f\) has a zero at \( T \)",
+          );
+        
+@type = ("false","true");
+$tj = random(0,$#type,1);
+$tj = 1;  # Set to true always (for now)
+$truefalse = $type[$tj];
+
+if ($s == 1){  # leading coefficient is 1
+    if ($tj == 1){ # true
+        @corr = @allTs1;
+        @incorr = @allFs1;
+        }
+    else { # false
+        @corr = @allFs1;
+        @incorr = @allTs1;
+        }
+   }
+else { # leading coeff is -1
+    if ($tj == 1){ # true
+        @corr = @allTsm;
+        @incorr = @allFsm;
+        }
+    else { # false
+        @corr = @allFsm;
+        @incorr = @allTsm;
+        }
+   }
+# Choose correct to display
+$numc = random(1,4,1); # show at least one "correct" (why?)
+@slicec = NchooseK(scalar(@corr),$numc);
+@randc = @corr[@slicec];
+# Choose incorrect to display
+$numi = 4 - $numc;
+@slicei = NchooseK(scalar(@incorr),$numi);
+@randi = @incorr[@slicei];
+
+$quest = ();
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){ # show at least one correct
+    $multichoice -> qa (
+        $quest, 
+    @randc,
+    );
+    $multichoice -> extra(
+    @randi,
+    );
+} else { # show no correct choice ("None of the above" is correct answer)
+   $multichoice -> qa (
+        $quest, 
+        "None of the above",
+    );
+    $multichoice -> extra(
+    @randi,
+    );
+}
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+>>
+ [@ image(insertGraph($graphtikz),width=>250,tex_size=>300)@]*
+<<
+
+Given the graph of the *derivative* [`f'(x)`]  of a function [`f(x)`]. Important [`x`]-values are labelled with [`P`], [`Q`], [`R`], [`S`] and [`T`]. (Click on graph to enlarge.)  
+Select the statements that are [$truefalse].
+[@ $multichoice->print_a() @]*
+END_PGML
+# Answer evaluator
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*
+END_PGML_SOLUTION
+ENDDOCUMENT();

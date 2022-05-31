@@ -1,0 +1,83 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Limit at Infinity : end behaviour of a polynomial
+##      True or False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+# Set parameters
+$a = random(2,10,1)*random(-1,1,2);
+$pm = "+";
+if ($a < 0){$pm = "-";}  # for display
+$c = random(2,10,1);
+$d = random(2,10,1);
+$n = random(4,8,1);  # n greater than 3
+#   Three cases: 1) same leading coefficient, different degree
+#                2) same degree, different leading coeff
+#                3) same leading coefficient and same degree
+$i = random(0,2,1);  
+@poly = ("$a x^{$n}- $d x^3 + $c x",
+         "$c x $pm $a x^{$n} - $d x^3",
+         "$c x - $d x^3 $pm $a x^{$n}", 
+         "- $d x^3 + $c x $pm $a x^{$n} ",
+         "- $d x^3 $pm $a x^{$n} + $c x", 
+         );
+$j = random(0,$#poly,1);
+$disppoly = $poly[$j];
+if ($i == 0){ # equal leading coeff, unequal degree
+    $b = $a;
+    $m = $n + 2; # m even too
+    $correct = "False";
+    }
+elsif ($i == 1){ # equal degree, unequal leading coeff
+    $b = -1*$a;
+    $m = $n;
+    $correct = "False";
+    }
+else {
+    $b = $a;
+    $m = $n;
+    $correct = "True";
+    }
+
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or False:* The polynomials [`P(x)=[$disppoly]`] and [`Q(x)=[$b] x^{[$m]}`] have the same end behaviour.  
+[@ $radio1->buttons() @]* 
+
+_Hint:_ The *end behaviour* of a polynomial function is the behaviour of its graph as [` x\to \infty`] or as [`x \to -\infty`]. The degree and the leading coefficient of the polynomial determine its end behaviour.
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

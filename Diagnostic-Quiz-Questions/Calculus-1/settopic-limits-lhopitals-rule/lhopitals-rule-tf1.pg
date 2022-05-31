@@ -1,0 +1,57 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      L'Hopital's rule definition
+##      True or false
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+
+# Condition that determines the truth of the statement:
+$n = 0;  # always f
+# Correctness condition checked:
+if ($n == 1) {
+    $correct = "True";
+    }
+else {
+    $correct = "False";
+}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:*  For limits of indeterminate form [`0/0`] or [`\infty/\infty`], l'Hospital's Rule states that
+[` \lim\limits_{x\to a} \dfrac{f(x)}{g(x)} 
+= \lim\limits_{x\to a} \dfrac{f'(x)g(x)-f(x)g'(x)}{[g(x)]^2} `]
+ 
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct].
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

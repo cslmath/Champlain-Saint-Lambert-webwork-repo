@@ -1,0 +1,101 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Implicit differentiation, equation of form a x^2 + bxf(x) - [f(x)[^3 = c
+##      Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+# Show the correct answer more often than not
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+# Set parameters
+@fun = qw(F G h k A b);
+$i = random(0,$#fun,1);
+$f = $fun[$i];
+$a = random(2,4,2);
+$twoa = 2*$a;
+#$b = random(2,5,1);
+$x0 = random(-1,1,2);
+do {$b = random(3,7,2);
+    $y0 = non_zero_random(-2,2,1);
+    $impfun = Formula("$a x^2 + $b x $y0 - ($y0)^3");
+    $c = $impfun -> eval(x=>$x0);
+    } until ($c != 0);
+$impdisp = "$a x^2 + $b x $f(x) - [$f(x)]^3 = $c";
+
+# All possible answers
+@allAns = ("\( $twoa x + $b $f(x) + $b x $f'(x) - 3[$f(x)]^2 $f'(x) = 0 \)",
+            "\( $twoa x + $b $f(x) + $b x $f'(x) - 3[$f(x)]^2 $f'(x) = $c \)",
+            "\( $twoa x + $b $f'(x) - 3[$f(x)]^2 $f'(x) = 0 \)",
+            "\( $twoa x + $b $f'(x) - 3[$f(x)]^2 $f'(x) = $c \)",
+            "\( $twoa x + $b $f'(x) - 3[$f(x)]^2  = 0 \)",
+            "\( $twoa x + $b $f'(x) - 3[$f(x)]^2  = $c \)",
+            "\( $twoa x + $b $f(x) + $b x $f'(x) - 3[$f(x)]^2  = 0 \)",
+            "\( $twoa x + $b $f(x) + $b x $f'(x) - 3[$f(x)]^2  = $c \)",
+   );
+$correct = $allAns[0];
+@incorrAns = @allAns[1..$#allAns];
+
+# Use map and grep to extract the correct answer, and 
+#   create an array of incorrects.
+@corrAns = ($correct); 
+
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+
+BEGIN_PGML
+Suppose that [`y=[$f](x)`] is defined implicitly by the equation [`[$impdisp]`].  
+
+Select the correct form, if any, after differentiating both sides of the equation with respect to [`x`].  
+[@ $radio1->buttons() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

@@ -1,0 +1,110 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Limit definition of the derivative h->0 form
+##      sin or cos or trig function and 3 possible angles 
+##      in quadrant 1 only
+##      Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+
+
+
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+Context()->variables->add(h=>'Real',a=>'Real');
+# Set parameters
+@allAngles = ("\pi/6","\pi/4","\pi/3",);
+$ia = random(0,$#allAngles,1);
+$a = $allAngles[$ia];
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+@allTrig = ("\sin","\cos","\tan",);
+
+@allRatios = (["\frac{1}{2}","\frac{\sqrt 2}{2}","\frac{\sqrt 3}{2}"], #sin
+              ["\frac{\sqrt 3}{2}","\frac{\sqrt 2}{2}","\frac{1}{2}"], #cos
+              ["\frac{\sqrt 3}{3}","1","{\sqrt 3}"], #tan
+              );
+              
+$it = random(0,$#allTrig,1);
+$trigfun = $allTrig[$it];
+@ratval = @{$allRatios[$it]};  #($f,$a,$av) = @{$flist[$i]};
+$fa = $ratval[$ia];
+
+@allAns = ("\( f(x) = $trigfun(x) \) and \( a = $a \)",
+           "\( f(x) = $trigfun(x) \) and \( a = $fa \)",  
+           "\( f(x) = $trigfun(h) \) and \( a = $a \)",  
+           "\( f(x) = $trigfun(h) \) and \( a = $fa \)", 
+           "\( f(x) = $trigfun(a) \) and \( a = $a \)",  
+           "\( f(x) = $trigfun(a) \) and \( a = $fa \)", 
+           "\( f(x) = $trigfun(a+h)\) and \( a = $a \)",  
+           "\( f(x) = $trigfun(a+h)\) and \( a = $fa \)", 
+           "\( f(x) = $trigfun(x+h)\) and \( a = $a \)",  
+           "\( f(x) = $trigfun(x+h)\) and \( a = $fa \)", 
+           );
+$correct = $allAns[0];
+@corrAns = ($correct); 
+@incorrAns = @allAns[1..$#allAns];
+    
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+
+BEGIN_PGML
+Select the option, if any, with a function [`f(x)`] and a value [`a`] so that
+the expression [` \displaystyle \lim_{h\to 0} \frac{[$trigfun]\big([$a] +h \big) - [$fa]}{h} `] represents [` f^{\prime}(a)`].  
+
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

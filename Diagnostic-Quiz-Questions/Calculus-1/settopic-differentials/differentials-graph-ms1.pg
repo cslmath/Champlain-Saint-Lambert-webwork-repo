@@ -1,0 +1,179 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      given the increasing concave down graph of f and change in x equal dx
+##      select the true (or false) statements about dx, dy, Deltax, Deltay
+##      Multiple select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();  
+
+loadMacros(
+  "PGstandard.pl",
+  "PGchoicemacros.pl",
+  "PGgraphmacros.pl",
+  "MathObjects.pl",
+  "PGML.pl",
+  "PGtikz.pl",
+  "PGcourse.pl",
+);
+ 
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+Context("Numeric");
+
+#$refreshCachedImages = 1;  # <= COMMENT OUT THIS LINE OF CODE AFTER TESTING
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+# Set parameters
+
+@letters = ('A','B','C',);
+@order = NchooseK(scalar(@letters),3); # rearrange order of labels
+@label = @letters[@order];
+
+# Variable $graphtikz contains the TikZ graph:
+$graphtikz = createTikZImage();
+$graphtikz->tikzLibraries("arrows.meta");
+# set graph parameters
+# plot curve f(x) at the point P = (a,f(a))
+$f = Formula("1.5 sqrt(x-1) + .5");
+$fdisp = "1.5*sqrt(\x-1)+.5";
+$a = 1.75;
+$dx = 1.5;
+$xe = 5;  # $xe, $xe2: end values of x for grey horizontal lines
+$xe2 = 6;
+$fa = $f -> eval(x=>$a); 
+$apdx = $a + $dx;
+$fapdx = $f -> eval(x=>$apdx);
+# Equation of tangent line T(x) = f(a) + f'(a)(x-a)
+$fp = $f -> D(x);
+$fpa = $fp -> eval(x=>$a);
+$T = Formula("$fa + $fpa (x - $a)");
+$Tdisp = "$fa + $fpa*(\x -$a)";
+$tapdx = $T -> eval(x => $apdx);
+$xmid =  ($apdx + $a)/2;
+$ymid = $fa/2;
+$x1 = ($apdx + $xe)/2; 
+$y1 = ($fa + $fapdx)/2;
+$x2 = ($xe + $xe2)/2; 
+$y2 = ($fa + $tapdx)/2;
+$flabelx = 6;
+$flabely = $f -> eval(x=>$flabelx);
+$tlabely = $T -> eval(x=>$flabelx);
+
+$graphtikz->BEGIN_TIKZ
+\draw [->, thick] (-.5,0) -- (6,0) node [right] {\(x\)};
+\draw [->, thick] (0,-.5) -- (0,5.5) node [right] {\(y\)}; 
+\draw[gray] ($a,0)--($a,$fa);  %vertical line to P
+\draw[gray] (0,$fa)--($xe2,$fa);   % horizontal line from y-axis through P
+\draw[gray] ($apdx,0)--($apdx,$tapdx);
+\draw[gray] (0,$fapdx)--($xe,$fapdx);
+\draw[gray] ($apdx,$tapdx) -- ($xe2,$tapdx);
+\node [below] at ($a,0) {\(a\)};
+\node [below] at ({$apdx+.1},0) {\(a+\Delta x\)};
+\node [black] at ($xmid,$ymid) {\($label[2]\)};    % arrows for horiz. distance
+\draw[black,->] ({$xmid-.2},$ymid) -- ({$a+.01},$ymid);
+\draw[black,->] ({$xmid+.2},$ymid) -- ({$apdx - .01},$ymid);
+\node [right,black] at ($x1,$y1) {\($label[0]\)};  % arrows for vert. distance 1
+\draw[black,<->] ($x1,{$fa+.01}) -- ($x1,{$fapdx-.01});
+\node [black,right] at ($x2,$y2) {\($label[1]\)};   % arrows for vert. distance 2
+\draw[black,<->] ($x2,{$tapdx-.01}) -- ($x2,{$fa+.01});
+\node [left] at (0,$fa) {\(f(a)\)};
+\node [left] at (0,$fapdx) {\(f(a + \Delta x)\)};
+\node [right,blue] at ($flabelx,$flabely) {\(y=f(x)\)};
+\node [right,red] at ($flabelx,$tlabely) {\(T\)};
+\draw[thick, domain=1.05:6, samples=150,blue] plot (\x, {$fdisp});
+\draw[thick, domain=0.5:6, red] plot (\x, {$Tdisp});
+\filldraw [black] ($a,$fa) circle (1pt);
+\node [above] at ($a,$fa) {\(P\)};
+\filldraw [black] ($apdx,$fapdx) circle (1pt);
+\filldraw [black] ($apdx,$tapdx) circle (1pt);
+END_TIKZ
+
+# Choices
+@allT = ("\(dx = $label[2]\)",
+         "\(dy = $label[1]\)",
+         "\(\Delta x = $label[2]\)",
+         "\(\Delta y = $label[0]\)",
+         "\(dx = \Delta x\)",
+         );
+@allF = ("\(dx = $label[1] - $label[0]\)",
+         "\(dy = $label[0] \)",
+         "\(dy = \Delta y\)",
+         "\(\Delta y = $label[1]\)",
+          );
+
+@type = ("false","true");
+$tj = random(0,1,1);
+#$tj = 0; # always false ; remove later
+$truefalse = $type[$tj];
+
+if ($tj == 1){ # true
+   @corr = @allT;
+   @incorr = @allF;
+   }
+else { # false
+   @corr = @allF;
+   @incorr = @allT;
+   }
+
+# Choose correct to display
+$numc = random(0,4,1); 
+@slicec = NchooseK(scalar(@corr),$numc);
+@randc = @corr[@slicec];
+# Choose incorrect to display
+$numi = 4 - $numc;
+@slicei = NchooseK(scalar(@incorr),$numi);
+@randi = @incorr[@slicei];
+
+$quest = ();
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){ # show at least one correct
+    $multichoice -> qa (
+        $quest, 
+    @randc,
+    );
+    $multichoice -> extra(
+    @randi,
+    );
+} else { # show no correct choice ("None of the above" is correct answer)
+   $multichoice -> qa (
+        $quest, 
+        "None of the above",
+    );
+    $multichoice -> extra(
+    @randi,
+    );
+}
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+>>
+ [@ image(insertGraph($graphtikz),width=>400,tex_size=>500)@]*
+<<
+
+Given the graph of the tangent line [`T`] to the curve [`y=f(x)`] at the point [`P`]. (Click on graph to enlarge.)  
+Select the statement(s), if any, that are [$truefalse].
+[@ $multichoice->print_a() @]*
+END_PGML
+# Answer evaluator
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*
+END_PGML_SOLUTION
+ENDDOCUMENT();

@@ -1,0 +1,113 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      One sided limit of piecewise function   
+##      Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+Context()->variables->add(k=>"Real",b=>"Real",c=>"Real",m=>"Real",n=>"Real");
+@letters = qw(k b c m n);
+@ind = NchooseK(scalar(@letters),5);
+($a,$b,$c,$m,$n) = @letters[@ind];
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+# Set parameters
+# Choose three different numbers (non-zero)
+$a = random(-9,9,1);
+@allLim = ("\lim\limits_{x\to $a^-}","\lim\limits_{x\to $a^+}");
+$i = random(0,$#allLim,1);
+$xlim = $allLim[$i];
+
+$left = Formula("$a $k + $b")->reduce()->TeX;
+$right = Formula("$a $m + $n")->reduce()->TeX;
+
+if ($a == 0){$left = "$b"; $right = "$n";}
+
+# Answer arrays
+@allAns = ("\( $left \)",
+           "\( $right \)",
+           "\( $c \)",
+           "\( $k x + $b \)",
+           "\( $k x + $n \)",
+           "Does not exist",
+           );
+
+$correct = $allAns[$i];
+
+# Use map and grep to extract the correct answer, and 
+#   create an array of incorrects.
+@corrAns = ($correct); 
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+    
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+#########################################################
+
+BEGIN_PGML
+Let [`` f(x) = \left\{  
+             \begin{array}{ll}
+             [$k]x + [$b] & \text{ if } x < [$a] \\
+             [$c]      & \text{ if } x = [$a] \\
+             [$m]x + [$n] & \text{ if } x > [$a]
+             \end{array}
+             \right.
+             ``]  
+
+Select the correct expression, if any, for [`[$xlim] f(x)`].  
+[@ $radio1->buttons() @]*  
+END_PGML
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

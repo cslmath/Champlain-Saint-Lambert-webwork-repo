@@ -1,0 +1,108 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Applications of f' 
+##      Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGML.pl",
+  "PGchoicemacros.pl",
+  "parserRadioButtons.pl",
+  "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+
+Context("Numeric");
+$showPartialCorrectAnswers = 0;
+
+# Set parameters
+$c1 = random(-5,9);
+@sign = ("positive","negative");
+$i1 = random(0,$#sign,1);
+$i2 = random(0,$#sign,1);
+$signString1 = $sign[$i1];
+$signString2 = $sign[$i2];
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+# All possible answers
+@allAns = ("\( f(x)\) has no local (relative) extremum at \(x = $c1\)",
+           "\( f(x)\) has a local (relative) minimum at \(x = $c1\)",
+           "\( f(x)\) has a local (relative) maximum at \(x = $c1\)",
+           "\( f(x)\) has an inflection point at \(x = $c1\)",
+           "\( f(x)\) has a zero at \(x = $c1\)",
+           "\( f(x)\) has a discontinuity at \(x = $c1\)",
+           );
+
+# Correctness depends on signs of f' 
+if ($i1 == $i2){ # no extremum
+    $correct = $allAns[0];
+    }
+elsif ($i1 == 0){ # sign change from +
+    $correct = $allAns[2];
+    }
+else { # sign change from -
+    $correct = $allAns[1];
+}
+
+# Use map and grep to extract the correct answer, and 
+#   create an array of incorrects.
+@corrAns = ($correct); 
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+
+BEGIN_PGML
+Let [`f(x)`] be a differentiable function that has a critical number at [`x = [$c1]`], and suppose that [`f'(x)`] is [$signString1] on the interval [`(-\infty,[$c1])`] and [`f'(x)`] is [$signString2] on the interval [`([$c1],\infty)`].
+
+Select the option, if any, that describes the function at [`x = [$c1]`].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

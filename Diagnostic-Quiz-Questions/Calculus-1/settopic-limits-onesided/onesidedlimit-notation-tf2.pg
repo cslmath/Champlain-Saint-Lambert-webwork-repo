@@ -1,0 +1,65 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      One-sided limit notation (2)
+##      True or false
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGML.pl",
+  "PGchoicemacros.pl",
+  "parserRadioButtons.pl",
+  "PGcourse.pl",
+);
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+@var = qw(t \theta z w r);
+$x = $var[random(0,$#var,1)];
+$a = random(-9,9,1);
+
+@allLim = ("\lim\limits_{$x\to $a^-}",
+           "\lim\limits_{$x\to $a^+}");
+@allSymb = ("$x\to $a^-","$x\to $a^+");
+$i = random(0,$#allLim,1);
+$xlim = $allLim[$i];
+$symb = $allSymb[$i];
+
+@allDir = ("less than","greater than");
+$j = random(0,$#allDir,1);
+$dir = $allDir[$j];
+
+# Condition of correctness
+$correct = "False";
+if ($i == $j){$correct = "True";}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:* In the limit [`[$xlim] f([$x])`], the symbol "[`[$symb]`]" indicates to consider only values of [`[$x]`] that are [$dir] [`[$a]`].  
+[@ $radio1->buttons() @]*
+END_PGML
+
+# Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [@ $radio1->correct_ans() @]     
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

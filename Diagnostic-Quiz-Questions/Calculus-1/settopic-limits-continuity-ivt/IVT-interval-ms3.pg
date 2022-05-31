@@ -1,0 +1,337 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      IVT continuity
+##      The equation y=bx + sinx + a with a in [-3,3], non-zero. 
+##      The solution is always in [-3pi/4, pi/4]
+##      Checked range with Desmos :P 
+##      From a list of intervals, select by IVT the ones that contain a solution
+##      Multiple select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+
+
+
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+Context() -> variables -> add(pi=>"Real");
+
+# Set parameters:
+$a = non_zero_random(-3, 3, 1);
+$b = random(1, 20, 1); # as b gets larger the solution gets closer to x=0
+
+# The range containing the intervals: 
+# arbitrary choice, small enough that 7^choice is reasonable  
+$xmin = -5;
+$xmax = 5; 
+
+# Generate 6 correct intervals, i.e., intervals on which the IVT applies
+# They are of the type [p,q] with p <= -3pi/4 and q >= pi/4
+
+# Introduce stuff to deal with fractions. 
+@fractionShift = ([-1,3], [-1,4], [-1,6], [0,1], [1,6], [1,4], [1,3], [1,2]);
+#### Template on how to get elements from the list of lists. 
+#$index = random(0,$#fractionShift,1); 
+#($m,$n) = @{$fractionShift[$index]};
+
+
+@corrAns = ();
+@lowerBoundCorr = ();
+@upperBoundCorr = ();
+for($i=0; $i<=5; $i++){
+    # Choose a fraction that is less than -3/4
+    # Generate it as k+m/n, where m/n is from the list above
+    $k = random($xmin,-2,1);
+    $index1 = random(0,$#fractionShift,1); 
+    ($m,$n) = @{$fractionShift[$index1]};
+    $lowerBoundCorr[$i] = $k + $m/$n;
+    # Choose a fraction that is large than 1/4 
+    # Generate it as p+q/r, where q/r is from the list above
+    $p = random(1, $xmax, 1);
+    $index2 = random(0,$#fractionShift,1); 
+    ($q,$r) = @{$fractionShift[$index2]};
+    $upperBoundCorr[$i] = $p + $q/$r;        
+    # Make sure we are not duplicating an interval
+    $new = 1;
+    for($j=0; $j<$i; $j++){
+        # here j<i because if j=i, the condition is always true
+        if(($lowerBoundCorr[$j] == $lowerBoundCorr[$i]) and ($upperBoundCorr[$i] == $upperBoundCorr[$j])){ # so we are reapeating some previously recorded interval
+            $new = 0; # do not record this interval, it is not new
+        }
+        # else do nothing
+    }
+    if($new == 1){
+        # describe the fractions with pi and everything
+        $lowerBoundNum = $k*$n+$m;
+        $lowerBoundDenom = $n;
+        $upperBoundNum = $p*$r+$q;
+        $upperBoundDenom = $r;
+ 
+        ##############
+        # if a fraction chosen was 0/1, deal with the ugly denominator separately 
+        if(($n==1) and ($r==1)){ #then k+m/n = k and p+q/r=p
+            # if k=-1 or r=1, we want to avoid thngs looking like -1pi
+            if(($k==-1) and ($r == 1)){
+                push(@corrAns, "\( -\pi, \pi \)");
+            }
+            elsif(($k==-1) and ($r!=1)){
+                push(@corrAns, "\([-\pi, $p\pi]\)");
+            }
+            elsif(($k!=-1) and ($r==1)){
+                push(@corrAns, "\([$k\pi, \pi]\)");
+            }
+            else{
+                push(@corrAns, "\([$k\pi, $p\pi]\)");
+            }
+        }
+        elsif(($n==1) and ($r!=1)){ # then only k+m/n =k
+            # if k = -1 avoid seeing -1pi
+            if($k == -1){
+                push(@corrAns, "\([-\pi, \frac{$upperBoundNum}{$upperBoundDenom}\pi]\)");
+            }
+            else{
+                push(@corrAns, "\([$k\pi, \frac{$upperBoundNum}{$upperBoundDenom}\pi]\)");
+            }
+        }
+        elsif(($n!=1) and ($r==1)){ #then p+q/r =p
+            # if p=1, avoid seeing 1pi
+            if($p ==1){
+                push(@corrAns, "\([\frac{$lowerBoundNum}{$lowerBoundDenom}\pi, \pi]\)");
+            }
+            else{
+                push(@corrAns, "\([\frac{$lowerBoundNum}{$lowerBoundDenom}\pi, $p\pi]\)");
+            }           
+        }
+        else{
+            push(@corrAns, "\([\frac{$lowerBoundNum}{$lowerBoundDenom}\pi, \frac{$upperBoundNum}{$upperBoundDenom}\pi]\)");
+        }
+        # ugly denominator nonsense ends here 
+        ############
+    }
+    else{
+        $i = $i-1; # force one more pass through the loop
+    }
+}
+
+
+##### Generate incorrect intervals
+# The incorrect intervals can be on the right or the left of the correct one
+@incorrAns = ();
+
+# Generate 6 incorrect intervals on the right of pi/4
+@lowerBoundIncorr1 = ();
+@upperBoundIncorr1 = ();
+for($i=0; $i<=5; $i++){
+    # Choose a fraction that is larger than 1/4
+    # Generate it as k+m/n, where m/n is from the list above
+    $k = random(1,$xmax-2,1);
+    $index1 = random(0,$#fractionShift,1); 
+    ($m,$n) = @{$fractionShift[$index1]};
+    $lowerBoundIncorr1[$i] = $k + $m/$n;
+    # Choose a fraction that is large than the previous one 
+    # Generate it as p+q/r, where q/r is from the list above
+    $p = random($k+1, $xmax, 1);
+    $index2 = random(0,$#fractionShift,1); 
+    ($q,$r) = @{$fractionShift[$index2]};
+    $upperBoundIncorr1[$i] = $p + $q/$r;        
+    # Make sure we are not duplicating an interval
+    $new = 1;
+    for($j=0; $j<$i; $j++){
+        # here j<i because if j=i, the condition is always true
+        if(($lowerBoundIncorr1[$j] == $lowerBoundIncorr1[$i]) and ($upperBoundIncorr1[$i] == $upperBoundIncorr1[$j])){ # so we are reapeating some previously recorded interval
+            $new = 0; # do not record this interval, it is not new
+        }
+        # else do nothing
+    }
+    if($new == 1){
+        # describe the fractions with pi and everything
+        $lowerBoundNum = $k*$n+$m;
+        $lowerBoundDenom = $n;
+        $upperBoundNum = $p*$r+$q;
+        $upperBoundDenom = $r;
+        
+        #############
+        # if a fraction chosen was 0/1, deal with the ugly denominator separately 
+        if(($n==1) and ($r==1)){ #then k+m/n = k and p+q/r=p
+            # if k =1 avoid seeing 1pi
+            if($k == 1){
+                push(@incorrAns, "\([\pi, $p\pi]\)");
+            }
+            else{
+                push(@incorrAns, "\([$k\pi, $p\pi]\)");
+            }
+        }
+        elsif(($n==1) and ($r!=1)){ # then only k+m/n =k
+            if($k == 1){
+                push(@incorrAns, "\([\pi, \frac{$upperBoundNum}{$upperBoundDenom}\pi]\)");
+            }
+            else{
+                push(@incorrAns, "\([$k\pi, \frac{$upperBoundNum}{$upperBoundDenom}\pi]\)");
+            }
+        }
+        elsif(($n!=1) and ($r==1)){
+            push(@incorrAns, "\([\frac{$lowerBoundNum}{$lowerBoundDenom}\pi, $p\pi]\)");
+        }
+        else{
+            push(@incorrAns, "\([\frac{$lowerBoundNum}{$lowerBoundDenom}\pi, \frac{$upperBoundNum}{$upperBoundDenom}\pi]\)");
+        }
+        # ugly denomiantor nonsense ends here
+    }
+    else{
+        $i = $i-1; # force one more pass through the loop
+    }
+}
+
+# Generate 6 incorrect intervals to the left of -3pi/4
+@lowerBoundIncorr2 = ();
+@upperBoundIncorr2 = ();
+for($i=0; $i<=5; $i++){
+    # Choose a fraction that is smaller than -3/4
+    # Leave some space for the upper bound on the left of -3/4
+    # Generate it as k+m/n, where m/n is from the list above
+    $k = random($xmin,-2,1);
+    $index1 = random(0,$#fractionShift,1); 
+    ($m,$n) = @{$fractionShift[$index1]};
+    $lowerBoundIncorr2[$i] = $k + $m/$n;
+    # Choose a fraction that is larger than the previous one but smaller than -3/4
+    # Generate it as p+q/r, where q/r is from the list above
+    $p = random($k+1, -1, 1);
+    # try to get as close as possible to -3.4 (for prettiness)
+    # exclude the fractions 1/6, 1/3 and 1/2 
+    # this excludes them from any lower bound, but it won't be noticeable
+    # index 3 corresponds to 0, after that start the positive increments
+    $index2 = random(0,3,1); 
+    ($q,$r) = @{$fractionShift[$index2]};
+    $upperBoundIncorr2[$i] = $p + $q/$r;        
+    # Make sure we are not duplicating an interval
+    $new = 1;
+    for($j=0; $j<$i; $j++){
+        # here j<i because if j=i, the condition is always true
+        if(($lowerBoundIncorr2[$j] == $lowerBoundIncorr2[$i]) and ($upperBoundIncorr2[$i] == $upperBoundIncorr2[$j])){ # so we are reapeating some previously recorded interval
+            $new = 0; # do not record this interval, it is not new
+        }
+        # else do nothing
+    }
+    if($new == 1){
+        # describe the fractions with pi and everything  
+        $lowerBoundNum = $k*$n+$m;
+        $lowerBoundDenom = $n;
+        $upperBoundNum = $p*$r+$q;
+        $upperBoundDenom = $r;
+
+        # if a fraction chosen was 0/1, deal with the ugly denominator separately 
+        if(($n==1) and ($r==1)){ #then k+m/n = k and p+q/r=p
+            # if p=-1 avoid seeing -1pi
+            if($p==-1){
+                push(@incorrAns, "\([$k\pi, -\pi]\)");
+            }
+            else{
+                push(@incorrAns, "\([$k\pi, $p\pi]\)");
+            }
+        }
+        elsif(($n==1) and ($r!=1)){ # then only k+m/n =k
+            push(@incorrAns, "\([$k\pi, \frac{$upperBoundNum}{$upperBoundDenom}\pi]\)");
+        }
+        elsif(($n!=1) and ($r==1)){
+            if($p==-1){
+                push(@incorrAns, "\([\frac{$lowerBoundNum}{$lowerBoundDenom}\pi, -\pi]\)");
+            }
+            else{
+                push(@incorrAns, "\([\frac{$lowerBoundNum}{$lowerBoundDenom}\pi, $p\pi]\)");
+            }
+        }
+        else{
+            push(@incorrAns, "\([\frac{$lowerBoundNum}{$lowerBoundDenom}\pi, \frac{$upperBoundNum}{$upperBoundDenom}\pi]\)");
+        }
+        # ugly denomiantor nonsense ends here
+    }
+    else{
+        $i = $i-1; # force one more pass through the loop
+    }
+}
+
+
+
+
+
+
+# Correct answers to display
+#     $numc: Display 0 to 4 correct answers
+#     @slicec: indices of subset of correct answers
+#     @randc: subset of correct answers
+$numc = random(0,4,1);  # number correct answers up to max 4
+@slicec = NchooseK(scalar(@corrAns),$numc);
+@corrAns = @corrAns[@slicec];
+# Incorrect answers to display
+#     $numi: Display 4-$numc incorrect answers
+#     @slicei: indices of subset of incorrect answers
+#     @randi: subset of incorrect answers
+$numi = 4 - $numc;
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@incorrAns = @incorrAns[@slicei];
+
+$quest = ();
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){ # show at least one correct
+    $multichoice -> qa (
+        $quest, 
+    @corrAns,
+    );
+    $multichoice -> extra(
+    @incorrAns,
+    );
+} else { # show no correct choice ("None of the above" is correct answer)
+   $multichoice -> qa (
+        $quest, 
+        "None of the above",
+    );
+    $multichoice -> extra(
+    @incorrAns,
+    );
+}
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+
+Select the interval(s), if any, on which you can conclude, by using the Intermediate Value Theorem, that the following equation has a solution. 
+
+[` [$b]x + \sin x + [$a] = 0 `]  
+[@ $multichoice->print_a() @]*  
+
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

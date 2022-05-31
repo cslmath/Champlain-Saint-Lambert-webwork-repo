@@ -1,0 +1,62 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      One sided limit concept: 
+##         then limit as x approaches a or at -a
+##      True or false
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGML.pl",
+  "parserPopUp.pl",
+  "parserRadioButtons.pl",
+  "PGchoicemacros.pl",
+  "PGcourse.pl",
+);
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+$a = random(-9,9,1);
+$b = -1*$a;
+$twosidedlim = "\lim\limits_{x\to $a} f(x)";
+$leftlim = "\lim\limits_{x\to $a^-} f(x)";
+$rightlim = "\lim\limits_{x\to $a^+} f(x)";
+$btwosidedlim = "\lim\limits_{x\to $b} f(x)";
+
+@allLim = ($twosidedlim,$btwosidedlim);
+$j = random(0,$#allLim,1);
+$thenlimit = $allLim[$j];
+
+$correct = "True";
+if ($j == 1){$correct = "False";}
+
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:* If [`[$leftlim] = [$rightlim] = L`], then [`[$thenlimit] = L`].  
+[@ $radio1->buttons() @]*
+END_PGML
+
+# Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

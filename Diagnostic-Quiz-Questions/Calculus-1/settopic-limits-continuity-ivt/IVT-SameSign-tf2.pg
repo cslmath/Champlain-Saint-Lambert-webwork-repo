@@ -1,0 +1,73 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      if differentiable, then continuous using limit condition of continuity
+##      True or false 
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+# Set parameters
+$a = random(-9,9,1);
+$shift = random(1,5,1);
+$b = $a+$shift;
+$ABSfa = random(1,9,1);
+$ABSfb = random(1,9,1);
+
+$sign = random(0,1,1);
+if($sign == 0){ #the sign of fa and fb is negative
+    $fa = -$ABSfa;
+    $fb = -$ABSfb;
+}
+else{ #the sign of fa nad fb is positive
+    $fa = $ABSfa;
+    $fb = $ABSfb;
+}
+
+@allAns = (
+    "exactly one solution",
+    "exactly two solutions",
+    "no solution",
+);
+$index = random(0,$#allAns,1);
+$conclusion = $allAns[$index];
+
+# Since fa and fb always have the same sign, IVT is always inconclusive
+$correct = "False";
+
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:* Suppose that [`f(x)`] is differentiable on the interval [`[[$a],[$b]]`], [`f([$a]) = [$fa]`], and [`f([$b]) = [$fb] `], then we can conclude by the Intermediate Value Theorem that [`f(x)`] has [$conclusion] in this interval.
+
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct].
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

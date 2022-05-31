@@ -1,0 +1,98 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Increase/decrease, Concavity: conclusion from signs of f' and f''
+##      Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGML.pl",
+  "parserRadioButtons.pl",
+  "PGchoicemacros.pl",
+  "PGcourse.pl",
+);
+
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+$a = random(-2,5,1);
+$b = $a + random(2,6,1);
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+@sign = ("positive","negative");
+$ip = random(0,1,1);
+$ipp = random(0,1,1);
+$fp = $sign[$ip];
+$fpp = $sign[$ipp];
+
+@change = ("is increasing","is decreasing");
+@concavity = ("concave upward","concave downward");
+$correctChange = $change[$ip];
+$wrongChange = $change[1-$ip];
+$correctConcavity = $concavity[$ipp];
+$wrongConcavity = $concavity[1-$ipp];
+
+# Set up correct and incorrect answers
+$correct = "\( f(x)\) $correctChange and $correctConcavity on the interval \( ($a,$b)\)";
+@incorrAns = ("\( f(x)\) $correctChange and $wrongConcavity on the interval \( ($a,$b)\)",
+   "\( f(x)\) $wrongChange and $correctConcavity on the interval \( ($a,$b)\)",
+   "\( f'(x)\) $correctChange and $correctConcavity on the interval \( ($a,$b)\)",
+   "\( f'(x)\) $correctChange and $wrongConcavity on the interval \( ($a,$b)\)",
+   "\( f(x) \) $wrongChange and $wrongConcavity on the interval \( ($a,$b)\)",
+   );
+
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+
+BEGIN_PGML
+Let [`f(x)`] be a function with a continuous second derivative. Suppose that  [`f'(x)`] is [$fp]  and [`f''(x)`] is [$fpp] on the interval [`([$a],[$b])`]. 
+
+Select the option, if any, that describes the function on this interval.  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

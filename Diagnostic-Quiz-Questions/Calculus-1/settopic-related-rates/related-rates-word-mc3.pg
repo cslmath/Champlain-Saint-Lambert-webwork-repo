@@ -1,0 +1,130 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Related rates
+##      Word problem: learning to read the problem, Volume 
+##      (Stewart 7ed, 3.9, 17)
+##      Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGtikz.pl",
+    "PGcourse.pl",
+  );
+
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+#$refreshCachedImages = 1; # <= comment out line after testing
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+# Set parameters
+$Xrate = random(1.2,1.5,0.1);
+$Yrate = random(0.7,1.1,0.1); # Yrate < Xrate (so diagram reasonable)
+@Wordmin = ("Eight","Six","Four");
+@Nummin = (8,6,4);
+$j = random(0,$#Wordmin,1);
+$wordtime = $Wordmin[$j];
+$numtime = $Nummin[$j];
+$time = random(10,20,5); 
+$dist = random(130,170,10); # 500 feet =approx 152 m
+
+# Answer arrays
+@allAns = ("Find \(dz/dt\) when \( x = ($numtime + $time)($Xrate)(60) \) m and \( y = ($time)($Yrate)(60) \) m, given that \(dx/dt = $Xrate\) m/s and \( dy/dt = $Yrate\) m/s.",
+    "Find \(dz/dt\) when \( x = ($numtime + $time)($Xrate) \) m and \( y = ($time)($Yrate) \) m, given that \(dx/dt = $Xrate\) m/s and \( dy/dt = $Yrate\) m/s.",  # error: did not convert minutes to seconds
+     "Find \(dz/dt\) when \( x = ($numtime + $time)($Yrate) \) m and \( y = ($time)($Xrate) \) m, given that \(dx/dt = $Yrate\) m/s and \( dy/dt = $Xrate\) m/s.", # error: mix up rates
+     "Find \(dz/dt\) when \( x = ($time)($Xrate) \) m and \( y = ($time)($Yrate) \) m, given that \(dx/dt = $Xrate\) m/s and \( dy/dt = $Yrate\) m/s.", # error: forget extra minutes for person X
+     "Find \(dz/dt\) when \( x = ($numtime + $time)($Xrate)(60) \) m and \( y = ($time)($Yrate)(60) \) m, given that \(dx/dt = $Xrate\) m/s and \( dy/dt = - $Yrate\) m/s.", # error: negative rate for person Y moving south
+);
+
+$correct = $allAns[0];
+@incorrAns = @allAns[1..$#allAns];
+@corrAns = ($correct); 
+ 
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+    
+##############################################################
+#
+#  Graph Setup
+#
+$graph_image = createTikZImage();
+$graph_image->tikzLibraries("arrows.meta");
+
+$graph_image->BEGIN_TIKZ
+  \draw[dashed]  (0,1.7) -- (0,4) -- (3,4);
+  \draw[dashed] (0,1.7) -- (3,1.7);
+  \node [right] at (3,1) {\(P\)};
+  \node [left] at (0,1.7) {\(Q\)};
+  \draw[thick,->] (3,1.7) -- (3,4);
+  \node [right] at (3,{(1.7+4)/2}) {\(x\)};
+  \draw[thick,->] (0,1.7) -- (0,0);
+   \node [right] at (3.1,4) {Person \(X\)};
+   \node [left] at (-0.1,0) {Person \(Y\)};
+  \node [left] at (0,0.85) {\(y\)};
+  \draw (0,0) -- (3,4);
+  \filldraw  (3,1.7) circle (1pt);
+  \filldraw  (0,1.7) circle (1pt);
+  \node [above] at (1.5,4) {\($dist\) m};
+END_TIKZ
+#########################################################
+
+BEGIN_PGML
+Person [`X`] starts walking north at [`[$Xrate]`] metres per second from a point [`P`]. [$wordtime] minutes later, person [`Y`] starts walking south at [`[$Yrate]`] metres per second from a point [`Q`] that is [`[$dist]`] metres due west of [`P`].  Let [`x`] be the distance in metres that person [`X`] walks from [`P`], let [`y`] the the distance in metres that person [`Y`] walks from [`Q`], and let [`z`] be the distance between the two people. At what  rate are the two people moving apart at the moment [`[$time]`] minutes after person [`Y`] start walking?  
+
+Notes: By the Pythagorean Thereom, the equation that relates the distances is [`z^2 = (x+y)^2 + [$dist]^2`]. Remember to convert minutes to seconds.
+
+>>[@ image($graph_image, width => 200, tex_size => 250) @]*<<  
+>>Note: the graph is not to scale.<<  
+>>(Click on graph to enlarge.)<<
+
+Select the statement, if any, that describes the goal of the related rates word problem.  
+
+[@ $radio1->buttons() @]*  
+
+END_PGML
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

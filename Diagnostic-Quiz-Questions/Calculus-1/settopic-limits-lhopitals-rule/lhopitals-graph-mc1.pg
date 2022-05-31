@@ -1,0 +1,166 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      L'Hopital's rule
+##      Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGchoicemacros.pl",
+  "PGgraphmacros.pl",
+  "PGML.pl",
+  "PGtikz.pl",
+  "parserRadioButtons.pl",
+  "PGcourse.pl",
+);
+
+Context("Numeric");
+$showPartialCorrectAnswers = 0;
+#$refreshCachedImages = 1;  # <= comment out this line after testing
+
+# Parameters
+#  slope
+$mneg = -1*random( 0.4,0.9,0.1 );
+$k = random(1.7,2.3,0.2);
+$mpos = -$k*$mneg;
+do {$a = random(1,6,1);} until ($a != 4);
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+@colours = ("blue","red");
+
+$cj = random(0,1,1);
+if ($cj == 0){# f dec, g inc
+    $fcolour = $colours[0];
+    $gcolour = $colours[1];
+    $ftcolour = $colours[0];
+    $gtcolour = $colours[1];
+    $mf = $mneg;
+    $mg = $mpos;
+    $bf = "g";
+    $kf = "f";
+}
+else { # f inc, g dec
+    $fcolour = $colours[1]; 
+    $gcolour = $colours[0];
+    $ftcolour = $colours[1]; 
+    $gtcolour = $colours[0];
+    $mf = $mpos;
+    $mg = $mneg;
+    $bf = "f";
+    $kf = "g";
+}
+
+# Graph setup
+$graph_image = createTikZImage();
+$graph_image->tikzLibraries("arrows.meta");
+
+$graph_image->BEGIN_TIKZ
+\draw [->] (-.5,0) -- (2,0);
+\draw [->] (0,-1.1) -- (0,1.5);
+\node [right] at (2.1,0) {\( x \)};
+\node [above] at (0,1.5) {\( y \)};
+\draw[blue,thick,domain=0.1:2] plot (\x, {0.7*(exp(1 - \x)-1)});
+\node[blue,right] at (2,-.5) {\( $kf(x) \)};
+\draw[blue,dashed,thick,domain=0:2] plot (\x, {-0.7*(\x - 1)});
+\draw[red,dashed,thick,domain=0.285714:1.71429] plot (\x, {1.4*(\x - 1)});
+\draw[red,thick,domain=0.489542:2] plot (\x, {1.4*ln(\x)});
+\node[red,right] at (2,0.9) {\($bf(x)\)};
+\draw (1,-.1) -- (1,.1);
+\node [below,black] at (1,-0.11) {\($a\)};
+END_TIKZ
+
+# values of f and g
+$fcorr = "\( f($a) = 0\) and \( g($a) = 0 \)";
+$fincorr1 = "\( f($a) = $a \) and \( g($a) = $a \) "; 
+$fincorr2 = "\( f($a) = $mf \) and \( g($a) = $mg \)";  
+$fincorr3 = "\( f($a) = $mg \) and  \( g($a) = $mf \) ";   
+@allI = ($fincorr1,$fincorr2,$fincorr3);
+$finsuffString = "There is not enough information to determine the values of \(f($a)\) and \(g($a)\)";
+
+# values of f' and g'
+$fpincorr2 = "\( f'($a) = 0\) and \( g'($a) = 0 \)";
+$fpincorr1 = "\( f'($a) = $a \) and \( g'($a) = $a \) "; 
+$fpcorr = "\( f'($a) = $mf \) and \( g'($a) = $mg \)";  
+$fpincorr3 = "\( f'($a) = $mg \) and  \( g'($a) = $mf \) ";   
+@allIp = ($fpincorr1,$fpincorr2,$fpincorr3);
+$fpinsuffString = "There is not enough information to determine the values of \(f'($a)\) and \(g'($a)\)";
+
+$mfabs = abs($mf);
+$mgabs = abs($mg);
+
+# All limits
+@allAns = ("\(- $mfabs/$mgabs\)", 
+           "\(- $mgabs/$mfabs\)",
+           "\( $mgabs/$mfabs \)", 
+           "\( $mfabs/$mgabs \)", 
+           "\(0\)",
+           "Does not exist",
+           "There is not enough information to determine the value of the limit",
+           );
+$correct = $allAns[0];   
+
+# Use map and grep to extract the correct answer, and 
+#   create an array of incorrects.
+@corrAns = ($correct); 
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+    
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+
+TEXT(beginproblem());
+
+BEGIN_PGML
+>>
+[@ image($graph_image, height=>180, width=>180, tex_size=>350) @]*
+<<
+The graph above has the functions [` f `] in [$fcolour] and [` g `] in [$gcolour] and their tangent lines (dashed lines) at the point [` ([$a],0) `].  
+The tangent line to [`f`] is [`y = [$mf] (x - [$a])`] and the tangent line to [`g`] is [`y = [$mg] (x - [$a])`].
+
+Select the correct value, if any, for [``\lim\limits_{x\to [$a]} \frac{f(x)}{g(x)} .``]  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]* 
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

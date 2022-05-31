@@ -1,0 +1,66 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      If differentiable, then continuous using limit condition of continuity
+##      True or false
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+# Set parameters
+$a = random(-9,9,1);
+$absa = abs($a);
+$pm = "-";
+if ($a < 0){$pm = "+";}
+
+# Condition that determines the truth of the statement:
+#   Here, the order of terms in the difference.
+@words = ("continuous","differentiable");
+$ir = random(0,$#words,1);
+$ifword = $words[$ir];
+
+# Correctness condition checked:
+if ($ir == 1) {   # 
+    $thenword = $words[0];
+    $correct = "True";
+    }
+else {
+    $thenword = $words[1];
+    $correct = "False";
+}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:* If [`f(x)`] is [$ifword] at [`x=[$a]`], then [`f(x)`] is [$thenword] at [`x=[$a]`].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct].
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

@@ -1,0 +1,131 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Sign of f' and f'' from graph (1 of 1)
+##      Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+
+
+DOCUMENT();
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "parserRadioButtons.pl",
+    "PGtikz.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+#$refreshCachedImages = 1;  # <= COMMENT OUT THIS LINE OF CODE AFTER TESTING
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+# Variable $graph1 contains the TikZ graph:
+$graph1 = createTikZImage();
+$graph1->tikzLibraries("arrows.meta");
+
+$gmin = -2.5;
+$gmax = 2.5;
+$xmin = -2.5;
+$xmax = 2.5;
+$a = 3.9641;
+$b = 6.5641;
+@allxmin = (-2.5,-2.5,-1.7,-1.25,-1.25,-1.7,-2.5,-2.5);
+@allxmax = (1.7,1.25,2.5,2.5,2.5,2.5,1.25,1.7);
+
+# Graphs to display
+@allGraph = ("sqrt(49 - (-1*\x - 3.9641)^2) - 6.5641",# 000  f, f', f''
+         "-1*sqrt(49 - (\x - 3.9641)^2) + 3.9641",    # 001
+         "sqrt(49 - (\x - 3.9641)^2) - 6.5641",       # 010
+         "-1*sqrt(49 - (-1*\x - 3.9641)^2) + 3.9641", # 011
+         "sqrt(49 - (-1*\x - 3.9641)^2) - 3.9641",    # 100
+         "-1*sqrt(49 - (\x - 3.9641)^2) + 6.5641",    # 101
+         "sqrt(49 - (\x - 3.9641)^2) - 3.9641",       # 110      
+         "-1*sqrt(49 - (-1*\x - 3.9641)^2) + 6.5641", # 111
+        );
+$gi = random(0,$#allGraph,1);
+
+$fun = $allGraph[$gi];
+$xmin = $allxmin[$gi];
+$xmax = $allxmax[$gi];
+
+$graph1->BEGIN_TIKZ
+  \draw[thick,->] ({$gmin},0) -- ({$gmax},0) node[anchor=north west] {\(x\)};
+  \draw[thick,->] (0,{$gmin}) -- (0,{$gmax}) node[anchor=south east] {\(y\)};
+  \draw[blue, ultra thick, domain={$xmin}:{$xmax}] plot (\x, {$fun});
+END_TIKZ
+
+# All possible answers
+@allAns = ("\( f(0)<0, f'(0)<0, f''(0)<0 \)",  # 000
+           "\( f(0)<0, f'(0)<0, f''(0)>0 \)",  # 001
+           "\( f(0)<0, f'(0)>0, f''(0)<0 \)",  # 010
+           "\( f(0)<0, f'(0)>0, f''(0)>0 \)",  # 011
+           "\( f(0)>0, f'(0)<0, f''(0)<0 \)",  # 100
+           "\( f(0)>0, f'(0)<0, f''(0)>0 \)",  # 101
+           "\( f(0)>0, f'(0)>0, f''(0)<0 \)",  # 110
+           "\( f(0)>0, f'(0)>0, f''(0)>0 \)",  # 111
+           );
+$correct = $allAns[$gi];
+
+# Use map and grep to extract the correct answer, and 
+#   create an array of incorrects.
+@corrAns = ($correct); 
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+
+BEGIN_PGML
+>>[@ image(insertGraph($graph1), width=>150, height=>150, tex_size=>400); @]*<<  
+Given the function [`f(x)`] whose graph is shown above.  
+Select the option, if any, that describes the signs of [`f`], [`f'`] and [`f''`] at [`x=0`].  
+[@ $radio1->buttons() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

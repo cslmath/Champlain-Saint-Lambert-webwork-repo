@@ -1,0 +1,74 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Differentiable or not, using limit definition of the derivative
+##      True or false
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+
+
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+# Set parameters
+$a = random(-9,9,1);
+$absa = abs($a);
+$pm = "-";
+if ($a < 0){$pm = "+";}
+
+# Condition that determines the truth of the statement:
+#   Here, the order of terms in the difference.
+@allLim = (" \lim\limits_{h\to 0} \dfrac{f($a + h) - f($a)}{h} ", 
+           " \lim\limits_{x \to $a} \dfrac{f(x) - f($a)}{x $pm $absa} ", 
+           );
+$i = random(0,$#allLim,1);
+$limit = $allLim[$i];
+@diff = ("not differentiable","differentiable");
+$id = random(0,$#diff,1);
+@exist = ("does not exist","exists");
+$ie = random(0,$#exist,1);
+$diffyn = $diff[$id];
+$existyn = $exist[$ie];
+
+# Correctness condition checked:
+if ($id == $ie) {   # true if indices equal
+    $correct = "True";
+    }
+else {
+    $correct = "False";
+}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:* If [`f(x)`] is [$diffyn] at [`x=[$a]`], then [`[$limit]`] [$existyn].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct].
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

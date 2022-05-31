@@ -1,0 +1,115 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Indeterminate forms: powers
+##      Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+# True = indeterminate form, False = determinate form
+@allLimPairs = (["0","0"],
+                ["1","\infty"],
+                ["1","-\infty"],
+                ["\infty","0"],
+                ["0","1"],  # zero,
+                ["\infty","-\infty"], # zero,
+                ["1","0"], # one
+                ["1","1"], # one
+                ["\infty","1"], # infty
+                ["\infty","\infty"], # infty
+            );
+$i = random(0,$#allLimPairs,1);
+$flim=$allLimPairs[$i][0];
+$glim=$allLimPairs[$i][1];
+
+# Displayed choices
+@allAns = ("Limit is an indeterminate power to which l'Hospital's Rule applies",
+           "Limit evaluates to 0  and l'Hospital's Rule does not apply",
+           "Limit evaluates to 1  and l'Hospital's Rule does not apply",
+           "Limit evaluates to \(\infty\)  and l'Hospital's Rule does not apply",
+           "Limit evaluates to \(-\infty\)  and l'Hospital's Rule does not apply",
+           );
+
+# Correct answer depends on $i
+if ($i < 4){ # indeterminate
+    $correct = $allAns[0];
+    }
+elsif ($i < 6){ # zero
+    $correct = $allAns[1];
+    }
+elsif ($i < 8){ # one
+    $correct = $allAns[2];
+    }
+else { # infty
+    $correct = $allAns[3];
+    }
+
+# Use map and grep to extract the correct answer, and 
+#   create an array of incorrects.
+@corrAns = ($correct); 
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+    
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+#########################################################
+
+BEGIN_PGML
+Suppose that [`f`] is a positive function, and that [`\lim\limits_{x\to a} f(x) = [$flim]`]  and [`\lim\limits_{x\to a} g(x) = [$glim]`].
+
+Select the type of limit, if any, of [`\lim\limits_{x\to a} [f(x)]^{g(x)}`].
+
+[@ $radio1->buttons() @]*  
+END_PGML
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

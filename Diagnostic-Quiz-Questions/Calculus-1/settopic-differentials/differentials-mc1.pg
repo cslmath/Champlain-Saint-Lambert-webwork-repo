@@ -1,0 +1,102 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##     Linear approximation using differentials (1 of 4)
+##     Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGgraphmacros.pl",
+  "PGML.pl",
+  "parserRadioButtons.pl",
+  "PGchoicemacros.pl",  # needed for NchooseK
+  "PGcourse.pl",
+);
+
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+# Set parameters
+$a1 = non_zero_random(-5,9);
+$dx = non_zero_random(-0.15,0.15,0.01);
+$a2 = $a1 + $dx;
+
+# adjust signs so the display of (x-a) factor looks right:
+$abs1 = abs($a1);
+$abs2 = abs($a2);
+@minusplus = ("-","+");
+$pm1 = $minusplus[0];
+if ($a1 < 0){$pm1 = $minusplus[1];}
+$pm2 = $minusplus[0];
+if ($a2 < 0){$pm2 = $minusplus[1];}
+
+# all answers to display
+@allAns = ("\( f($a2) \approx f($a1) + f'($a1)\cdot($a2 $pm1 $abs1) \)",
+    "\( f($a2) \approx  f'($a2)\cdot($a1 $pm2 $abs2) \)",  #Distractors start here
+    "\( f($a2) \approx  f($a1) + f'($a1)\cdot($a1 $pm2 $abs2)  \)",
+    "\( f($a2) \approx  f'($a2)\cdot($a2 $pm1 $abs1) \)",
+    "\( f($a2) \approx f'($a1)\cdot($a2 $pm1 $abs1) \)",
+    "\( f($a2) \approx f'($a1)\cdot($a1 $pm2 $abs2) \)",
+    );
+$correct = $allAns[0];
+@incorrAns = @allAns[1..$#allAns];
+
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+
+#$radio = RadioButtons([[$correct,@randi],"None of the above"],0); # correct index 0
+
+BEGIN_PGML
+Suppose [`y=f(x)`] is a differentiable function, and that the values of [`f([$a1])`] and [`f'([$a1])`] are known. 
+
+Select the correct form, if any, of the approximation of [`f([$a2])`] using the differential of [`f`].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();
