@@ -1,0 +1,184 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      IVT continuity
+##      The equation n^x - x^n always has a solution on [0,3] 
+##      with n>3 odd (proof by induction)
+##      From a list of intervals, select by IVT the ones that contain a solution
+##      Multiple select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+# Set parameters:
+
+do{$n = random(3, 13, 2); # n is odd to avoid possible negative solutions
+}until(n != 5); # if n = 5, x=5 is a solution and a bunch of wrong intervals are correct
+
+
+# The range contianing the intervals: 
+# arbitrary choice, small enough that 7^choice is reasonable  
+# Warning! x=n is always a solution, so if the range (xmin and xmax) changes
+# the exclusion in the choice of n above needs to be ammended
+$xmin = -5;
+$xmax = 5; 
+
+# Generate 6 correct intervals
+$lowerMax = 0; # because solution is always in [0,3]
+$lowerMin = $xmin;
+@lowerBoundYes = ();
+$upperMin = 3;
+$upperMax = $xmax;
+@upperBoundYes = ();
+@corrAns = ();
+for($i=0; $i<=5; $i++){
+    $lowerBoundYes[$i] = random($lowerMin, $lowerMax, 0.5);
+    $upperBoundYes[$i] = random($upperMin, $upperMax, 0.5);
+#    $lowerBoundYes = random($lowerMin, $lowerMax, 0.5);
+#    $upperBoundYes = random($upperMin, $upperMax, 0.5);
+    # Make sure we are not duplicating an interval
+    $new = 1;
+    for($j=0; $j<$i; $j++){
+        # here j<i because if j=i, the condition is always true
+        if(($lowerBoundYes[$j] == $lowerBoundYes[$i]) and ($upperBoundYes[$j]) == $upperBoundYes[$i]){ # so we are reapeating some previously recorded interval
+            $new = 0; # do not record this interval, it is not new
+        }
+        # else do nothing
+    }
+    if($new == 1){
+        $corrAns[$i] = "\([$lowerBoundYes[$i], $upperBoundYes[$i]]\)";
+    }
+    else{
+        $i = $i-1; # force one more pass through the loop
+    }
+}
+
+@incorrAns = ();
+# Generate 4 wrong intervals on the right of 3
+$lowerMin = 3;
+$lowerMax = (3+$xmax)/2-0.5;
+@lowerBoundNo = ();
+$upperMin = $lowerMax+0.5;
+$upperMax = $xmax;
+@upperBoundNo = ();
+for($i=0; $i<=3; $i++){
+    $lowerBoundNo[$i] = random($lowerMin, $lowerMax, 0.5);
+    $upperBoundNo[$i] = random($upperMin, $upperMax, 0.5);
+    # Make sure we are not duplicating an interval
+    $new = 1;
+    for($j=0; $j<$i; $j++){
+        # here j<i because if j=i, the condition is always true
+        if(($lowerBoundNo[$j] == $lowerBoundNo[$i]) and ($upperBoundNo[$j]) == $upperBoundNo[$i]){ # so we are reapeating some previously recorded interval
+            $new = 0; # do not record this interval, it is not new
+        }
+        # else do nothing
+    }
+    if($new == 1){
+        $incorrAns[$i] = "\([$lowerBoundNo[$i], $upperBoundNo[$i]]\)";
+    }
+    else{
+        $i = $i-1; # force one more pass through the loop
+    }
+}
+
+# Generate 4 wrong intervals on the left of 0
+$lowerMin = $xmin;
+$lowerMax = $xmin/2;
+@lowerBoundNo = ();
+$upperMin = $lowerMax+0.5;
+$upperMax = 0;
+@upperBoundNo = ();
+for($i=4; $i<=7; $i++){
+    # Important: i starts at 4 because we are adding to the end of incorrAns
+    # incorrAns had its first 4 terms filled in above
+    $lowerBoundNo[$i] = random($lowerMin, $lowerMax, 0.5);
+    $upperBoundNo[$i] = random($upperMin, $upperMax, 0.5);
+    # Make sure we are not duplicating an interval
+    $new = 1;
+    for($j=0; $j<$i; $j++){
+        # here j<i because if j=i, the condition is always true
+        if(($lowerBoundNo[$j] == $lowerBoundNo[$i]) and ($upperBoundNo[$j]) == $upperBoundNo[$i]){ # so we are reapeating some previously recorded interval
+            $new = 0; # do not record this interval, it is not new
+        }
+        # else do nothing
+    }
+    if($new == 1){
+        $incorrAns[$i] = "\([$lowerBoundNo[$i], $upperBoundNo[$i]]\)";
+    }
+    else{
+        $i = $i-1; # force one more pass through the loop
+    }
+}
+
+# Correct answers to display
+$numc = random(0,4,1);  # number correct answers up to max 4
+@slicec = NchooseK(scalar(@corrAns),$numc);
+@corrAns = @corrAns[@slicec];
+# Incorrect answers to display
+$numi = 4 - $numc;
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@incorrAns = @incorrAns[@slicei];
+
+$quest = ();
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){ # show at least one correct
+    $multichoice -> qa (
+        $quest, 
+    @corrAns,
+    );
+    $multichoice -> extra(
+    @incorrAns,
+    );
+} else { # show no correct choice ("None of the above" is correct answer)
+   $multichoice -> qa (
+        $quest, 
+        "None of the above",
+    );
+    $multichoice -> extra(
+    @incorrAns,
+    );
+}
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+
+Select the interval(s), if any, on which you can conclude, by using the Intermediate Value Theorem, that the following equation has a solution.  
+
+[` [$n]^x - x^{[$n]} = 0 `]  
+[@ $multichoice->print_a() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

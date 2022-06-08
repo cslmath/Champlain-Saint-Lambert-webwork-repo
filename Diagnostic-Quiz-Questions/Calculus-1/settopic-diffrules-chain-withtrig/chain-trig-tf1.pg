@@ -1,0 +1,66 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##     Chain rule with trig: sine
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+# Set parameters
+@fun = qw(g h u v w);
+@var = qw(t z \theta);
+$g = $fun[random(0,$#fun,1)];
+$x = $var[random(0,$#var,1)];
+
+# All possible answers
+@allAns = ("\cos\big( $g($x) \big) $g'($x)",
+	"\cos \big( $g'($x) \big)",
+    "\cos \big( $g($x) \big)",
+    );
+$ir = random(0,$#allAns,1);
+$rhs = $allAns[$ir];
+# Correctness condition checked:
+if ($ir == 0) {
+    $correct = "True";
+    }
+else {
+    $correct = "False";
+}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:* If [`f([$x])=\sin\big([$g]([$x])\big)`], then [`f'([$x]) = [$rhs]`].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

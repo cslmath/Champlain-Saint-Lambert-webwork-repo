@@ -1,0 +1,114 @@
+assignmentType      = default
+openDate          = 02/21/2022 at 11:59pm EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 02/28/2022 at 11:59pm EST
+answerDate        = 03/02/2022 at 11:59pm EST
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = 
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = calculus-1-diagnostic-quiz/settopic-limits-lhopitals-rule/lhopitals-applicable-ms1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = calculus-1-diagnostic-quiz/settopic-limits-lhopitals-rule/lhopitals-graph-mc1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = calculus-1-diagnostic-quiz/settopic-limits-lhopitals-rule/IndeterminateForms-mc1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = calculus-1-diagnostic-quiz/settopic-limits-lhopitals-rule/lhopitals-rule-tf1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 5
+source_file = calculus-1-diagnostic-quiz/settopic-limits-lhopitals-rule/lhopitals-rule-tf2.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 6
+source_file = calculus-1-diagnostic-quiz/settopic-limits-lhopitals-rule/lhopitals-rule-tf3.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 7
+source_file = calculus-1-diagnostic-quiz/settopic-limits-lhopitals-rule/lhopitals-rule-tf4.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 8
+source_file = calculus-1-diagnostic-quiz/settopic-limits-lhopitals-rule/lhopitals-rule-tf5.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 9
+source_file = calculus-1-diagnostic-quiz/settopic-limits-lhopitals-rule/lhopitals-rule-tf6.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 10
+source_file = calculus-1-diagnostic-quiz/settopic-limits-lhopitals-rule/lhopitals-rule-tf7.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+

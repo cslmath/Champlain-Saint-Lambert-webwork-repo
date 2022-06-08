@@ -1,0 +1,134 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##     Limit of a rational function at +/- infinity
+##     Missing factor: find the degree and sign of leading coefficient
+##     Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGgraphmacros.pl",
+  "PGML.pl",
+  "parserRadioButtons.pl",
+  "PGchoicemacros.pl",  # needed for NchooseK
+  "PGcourse.pl",
+);
+
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+# Set parameters
+$a = random(1,9,1);
+$b = $a + random(1,5,1);
+$c = random(1,9,1);
+$d = random(2,9,1);
+$md = -1*$d;
+$e = $d + 1; 
+
+@allLim = ("$d",
+            "$md",
+            "0",
+            "\infty",
+            "- \infty",
+            );
+$np = random(0,$#allLim,1);  # limit at +inf
+$nn = random(0,$#allLim,1);  # limit at -inf
+$limdisp1 = $allLim[$np];
+$limdisp2 = $allLim[$nn];
+
+@allAns = ("\(y = $d\) is the only horizontal asymptote",
+           "\(y = -$d\) is the only horizontal asymptote",
+           "\(y = 0\) is the only horizontal asymptote",
+           "Has no horizontal asymptotes",
+           "\(y = $d\) and \(y=-$d\) are the only horizontal asymptotes",
+           "\(y = $d\) and \(y=0\) are the only horizontal asymptotes",
+           "\(y = $md\) and \(y=0\) are the only horizontal asymptotes",
+            "\(x = $d\) is the only horizontal asymptote", # distractors...
+           "\(x = -$d\) is the only horizontal asymptote",
+           "\(x = 0\) is the only horizontal asymptote",
+           "\(y = x\) is the only horizontal asymptote",
+           );           
+
+# Condition of correctness:
+if ($np == 0){ # limit at +infinity is $d
+    $correct = $allAns[$np];
+    if (($nn == 1) || ($nn == 2)){$correct = $allAns[$nn+3];}
+    }
+elsif ($np == 1){ # limit at +inf is -$d
+    $correct = $allAns[$np];
+    if (($nn == 0) || ($nn == 2)){$correct = $allAns[$nn+4];}
+    }
+elsif ($np == 2){ # limit at +inf is 0
+    $correct = $allAns[$np];
+    if ($nn < 2){$correct = $allAns[$nn+5];}
+    }
+else { # limit at +inf is +/- inf
+    $correct = $allAns[$nn];
+    if ($nn > 2){$correct = $allAns[3];}
+    }
+    
+@corrAns = ($correct);
+
+# using map and grep to create an array of incorrects
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+
+#$radio = RadioButtons([[$correct,@randi],"None of the above"],0); # correct index 0
+
+BEGIN_PGML 
+Determine the horizontal asymptotes of the graph of [`f`] if [` \lim\limits_{x\to \infty} f(x) = [$limdisp1]`] and [` \lim\limits_{x\to -\infty} f(x) = [$limdisp2]`].
+
+Select the correct option, if any.  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

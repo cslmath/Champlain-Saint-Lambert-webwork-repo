@@ -1,0 +1,80 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Limits Theory
+##      True or false
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+# Set parameters
+#   Inequality to display
+$fIneq = "<";
+$xIneq = ">";
+
+$L = random(1, 100, 1);
+do{$N = random(1, 100, 1);}
+until($N != $L);
+$epsilon = non_zero_random(0, 0.5, 0.001);
+
+# All possible answers
+@allAns = (" \displaystyle\lim_{x\rightarrow \infty} f(x) = $L ",
+    " \displaystyle\lim_{x\rightarrow \infty} f(x) = $N ",
+    " \displaystyle\lim_{x\rightarrow \infty} f(x)",
+    " \displaystyle\lim_{x\rightarrow $N} f(x) = $L ",
+    " \displaystyle\lim_{x\rightarrow \infty} f(x) = \infty ",
+    );
+$ip = random(0,$#allAns,1); 
+$statement = $allAns[$ip];
+
+# For font display purposes
+if ($ip == 2){
+    $thistext = " does not exist";
+    }
+else {$thistext = "";}
+
+# Correctness condition checked:
+if ($ip == 0) {
+    $correct = "True";
+    }
+else {
+    $correct = "False";
+}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:* If [`f(x)`] is a function defined on [`(0,\infty)`], and for all [`x [$xIneq] [$N]`], [`|f(x) - [$L]| < [$epsilon]`], then [`[$statement]`][$thistext].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

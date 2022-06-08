@@ -1,0 +1,58 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Limits Theory - for what type of function is lim(x->a) f(x) = f(a)
+##      True or False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+@type = ("a polynomial function",
+         "a rational function and \( x = a \) is in the domain of \( f \)",
+         "a rational function",
+         "any function",
+         );
+$i = random(0,$#type,1);
+$typedisp = $type[$i];
+
+$correct = "False";
+if ($i < 2){ # 0 or 1
+    $correct = "True";
+    }
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or False:* If [`f(x)`] is [$typedisp], then [`\displaystyle\lim_{x\to a}f(x)=f(a)`]  
+[@ $radio1->buttons() @]* 
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

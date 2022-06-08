@@ -1,0 +1,66 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##     Mix of chain and logarithm base a
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+# Set parameters
+@var = qw(t v u w r s);
+$iv = random(0,$#var,1);
+$x = $var[$iv];
+
+$a = random(2,8,1);
+
+# All possible answers
+@allAns = ("g'($x) /[g($x) \ln $a] ",
+	"g($x)/[g'($x)\ln $a]",
+    );
+$ip = random(0,$#allAns,1); 
+$rhs = $allAns[$ip];
+# Correctness condition checked:
+if ($ip == 0) {
+    $correct = "True";
+    }
+else {
+    $correct = "False";
+}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:* If [`f([$x]) = \log_{[$a]} g([$x])`], where [`g`] is a differentiable function, then [`f'([$x]) = [$rhs]`].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

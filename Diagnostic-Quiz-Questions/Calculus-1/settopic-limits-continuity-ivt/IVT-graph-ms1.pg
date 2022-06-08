@@ -1,0 +1,311 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      IVT continuity
+##      The equation f(x) = 0, f(x) given by a table
+##      From a list of intervals, select by IVT the ones that contain a solution
+##      Multiple select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "PGtikz.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+#$refreshCachedImages = 1; <= Comment out this line after testing
+
+Context("Numeric");
+
+##############################################################
+#
+#  Graph Setup
+#
+
+# set domain of function
+$xmin = -3;
+$xmax = 3;
+$ymin = $xmin;
+$ymax = $xmax;
+
+# Select several points through which f(x) should go
+# Select a small number so that the x-values are never integers
+$epsilon = 0.431;
+# In this question, make a>0, so that we know the y-intercept is to the left of it
+# Also, a should not be an integer so that the actual solution is not obvious
+do{
+$a = non_zero_random($epsilon, $xmax-2, $epsilon);
+} until( ($a != 1) and ($a != 2) and ($a != 3) );
+$b = 0;
+$c = random($a+1, $xmax-1, 1);
+$fa = 0;
+$fb = non_zero_random($ymin+1,0,1);
+$fc = random(1,$ymax-1,1);
+
+
+
+# Generate 6 correct intervals
+@corrAns = ();
+@lowerBoundCorr = ();
+@upperBoundCorr = ();
+for($i=0; $i<=5; $i++){
+    $lowerBoundCorr[$i] = random($xmin, floor($a)-0.1, 0.1);
+    $upperBoundCorr[$i] = random(ceil($a)+0.1, $xmax, 0.1);
+    # Make sure we are not duplicating an interval
+    $new = 1;
+    for($j=0; $j<$i; $j++){
+        # here j<i because if j=i, the condition is always true
+        if(($lowerBoundCorr[$j] == $lowerBoundCorr[$i]) and ($upperBoundCorr[$j] == $upperBoundCorr[$i])){ # so we are reapeating some previously recorded interval
+            $new = 0; # do not record this interval, it is not new
+        }
+        # else do nothing
+    }
+    if($new == 1){
+        push(@corrAns, "\([$lowerBoundCorr[$i], $upperBoundCorr[$i]]\)");
+    }
+    else{
+        $i = $i-1; # force one more pass through the loop
+    }
+}
+
+
+# Generate incorrect answers
+# 1. A set of 6 incorrect intervals to the left of a
+@lowerBoundIncorr1 = ();
+@upperBoundIncorr1 = ();
+for($i=0; $i<=5; $i++){
+    $lowerBoundIncorr1[$i] = random($xmin, floor($a)-1, 0.1);
+    $upperBoundIncorr1[$i] = random($lowerBoundIncorr1[$i], floor($a), 0.1);
+    # Make sure we are not duplicating an interval
+    $new = 1;
+    for($j=0; $j<$i; $j++){
+        # here j<i because if j=i, the condition is always true
+        if(($lowerBoundIncorr1[$j] == $lowerBoundIncorr1[$i]) and ($upperBoundIncorr1[$j] == $upperBoundIncorr1[$i])){ # so we are reapeating some previously recorded interval
+            $new = 0; # do not record this interval, it is not new
+        }
+        # else do nothing
+    }
+    if($new == 1){
+        push(@incorrAns, "\([$lowerBoundIncorr1[$i], $upperBoundIncorr1[$i]]\)");
+    }
+    else{
+        $i = $i-1; # force one more pass through the loop
+    }
+}
+
+
+# 2. A set of 6 incorrect intervals to the right of a
+@lowerBoundIncorr2 = ();
+@upperBoundIncorr2 = ();
+for($i=0; $i<=5; $i++){
+    $lowerBoundIncorr2[$i] = random(ceil($a), $xmax - 0.6 , 0.1);
+    $upperBoundIncorr2[$i] = random($lowerBoundIncorr2[$i], $xmax, 0.1);
+    # Make sure we are not duplicating an interval
+    $new = 1;
+    for($j=0; $j<$i; $j++){
+        # here j<i because if j=i, the condition is always true
+        if(($lowerBoundIncorr2[$j] == $lowerBoundIncorr2[$i]) and ($upperBoundIncorr2[$j] == $upperBoundIncorr2[$i])){ # so we are reapeating some previously recorded interval
+            $new = 0; # do not record this interval, it is not new
+        }
+        # else do nothing
+    }
+    if($new == 1){
+        push(@incorrAns, "\([$lowerBoundIncorr2[$i], $upperBoundIncorr2[$i]]\)");
+    }
+    else{
+        $i = $i-1; # force one more pass through the loop
+    }
+}
+
+
+##########
+# Draw f(x)
+#########
+# FANCY HERMITE / BEZIER
+#########
+# https://chrisphan.com/posts/2019-05-13-plotting_with_tikz_3/
+#########
+
+## x-values for control points
+$x0 = $xmin;
+$x1 = $xmin + 1/3*($b-$xmin);
+$x2 = $x1 + 1/3*($b-$xmin);
+$x3 = $b;
+$x4 = $x3 + 1/3*($a-$b);
+$x5 = $x4 + 1/3*($a-$b);
+$x6 = $a;
+$x7 = $x6 + 1/3*($c-$a);
+$x8 =  $x7 + 1/3*($c-$a);;
+$x9 = $c;
+$x10 = $c + 1/3*($xmax-$c);
+$x11=  $x10 + 1/3*($xmax-$c);
+$x12= $xmax;
+
+
+## y-values for control points
+$y0 = $ymin;
+# first control is high, but not too high
+$y1 = random($fb+0.5, 2, 0.5);
+# second control is low
+$y2 = random($fb-0.5, $ymin+0.5, 0.5);
+#$y2=$fb;
+$y3 = $fb;
+#$y4=$fb;
+# Make sure (x2,y2), (x3,y3), (x4,y4) are colinear 
+# in order for the curve to be smooth at (x3,y3)
+$y4 = $y3 + ($y3-$y2)*($x4-$x3)/($x3-$x2);
+# In order to keep the control points within the grid:
+# The complicated min/max is to ensure y7 is b/w 0 and ymax
+# The min in maxy5 is to ensure y5 doesn't go beyond ymax
+    $maxy5 = min($fa+$fa*($x6-$x5)/($x7-$x6), 0);
+    $miny5 = max($fa - ($ymax-$fa)*($x6-$x5)/($x7-$x6), $ymin);
+$y5 = random($miny5, $maxy5, 0.5);
+$y6 = $fa;
+# Make sure (x5,y5), (x6,y6), and (x7,y7) are colinear
+# in order for the curve to be smooth at (x6,y6)
+$y7 = $y6 + ($y6-$y5)*($x7-$x6)/($x6-$x5);
+# In order to keep the control points within the grid:
+# The complicated min/max is to ensure y10 is b/w 0 and ymax
+# The min in maxy8 is to ensure y8 doesn't go beyond ymax
+    $miny8 = max($fc - ($ymax-$fc)*($x9-$x8)/($x10-$x9), 0);
+    $maxy8 = min($fc+$fc*($x9-$x8)/($x10-$x9),$ymax);
+$y8 = random($miny8, $maxy8, 0.5);
+$y9 = $fc;
+# Make sure (x8,y8), (x9,y9), (x10,y10) are colinear 
+# in order for the curve to be smooth at (x3,y3)
+$y10 = $y9 + ($y9-$y8)*($x10-$x9)/($x9-$x8);
+$y11 = random(0.5, $ymax-0.5, 0.5);
+$y12 = $ymax;
+
+######
+# END draw f(x)
+######
+
+
+# Variable $graph_image contains the TikZ graph:
+$graph_image = createTikZImage();
+$graph_image->tikzLibraries("arrows.meta");
+
+$graph_image->BEGIN_TIKZ
+  %%%% Draw gridline,  axes
+    % draw from top left corner to bottom right corner
+  \draw [help lines,thin] ($xmin,$xmin) grid ($xmax,$xmax);
+    % draw x-axis from leftmost x-value to rightmost x-value
+    % eg (-L, 0) -- (L.1, 0)
+  \draw[thick,->] ($xmin,0) -- ($xmax+0.1,0) node[anchor=north west] {\(x\)};
+    % draw y-axis from bottom y-value to top y-value
+    $ eg (0,-L) -- (0,L.1)
+   \draw[thick,->] (0,$xmin) -- (0,$xmax+0.1) node[anchor=south east] {\(y\)};
+    % label the x-axis, without labelling zero
+  \foreach \x in {$xmin,...,-1}
+     \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {\( \x \)};
+  \foreach \x in {1,...,$xmax}
+     \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {\( \x \)};
+    % label the y-axis without labelling zero
+   \foreach \y in {$xmin,...,-1}
+     \draw (1pt,\y cm) -- (-1pt,\y cm) node[anchor=east] {\( \y \)};
+   \foreach \y in {1,...,$xmax}
+     \draw (1pt,\y cm) -- (-1pt,\y cm) node[anchor=east] {\( \y \)};
+  % End draw gridlines, axes
+%     \fill ($a,$fa) circle[radius=2pt];
+%     \fill ($b,$fb)  circle[radius=2pt];
+%     \fill ($c, $fc) circle[radius=2pt];
+%          \fill[color = green] ($x1,$y1) circle[radius=2pt];
+%          \fill[color = green] ($x2,$y2) circle[radius=2pt];
+%          \fill[color = green] ($x4,$y4) circle[radius=2pt];
+%          \fill[color = green] ($x5,$y5) circle[radius=2pt];
+%          \fill[color = green] ($x7,$y7) circle[radius=2pt];
+%          \fill[color = green] ($x8,$y8) circle[radius=2pt];
+%          \fill[color = green] ($x9,$y9) circle[radius=2pt];
+%          \fill[color = green] ($x10,$y10) circle[radius=2pt];
+%          \fill[color = green] ($x11,$y11) circle[radius=2pt];
+
+    % Plot f(x) on (xmin, a)
+    \draw[ultra thick, blue, -] ($x0, $y0)
+   .. controls ($x1,$y1) and ($x2,$y2) .. ($x3,$y3)
+   .. controls ($x4,$y4) and ($x5,$y5) .. ($x6,$y6)
+   .. controls ($x7,$y7) and ($x8,$y8) .. ($x9,$y9)
+   .. controls ($x10,$y10) and ($x11,$y11) .. ($x12,$y12);
+    % Plot f(x) on (a, xmax)
+%     \draw[ultra thick, red, -] ($xx0, $yy0)
+%   .. controls ($xx1,$yy1) and ($xx2,$yy2) .. ($xx3,$yy3)
+%   .. controls ($xx4,$yy4) and ($xx5,$yy5) .. ($xx6,$yy6);
+
+END_TIKZ
+
+# Correct answers to display
+#     $numc: Display 0 to 4 correct answers
+#     @slicec: indices of subset of correct answers
+#     @randc: subset of correct answers
+$numc = random(0,4,1);  # number correct answers up to max 4
+@slicec = NchooseK(scalar(@corrAns),$numc);
+@corrAns = @corrAns[@slicec];
+# Incorrect answers to display
+#     $numi: Display 4-$numc incorrect answers
+#     @slicei: indices of subset of incorrect answers
+#     @randi: subset of incorrect answers
+$numi = 4 - $numc;
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@incorrAns = @incorrAns[@slicei];
+
+$quest = ();
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){ # show at least one correct
+    $multichoice -> qa (
+        $quest, 
+    @corrAns,
+    );
+    $multichoice -> extra(
+    @incorrAns,
+    );
+} else { # show no correct choice ("None of the above" is correct answer)
+   $multichoice -> qa (
+        $quest, 
+        "None of the above",
+    );
+    $multichoice -> extra(
+    @incorrAns,
+    );
+}
+$multichoice -> makeLast("None of the above");
+
+
+
+
+BEGIN_PGML
+Select the interval(s), if any, on which you can conclude, by using the Intermediate Value Theorem, that the continuous function, [`f(x)`], given by the following graph has a root (i.e., a zero). 
+
+[@ image($graph_image, width => 300, tex_size => 500) @]*
+
+[@ $multichoice->print_a() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

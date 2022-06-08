@@ -1,0 +1,62 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Limit at Infinity of power of x (nonnegative or ...)
+##      True or False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+# Set parameters
+@phrase = ("any integer",
+         "any positive integer",
+         "any negative integer",
+         );
+$n = random(0,2,1);
+$m = 0;  # keep m=0 unless n=2 (in the next line of code)
+if ($n == 2){$m = random(0,1,1);}
+$ntype = $phrase[$n];
+@lim = ("\infty","0");
+$limdisp = $lim[$m];
+
+$correct = "False";
+if (($n == 1) && ($m == 0)){$correct = "True";}
+if (($n == 2) && ($m == 1)){$correct = "True";}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or False:* If [`n`] is [$ntype], then [`\displaystyle \lim_{x \to \infty} x^n =  [$limdisp]`].  
+[@ $radio1->buttons() @]* 
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

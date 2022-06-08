@@ -1,0 +1,114 @@
+assignmentType      = default
+openDate          = 05/26/2022 at 11:59pm EDT
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 06/02/2022 at 11:59pm EDT
+answerDate        = 06/04/2022 at 11:59pm EDT
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = 
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2 
+problem_start
+problem_id = 1
+source_file = calculus-1-diagnostic-quiz/settopic-diffrules-log-base-a/log-base-a-tf1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 1 
+problem_end
+problem_start
+problem_id = 2
+source_file = calculus-1-diagnostic-quiz/settopic-diffrules-log-base-a/log-base-a-tf2.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 1 
+problem_end
+problem_start
+problem_id = 3
+source_file = calculus-1-diagnostic-quiz/settopic-diffrules-log-base-a/log-base-a-tf3.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 1 
+problem_end
+problem_start
+problem_id = 4
+source_file = calculus-1-diagnostic-quiz/settopic-diffrules-log-base-a/log-base-a-tf4.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 1 
+problem_end
+problem_start
+problem_id = 5
+source_file = calculus-1-diagnostic-quiz/settopic-diffrules-log-base-a/log-base-a-ms1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 1 
+problem_end
+problem_start
+problem_id = 6
+source_file = calculus-1-diagnostic-quiz/settopic-diffrules-log-base-a/log-base-a-chain-mc1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 1 
+problem_end
+problem_start
+problem_id = 7
+source_file = calculus-1-diagnostic-quiz/settopic-diffrules-log-base-a/log-base-a-chain-mc2.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 1 
+problem_end
+problem_start
+problem_id = 8
+source_file = calculus-1-diagnostic-quiz/settopic-diffrules-log-base-a/log-base-a-chain-product-mc1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 1 
+problem_end
+problem_start
+problem_id = 9
+source_file = calculus-1-diagnostic-quiz/settopic-diffrules-log-base-a/log-base-a-chain-product-mc2.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 1 
+problem_end
+problem_start
+problem_id = 10
+source_file = calculus-1-diagnostic-quiz/settopic-diffrules-log-base-a/log-base-a-product-mc1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 1 
+problem_end
+

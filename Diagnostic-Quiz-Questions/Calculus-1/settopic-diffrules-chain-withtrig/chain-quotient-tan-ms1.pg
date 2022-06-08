@@ -1,0 +1,112 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Chain rule with trig: tan and quotient rule
+##      Multiple select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+
+# Possible types
+@typearray = ("false","true");
+$n = random(0,1,1);  # choose one of the types
+$type = $typearray[$n];
+$numc = random(0,4,1);  # number correct to display
+
+# Set parameters
+$a = random(2,9,1); 
+$b = random(2,9,1);
+
+# Answer arrays, all false and all true
+#   Note! put at least 4 answers of each type
+@allF = (   "\( \frac{d}{dx} \tan  \big( \frac{1+x}{1-x} \big) = \sec^2 \big( \frac{0+1}{0-1} \big)\)",
+            "\( \frac{d}{dx} $a^{\tan $b x} =  $a^{\sec^2 $b x} \)",
+            "\( \frac{d}{dx} \big( \frac{\tan^2 x}{x^2 + 1}\big) = \frac{\sec^4 x}{2x+0} \)",
+            "\( \frac{d}{dx} \ln\tan x = \frac{1}{\tan x} \)",
+            "\( \frac{d}{dx} \tan(e^x) = \sec^2(e^x) \)",
+           "f5 \( \frac{d}{dx}   \tan ($a x e^{$b x}) = \sec^2($a e^{$b x} \)",
+           );
+@allT = ("\( \frac{d}{dx} \tan  \big( \frac{1+x}{1-x} \big) = \sec^2 \big( \frac{1+x}{1-x} \big) \big( \frac{1(1-x)-(1+x)(-1)}{(1-x)^2} \big) \)",
+        "\( \frac{d}{dx} $a^{\tan $b x} =  $a^{\tan $b x}\ln $a ($b \sec^2 $b x) \)", 
+        "\( \frac{d}{dx} \big( \frac{\tan^2 x}{x^2 + 1}\big) = \frac{2\tan x \sec^2 x (x^2+1) - \tan^2 x(2x+0)}{(x^2+1)^2} \)",
+        "t3 \( \frac{d}{dx} \ln\tan x = \frac{\sec^2 x}{\tan x}  \)", 
+        "t4 \( \frac{d}{dx} \tan(e^x) = e^x \sec^2(e^x) \)",
+        "\( \frac{d}{dx}   \tan ($a x e^{$b x}) = \big($a e^{$b x} + $a x ($b e^{$b x}) \big)\sec^2($a x e^{$b x}) \)",
+             ); 
+
+# set conditions of correctness
+if ($n == 0){    # false
+    @corrAns = @allF; 
+    @incorrAns = @allT;
+    }
+else  {   # true
+    @corrAns = @allT;
+    @incorrAns = @allF;
+    }
+
+# Correct answers to display:
+#   $numc : how many correct answers to display
+#   @slicec : from the correct answers, choose a subset of indices
+#             e.g. if $numc = 2, 0 1 2 3 => 0 3, or 1 4, or 2 3, etc
+#   scalar(@corrAns) : total number of possible correct answers (usually 4)
+@slicec = NchooseK(scalar(@corrAns),$numc);  
+@randc = @corrAns[@slicec];
+
+# Incorrect answers to display
+$numi = 4 - $numc;   # the 4 is the number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+# Display the question, and the choices:
+$quest = ();
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){  # at least one correct answer
+    $multichoice -> qa ( $quest, @randc,);
+    $multichoice -> extra( @randi, "None of the above",);
+    }
+else {            # no correct answers
+    $multichoice -> qa ( $quest, "None of the above",);
+    $multichoice -> extra( @randi, );
+}
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+Select the expression(s), if any, that are [$type].
+[@ $multichoice->print_a() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

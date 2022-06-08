@@ -1,0 +1,70 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##     Exponential e^c e^x, slope of the tangent line at given point
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+# Set parameters
+$c = random(3,9,1);
+do {$a = random(3,9,1);} until ($a != $c);
+$a = $a*random(-1,1,2); # plus or minus
+$apc = $a + $c;
+$cm1 = $c - 1;
+$am1 = $a - 1;
+$ac = $a*$c;
+$cpam1 = $c + $am1;
+
+# All possible answers
+@allAns = (" e^{$a}e^{$c} = e^{$apc} ",
+	" e^{$a}e^{$c} = e^{$ac} ",
+    " e^{$c} ($a) e^{$am1} = $a e^{$cpam1} ",
+    );
+$ip = random(0,$#allAns,1); 
+$fprime = $allAns[$ip];
+# Correctness condition checked:
+if ($ip == 0) {
+    $correct = "True";
+    }
+else {
+    $correct = "False";
+}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:* The slope of the tangent line to [`f(x)=e^{[$c]}e^x`] at the point [`x=[$a]`] is [`[$fprime]`].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

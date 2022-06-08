@@ -1,0 +1,57 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##     Continuity 
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+# Set parameters
+$a = random(-9,9,1);
+do {$fa = random(-9,9,1);} until ($fa != $a);
+
+# Condition that determines the truth of the statement:
+#   Here, the order of terms in the difference.
+@xConds = ("x \ne $a","x");
+$i = random(0,$#xConds,1);
+$xinterval = $xConds[$i];
+
+# Correctness condition checked:
+$correct = "False";
+if ($i == 1){$correct = "True";}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:* If [`f(x)`] is continuous for all [`[$xinterval]`], and [`f([$a])=[$fa]`], then [`\lim\limits_{x\to[$a]} f(x) = [$fa] `].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [$correct].
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

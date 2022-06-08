@@ -1,0 +1,139 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Related rates
+##      Word problem: learning to read the problem, Volume 
+##      (Stewart 7ed, 3.9, 32)
+##      Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGtikz.pl",
+    "PGcourse.pl",
+  );
+
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+#$refreshCachedImages = 1; # <= comment out line after testing
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+# Set parameters
+$diam = random(36,72,12); # numbers evenly divisible by 2, 4 and 3.
+$dVdtdisp = random(1.5,2.5,0.1);
+@fullness = ("half","a quarter","a third");
+@scale = (2,4,3);
+$j = random(0,$#fullness,1);
+$howfull = $fullness[$j];
+$scaleconst = $scale[$j];
+
+$dVdt = 1000*$dVdtdisp;  # Convert to cm^3 / minute
+$radius = $diam/2; 
+$height = $radius/$scaleconst;
+$heighterr = $diam/$scaleconst;
+
+
+# Answer arrays
+@allAns = ("Find \(dh/dt\) at the moment that  \( h = $height \) cm, given that \(r = $radius \) cm and \(dV/dt = $dVdt\) cm\(^3\)/min.",
+    "Find \(dh/dt\) at the moment that  \( h = $height \) cm, given that \(r = $diam \) cm and \(dV/dt = $dVdt\) cm\(^3\)/min.",  # error in r: diameter instead
+     "Find \(dh/dt\) at the moment that  \( h = $heighterr \) cm, given that \(r = $radius \) cm and \(dV/dt = $dVdt\) cm\(^3\)/min.", # error in h: diameter instead 
+     "Find \(dh/dt\) at the moment that  \( h = $height \) cm, given that \(r = $radius \) cm and \(dV/dt = $dVdtdisp\) cm\(^3\)/min.", # dV/dt in incorrect units
+     "Find \(dh/dt\) at the moment that  \( h = $height \) cm, given that \(r = $diam \) cm and \(dV/dt = $dVdtdisp\) cm\(^3\)/min.", # dV/dt incorrect units and error in r too.
+     "Find \(dV/dt\) at the moment that \( h = $height \) cm, given that \(r = $radius \) cm and \(dh/dt = $dVdt\) cm\(^3\)/min.", # incorrect rate to find
+     "Find \(dr/dt\) at the moment that  \( h = $height \) cm, given that \(r = $radius \) cm and \(dV/dt = $dVdt\) cm\(^3\)/min.", # incorrect rate to find
+);
+
+$correct = $allAns[0];
+@incorrAns = @allAns[1..$#allAns];
+@corrAns = ($correct); 
+ 
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+    
+##############################################################
+#
+#  Graph Setup
+#
+$graph_image = createTikZImage();
+$graph_image->tikzLibraries("arrows.meta");
+
+$graph_image->BEGIN_TIKZ
+  \draw (-1.5,0) -- (1.5,0);
+   \draw[<->] (1.5,-1.5) -- (1.5,-1.05);
+   \node [right] at (1.5,-1.25) {\(h\)};
+   \draw[<->] (0,0.2) -- (1.5,0.2);
+   \node [above] at (0.75,0.2) {\(r\)};
+   \draw (-1.5,0) arc
+	[
+		start angle=180,
+		end angle=360,
+		x radius=1.5cm,
+		y radius =1.5cm
+	] ;
+    \filldraw[blue] (-1.05,-1.05) arc
+    [
+        start angle=225,
+        end angle=315,
+        x radius=1.5cm,
+        y radius =1.5cm
+    ] -- (-1.05,-1.05);
+END_TIKZ
+#########################################################
+
+BEGIN_PGML
+A hemispherical basin of diameter [`[$diam]`] centimetres is filling up with water at a rate of [`[$dVdtdisp]`] litres per minute. Consider the moment when the basin is [$howfull] full. At what rate is the water rising in the basin at that moment? 
+
+Notes: the volume of the portion of a sphere with radius [`r`] from the bottom to a height [`h`] is [` V = \pi (rh^2 - \frac{1}{3} h^3)  `]; and 1 litre equals 1000 cubic centimetres.
+
+>>[@ image($graph_image, width => 150, tex_size => 250) @]*<<  
+>>Cross-section of the hemispherical basin<<
+
+Select the statement, if any, that describes the goal of the related rates word problem.
+
+[@ $radio1->buttons() @]*  
+END_PGML
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

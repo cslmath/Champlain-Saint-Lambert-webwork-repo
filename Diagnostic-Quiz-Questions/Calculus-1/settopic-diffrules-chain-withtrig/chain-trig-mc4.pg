@@ -1,0 +1,89 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##     Chain Rule with Trig: secant
+##     Multiple Choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGchoicemacros.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;
+
+Context("Numeric");
+# Choice of variables
+$g = qw(g h F G H)[random(0,4,1)];
+$x = qw(t u z r)[random(0,3,1)];
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+# Set parameters
+
+@allAns = (	"\( $g\,'(\sec $x) \cdot (\sec $x \tan $x) \)",
+    "\( $g\,'(\sec $x)\cdot (\tan^2 $x) \)",
+    "\( $g\,'(\sec $x \tan $x) \)",
+    "\( $g\,'($x)\cdot (\sec $x) + $g($x)\cdot (\sec $x \tan $x) \)",
+    "\( $g\,'($x) \cdot (\sec $x \tan $x) \)",
+    "\( $g\,'(\sec $x) \)",
+    "\( $g\,'($x)\cdot (\sec $x) + $g($x)\cdot (\tan^2 $x) \)",
+    );
+$correct = $allAns[0];
+@incorrAns = @allAns[1..$#allAns];
+
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+
+BEGIN_PGML
+Given the composite function [`y = [$g](\sec [$x])`], where [`[$g]`] is a differentiable function.
+
+Select the correct form, if any, of the derivative [`\frac{dy}{d[$x]}`].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

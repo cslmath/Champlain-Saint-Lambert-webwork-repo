@@ -1,0 +1,249 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Related rates
+##      Word problem: learning to read the problem, and actual problem
+##      Price and demand (Tan, 3.6/41)
+##      Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+
+
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+#########################
+# Reducing a fraction   #
+#########################
+
+sub fraction_reduce_tex {
+  my ($numerator, $denominator) = @_;
+    my $sign = "";
+    my $num_red = $numerator;
+    my $denom_red = $denominator;
+    my $reduced = "";
+    my $gcd = 1;
+    if($denominator == 0){
+        $reduced = "You are dividing by zero! Bad!!!";
+        return $reduced;
+    }
+    if($numerator/$denominator < 0){
+        $sign = "-";
+    }
+    $gcd = gcd($numerator, $denominator);
+    if($gcd == abs($denominator)){
+    $fraction = abs($numerator/$denominator);
+    $reduced = "\($sign $fraction\)";
+    }
+    elsif($gcd == 1){
+        $num_red = abs($numerator);
+        $denom_red = abs($denominator);
+        $reduced = "\($sign \frac{$num_red}{$denom_red}\)";
+    }
+    else{
+        $num_red = abs($numerator/$gcd);
+        $denom_red = abs($denominator/$gcd);
+        $reduced = "\($sign \frac{$num_red}{$denom_red}\)";
+    }
+  return $reduced;
+  }
+##########################################
+# end reduce_fraction_tex
+##########################################
+
+
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+# Set parameters
+$xValue = 9;
+$pValue = 63;
+$dpdtValue = 2;
+$pValueInc = $pValue + $dpdtValue;
+
+$dxdtValue = fraction_reduce_tex($dpdtValue,(2*$xValue));
+$dxdtCorrect = floor($dpdtValue/(2*$xValue));
+$distractor1 = 2*$xValue*$dpdtValue;
+$distractor2 = fraction_reduce_tex($dpdtValue, (2*$xValue*1000));
+
+$demand = "the quantity demanded weekly";
+$price = "unit price";
+$priceInc = "the price of tyres is increasing by $dpdtValue dollars per week";
+
+# Choose which question to ask
+$chooseQandA = random(0,4,1);
+
+
+@questions=(
+    "In what units do we measure how fast the quantity demanded weekly is changing?",
+    "How do we interpret \(x=$xValue\)?",
+    "How do we interpret \(p=$pValue\)?",
+    "What does the increase of 2 dollars per week represent?",
+    "How fast is the quantity demanded weekly changing?",
+);
+
+if($chooseQandA == 0){
+    $priceInc = "$BBOLD the price of tyres is increasing by $dpdtValue dollars per week $EBOLD";
+}
+elsif($chooseQandA == 1){
+    $demand = "BBOLD the quantity demanded weekly EBOLD";
+}
+elsif($chooseQandA == 2){
+    $price = "BBOLD unit price EBOLD";
+}
+elsif($chooseQandA == 3){
+    $priceInc = "$BBOLD the price of tyres is increasing by $dpdtValue dollars per week $EBOLD";
+}
+else{
+}
+
+
+#######
+# Each question above has a corresponding set of answers
+# Always place the correct answer first
+
+@answers = (
+    ['thousands of tyres/week', 
+    '$',
+    'thousands of tyres',
+    '$/week','$/thousand tyres',
+    'thousands of tyres/$',
+    ],
+    [   "There is a weekly demand for \($xValue 000\) tyres",
+        "There is a weekly demand for \($pValue\) tyres",
+        "If the tyres are priced at \(${DOLLAR} $pValue\), there is demand for \($xValue\) tyres in the week", 
+        "Up until the given moment in time, a total of \($xValue 000\) tyres were sold", 
+        "At the given moment in time, \($xValue 000\) tyres are being sold", 
+        "At the given moment in time, \($xValue\) tyres are being sold ", 
+        "The price per tyre is increasing by \($xValue\) dollars per week", 
+        "It takes \($xValue\) weeks to meet the demand"
+     ],
+     [  "The price of a tyre is \(${DOLLAR} $pValue\)",
+        "The price of a thousand tyres is \(${DOLLAR} $pValue\)",
+        "The price per tyre is increasing by \(${DOLLAR} $pValue\) per week",
+        "The price of a tyre is \(${DOLLAR} $pValueInc\)",
+        "Increasing the price of tyres will increase the demand by \(${DOLLAR} $pValue\)"
+        ],
+     ["\(\frac{dp}{dt}\)",
+     "\(\frac{dx}{dt}\)",
+     "\(\frac{dx}{dp}\)",
+     "\(\frac{dp}{dx}\)",
+     "\(\frac{dt}{dp}\)",
+     "\(p-x\)",
+     "\(x\)",
+     "\(p\)",
+     ],
+     [  "The quantity demanded is decreasing by $dxdtCorrect tyres per week",
+        "The quantity demanded is increasing by $dxdtCorrect tyres per week",
+        "The quantity demanded is decreasing by $dxdtValue tyres per week",
+        "The quantity demanded is increasing by $dxdtValue tyres per week",
+        "The quantity demanded is decreasing by $dpdtValue 000 tyres per week",
+        "The quantity demanded is decreasing by $dpdtValue tyres per week",
+        "The quantity demanded is increasing by $dpdtValue 000 tyres per week",
+        "The quantity demanded is increasing by $dpdtValue tyres per week",
+        "The quantity demanded is decreasing by $distractor1 000 tyres per week",
+        "The quantity demanded is decreasing by $distractor1 tyres per week",
+        "The quantity demanded is increasing by $distractor1 000 tyres per week",
+        "The quantity demanded is increasing by $distractor1 tyres per week",
+        "The quantity demanded is decreasing by $xValue 000 tyres per week",
+        "The quantity demanded is decreasing by $xValue tyres per week",
+        "The quantity demanded is increasing by $xValue 000 tyres per week",
+        "The quantity demanded is increasing by $xValue tyres per week",
+        "The quantity demanded is decreasing by $distractor2 tyres per week",
+     ],
+);
+
+# Answer arrays
+#    @allAns: array of all possible answers (at least 5: 1 correct, 4 incorrect)
+#    @corrAns: array (1 element) containing correct answer
+#    @incorrAns: array of @allAns after correct is extracted (correctness
+#                depends on something in the code)
+#    @slicei = indices of subset of incorrects
+#    @randi = random subset of incorrects (3 or 4 elements)
+@allAns = @{$answers[$chooseQandA]};
+
+$correct = $allAns[0];
+
+# Correct answer depends on sign in g function and whether parallel/perpendicular:
+#if ($i == 0){  # parallel
+#   $correct = $allAns[0];
+#   if ($j == 1){$correct = $allAns[1];}
+#    }
+#else {  # perpendicular
+#    $correct = $allAns[2];
+#    if ($j == 1){$correct = $allAns[3];}
+#}
+
+# Use map and grep to extract the correct answer, and 
+#   create an array of incorrects.
+@corrAns = ($correct); 
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+
+
+ 
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+#########################################################
+
+BEGIN_PGML
+
+Suppose [@$demand@]*** of a certain brand of tyres is related to the [@$price@]***  by the equation
+
+>> [`` p + x^2 = 144, ``] <<
+
+where [`p`] is measured in dollars and [`x`] is measured in units of a thousand. Consider the moment when [`x = [$xValue]`], [`p = [$pValue]`] and suppose that at that moment [@$priceInc@]***. 
+
+[$questions[$chooseQandA]]
+
+ 
+[@ $radio1->buttons() @]*  
+END_PGML
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

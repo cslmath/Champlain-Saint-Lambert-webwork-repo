@@ -1,0 +1,459 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Limits graphs question 
+##      One-sided limits and composition
+##      Find lim_{x->k} f(x)g(x)
+##      Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+
+
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGgraphmacros.pl",
+    "PGchoicemacros.pl",
+    "parserRadioButtons.pl",
+    "PGtikz.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+#$refreshCachedImages = 1;  # <= COMMENT OUT THIS LINE OF CODE AFTER TESTING
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+
+
+##############################################################
+#
+#  TikZ Graph Setup. Note: must load macro PGtikz.pl
+#
+
+# set domain of function
+# need to have a max of at least 5 to fit all the positive choices
+# forced gk to be negative so need more negative range
+$xmin = -3;
+$xmax = 5;
+$ymin = $xmin;
+$ymax = $xmax;
+
+# Select the point of discontinuity for f
+# Leave space for b and c between a and the edges
+$a = random($xmin+2, $xmax-2, 1);
+
+# Select two points in the domain of f that will have integer y-values
+# One point of each side of the discontinuity (to be used as g y-values)
+$b = random($xmin+1, $a-1, 1);
+$c = random($a+1, $xmax-1, 1);
+
+# To ensure that distractors are all distinct (see all answers)
+# we make several choices, namely:
+# 1. all y-values are non-zero (this is the only crucial choice)
+# 2. gLim != gk (true anyway, to make a hole in the picture)
+# 3. fb != fc
+# 4. Manually exclude the remaining distractors being equal. 
+    
+    
+    # Choose gLim randomly 
+    $gLim = non_zero_random($ymin, $ymax, 1);
+    do{
+       $gk = non_zero_random($ymin, $ymax, 1);
+    }until($gLim != $gk);
+    
+     # Generate the other possible y values for fa, fLeft, fRight
+     # Make sure they are distinct for the picture of f
+    @possible_f_values = (($ymin+1)..($ymax-1));
+ #   @arrayA = ($gLim);
+ #   %yes = map{$_=>1} @arrayA;
+ #   @possible_f_values = grep(!defined $yes{$_}, @possible_f_values);
+        $index = random(0, $#possible_f_values, 1);
+    $fLeft = splice(@possible_f_values, $index, 1);
+        $index = random(0, $#possible_f_values, 1);
+    $fRight = splice(@possible_f_values, $index, 1);
+        $index = random(0, $#possible_f_values, 1);
+    $fa = splice(@possible_f_values, $index, 1);
+
+do{
+    $fb = random($ymin+1,$ymax-1,1);
+    $fc = random($ymin+1,$ymax-1,1);
+}until( ($gLim*$fb != $gk*$fc) and ($gLim*$fc != $gk*$fb)and ($fb != $fc) );
+
+
+##########
+# Draw f(x) on (xmin, a)
+#########
+# FANCY HERMITE / BEZIER
+#########
+# https://chrisphan.com/posts/2019-05-13-plotting_with_tikz_3/
+#########
+
+## x-values for control points
+$x0 = $xmin;
+$x1 = $xmin + 1/3*($b-$xmin);
+$x2 = $x1 + 1/3*($b-$xmin);
+$x3 = $b;
+$x4 = $x3 + 1/3*($a-$b);
+$x5 = $x4 + 1/3*($a-$b);
+$x6 = $a;
+## y-values for control points
+$y0 = random($ymin, $ymax-2, 0.5);
+# first control is random
+$y1 = random($ymin+1, $ymax-1, 0.5);
+# Make sure (x2,y2), (x3,y3), (x4,y4) are colinear 
+# in order for the curve to be smooth at (x3,y3)
+# This means y2 and y4 are chosen together so they make sense
+$y3 = $fb;
+do{
+$y2 = random($y3-($x3-$x2)/($x4-$x3), $y3-(1-$ymax+$ymin)*($x3-$x2)/($x4-$x3), 0.5);
+$y4 = $y3 + ($y3-$y2)*($x4-$x3)/($x3-$x2);
+}
+until(($y4 <= $ymax) and ($y4 >= $ymin) and ($y2<=$ymax) and ($y2>=$ymin));
+$y5 = random($ymin+1, $ymax-1, 0.5);
+$y6 = $fLeft;
+######
+# END draw f(x) on (xmin, a)
+######
+
+##########
+# Draw f(x) on (a, xmax)
+#########
+# FANCY HERMITE / BEZIER
+#########
+
+## x-values for control points
+$xx0 = $a;
+$xx1 = $xx0 + 1/3*($c-$a);
+$xx2 = $xx1 + 1/3*($c-$a);
+$xx3 = $c;
+$xx4 = $c + 1/3*($xmax-$c);
+$xx5 = $xx4 + 1/3*($xmax-$c);
+$xx6 = $xmax;
+## y-values for control points
+$yy0 = $fRight;
+# first control is random
+$yy1 = random($ymin - 0.5, $ymax, 0.5);
+$yy3 = $fc;
+# Make sure (x2,y2), (x3,y3), (x4,y4) are colinear 
+# in order for the curve to be smooth at (x3,y3)
+# Choose yy2 and yy4 together to make sure they are withing range
+do{
+$yy2 = random($yy3-($xx3-$xx2)/($xx4-$xx3), $yy3-(1-$ymax+$ymin)*($xx3-$xx2)/($xx4-$xx3), 0.5);
+$yy4 = $yy3 + ($yy3-$yy2)*($xx4-$xx3)/($xx3-$xx2);
+}
+until(($ymax >= $yy4) and ($yy4 >= $ymin) and ($yy2 >= $ymin) and ($yy2 <= $ymax)); 
+$yy5 = random($ymin, $ymax, 0.5);
+$yy6 = $ymax;
+######
+# END draw f(x) on (a, xmax)
+######
+
+
+# Variable $graph_image_f contains the TikZ graph of f:
+$graph_image_f = createTikZImage();
+$graph_image_f->tikzLibraries("arrows.meta");
+
+$graph_image_f->BEGIN_TIKZ
+  %%%% Draw gridline,  axes
+    % draw from top left corner to bottom right corner
+  \draw [help lines,thin] ($xmin,$xmin) grid ($xmax,$xmax);
+    % draw x-axis from leftmost x-value to rightmost x-value
+    % eg (-L, 0) -- (L.1, 0)
+  \draw[thick,->] ($xmin,0) -- ($xmax+0.1,0) node[anchor=north west] {\(x\)};
+    % draw y-axis from bottom y-value to top y-value
+    $ eg (0,-L) -- (0,L.1)
+   \draw[thick,->] (0,$ymin) -- (0,$ymax+0.1) node[anchor=south east] {\(y=f(x)\)};
+    % label the x-axis, without labelling zero
+  \foreach \x in {$xmin,...,-1}
+     \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {\( \x \)};
+  \foreach \x in {1,...,$xmax}
+     \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {\( \x \)};
+    % label the y-axis without labelling zero
+   \foreach \y in {$ymin,...,-1}
+     \draw (1pt,\y cm) -- (-1pt,\y cm) node[anchor=east] {\( \y \)};
+   \foreach \y in {1,...,$ymax}
+     \draw (1pt,\y cm) -- (-1pt,\y cm) node[anchor=east] {\( \y \)};
+  % End draw gridlines, axes
+
+  %%%%% Plot f(x)
+  % Plot f(x) on (xmin, a)
+    \draw[ultra thick, blue, -] ($x0, $y0)
+   .. controls ($x1,$y1) and ($x2,$y2) .. ($x3,$y3)
+   .. controls ($x4,$y4) and ($x5,$y5) .. ($x6,$y6);
+            % Plot these to test only 
+            %\fill [thick, color = green] ($x1, $y1) circle (2pt);
+            %\fill [thick, color = green] ($x2, $y2) circle (2pt);
+            %\fill [thick, color = green] ($x3, $y3) circle (2pt);
+            %\fill [thick, color = green] ($x4, $y4) circle (2pt);
+            %\fill [thick, color = green] ($x5, $y5) circle (2pt);
+            %\fill [thick, color = green] ($x6, $y6) circle (2pt);
+    % Plot f(x) on (a, xmax)
+     \draw[ultra thick, blue, -] ($xx0, $yy0)
+   .. controls ($xx1,$yy1) and ($xx2,$yy2) .. ($xx3,$yy3)
+   .. controls ($xx4,$yy4) and ($xx5,$yy5) .. ($xx6,$yy6);
+            % Plot these to test only 
+            %\fill [thick, color = green] ($xx1, $yy1) circle (2pt);
+            %\fill [thick, color = green] ($xx2, $yy2) circle (2pt);
+            %\fill [thick, color = green] ($xx3, $yy3) circle (2pt);
+            %\fill [thick, color = green] ($xx4, $yy4) circle (2pt);
+            %\fill [thick, color = green] ($xx5, $yy5) circle (2pt);
+            %\fill [thick, color = green] ($xx6, $yy6) circle (2pt);
+   % Plot f(x) near a -- the single points
+    \filldraw [thick, color = blue, inner color = white] ($a, $fRight) circle (2pt);
+    \filldraw [thick, color = blue, inner color = white] ($a, $fLeft) circle (2pt);
+    \fill [color=blue] ($a, $fa) circle (2pt);
+END_TIKZ
+
+
+# Select the point of discontinuity for g
+# It will be either b or c, in order for the multiplication to be defined.
+$decision = random(0,1,1);
+if($dcision == 0){
+    $k = $b;
+}
+else{
+    $k =$c; 
+}
+
+#$k = $a;
+# Note: gk and gLim are selected in the very beginning 
+
+
+##########
+# Draw g(x) on (xmin, k)
+#########
+
+## x-values for control points
+$x0 = $xmin;
+$x1 = $xmin + 1/3*($k-$xmin);
+$x2 = $x1 + 1/3*($k-$xmin);
+$x3 = $k;
+## y-values for control points
+#$epsilon = int(($ymax - $ymin)/4*10)/10;
+$epsilon = 0.5;
+# y0 is negative to draw the whole graph of g below the x-axis, since gk must be negative
+#$y0 = random($ymin + $epsilon, $ymax - $epsilon, $epsilon);
+$y0 = random($ymin+$epsilon, 0, $epsilon);
+
+# first control is random
+$y1 = random($ymin+$epsilon, $ymax-$epsilon, $epsilon);
+# second control is random
+$y2 = random($ymin+$epsilon, $ymax-$epsilon, $epsilon);;
+$y3 = $gLim;
+######
+# END draw g(x) on (xmin, k)
+######
+
+##########
+# Draw g(x) on (k, xmax)
+#########
+
+
+## x-values for control points
+$deltaX = ($xmax - $k)/6;
+$xx0 = $k;
+$xx1 = $xx0 + $deltaX;
+$xx2 = $xx1 + $deltaX;
+$xx3 = $xx2 + $deltaX;
+$xx4 = $xx3 + $deltaX;
+$xx5 = $xx4 + $deltaX;
+$xx6 = $xmax;
+## y-values for control points
+$yy0 = $gLim;
+# first control and fixed point are random, but negative
+#$yy1 = random($ymin+$epsilon, $ymax-$epsilon, $epsilon);
+#$yy3 = random($ymin+1, $ymax-1, $epsilon);
+$yy1 = random($ymin+$epsilon, 0+$epsilon, $epsilon);
+$yy3 = random($ymin+1, 0+$epsilon, $epsilon);
+
+# Make sure (x2,y2), (x3,y3), (x4,y4) are colinear 
+# in order for the curve to be smooth at (x3,y3)
+do{
+$yy2 = random($yy3-($xx3-$xx2)/($xx4-$xx3), $yy3-(1-$ymax+$ymin)*($xx3-$xx2)/($xx4-$xx3), $epsilon);
+$yy4 = $yy3 + ($yy3-$yy2)*($xx4-$xx3)/($xx3-$xx2);
+}
+until(($ymax >= $yy4) and ($yy4 >= $ymin) and ($yy2 >= $ymin) and ($yy2 <= $ymax)); 
+
+# Choose the last two points negative to draw the graph belwo the x-axis
+$yy5 = random($ymin+0.5, 0, 0.5);
+$yy6 = random($ymin, 0, 0.5);
+#$yy6 = $ymax;
+######
+# END draw g(x) on (k, xmax)
+######
+
+
+# Variable $graph_image_g contains the TikZ graph of g:
+$graph_image_g = createTikZImage();
+$graph_image_g->tikzLibraries("arrows.meta");
+
+$graph_image_g->BEGIN_TIKZ
+  %%%% Draw gridline,  axes
+    % draw from top left corner to bottom right corner
+  \draw [help lines,thin] ($xmin,$xmin) grid ($xmax,$xmax);
+    % draw x-axis from leftmost x-value to rightmost x-value
+    % eg (-L, 0) -- (L.1, 0)
+  \draw[thick,->] ($xmin,0) -- ($xmax+0.1,0) node[anchor=north west] {\(x\)};
+    % draw y-axis from bottom y-value to top y-value
+    $ eg (0,-L) -- (0,L.1)
+   \draw[thick,->] (0,$ymin) -- (0,$ymax+0.1) node[anchor=south east] {\(y=g(x)\)};
+    % label the x-axis, without labelling zero
+  \foreach \x in {$xmin,...,-1}
+     \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {\( \x \)};
+  \foreach \x in {1,...,$xmax}
+     \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {\( \x \)};
+    % label the y-axis without labelling zero
+   \foreach \y in {$ymin,...,-1}
+     \draw (1pt,\y cm) -- (-1pt,\y cm) node[anchor=east] {\( \y \)};
+   \foreach \y in {1,...,$ymax}
+     \draw (1pt,\y cm) -- (-1pt,\y cm) node[anchor=east] {\( \y \)};
+  % End draw gridlines, axes
+
+  %%%%% Plot g(x)
+  % Plot g(x) on (xmin, k)
+    \draw[ultra thick, red, -] ($x0, $y0)
+   .. controls ($x1,$y1) and ($x2,$y2) .. ($x3,$y3);
+  % Plot g(x) on (k, xmax)
+     \draw[ultra thick, red, -] ($xx0, $yy0)
+   .. controls ($xx1,$yy1) and ($xx2,$yy2) .. ($xx3,$yy3)
+   .. controls ($xx4,$yy4) and ($xx5,$yy5) .. ($xx6,$yy6);
+   % Plot f(x) near a
+    \filldraw [thick, color = red, inner color = white] ($k, $gLim) circle (2pt);
+    \fill [color=red] ($k, $gk) circle (2pt);
+            % Plot these to test only 
+            %\fill [thick, color = green] ($xx1, $yy1) circle (2pt);
+            %\fill [thick, color = green] ($xx2, $yy2) circle (2pt);
+            %\fill [thick, color = green] ($xx3, $yy3) circle (2pt);
+            %\fill [thick, color = green] ($xx4, $yy4) circle (2pt);
+            %\fill [thick, color = green] ($xx5, $yy5) circle (2pt);
+            %\fill [thick, color = green] ($xx6, $yy6) circle (2pt);
+END_TIKZ
+
+############################
+# end tikz
+###########################
+
+
+################################
+#
+# RADIO BUTTONS
+#
+#################################
+
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+
+# Answer arrays
+#    @allAns: array of all possible answers (at least 5: 1 correct, >=4 incorrect)
+#    @corrAns: array (1 element) containing correct answer
+#    @incorrAns: array of @allAns after correct is extracted (correctness
+#                depends on something in the code)
+#    @slicei = indices of subset of incorrects
+#    @randi = random subset of incorrects (3 or 4 elements)
+#
+
+     # Generate possible values for the distractors
+    @possible_distractors = (($ymin*$ymin)..($ymax*$ymax));
+    @arrayA = ($gLim*$fb,
+    $gLim*$fc,
+    $gk*$fb,
+    $gk*$fc,);
+    %yes = map{$_=>1} @arrayA;
+    @possible_distractors = grep(!defined $yes{$_}, @possible_distractors);
+        $index = random(0, $#possible_distractors, 1);
+    $distractor1 = splice(@possible_distractors, $index, 1);
+        $index = random(0, $#possible_distractors, 1);
+    $distractor2 = splice(@possible_distractors, $index, 1);
+
+
+
+@allAns = (
+    $gLim*$fb,
+    $gLim*$fc,
+    $gk*$fb,
+    $gk*$fc,
+    $distractor1,
+    $distractor2,
+    "\infty",
+);
+
+for(@allAns){
+    $_ = "\($_\)";
+}
+push(@allAns, "Does not exist");
+
+
+$correct = @allAns[$decision];
+
+
+# Extract the correct answer: use map and grep
+@corrAns = ();
+push(@corrAns,$correct);
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+
+if ($numc == 1){  # show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3);  #choose 3 incorrect ans
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[$correct,@randi,],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4);  #choose 4 incorrect ans
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],
+    "None of the above"],4); # correct index 4
+}
+
+
+
+
+
+
+BEGIN_PGML
+
+>>
+[@ image(insertGraph($graph_image_f), width=>300, height=>300, tex_size=>400); @]*
+[@ image(insertGraph($graph_image_g), width=>300, height=>300, tex_size=>400); @]*
+<<  
+
+Select the correct value of [`\displaystyle \lim_{x\rightarrow [$k]^{[$limitSign]}} f(x)g(x)`]. (Click on graphs to enlarge.)  
+
+[@ $radio1->buttons() @]*
+
+
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

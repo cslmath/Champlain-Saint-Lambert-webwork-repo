@@ -1,0 +1,144 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##     Determine if function has a vertical asymptote at x=a or not
+##     Multiple Select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+# Set parameters:
+@fname = qw(F G h g A v w);
+@slicef = NchooseK(scalar(@fname),4);
+@fun = @fname[@slicef];
+($f,$g,$h,$u) = @fun;
+@var = qw(p q z r s b t x);
+@slicex = NchooseK(scalar(@var),3);
+@ex = @var[@slicex];
+#$x = $ex[0];
+#$t = $ex[1];
+#$w = $ex[2];
+($x,$t,$w) = @ex;
+$a = random(2,7,1);
+$ma = -1*$a;
+$b = random(1,3,1);
+$k = -1 - $a;  # so that coefficient of linear term is 1
+$akabs = abs($a*($k));  # ak is negative (for display)
+$bsq = $b*$b;
+$c = random(2,5,1);
+$nc = -1*$c;
+$asq = $a*$a;
+
+# The full list of answers:
+@allF = (
+"\( $f($x) = \frac{$x^2 + $x - $akabs}{$a-$x} \)", 
+"\( $g($w) = \frac{$w^2 - 1}{$w^2 - $w} \)",              
+"\( $h($t) = \frac{$b-\sqrt{$t}}{$t - $bsq} \)",
+"\( $u($t) = \frac{1/$a - 1/$t}{$a - $t} \)",
+"\( $g($x) = \frac{$x + $a}{$a - 2$x} \)",
+     );
+@allT = (
+"\( $f($x) = \frac{$x^2 + $x + $akabs}{$a-$x} \)",
+"\( $g($x) = \frac{$x^2 + $x}{$x^2 - $asq} \)",
+"\( $h($t) =  \frac{$a+\sqrt{$t}}{$asq - $t^2} \)",
+"\( $u($t) =  \frac{1/$a + 1/$t}{$a - $t} \)",
+"\( $g($w) = \frac{($w - $a)^2 - $a}{$a - $w} \)"
+);
+
+#   Word(s) to display
+@word = ("do not have","have");
+$n = random(0,1,1);
+$n = 1; # always display "have a vertical asymptote"
+$yesno = $word[$n];
+
+if ($n == 0){ # are not
+    @corrAns = @allF;
+    @incorrAns = @allT;
+    }
+else { # are
+    @corrAns = @allT;
+    @incorrAns = @allF;
+    }
+
+# Correct answers to display
+#     $numc: Display 0 to 4 correct answers
+#     @slicec: indices of subset of correct answers
+#     @randc: subset of correct answers
+$numc = random(0,4,1);  # number correct answers up to max 4
+@slicec = NchooseK(scalar(@corrAns),$numc);
+@corrAns = @corrAns[@slicec];
+# Incorrect answers to display
+#     $numi: Display 4-$numc incorrect answers
+#     @slicei: indices of subset of incorrect answers
+#     @randi: subset of incorrect answers
+$numi = 4 - $numc;
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@incorrAns = @incorrAns[@slicei];
+
+$quest = ();
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){ # show at least one correct
+    $multichoice -> qa (
+        $quest, 
+    @corrAns,
+    );
+    $multichoice -> extra(
+    @incorrAns,
+    );
+} else { # show no correct choice ("None of the above" is correct answer)
+   $multichoice -> qa (
+        $quest, 
+        "None of the above",
+    );
+    $multichoice -> extra(
+    @incorrAns,
+    );
+}
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+Select the functions, if any, whose graphs [$yesno] a vertical asymptote at [`x=[$a]`].
+[@ $multichoice->print_a() @]* 
+
+_Hint:_ The line [`x=a`] is a *vertical asymptote* of the graph of a function [`f`] if at least one of the following is true:
+>>[``\lim\limits_{x\to a} f(x) = \infty  \,(\text{or } =-\infty) \quad``] or
+[`` \quad \lim\limits_{x\to a^+} f(x) = \infty  \,(\text{or } =-\infty) \quad``]
+or
+[``\quad \lim\limits_{x\to a^-} f(x) = \infty  \,(\text{or } =-\infty) ``]<<
+
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

@@ -1,0 +1,121 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Trigonometry differentiation rules: tangent and secant
+##      Multiple select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+# display different variables
+@var = qw(x y t u v z n);
+$x = $var[random(0,$#var,1)];
+
+# random a and b not equal
+$a = random(2,9,1);
+$a = $a*random(-1,1,2);  # plus or minus
+do {$b = random(1,9,1);} until ($b != $a);
+$c = random(2,21,1);
+$ma = -1*$a;
+$k = random(-9,-2,1);  # k is negative
+$absk = abs($k);
+
+# possible types
+@typearray = ("false","true");
+$n = random(0,$#typearray,1);  # choose one of the types
+$type = $typearray[$n];
+
+# The full list of answers (at least 4 in each)
+@allF = ("\( \frac{d}{dx}( \tan x ) = \sec x \tan x \)",
+             "\( \frac{d}{dx}( \sec x ) = \tan^2 x \)",
+             "\( \frac{d}{dx}(  \tan $c ) =  \sec^2 $c \)", 
+             "\( \frac{d}{dx} ( \sec $b ) = \sec $b \tan $b \)",  
+             "\( \frac{d}{dx} ( $a \tan x ) = 0 \sec^2 x \)",
+             "\( \frac{d}{dx} ( $c \sec x ) = 0 (\tan x \sec x)\)",
+             "\( \frac{d}{dx} ( \tan x ) = -\cot x \)",
+             "\( \frac{d}{dx} ( \sec x ) = \sec x - \tan x \)",
+             );
+@allT = ("\( \frac{d}{dx}( \tan x ) =  \sec^2 x \)",
+             "\( \frac{d}{dx}( \sec x ) = \sec x \tan x \)",
+             "\( \frac{d}{dx}(  \tan $c ) =  0 \)", 
+             "\( \frac{d}{dx} ( \sec $b ) = 0 \)",  
+             "\( \frac{d}{dx} ( $c \tan x ) = $c \sec^2 x \)",
+             "\( \frac{d}{dx} ( $a \sec x ) = $a \tan x \sec x \)",
+             "\( \frac{d}{dx} ( \sec x ) = \tan x \sec x \)",
+             "\( \frac{d}{dx} ( \tan x ) = \sec x \sec x \)",
+);
+
+
+# set conditions of correctness
+if ($n == 0){    # f
+    @corrAns = @allF;
+    @incorrAns = @allT;
+    }
+else  {   # t
+    @corrAns = @allT;
+    @incorrAns = @allF;
+    }
+
+# Correct answers to display:
+$numc = random(0,4,1);  
+@slicec = NchooseK(scalar(@corrAns),$numc);  
+@randc = @corrAns[@slicec];
+
+# Incorrect answers to display
+$numi = 4 - $numc;   # the 4 is the number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+# Display the question, and the choices:
+$quest = ();
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){  # at least one correct answer
+    $multichoice -> qa ( $quest, @randc,);
+    $multichoice -> extra( @randi, "None of the above",);
+    }
+else {            # no correct answers
+    $multichoice -> qa ( $quest, "None of the above",);
+    $multichoice -> extra( @randi, );
+}
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+Select the expression(s), if any, that are [$type].
+[@ $multichoice->print_a() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

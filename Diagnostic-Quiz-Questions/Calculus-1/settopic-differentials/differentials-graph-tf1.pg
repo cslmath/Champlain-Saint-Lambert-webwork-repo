@@ -1,0 +1,135 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##     Differential, definition: dy > or < or = Deltay 
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGtikz.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+#$refreshCachedImages = 1;  # <= COMMENT OUT THIS LINE OF CODE AFTER TESTING
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+# Set parameters
+$a = .2;
+$dx = random(0.01,0.15,0.01);
+$dx = $dx*random(-1,1,2);  #plus or minus
+$apdx = $a + $dx;
+$absdx = abs($dx);
+$pmdx = "+ $absdx";
+if ($dx < 0){$pmdx = "- $absdx";}
+
+# Variable $graph1 contains the TikZ graph:
+$graph1 = createTikZImage();
+$graph1->tikzLibraries("arrows.meta");
+
+$gmin = -2.5;
+$gmax = 2.5;
+$xmin = -2.5;
+$xmax = 2.5;
+
+# Graphs to display - arcs of circles
+$rsq = 49;
+$xo = 3.9641;
+$yo = 6.5641;
+
+@allxmin = (-2.5,-2.5,-1.7,-1.25,-1.25,-1.7,-2.5,-2.5);
+@allxmax = (1.7,1.25,2.5,2.5,2.5,2.5,1.25,1.7);
+
+@allGraph = ("sqrt($rsq - (-1*\x - $xo)^2) - $yo",# 000  f, f', f''
+         "-1*sqrt($rsq - (\x - $xo)^2) + $xo",    # 001
+         "sqrt($rsq - (\x - $xo)^2) - $yo",       # 010
+         "-1*sqrt($rsq - (-1*\x - $xo)^2) + $xo", # 011
+         "sqrt($rsq - (-1*\x - $xo)^2) - $xo",    # 100
+         "-1*sqrt($rsq - (\x - $xo)^2) + $yo",    # 101
+         "sqrt($rsq - (\x - $xo)^2) - $xo",       # 110      
+         "-1*sqrt($rsq - (-1*\x - $xo)^2) + $yo", # 111
+        );
+        
+@allFunct = (Formula("sqrt($rsq - (-1*x - $xo)^2) - $yo"),# 000  f, f', f''
+         Formula("-1*sqrt($rsq - (x - $xo)^2) + $xo"),    # 001
+         Formula("sqrt($rsq - (x - $xo)^2) - $yo"),       # 010
+         Formula("-1*sqrt($rsq - (-1*x - $xo)^2) + $xo"), # 011
+         Formula("sqrt($rsq - (-1*x - $xo)^2) - $xo"),    # 100
+         Formula("-1*sqrt($rsq - (x - $xo)^2) + $yo"),    # 101
+         Formula("sqrt($rsq - (x - $xo)^2) - $xo"),       # 110      
+         Formula("-1*sqrt($rsq - (-1*x - $xo)^2) + $yo"), # 111
+        );
+
+$gi = random(0,$#allGraph,1);
+$fun = $allGraph[$gi];
+$f = $allFunct[$gi];
+$fp = $f -> D(x);
+$fa = $f -> eval(x=>$a);
+$fapdx = $f -> eval(x=>$apdx);
+$fpa = $fp -> eval(x=>$a);
+#$T = $fa + $fpa*(x - $a);
+$Tdisp = "$fa + $fpa*(\x - $a)";
+$dy = $fpa*$dx;
+$Deltay = $fapdx - $fa;
+$diff = $dy - $Deltay;
+
+$xmin = $allxmin[$gi];
+$xmax = $allxmax[$gi];
+
+$graph1->BEGIN_TIKZ
+  \draw[thick,->] ({$gmin},0) -- ({$gmax},0) node[anchor=north west] {\(x\)};
+  \draw[thick,->] (0,{$gmin}) -- (0,{$gmax}) node[anchor=south east] {\(y\)};
+  \draw[red, thick, domain = {$xmin}:{$xmax}] plot (\x, {$Tdisp});
+  \draw[blue, thick, domain={$xmin}:{$xmax}] plot (\x, {$fun});
+  \filldraw[black] ($a,$fa) circle (1pt);
+  \draw[black] ($a,-.05) -- ($a,.05) node [anchor=north] {\(a\)};
+END_TIKZ
+
+# All possible answers
+@allAns = ("less than","greater than");
+$ip = random(0,$#allAns,1); 
+$sign = $allAns[$ip];
+# Correctness condition checked:
+$correct = "False";
+if ($ip == 0) {  #lt
+    if ($gi%2 == 1){$correct = "True";}  # odd-numbered graphs are concave up
+    }
+else { #gt
+    if ($gi%2 == 0){$correct = "True";}  # even-numbered graphs are concave down
+}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+
+BEGIN_PGML
+Consider the graph of the tangent line (red) to the function [`y=f(x)`] (blue) at the point [`(a,f(a))`]. (Click on graph to enlarge.)  
+>>[@ image(insertGraph($graph1), width=>200, height=>200, tex_size=>400); @]*<<  
+
+*True or false:* If [`x`] changes from [`a`] to [`a [$pmdx]`], then the differential [`dy`] is [$sign] the corresponding exact change in [`y`].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

@@ -1,0 +1,101 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      Applications of f' and f''
+##      Multiple choice
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGML.pl",
+  "PGchoicemacros.pl",
+  "parserRadioButtons.pl",
+  "PGcourse.pl",
+);
+
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+$showc = random(0,9,1);
+$numc = 1;
+if ($showc == 0){$numc = 0;}
+
+Context("Numeric");
+$showPartialCorrectAnswers = 0;
+$c1 = random(-5,9);
+$fpp = non_zero_random(-3,3,1);
+
+@word = ("negative","positive");
+$ip = random(0,1,1);
+$posneg = $word[$ip];
+
+@allAns = ("\( f(x)\) has a local (relative) maximum at \(x = $c1\)",
+           "\( f(x)\) has a local (relative) minimum at \(x = $c1\)",
+           "\( f(x)\) has no local (relative) extremum  at \(x = $c1\)",
+           "\( f(x)\) has a zero at \(x = $c1\)",
+           "\( f(x)\) has a discontinuity at \(x = $c1 \)",
+           "\( f(x)\) is $posneg at \(x = $c1 \)",
+           );
+           
+if ($fpp < 0){ # relative maximum
+    $correct = $allAns[0];
+    }
+else { 
+    $correct = $allAns[1];
+}
+# Use map and grep to extract the correct answer, and 
+#   create an array of incorrects.
+@corrAns = ($correct); 
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+    
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+    
+
+BEGIN_PGML
+Suppose a function [`f(x)`] with a continuous second derivative is such that  [`f'([$c1])=0`] and [`f''([$c1]) = [$fpp]`]. 
+
+Select the option, if any, that is true about the function at [`x = [$c1]`].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

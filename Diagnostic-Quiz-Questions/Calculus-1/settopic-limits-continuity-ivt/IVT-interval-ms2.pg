@@ -1,0 +1,266 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      IVT continuity
+##      The equation a^x - x^a with a>=6 even. 
+##      There are three solutions:
+##      1. A negative solution on (-1,-0.7), tending to -1 as a increases,
+##      2. A positive solution on (1, 1.7), tending to 1, as a increases,
+##      3. x = a. 
+##      From a list of intervals, select by IVT the ones that contain a solution
+##      Multiple select
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+########## Array and Variable Names ##########
+# @allAns, @allT, @allF ... : answer arrays of all possible display choices
+# @corrAns, @incorrAns : correct answer array, incorrect answer array
+# $numc : number of correct answers to display
+# $numi : number of incorrect answers to display
+# $showc: toggle to show the correct answer or not
+# @slicec : indices of correct answer subset
+# @slicei : indices of incorrect answer subset
+# @randc : array of correct choice(s) to display
+# @randi : array of incorrect choice(s) to display
+
+
+
+
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+# Set parameters:
+$a = random(6, 16, 2); # a is even and a>4 because otherwise we have "obvious" solutions
+
+
+# The range containing the intervals: 
+# arbitrary choice, small enough that 7^choice is reasonable  
+$xmin = -5;
+$xmax = 5; 
+
+# Generate 6 correct intervals, i.e., intervals on which the IVT applies
+# There are several types of intervals:
+# 1. Intervals catching the negative solution: we use [k, 0], k<=-1
+# 2. Intervals catching the positive solution: we use [0, m], a>m>=1
+# 3. Intervals catching a: we don't use those b/c a is "visible"
+# 4. Intervals where the IVT applies and there are three or more solutions, eg, [-2, a+1]: we don't use those, but we could. 
+@corrAns = ();
+
+# Generate 6 correct intervals of the first type
+@lowerBoundCorr1 = ();
+for($i=0; $i<=5; $i++){
+    $lowerBoundCorr1[$i] = random($xmin, -1, 0.1);
+    # Make sure we are not duplicating an interval
+    $new = 1;
+    for($j=0; $j<$i; $j++){
+        # here j<i because if j=i, the condition is always true
+        if($lowerBoundCorr1[$j] == $lowerBoundCorr1[$i]){ # so we are reapeating some previously recorded interval
+            $new = 0; # do not record this interval, it is not new
+        }
+        # else do nothing
+    }
+    if($new == 1){
+        push(@corrAns, "\([$lowerBoundCorr1[$i], 0]\)");
+    }
+    else{
+        $i = $i-1; # force one more pass through the loop
+    }
+}
+
+# Generate 6 correct intervals of the second type
+@upperBoundCorr2 = ();
+for($i=0; $i<=5; $i++){
+    $upperBoundCorr2[$i] = random(1, $xmax, 0.1);
+    # Make sure we are not duplicating an interval
+    $new = 1;
+    for($j=0; $j<$i; $j++){
+        # here j<i because if j=i, the condition is always true
+        if($upperBoundCorr2[$j] == $upperBoundCorr2[$i]){ # so we are reapeating some previously recorded interval
+            $new = 0; # do not record this interval, it is not new
+        }
+        # else do nothing
+    }
+    if($new == 1){
+        push(@corrAns, "\( [0, $upperBoundCorr2[$i]] \)");
+    }
+    else{
+        $i = $i-1; # force one more pass through the loop
+    }
+}
+
+
+@incorrAns = ();
+# There are two types of "incorrect" intervals:
+# 1. There are two solution on an interval, but the IVT does not apply
+# 2. There are no solutions on an interval and the IVT does not apply
+# Generate 4 wrong intervals on the right of 3
+
+# Generate 6 incorrect intervals of the first type
+# (a) Intervals of the type [k,m] with k<=-1 and xmax>= m >= 1.7
+# (b) Intervals of the type [0,n] with n>a: don't include these as a can be large
+@lowerBoundIncorr1 = ();
+@upperBoundIncorr1 = ();
+for($i=0; $i<=5; $i++){
+    $lowerBoundIncorr1[$i] = random($xmin, -1, 0.1);
+    $upperBoundIncorr1[$i] = random(1.7, $xmax, 0.1);
+    # Make sure we are not duplicating an interval
+    $new = 1;
+    for($j=0; $j<$i; $j++){
+        # here j<i because if j=i, the condition is always true
+        if(($lowerBoundIncorr1[$j] == $lowerBoundIncorr1[$i]) and ($upperBoundIncorr1[$j] == $upperBoundIncorr1[$i])){ # so we are reapeating some previously recorded interval
+            $new = 0; # do not record this interval, it is not new
+        }
+        # else do nothing
+    }
+    if($new == 1){
+        push(@incorrAns, "\( [$lowerBoundIncorr1[$i], $upperBoundIncorr1[$i]] \)");
+    }
+    else{
+        $i = $i-1; # force one more pass through the loop
+    }
+}
+
+
+
+# Generate 6 incorrect intervals of the second type
+# (a) intervals of the type [p, k] with k <= -1
+# (b) intervals of the type [m, q] with m < q < xmax
+# (c) intervlas of the type [r, 0] with -0.6 <= r <= -0.1
+@lowerBoundIncorr2a = ();
+@upperBoundIncorr2a = ();
+for($i=0; $i<=5; $i++){
+    $upperBoundIncorr2a[$i] = random($xmin+0.2, -1, 0.1);
+    $lowerBoundIncorr2a[$i] = random($xmin, $upperBoundIncorr2a[$i], 0.1);
+    # Make sure we are not duplicating an interval
+    $new = 1;
+    for($j=0; $j<$i; $j++){
+        # here j<i because if j=i, the condition is always true
+        if(($lowerBoundIncorr2a[$j] == $lowerBoundIncorr2a[$i]) and ($upperBoundIncorr2a[$j] == $upperBoundIncorr2a[$i])){ # so we are reapeating some previously recorded interval
+            $new = 0; # do not record this interval, it is not new
+        }
+        # else do nothing
+    }
+    if($new == 1){
+        push(@incorrAns, "\( [$lowerBoundIncorr2a[$i], $upperBoundIncorr2a[$i]] \)");
+    }
+    else{
+        $i = $i-1; # force one more pass through the loop
+    }
+}
+
+####
+
+@lowerBoundIncorr2b = ();
+@upperBoundIncorr2b = ();
+for($i=0; $i<=5; $i++){
+    $lowerBoundIncorr2b[$i] = random(1.7, $xmax-0.2, 0.1);
+    $upperBoundIncorr2b[$i] = random($lowerBoundIncorr2b[$i], $xmax, 0.1);
+    # Make sure we are not duplicating an interval
+    $new = 1;
+    for($j=0; $j<$i; $j++){
+        # here j<i because if j=i, the condition is always true
+        if(($lowerBoundIncorr2b[$j] == $lowerBoundIncorr2b[$i]) and ($upperBoundIncorr2b[$j] == $upperBoundIncorr2b[$i])){ # so we are reapeating some previously recorded interval
+            $new = 0; # do not record this interval, it is not new
+        }
+        # else do nothing
+    }
+    if($new == 1){
+        push(@incorrAns, "\( [$lowerBoundIncorr2b[$i], $upperBoundIncorr2b[$i]] \)");
+    }
+    else{
+        $i = $i-1; # force one more pass through the loop
+    }
+}
+
+####
+
+@lowerBoundIncorr2c = ();
+@upperBoundIncorr2c = ();
+for($i=0; $i<=5; $i++){
+    $lowerBoundIncorr2c[$i] = random(-0.6, -0.1, 0.1);
+    # Make sure we are not duplicating an interval
+    $new = 1;
+    for($j=0; $j<$i; $j++){
+        # here j<i because if j=i, the condition is always true
+        if($lowerBoundIncorr2c[$j] == $lowerBoundIncorr2c[$i]){ # so we are reapeating some previously recorded interval
+            $new = 0; # do not record this interval, it is not new
+        }
+        # else do nothing
+    }
+    if($new == 1){
+        push(@incorrAns, "\( [$lowerBoundIncorr2c[$i], 0] \)");
+    }
+    else{
+        $i = $i-1; # force one more pass through the loop
+    }
+}
+
+
+
+
+# Correct answers to display
+#     $numc: Display 0 to 4 correct answers
+#     @slicec: indices of subset of correct answers
+#     @randc: subset of correct answers
+$numc = random(0,4,1);  # number correct answers up to max 4
+@slicec = NchooseK(scalar(@corrAns),$numc);
+@corrAns = @corrAns[@slicec];
+# Incorrect answers to display
+#     $numi: Display 4-$numc incorrect answers
+#     @slicei: indices of subset of incorrect answers
+#     @randi: subset of incorrect answers
+$numi = 4 - $numc;
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@incorrAns = @incorrAns[@slicei];
+
+$quest = ();
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){ # show at least one correct
+    $multichoice -> qa (
+        $quest, 
+    @corrAns,
+    );
+    $multichoice -> extra(
+    @incorrAns,
+    );
+} else { # show no correct choice ("None of the above" is correct answer)
+   $multichoice -> qa (
+        $quest, 
+        "None of the above",
+    );
+    $multichoice -> extra(
+    @incorrAns,
+    );
+}
+$multichoice -> makeLast("None of the above");
+
+BEGIN_PGML
+
+Select the interval(s), if any, on which you can conclude, by using the Intermediate Value Theorem, that the following equation has a solution. 
+
+[` [$a]^x - x^{[$a]} = 0 `]  
+[@ $multichoice->print_a() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

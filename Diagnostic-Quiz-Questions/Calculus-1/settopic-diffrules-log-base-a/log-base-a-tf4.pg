@@ -1,0 +1,73 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##     Logarithm base a: derivative rule, give base 0 < a/b < 1
+##     True/False
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe 
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+# Set parameters
+$b = random(5,9,1);
+$a = random(2,$b,1);  # numerator is less than denominator
+if (gcd($a,$b) != 1){
+    $a = $a/gcd($a,$b);
+    $b = $b/gcd($a,$b);
+    }
+ 
+$ad = $a; # for display (suppress coeff 1)
+if ($a == 1){
+    $ad = "";
+    }
+
+# All possible answers
+@allAns = ("1/(x \ln \frac{$a}{$b})", 
+	"$b /($ad \ln x)",  
+    );
+$ip = random(0,$#allAns,1); 
+$rhs = $allAns[$ip];
+# Correctness condition checked:
+if ($ip == 0) {
+    $correct = "True";
+    }
+else {
+    $correct = "False";
+}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:* If [`f(x) = \log_{\frac{[$a]}{[$b]}} x`], then [`f'(x) = [$rhs]`].  
+[@ $radio1->buttons() @]*
+
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+$showPartialCorrectAnswers = 0;
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

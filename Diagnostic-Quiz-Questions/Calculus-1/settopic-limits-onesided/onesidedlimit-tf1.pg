@@ -1,0 +1,64 @@
+## DESCRIPTION
+## WeBWorK Diagnostic test question: Calculus 1
+##      One-sided limit concept
+##      True or false
+## Institution: Champlain College Saint-Lambert
+## Authors: Svetla Vassileva, Michele Titcombe
+## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## ENDDESCRIPTION
+#
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGML.pl",
+  "PGchoicemacros.pl",
+  "parserRadioButtons.pl",
+  "PGcourse.pl",
+);
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+$a = random(-9,9,1);
+$L = $a + random(1,5);
+
+# limit statements
+@limits = ("\lim_{x\to $a}",
+           "\lim_{x\to $a^-}",
+           "\lim_{x\to $a^+}",
+       );
+$li = random(0,$#limits,1);
+do {$lt = random(0,$#limits,1);} until ($lt != $li);
+$iflim = $limits[$li];
+$thenlim = $limits[$lt];
+
+$correct = "False";
+# Set a condition of truth based on the variable $li
+# Unless index if-then pair is 01 or 02 (really, if $li=0)
+if ($li == 0){$correct = "True";}
+    
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	$correct,  # Correct answer
+	);
+
+BEGIN_PGML
+*True or false:* If [``[$iflim]f(x)=[$L]``], then [``[$thenlim]f(x)=[$L]``].  
+[@ $radio1->buttons() @]*
+END_PGML
+
+# Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The statement is [@ $radio1->correct_ans() @]     
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();
