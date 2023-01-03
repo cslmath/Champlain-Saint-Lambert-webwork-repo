@@ -5,7 +5,7 @@ dueDate           = 12/31/2022 at 11:59pm EST
 answerDate        = 12/31/2022 at 11:59pm EST
 enableReducedScoring = N
 paperHeaderFile   = defaultHeader
-screenHeaderFile  = 
+screenHeaderFile  = defaultHeader
 attemptsPerVersion  = 0
 timeInterval        = 0
 versionsPerInterval = 0
@@ -20,10 +20,10 @@ description       = This quiz has 5 questions to complete in 15 minutes. Try the
 restrictProbProgression = 0
 emailInstructor   = 0
 
-problemListV2 
+problemListV2
 problem_start
 problem_id = 1
-source_file = group:topic-limits-theory
+source_file = group:topic-limits-laws-properties
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -33,7 +33,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 2
-source_file = group:topic-limits-theory
+source_file = group:topic-limits-laws-properties
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -43,7 +43,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 3
-source_file = group:topic-limits-theory
+source_file = group:topic-limits-laws-properties
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -53,7 +53,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 4
-source_file = group:topic-limits-theory
+source_file = group:topic-limits-laws-properties
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -63,7 +63,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 5
-source_file = group:topic-limits-theory
+source_file = group:topic-limits-laws-properties
 value = 1
 max_attempts = -1
 showMeAnother = -1
