@@ -117,7 +117,7 @@ $chooseQandA = random(0,4,1);
 );
 
 if($chooseQandA == 0){
-    $priceInc = "$BBOLD the price of headphones is dropping by $dpdtValue dollars per set of headphones per week $EBOLD";
+    $priceInc = "the price of headphones is $BBOLD dropping $EBOLD by $dpdtValue dollars per set of headphones per week";
 }
 elsif($chooseQandA == 1){
     $demand = "$BBOLD demand equation $EBOLD";
@@ -126,7 +126,7 @@ elsif($chooseQandA == 2){
     $price = "$BBOLD unit price $EBOLD";
 }
 elsif($chooseQandA == 3){
-    $priceInc = "$BBOLD the price of headphones is dropping by $dpdtValue dollars per set of headphones per week $EBOLD";
+    $priceInc = "the price of headphones is $BBOLD dropping $EBOLD by $dpdtValue dollars per set of headphones per week";
 }
 else{
 }
