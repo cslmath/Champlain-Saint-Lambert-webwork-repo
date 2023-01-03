@@ -111,16 +111,16 @@ $chooseQandA = random(0,4,1);
 );
 
 if($chooseQandA == 0){
-    $priceInc = "$BBOLD the price of tyres is increasing by $dpdtValue dollars per week $EBOLD";
+    $priceInc = "the price of tyres is $BBOLD increasing $EBOLD by $dpdtValue dollars per week";
 }
 elsif($chooseQandA == 1){
-    $demand = "BBOLD the quantity demanded weekly EBOLD";
+    $demand = "$BBOLD the quantity demanded weekly $EBOLD";
 }
 elsif($chooseQandA == 2){
-    $price = "BBOLD unit price EBOLD";
+    $price = "$BBOLD unit price $EBOLD";
 }
 elsif($chooseQandA == 3){
-    $priceInc = "$BBOLD the price of tyres is increasing by $dpdtValue dollars per week $EBOLD";
+    $priceInc = "the price of tyres is $BBOLD increasing $EBOLD by $dpdtValue dollars per week";
 }
 else{
 }
