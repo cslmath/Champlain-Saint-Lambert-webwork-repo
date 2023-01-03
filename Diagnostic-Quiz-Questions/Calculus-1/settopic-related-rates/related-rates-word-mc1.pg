@@ -116,7 +116,7 @@ END_TIKZ
 #########################################################
 
 BEGIN_PGML
-A hemispherical basin of diameter [`[$diam]`] centimetres is filling up with water at a rate of [`[$dVdtdisp]`] litres per minute. Consider the moment when the basin is [$howfull] full. At what rate is the water rising in the basin at that moment? 
+A hemispherical basin of diameter [`[$diam]`] centimetres is filling up with water at a rate of [`[$dVdtdisp]`] litres per minute. Consider the moment when the basin is [$howfull] full (in terms of its height). At what rate is the water rising in the basin at that moment? 
 
 Notes: the volume of the portion of a sphere with radius [`r`] from the bottom to a height [`h`] is [` V = \pi (rh^2 - \frac{1}{3} h^3)  `]; and 1 litre equals 1000 cubic centimetres.
 
