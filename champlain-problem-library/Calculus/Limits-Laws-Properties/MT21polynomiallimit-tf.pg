@@ -1,0 +1,57 @@
+## DBsubject(Calculus - single variable)
+## DBchapter(Limits and continuity)
+## DBsection(Rules of limits - basic)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2021-Feb-09)
+## MLT(LimitRules_TrueFalse)
+## Level(3)
+## Static(1)
+## TitleText1('Calculus: Early Transcendentals')
+## AuthorText1('Stewart')
+## EditionText1('5')
+## Section1('2.3')
+## Problem1('53')
+## KEYWORDS('Product','Quotient','Differentiation')
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+#$a = non_zero_random(-6,6,2);
+#$b = random(1,9,1);
+#$c = non_zero_random(-5,5,1);
+
+$correct = "True";
+$radio1 = RadioButtons(
+	["True",
+	"False"],
+	"True",  # Correct answer
+	);
+
+BEGIN_PGML
+True or False?  
+If [`p`] is a polynomial, then [`\displaystyle \lim_{x \to a} p(x)=p(a)`].
+
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+The answer is [$correct].
+END_PGML_SOLUTION
+
+ENDDOCUMENT();
+
+
