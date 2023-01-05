@@ -78,7 +78,7 @@ for($i=$ySignChange+1; $i<=5; $i++){
 @corrAns = ();
 for($i=0; $i <= $ySignChange-1; $i++){
     for($j=$ySignChange; $j <= 5; $j++){
-        push(@corrAns, "\([$yValues[$i], $yValues[$j] ]\)" );
+        push(@corrAns, "\([$xValues[$i], $xValues[$j] ]\)" );
     }
 }
 

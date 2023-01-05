@@ -60,7 +60,7 @@ $type = $typearray[$n];
    );
 
 # all true
-@allT = ("\( \sqrt{$x $y} = \sqrt{$x} + \sqrt{$y} \)",
+@allT = ("\( \sqrt{$x $y} = \sqrt{$x} \sqrt{$y} \)",
          "\( \sqrt{$asq $x} = $a\sqrt{$x} \)",
          "\( \sqrt{$x^2} = |$x| \)",
          "\( (\sqrt{$x})^2 = $x \)",

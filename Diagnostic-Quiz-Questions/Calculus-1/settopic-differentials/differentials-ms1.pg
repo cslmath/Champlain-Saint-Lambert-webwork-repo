@@ -80,8 +80,8 @@ $errdeltay = $fa1 + $fa2;
     "\(dy =  ($fpa) \cdot ($mdx)  \)", # distractor: wrong sign of dx
     "\(dy = ($fa2) - ($fa1)  \)",  # distractor: dy instead of Deltay
     "The exact change in \(y\) is \( $dy \)", # distractor: dy instead
-    "The differential \(dy\) is \( $Deltay \)", # distractor: Deltay instead
-    "The approximate change in \(y\) is \( $Deltay \)", # distractor: Deltay 
+    "The differential \(dy\) is \( $deltay \)", # distractor: Deltay instead
+    "The approximate change in \(y\) is \( $deltay \)", # distractor: Deltay 
     "\(\Delta x = $mdx\)", # distractor: wrong sign
     );
     

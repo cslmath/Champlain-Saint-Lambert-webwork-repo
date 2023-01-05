@@ -37,7 +37,7 @@ Context("Numeric");
 # Set parameters:
 
 do{$n = random(3, 13, 2); # n is odd to avoid possible negative solutions
-}until(n != 5); # if n = 5, x=5 is a solution and a bunch of wrong intervals are correct
+}until($n != 5); # if n = 5, x=5 is a solution and a bunch of wrong intervals are correct
 
 
 # The range contianing the intervals: 

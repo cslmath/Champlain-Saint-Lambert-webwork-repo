@@ -19,9 +19,6 @@
 # @randc : array of correct choice(s) to display
 # @randi : array of incorrect choice(s) to display
 
-
-
-
 DOCUMENT();
   loadMacros(
     "PGstandard.pl",
@@ -46,39 +43,29 @@ $numc = 1;
 if ($showc == 0){$numc = 0;}
 
 # Set parameters
-# Choose three different numbers (non-zero)
+# Choose two different numbers (non-zero)
 @vals = 2..11;
 @slice = NchooseK(scalar(@vals),3);
 @param = @vals[@slice];
 $a = $param[0];  # a positive
 $b = $param[1]*random(-1,1,2);
-#$c = $param[2]*random(-1,1,2);
 
 $ma = -1*$a;
 $mb = -1*$b;
-#$mc = -1*$c;
 $absa = abs($a);
 $absb = abs($b);
-#$absc = abs($c);
 $twoa = 2*$a;
 $mtwoa = -2*$a;
 
-$numer = "f($a + h) - $b";
-if ($b < 0){
-    $numer = "f($a + h) + $absb";
-    }
+#$numer = "f($a + h) - $b";
+#if ($b < 0){
+#    $numer = "f($a + h) + $absb";
+#    }
 $fun = Compute("$b - $a x^2")->reduce()->TeX;
-$diff0 = Compute("$b - $a x^2 - $twoa x h - $a h^2")->reduce()->TeX; #corr +---
-$diff1 = Compute("$b - $a x^2 - $twoa x h + $a h^2")->reduce()->TeX; # +--+
-$diff2 = Compute("$b - $a x^2 + $twoa x h - $a h^2")->reduce()->TeX; # +-+-
-$diff3 = Compute("$b - $a x^2 + $twoa x h + $a h^2")->reduce()->TeX; # +-++
-$diff4 = Compute("$b + $a x^2 - $twoa x h - $a h^2")->reduce()->TeX; # ++--
-$diff5 = Compute("$b + $a x^2 - $twoa x h + $a h^2")->reduce()->TeX; # ++-+
-$diff6 = Compute("$b + $a x^2 + $twoa x h - $a h^2")->reduce()->TeX; # +++-
-$diff7 = Compute("$b + $a x^2 + $twoa x h + $a h^2")->reduce()->TeX; # ++++
-$diff8 = Compute("$mb - $a x^2 - $twoa x h - $a h^2")->reduce()->TeX; # ----
-$diff9 = Compute("$b - $a x^2 + $a h^2")->reduce()->TeX; # missing term -+
-$diff10 = Compute("$b - $a x^2 - $a h^2")->reduce()->TeX; # missing term --
+$diff0 = Compute("- $twoa x h - $a h^2")->reduce()->TeX; #corr --
+$diff1 = Compute("- $twoa x h + $a h^2")->reduce()->TeX; # -+
+$diff2 = Compute("$twoa x h - $a h^2")->reduce()->TeX; # +-
+$diff3 = Compute("$twoa x h + $a h^2")->reduce()->TeX; # ++
     
 # Answer arrays
 #    @allAns: array of all possible answers (at least 5: 1 correct, 4 incorrect)
@@ -87,17 +74,14 @@ $diff10 = Compute("$b - $a x^2 - $a h^2")->reduce()->TeX; # missing term --
 #                depends on something in the code)
 #    @slicei = indices of subset of incorrects
 #    @randi = random subset of incorrects (3 or 4 elements)
-@allAns = ("\( \lim\limits_{h\to 0}\dfrac{ $diff0 }{h} \)",
-            "\( \lim\limits_{h\to 0}\dfrac{ $diff1 }{h} \)",
-            "\( \lim\limits_{h\to 0}\dfrac{ $diff2 }{h} \)",
-            "\( \lim\limits_{h\to 0}\dfrac{ $diff3 }{h} \)",
-            "\( \lim\limits_{h\to 0}\dfrac{ $diff4 }{h} \)",
-            "\( \lim\limits_{h\to 0}\dfrac{ $diff5 }{h} \)",
-            "\( \lim\limits_{h\to 0}\dfrac{ $diff6 }{h} \)",
-            "\( \lim\limits_{h\to 0}\dfrac{ $diff7 }{h} \)",
-            "\( \lim\limits_{h\to 0}\dfrac{ $diff8 }{h} \)",
-            "\( \lim\limits_{h\to 0}\dfrac{ $diff9 }{h} \)",
-            "\( \lim\limits_{h\to 0}\dfrac{ $diff10 }{h} \)",
+@allAns = ("\( \lim\limits_{h\to 0}\dfrac{ $diff0 }{h} \)", # correct, signs are --
+            "\( \lim\limits_{x\to 0}\dfrac{ $diff0 }{h} \)", # error x->0
+            "\( \lim\limits_{h\to 0}\dfrac{ $diff1 }{h} \)", # error sign -+
+            "\( \lim\limits_{x\to 0}\dfrac{ $diff1 }{h} \)", # error sign -+ and x->0
+            "\( \lim\limits_{h\to 0}\dfrac{ $diff2 }{h} \)", # error sign +-
+            "\( \lim\limits_{x\to 0}\dfrac{ $diff2 }{h} \)", # error sign +- and x->0
+            "\( \lim\limits_{h\to 0}\dfrac{ $diff3 }{h} \)", # error sign ++
+            "\( \lim\limits_{x\to 0}\dfrac{ $diff3 }{h} \)", # error sign ++ and x->0
            );
 
 $correct = $allAns[0];
