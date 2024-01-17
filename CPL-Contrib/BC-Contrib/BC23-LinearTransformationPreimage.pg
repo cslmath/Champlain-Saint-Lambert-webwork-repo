@@ -1,0 +1,94 @@
+##DESCRIPTION
+##Find the preimage of a vector in R^2 under a full-rank linear operator, given the images of the standard basis vectors.
+##ENDDESCRIPTION
+
+ 
+## DBsubject('Linear algebra')
+## DBchapter('Linear transformations')
+## DBsection('Inverses')
+## Date(2023)
+## Author('Brendan Cordy')
+## Institution(Champlain College Saint-Lambert)
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+   "PG.pl",
+   "PGbasicmacros.pl",
+   "MathObjects.pl",
+   "PGmatrixmacros.pl"
+);
+
+TEXT(beginproblem());
+
+$a11 = non_zero_random(-9,9,1);
+$a12 = non_zero_random(-9,9,1);
+$a21 = random(-9,9,1);
+do {$a22 = random(-3,3,1)} until ($a11*$a22 != $$a12*$a21);
+
+$x1 = non_zero_random(-4,4,1);
+$x2 = non_zero_random(-4,4,1);
+
+$xone = '$x_1';
+$xtwo = '$x_2';
+
+Context("Matrix");
+$A = Matrix( [[$a11,$a12],[$a21,$a22]] );
+$Im1 = Matrix( [[$a11],[$a21]] );
+$Im2 = Matrix( [[$a12],[$a22]] );
+$X = Matrix( [[$x1], [$x2]] );
+$b = $A*$X;
+
+$ans1 = $a11*$x1 + $a12*$x2;
+$ans2 = $a21*$x1 + $a22*$x2;
+
+$showPartialCorrectAnswers = 1;
+
+############################################
+Context()->texStrings;
+BEGIN_TEXT
+There is a linear transformation \(T\) from \({\mathbb R}^2\) to \({\mathbb R}^2\) such that
+$PAR
+\[
+T\left(\left[
+\begin{array}{cc}
+ 1 \\ 0
+\end{array}
+\right]\right) = 
+\left[
+\begin{array}{cc}
+ $a11 \\ $a21
+\end{array}
+\right]
+\text{ and } T\left(\left[
+\begin{array}{cc}
+ 0 \\ 1
+\end{array}
+\right]\right) = 
+\left[
+\begin{array}{cc}
+ $a12 \\ $a22
+\end{array}
+\right].
+\]
+$PAR
+Find the vector \(\left[
+\begin{array}{cc}
+x \\ y
+\end{array}
+\right]\) that \(T\) sends to \(\left[
+\begin{array}{cc}
+ $ans1 \\ $ans2
+\end{array}
+\right]\).
+$PAR
+\(x = \) \{ANS_RULE(5)\}
+$BR
+\(y = \) \{ANS_RULE(5)\}
+
+END_TEXT
+Context()->normalStrings;
+ANS(Compute($x1)->cmp);
+ANS(Compute($x2)->cmp);
+
+ENDDOCUMENT();        

@@ -1,0 +1,144 @@
+assignmentType      = default
+openDate          = 11/10/2023 at 02:00pm EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 11/20/2023 at 11:00pm EST
+answerDate        = 11/21/2023 at 11:00pm EST
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = 
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2
+problem_start
+problem_id = 1
+source_file = Library/ASU-topics/setStat/kolossa9.pg
+value = 1
+max_attempts = 2
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/UBC/STAT/STAT200_Revised2016/HW06/hw06-q02.pg
+value = 1
+max_attempts = 3
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/UBC/STAT/STAT200/hw06/hw06-q01.pg
+value = 1
+max_attempts = 1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/Rochester/setProbability11CentralLimitTh/ur_pb_11_4.pg
+value = 1
+max_attempts = 3
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 5
+source_file = Library/CollegeOfIdaho/setStatistics_Ch11SamplingDistributions/11Stats_06_SamplingDistns.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 6
+source_file = Library/ASU-topics/setStat/di4.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 7
+source_file = Library/CollegeOfIdaho/setStatistics_Ch11SamplingDistributions/11Stats_10_SamplingDistns.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 8
+source_file = Library/CollegeOfIdaho/setStatistics_Ch11SamplingDistributions/11Stats_11_SamplingDistns.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 9
+source_file = Library/CollegeOfIdaho/setStatistics_Ch11SamplingDistributions/11Stats_08_SamplingDistns.pg
+value = 1
+max_attempts = 20
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 10
+source_file = Library/ASU-topics/setStat/di3.pg
+value = 1
+max_attempts = 2
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 11
+source_file = Library/NAU/setStatistics/central_limit_theorem1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 12
+source_file = Library/CollegeOfIdaho/setStatistics_Ch11SamplingDistributions/11Stats_07_SamplingDistns.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 13
+source_file = Library/UBC/STAT/STAT200_Revised2016/HW06/hw06-q07a.pg
+value = 1
+max_attempts = 5
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+
