@@ -1,0 +1,212 @@
+## DESCRIPTION
+##  Given input sequences and a circuit diagram, determine the output of the logic gates.
+## ENDDESCRIPTION
+
+## DBsubject(Set theory and logic)
+## DBchapter(Propositional logic)
+## DBsection(Operations on propositions)
+## Institution(Champlain College Saint-Lambert)
+## Author(Malcolm Harper)
+## Date(2022/03/13)
+## Level(2)
+## TitleText1('Computing Mathematics')
+## AuthorText1('Lipschutz')
+## Section1('7.6')
+## Problem1('')
+## KEYWORDS('Logic', 'Boolean', 'Operation','input sequence')
+
+## Revised(2022/10/20)
+
+## MO(1)
+## Static(0)
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "PGML.pl",
+    "contextString.pl",
+    "parserAutoStrings.pl",
+    "PGchoicemacros.pl",    # For NchooseK()
+    "PGcourse.pl",
+);
+
+##########
+# Configuration
+
+$showPartialCorrectAnswers = 0; 
+$image_ext = '.svg';
+
+Context("String");
+AutoStrings();
+
+##########
+# My macros
+
+# Display an integer as a string in binary notation
+# only the least significant nbits are shown
+
+sub binary_display {
+    sprintf $nbitsf, $_[0] & $bitmask;
+    };
+
+# Convert an array of 1s and 0s representing binary notation to an integer
+
+sub array_to_integer {
+    oct("0b".(join('',@_)));
+    };
+
+##########
+# Setup
+
+@Circuits = (
+            {
+            'filestem' => '0010',
+            'circuit_function' =>  sub { ( $A | $B | ~$C ) },
+        },
+                {
+            'filestem' => '0011',
+            'circuit_function' =>  sub { ( $A & $B & ~$C ) },
+        },
+                {
+            'filestem' => '0100',
+            'circuit_function' =>  sub { ( $A | ~$B | $C ) },
+        },
+                {
+            'filestem' => '0101',
+            'circuit_function' =>  sub { ( $A & ~$B & $C ) },
+        },
+                {
+            'filestem' => '0110',
+            'circuit_function' =>  sub { ( $A | ~$B | ~$C ) },
+        },
+                {
+            'filestem' => '0111',
+            'circuit_function' =>  sub { ( $A & ~$B & ~$C ) },
+        },
+                {
+            'filestem' => '1000',
+            'circuit_function' =>  sub { ( ~$A | $B | $C ) },
+        },
+                {
+            'filestem' => '1001',
+            'circuit_function' =>  sub { ( ~$A & $B & $C ) },
+        },
+                {
+            'filestem' => '1010',
+            'circuit_function' =>  sub { ( ~$A | $B | ~$C ) },
+        },
+                {
+            'filestem' => '1011',
+            'circuit_function' =>  sub { ( ~$A & $B & ~$C ) },
+        },
+                {
+            'filestem' => '1100',
+            'circuit_function' =>  sub { ( ~$A | ~$B | $C ) },
+        },
+                {
+            'filestem' => '1101',
+            'circuit_function' =>  sub { ( ~$A & ~$B & $C ) },
+        },
+        );
+
+##########
+# Choose the circuit
+
+$circuit = random(0,scalar(@Circuits)-1,1);
+
+$image_file = $Circuits[$circuit]{'filestem'}.$image_ext;
+$circuit_function = $Circuits[$circuit]{'circuit_function'};
+
+##########
+# Choose the inputs
+
+$nbits = 9;                                 # minimum of 8 bits in this set up
+$nbitsf = "%0".$nbits."b";
+$bitmask = 2**$nbits - 1;
+
+# Do it like this to cover all possible combinations of inputs
+# then add an extra pair of inputs
+@Abits = (1,1,1,1,0,0,0,0,random(0,1,1));
+@Bbits = (1,1,0,0,1,1,0,0,random(0,1,1));
+@Cbits = (1,0,1,0,1,0,1,0,random(0,1,1));
+
+# Mix up the order of the inputs
+@slice = NchooseK($nbits,$nbits);
+
+# bit array to integer
+$A = array_to_integer(@Abits[@slice]);
+$B = array_to_integer(@Bbits[@slice]);
+$C = array_to_integer(@Cbits[@slice]);
+
+##########
+# Set up the image display
+
+$width = 300;
+$tex_size = 700;
+$image = image($image_file,
+    width=>$width,tex_size=>$tex_size,
+    extra_html_tags=>'alt="Diagram of a logic circuit."' );
+
+##########
+# Main Text and Solution
+
+$answer = String(binary_display($Circuits[$circuit]{'circuit_function'}->()));
+
+# Clean up the answer checker error messages
+
+$cmp = $answer -> cmp()->withPostFilter(sub { 
+    my $ans = shift;
+    my $student_ans = $ans->{student_ans};
+    if ($student_ans =~ /[^01]/) {
+        $ans->{ans_message} = "Your answer should contain only the digits 0 and 1.";
+    } elsif (length($student_ans) != $nbits){
+        $ans->{ans_message} = "Your answer should have ".$nbits." bits.";
+    } else {
+        $ans->{ans_message} = "";
+    }
+    return $ans; 
+});
+
+TEXT(beginproblem());
+
+BEGIN_PGML
+Given the input sequences:
+[```
+\begin{array}{rl}
+    A & =  [@ binary_display($A) @] \\
+    B & =  [@ binary_display($B) @] \\
+    C & =  [@ binary_display($C) @] 
+\end{array}
+```]
+
+Find the output sequence for the logic circuit diagram:
+>> [@ $image @]* <<
+The output sequence, [` D `], is [____]{$cmp}{10}
+
+Note: the output sequence will be the same length ([$nbits] bits) as the input sequences.
+END_PGML
+
+BEGIN_PGML_HINT
+*OR* gate: [` A + B + C `]  
+[` 0`] occurs as an output of an OR gate only when all inputs are [` 0 `].
+
+*AND* gate: [` A \cdot B \cdot C `]  
+[` 1 `] occurs as an output of an AND gate only when all inputs are [` 1 `].
+
+*NOT* gate: [` \overline{A} `]  
+If the input is [` 1 `], the output is [` 0 `]; if the input is [` 0 `], the output is [` 1 `].  
+
+END_PGML_HINT
+
+# BEGIN_PGML_SOLUTION
+
+# END_PGML_SOLUTION
+
+COMMENT("The configuration is choosen randomly from 12 possibilities as the gate is an AND or an OR gate 
+    and as the inputs are negated or not.  Only configurations with one or two NOT gates are possible.");
+COMMENT("The input strings are $nbits bits long covering all possible input bit combinations plus one duplicate in random order.");
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.;
