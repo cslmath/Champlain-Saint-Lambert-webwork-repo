@@ -1,0 +1,64 @@
+assignmentType      = default
+openDate          = 11/24/2023 at 02:00pm EST
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 12/05/2023 at 11:00pm EST
+answerDate        = 12/05/2023 at 11:00pm EST
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = A short assignment on confidence intervals.  See handout 14.
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2
+problem_start
+problem_id = 1
+source_file = Library/ASU-topics/setStat/gust51.pg
+value = 1
+max_attempts = 3
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/ASU-topics/setStat/gust52.pg
+value = 1
+max_attempts = 3
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/CollegeOfIdaho/setStatistics_Ch14InferenceIntro/14Stats_01_InferenceIntro.pg
+value = 1
+max_attempts = 6
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/CollegeOfIdaho/setStatistics_Ch14InferenceIntro/14Stats_03_InferenceIntro.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 5
+source_file = Library/UVA-Stat/setStat212-Homework08/stat212-HW08-06.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+
