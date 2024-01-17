@@ -1,0 +1,56 @@
+## DESCRIPTION
+## Find the unique steady state vector for a three-state regular Markov chain.
+## ENDDESCRIPTION
+
+## DBsubject('Linear algebra')
+## DBchapter('Matrices')
+## DBsection('Markov chains')
+## Date('2023')
+## Author('Brendan Cordy')
+## Institution('Champlain College Saint-Lambert')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+"PG.pl",
+"PGbasicmacros.pl",
+"PGchoicemacros.pl",
+"PGanswermacros.pl",
+"PGgraphmacros.pl",
+"PGmatrixmacros.pl", 
+"PGnumericalmacros.pl",
+"PGauxiliaryFunctions.pl",
+"PGmorematrixmacros.pl"
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+$n = random(1,9,1);
+$a = $n / 10;
+$b = 1-$a;
+
+$t = 1 / ((-5/(30*($a-1)))+4/3);
+
+$q1 = (-5/(30*($a-1)))*$t;
+$q2 = (1/3)*$t;
+$q3 = $t;
+
+BEGIN_TEXT
+Consider the three state Markov chain whose stochastix matrix is given below.
+$BR
+\[ S = \left[\begin{array}{ccc}
+$a & 0.2 & 0.1 \\
+$b & 0.2 & 0.1 \\
+0 & 0.6 & 0.8 \\
+\end{array}\right]\]
+Check that the Markov chain is regular, then find the steady state vector \(\vec{q}\).
+$BR
+$BR
+\{ mbox( '\(\vec{q}=\)', answer_matrix(3,1,5) ) \} 
+$BR
+END_TEXT
+
+ANS(num_cmp($q1)); ANS(num_cmp($q2)); ANS(num_cmp($q3));
+
+ENDDOCUMENT();       # This should be the last executable line in the problem.
