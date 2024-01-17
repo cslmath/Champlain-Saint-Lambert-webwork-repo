@@ -1,6 +1,7 @@
 ##DESCRIPTION
 ##  Binary-coded decimal (BCD): ASCII-8
 ##  2018 Sep MT FIX removed lonely $EITALIC
+##  2024 Jan MH FIX remove characters that break tex mode
 ##ENDDESCRIPTION
 
 ##KEYWORDS('binary-coded decimal', 'BCD', 'ascii')
@@ -26,7 +27,7 @@ loadMacros(
    "PGstandard.pl",     # Standard macros for PG language
    "MathObjects.pl",
    #"source.pl",        # allows code to be displayed on certain sites.
-   #"PGcourse.pl",      # Customization file for the course
+   "PGcourse.pl",      # Customization file for the course
 );
 
 # Print problem number and point value (weight) for the problem
@@ -36,10 +37,14 @@ TEXT(beginproblem());
 $showPartialCorrectAnswers = 1;
 
 Context("Numeric");
+
+# include only characters that work in both HTML and TeX mode:
+@acceptable = (33, 34, 39..59, 61, 63..91, 93, 96..122);
 @dec = ();
 @hex = ();
+
 foreach my $i (0..7) {
-   $dec[$i] = random(33,122,1);
+   $dec[$i] = list_random(@acceptable);
    $asc[$i] = sprintf("%X",$dec[$i]);
    $a[$i] = chr($dec[$i]);
 }
