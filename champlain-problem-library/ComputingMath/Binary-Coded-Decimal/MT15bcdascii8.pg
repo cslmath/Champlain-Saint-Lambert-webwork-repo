@@ -44,7 +44,7 @@ Context("Numeric");
 @hex = ();
 
 foreach my $i (0..7) {
-    $dec[$i] = list_random(@acceptable);
+   $dec[$i] = list_random(@acceptable);
    $asc[$i] = sprintf("%X",$dec[$i]);
    $a[$i] = chr($dec[$i]);
 }
