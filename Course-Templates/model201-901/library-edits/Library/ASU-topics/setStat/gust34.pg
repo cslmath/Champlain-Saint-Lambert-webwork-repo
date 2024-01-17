@@ -1,0 +1,73 @@
+##DESCRIPTION
+##   Statistics: Normal Distribution
+##ENDDESCRIPTION
+
+## DBsubject(Probability)
+## DBchapter(Continuous distributions)
+## DBsection(Gaussian normal)
+## Institution(ASU)
+## Level(1)
+## KEYWORDS('Statistics')
+##
+## Local version of
+## Library/ASU-topics/setStat/gust34.pg
+## Converted to PGML, T/F -> popup, not string
+## Added solution (explanation)
+## Malcolm Harper 2022-02-07
+
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "PGML.pl",
+#  "PGchoicemacros.pl",
+#  "PGasu.pl",
+  "parserPopUp.pl",
+  "PGcourse.pl"
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 0;
+
+$m0 = random(1,20,1) ;
+do  {$m1 = random(1,20,1)}    until    ($m1 != $m0) ;
+do  {$s = random(2,15,1)}    until    ( (abs($s - $m0) > 2) and (abs($s - $m1) > 2) ) ;
+$pm = list_random( 1 , -1 ) ;
+$m0 *= $pm ;
+$m1 *= -($pm) ;
+
+## Answer checking
+Context()->strings->add(True => {}, False => {}, "?" => {});
+$TF_true = PopUp(
+["?","True","False"],
+1,
+);
+
+$TF_false = PopUp(
+["?","True","False"],
+2,
+);
+
+BEGIN_PGML
+Consider two normal distributions,
+one with mean  [$m0] and standard deviation [$s],
+the other with mean [$m1] and standard deviation [$s].
+
+Are the following statements **true** or **false**.
+
+a) The two distributions have the same shape.  
+True or false: 
+[_]{$TF_true}
+b)  The two distributions are centered at the same place.  
+True or false: 
+[_]{$TF_false}
+END_PGML
+
+BEGIN_PGML_SOLUTION
+
+a) The exact shape of a normal distribution is determined by its _standard deviation_.  Since the two distributions have the same standard deviation, [$s], they have the same shape.
+b) The _mean_ of a normal distribution determines where it is centered.  Since the two distributions have different means, (`[$m0] \ne [$m1]`), they are centered at different places.
+
+END_PGML_SOLUTION
+ENDDOCUMENT();

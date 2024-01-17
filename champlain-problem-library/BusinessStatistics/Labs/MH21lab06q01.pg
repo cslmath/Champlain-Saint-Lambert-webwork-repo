@@ -18,6 +18,8 @@
 
 ## MO(1)
 
+# Edited 2023-10-03 to correct typos - MH
+
 ###########################
 # Initialization
 
@@ -81,7 +83,7 @@ $eventA = random(8,10,1);
 BEGIN_PGML
 *Part (a)*
 
-Complete the table below by writing the sums when you roll a $n1-sided die and a $n2-sided die.
+Complete the table below by writing the sums when you roll a [$n1]-sided die and a [$n2]-sided die.
 
 [@
 DataTable(

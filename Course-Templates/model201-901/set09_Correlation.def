@@ -1,0 +1,104 @@
+assignmentType      = default
+openDate          = 09/15/2023 at 02:00pm EDT
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 09/26/2023 at 11:00pm EDT
+answerDate        = 09/27/2023 at 11:00pm EDT
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = 
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2
+problem_start
+problem_id = 1
+source_file = Library/NAU/setStatistics/Scatterplot.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/NAU/setStatistics/correlation_pos_neg_1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/CollegeOfIdaho/setStatistics_Ch04ScatterplotsAndCorrelation/04Stats_08_ScatterCorrelation.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/CollegeOfIdaho/setStatistics_Ch04ScatterplotsAndCorrelation/04Stats_09_ScatterCorrelation.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 5
+source_file = Library/CollegeOfIdaho/setStatistics_Ch04ScatterplotsAndCorrelation/04Stats_01_ScatterCorrelation.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 6
+source_file = Library/CollegeOfIdaho/setStatistics_Ch04ScatterplotsAndCorrelation/04Stats_07_ScatterCorrelation.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 7
+source_file = Library/CollegeOfIdaho/setStatistics_Ch04ScatterplotsAndCorrelation/04Stats_06_ScatterCorrelation/04Stats_06_ScatterCorrelation.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 8
+source_file = Library/CollegeOfIdaho/setStatistics_Ch04ScatterplotsAndCorrelation/04Stats_02_ScatterCorrelation/04Stats_02_ScatterCorrelation.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 9
+source_file = Library/LoyolaChicago/Precalc/Chap1Sec6/Q01.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+
