@@ -1,0 +1,79 @@
+## DESCRIPTION
+## 201-901-LA Lab WeBWorK question
+## Compute a critical value (z-score) from a confidence level
+## ENDDESCRIPTION
+
+## DBsubject('Statistics')
+## DBchapter('Confidence intervals')
+## DBsection('One sample mean - z')
+## KEYWORDS('statistics', 'inference', 'large sample','estimates','confidence interval')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+## Date('2023-November-29')
+## Author('Malcolm Harper')
+## Institution('Champlain College Saint-Lambert')
+
+DOCUMENT();
+loadMacros(
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "PGnumericalmacros.pl",     # required by PGstatisticsmacros.pl
+    "PGstatisticsmacros.pl",    # provides normal_prob()
+    "answerHints.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+###########################
+#  Setup
+
+Context("Numeric");
+$showPartialCorrectAnswers = 1;
+
+##########
+# Confidence levels and corresponding critical z's
+# Ask for a confidence level that is not on the distributed list
+
+@CL = (81,82,83,84,85,86,87,88,89,91,92,93,94);
+# The corresponding cv is computed, not loooked up
+# @cv = (0.67, 0.84, 1.04, 1.28, 1.65, 1.96, 2.05, 2.33, 2.58, 2.81, 3.09, 3.29);
+
+##########
+# Select CL
+
+$level = random(0,$#CL,1);
+
+##########
+# Answer tolerance
+
+# Expect two decimal places
+$cv_tol = 0.005;
+
+$abs_tol = $cv_tol;
+
+Context()->flags->set(tolType=>'absolute',tolerance=>$abs_tol);
+
+##########
+# Answer
+
+Context()->{format}{number} = "%.2f";
+$cv = Compute(normal_distr($CL[$level]/200));
+
+TEXT(beginproblem());
+
+BEGIN_PGML
+#### Arbitrary Confidence Level
+
+Find the critical value, [`z^*`], for the confidence level [$CL[$level]]%.
+
+[`z^* = `][____]{$cv}
+
+END_PGML
+
+COMMENT('A random confidence level is chosen from the '.scalar(@CL).' possibilities: '.join(', ',@CL).'.');
+COMMENT('MathObject version. Uses PGML.');
+
+ENDDOCUMENT();
