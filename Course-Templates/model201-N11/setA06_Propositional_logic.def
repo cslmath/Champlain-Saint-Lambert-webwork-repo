@@ -1,0 +1,124 @@
+assignmentType      = default
+openDate          = 10/01/2023 at 08:00am EDT
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 10/08/2023 at 11:00pm EDT
+answerDate        = 10/09/2023 at 11:00pm EDT
+enableReducedScoring = N
+paperHeaderFile   = ASimpleHardCopyHeaderFile.pg
+screenHeaderFile  = ASimpleScreenHeaderFile.pg
+description       = Propositional Logic
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2
+problem_start
+problem_id = 1
+source_file = champlainLibrary/ComputingMath/Logic-Truth-Tables/MT18logicstatements.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = Template_201-N11/library-edits/Library/SDSU/Discrete/Logic/formallogicB20.pg
+value = 1
+max_attempts = 2
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = Library/Westmont/EoDM3/Exercises_1_1/exer1_1_5.pg
+value = 1
+max_attempts = 2
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/SDSU/Discrete/Logic/ttlogicequivA4.pg
+value = 1
+max_attempts = 2
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 5
+source_file = Library/SDSU/Discrete/Logic/ttlogicequivA6.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 6
+source_file = Template_201-N11/library-edits/Library/SDSU/Discrete/Logic/ttcontratautB4.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 7
+source_file = Template_201-N11/library-edits/Library/SDSU/Discrete/Logic/ttlogicequivB2.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 8
+source_file = Template_201-N11/library-edits/Library/SDSU/Discrete/Logic/ttcontratautB2.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 9
+source_file = Library/SDSU/Discrete/Logic/ttlogicequivA7.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 10
+source_file = Library/SDSU/Discrete/Logic/ttcontratautB4.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 11
+source_file = Library/Rochester/setDiscrete1Logic/ur_dis_1_7.pg
+value = 1
+max_attempts = 9
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+

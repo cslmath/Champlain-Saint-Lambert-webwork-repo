@@ -1,0 +1,117 @@
+# DESCRIPTION
+# Using a truth table to detemine the 
+# equivalence of two logical statements
+# WeBWorK problem written by Michael E. O'Sullivan
+# and Thomas Schmidt
+# ENDDESCRIPTION
+
+## DBsubject(Set theory and logic)
+## DBchapter(Propositional logic)
+## DBsection(Truth tables)
+## Institution(SDSU)
+## Author(Thomas Schmidt','Michael E. O'Sullivan)
+## MLT(3vars_withImplications)
+## Level(2)
+## MO(1)
+## KEYWORDS('truth table')
+
+## Original location: OPL/SDSU/Discrete/Logic/ttlogicequivB3.pg)
+## Modified by BC to hide partial correct answers,
+## To add a column in the truth table
+## and to switch from querying equivalence to querying entailment.
+## Updated by MH to match the recommended usage of customizeLaTeX
+## Instead of the unmaintained logicMacros and to incorporate
+## changes in the OPL code 2022-10-21.
+
+
+
+############################
+# Initialization
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGchoicemacros.pl",
+  "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+
+############################
+# Setup
+
+$showPartialCorrectAnswers = 1;
+
+@answer = qw(T T F F T T
+	     T T F F F T
+	     T T T T F F
+	     F F T T F F
+	     T T F F T T
+	     T T F F F T
+	     T T T F F T
+	     F T T F F T);
+Context()->strings->add(T=>{},F=>{});
+
+$neg = negate();
+
+$radio = new_multiple_choice();
+$radio->qa("Does \( p\rightarrow (q\vee r) \) entail \( (p \, \wedge  \neg q)\rightarrow (q \wedge r ) \) ?","No, there is a row where \( p\rightarrow (q\vee r) \) is true but \( (p \, \wedge  \neg q)\rightarrow (q \wedge r ) \) is false.");
+$radio->makeLast("Yes, in each row where \( p\rightarrow (q\vee r) \) is true, \( (p \, \wedge  \neg q)\rightarrow (q \wedge r ) \) is also true.","No, there is a row where \( p\rightarrow (q\vee r) \) is true but \( (p \, \wedge  \neg q)\rightarrow (q \wedge r ) \) is false.");
+		  
+@fullsol = qw(T T T T T F F T T
+			T T F T T F F F T
+			T F T T T T T F F
+			T F F F F T T F F
+			F T T T T F F T T
+			F T F T T F F F T
+			F F T T T T F F T
+			F F F F T T F F T);
+
+############################
+# Main Text
+
+Context()->texStrings;
+BEGIN_TEXT
+Complete the truth table and determine whether or not $PAR
+$BCENTER
+\(p\rightarrow (q\vee r) \vDash (p \, \wedge  $neg q)\rightarrow (q \wedge r )\)
+$BR
+$BR
+\{
+begintable(8).
+row("\(p\)","\(q\)","\(r\)","\(q\vee r\)","\(p\rightarrow (q\vee r)\)","\( $neg q\)","\(p\,\wedge  $neg q\)","\(q\wedge r\)","\((p\,\wedge  $neg q)\rightarrow (q \wedge r)\)").
+row("T","T","T",ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1)).
+row("T","T","F",ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1)).
+row("T","F","T",ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1)).
+row("T","F","F",ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1)).
+row("F","T","T",ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1)).
+row("F","T","F",ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1)).
+row("F","F","T",ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1)).
+row("F","F","F",ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1),ans_rule(1)).
+endtable();
+\}
+$ECENTER
+$BR
+$BR
+\{$radio->print_q()\}
+\{$radio->print_a()\}
+END_TEXT
+Context()->normalStrings;
+
+############################
+# Answer Evaluation
+
+foreach my $i (@answer) {
+  ANS(String($i)->cmp());
+}
+ANS(radio_cmp($radio->correct_ans()));
+
+############################
+# Solution
+
+Context()->texStrings;
+
+COMMENT("Logical symbols defined in pg/macros/customizeLaTeX are used in this problem. They can be overwritten by putting new copies of the subroutines PGcourse.pl.");
+ENDDOCUMENT();
