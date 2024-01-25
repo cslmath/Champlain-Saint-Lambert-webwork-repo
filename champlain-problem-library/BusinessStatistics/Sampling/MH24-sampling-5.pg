@@ -1,0 +1,121 @@
+## DESCRIPTION
+## Sampling multiple choice
+## Three independent questions
+## ENDDESCRIPTION
+
+## DBsubject(Statistics)
+## DBchapter(Sample survey methods)
+## DBsection(Concepts)
+## Level(2)
+## KEYWORDS('sample', 'sampling', 'random sampling')
+## Date(2024-Jan-24)
+## Author(Malcolm Harper)
+## Institution(Champlain College Saint-Lambert)
+## TitleText1(Essential Statistics)
+## EditionText1(2)
+## AuthorText1(Moore)
+## Section1(7)
+## Problem1('12 14 15')
+## Language(en)
+## MO(1)
+## STATIC(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "parserPopUp.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+
+TEXT(beginproblem());
+
+
+###########################
+#  Setup
+
+Context("Numeric");
+
+$popup1 = PopUp(
+  ["?",
+  ["simple random sampling.",
+  "convenience sampling.",
+  "voluntary response sampling.",
+  "a census.",],
+  "all of the above.",
+  ],
+  "simple random sampling.",
+);
+
+$popup2 = PopUp(
+  ["?",
+  ["voluntary response sampling.",
+  "a survey with little bias becaue a large SRS was used.",
+  "a survey with little bias since someone who called would know their own opinion.",],
+  "all of the above.",
+  ],
+  "voluntary response sampling.",
+);
+
+$popup3 = PopUp(
+  ["?",
+  ["drawing names out of a hat.",
+  "tossing a coin.",
+  "using an expert to decide who to include in a survey.",],
+  "none of the above.",
+  ],
+  "drawing names out of a hat.",
+);
+
+###########################
+#  Main text
+
+BEGIN_PGML
+A cegep club has 110 members.
+They can send five people to a national conference.
+Five people are randomly selected from a list of all members and sent to the conference.
+
+This is an example of [_]{$popup1}
+
+-----
+
+The television program _Nightline_ once asked viewers whether the United Nations
+should continue to have its headquarters in the United States.
+Two phone numbers were given.
+Viewers were asked to call one telephone number to respond _"Yes"_
+and the other to respond _"No"_.
+
+More than 186,000 callers responded with 67% saying _"No"_.
+
+This is an example of [_]{$popup2}
+
+----
+
+A simple random sample is somewhat analogous to [_]{$popup3}
+
+END_PGML
+
+############################
+#  Answer evaluation
+
+$showPartialCorrectAnswers = 0;
+
+############################
+#  Solution
+
+BEGIN_PGML_SOLUTION
+Randomly selecting from a list of all members is _"[$popup1->correct_ans]"_.
+
+The sample is composed of the viewers who choose to call in.
+This is _"[$popup2->correct_ans]"_.
+END_PGML_SOLUTION
+
+COMMENT('MathObject version. Uses PGML.');
+COMMENT('STATIC.');
+
+ENDDOCUMENT();
