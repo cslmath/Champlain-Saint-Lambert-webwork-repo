@@ -19,7 +19,7 @@ Jane Doe's contributions.
    Problems here do not needed to be fully "tagged" for the CPL. However, it is helpful if you could include at least the following:
    * Tags for your name, the date, and our institution
    * Subject and possibly Chapter tags: 
-   	* See [current DBchapter and DBsection tags](https://hobbes.la.asu.edu/Holt/chaps-and-secs.html) 
+   	* See [current DBchapter and DBsection tags](https://raw.githubusercontent.com/openwebwork/webwork-open-problem-library/main/OpenProblemLibrary/Taxonomy2) 
    	* See also [current Keyword list](https://hobbes.la.asu.edu/Holt/keywords.html)
 > For example, a tag preamble looks like this:  
 > \## DBsubject('Calculus - multivariable')  
