@@ -1,0 +1,91 @@
+## DESCRIPTION
+## Sampling multiple choice
+## ENDDESCRIPTION
+
+## DBsubject(Statistics)
+## DBchapter(Sample survey methods)
+## DBsection(Concepts)
+## Level(2)
+## KEYWORDS('sample', 'sampling', 'random sampling')
+## Date(2024-Jan-24)
+## Author(Malcolm Harper)
+## Institution(Champlain College Saint-Lambert)
+## TitleText1(Essential Statistics)
+## EditionText1(2)
+## AuthorText1(Moore)
+## Section1(7)
+## Problem1('17')
+## Language(en)
+## MO(1)
+## STATIC(1)
+
+
+###########################
+#  Initialization
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "parserPopUp.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+
+TEXT(beginproblem());
+
+
+###########################
+#  Setup
+
+Context("Numeric");
+
+$popup1 = PopUp(
+  ["?",
+  ["is reasonably accurate since it used a large, simple random sample.",
+  "probably overstates the percentage of people that favour a National Dental Plan.",
+  "probably understates the percentage of people that favour a National Dental Plan.",
+  "is unbiased since simple random sampling was used.",
+  ],
+  ],
+  "probably understates the percentage of people that favour a National Dental Plan.",
+);
+
+###########################
+#  Main text
+
+BEGIN_PGML
+A simple random sample of 1200 adult Canadians was selected
+and each person was asked the following question:
+
+_"In light of the huge national deficit,
+should the government at this time spend additional billions of dollars
+to establish a National Dental Plan"_.
+
+Only 39% of respondents answered "Yes".
+
+This survey [_]{$popup1}
+
+END_PGML
+
+############################
+#  Answer evaluation
+
+$showPartialCorrectAnswers = 0;
+
+############################
+#  Solution
+
+BEGIN_PGML_SOLUTION
+By preceding the question with the phrase referencing the
+_"huge national deficit"_, the survey designers have biased
+reposnses against positve answers.
+
+The survey probably _"[$popup1->correct_ans]"_.
+END_PGML_SOLUTION
+
+COMMENT('MathObject version. Uses PGML.');
+COMMENT('STATIC');
+
+ENDDOCUMENT();

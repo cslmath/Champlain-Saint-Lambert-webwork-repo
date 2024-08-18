@@ -1,0 +1,108 @@
+## DESCRIPTION
+## Sampling multiple choice
+## ENDDESCRIPTION
+
+## DBsubject(Statistics)
+## DBchapter(Sample survey methods)
+## DBsection(Concepts)
+## Level(2)
+## KEYWORDS('sample', 'sampling', 'random sampling')
+## Date(2024-Jan-24)
+## Author(Malcolm Harper)
+## Institution(Champlain College Saint-Lambert)
+## TitleText1(Essential Statistics)
+## EditionText1(2)
+## AuthorText1(Moore)
+## Section1(7)
+## Problem1('7 8 9')
+## Language(en)
+## MO(1)
+## STATIC(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "parserPopUp.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+
+TEXT(beginproblem());
+
+
+###########################
+#  Setup
+
+Context("Numeric");
+
+$popup1 = PopUp(
+  ["?",
+  ["all those students walking on campus late at night.",
+  "all cegep students with safety issues.",
+  "the 15 students interviewed.",
+  "all students approached by the reporter.",],
+  ],
+  "the 15 students interviewed.",
+);
+
+$popup2 = PopUp(
+  ["?",
+  ["all those students walking on campus late at night.",
+  "all cegep students with safety issues.",
+  "all cegep students.",
+  "all students at the reporter's cegep.",],
+  ],
+  "all students at the reporter's cegep.",
+);
+
+$popup3 = PopUp(
+  ["?",
+  ["a simple random sample of the students feeling safe.",
+  "a census of the students feeling safe.",
+  "a random sample of students with night classes.",
+  "biased since students walking on campus at night probably tend to feel safer than the student body at large.",],
+  ],
+  "biased since students walking on campus at night probably tend to feel safer than the student body at large.",
+);
+
+###########################
+#  Main text
+
+BEGIN_PGML
+To assess how students at his cegep feel about campus safety,
+a reporter for the student newspaper approaches students he meets walking on campus late at night.
+He interviews 15 students who are willing to give their opinion.
+
+The sample is [_]{$popup1}
+
+The population is [_]{$popup2}
+
+The sample obtained is [_]{$popup3}
+
+END_PGML
+
+############################
+#  Answer evaluation
+
+$showPartialCorrectAnswers = 0;
+
+############################
+#  Solution
+
+BEGIN_PGML_SOLUTION
+The sample is  _"[$popup1->correct_ans]"_.
+
+The population is _"[$popup2->correct_ans]"_.
+
+The sample is likely biased: _"[$popup3->correct_ans]"_.
+END_PGML_SOLUTION
+
+COMMENT('MathObject version. Uses PGML.');
+COMMENT('STATIC');
+
+ENDDOCUMENT();

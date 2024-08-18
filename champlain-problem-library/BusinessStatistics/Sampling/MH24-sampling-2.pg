@@ -1,0 +1,81 @@
+## DESCRIPTION
+## Sampling multiple choice
+## ENDDESCRIPTION
+
+## DBsubject(Statistics)
+## DBchapter(Sample survey methods)
+## DBsection(Concepts)
+## Level(2)
+## KEYWORDS('sample', 'sampling', 'random sampling')
+## Date(2024-Jan-24)
+## Author(Malcolm Harper)
+## Institution(Champlain College Saint-Lambert)
+## TitleText1(Essential Statistics)
+## EditionText1(2)
+## AuthorText1(Moore)
+## Section1(7)
+## Problem1('3')
+## Language(en)
+## MO(1)
+## STATIC(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "parserPopUp.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+
+TEXT(beginproblem());
+
+
+###########################
+#  Setup
+
+Context("Numeric");
+
+$popup = PopUp(
+  ["?",
+  ["simple random sampling.",
+  "convenience sampling.",
+  "voluntary response sampling.",],
+  "none of the above."
+  ],
+  "voluntary response sampling.",
+);
+
+###########################
+#  Main text
+
+BEGIN_PGML
+A call-in poll conducted by a radio station concluded that
+race would not be an issue in the 2024 presidential election.
+This conclusion was based on data collected from 450 calls made by local listeners.
+
+The sampling technique being used is [_]{$popup}
+
+END_PGML
+
+############################
+#  Answer evaluation
+
+$showPartialCorrectAnswers = 0;
+
+############################
+#  Solution
+
+BEGIN_PGML_SOLUTION
+The sampling technique is _"[$popup->correct_ans()]"_
+The sample is the listeners who _choose_ to respond.
+END_PGML_SOLUTION
+
+COMMENT('MathObject version. Uses PGML.');
+COMMENT('STATIC');
+
+ENDDOCUMENT();
