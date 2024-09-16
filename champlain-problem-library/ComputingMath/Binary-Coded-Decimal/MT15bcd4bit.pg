@@ -15,6 +15,8 @@
 ## Section1('2.5')
 ## Problem1('31')
 
+## Typo in solutions (c) corrected by M Harper 2024-09-16
+
 ########################################################################
 
 DOCUMENT();      
@@ -88,7 +90,7 @@ $PAR
 (b) $num2b $BR
 The number encoded is: $num2
 $PAR
-(c) $num2c $BR
+(c) $num3b $BR
 The number encoded is $num3
 END_SOLUTION
 Context()->normalStrings;
