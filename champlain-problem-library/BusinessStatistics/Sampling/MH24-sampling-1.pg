@@ -1,0 +1,98 @@
+## DESCRIPTION
+## Sampling multiple choice
+## ENDDESCRIPTION
+
+## DBsubject(Statistics)
+## DBchapter(Sample survey methods)
+## DBsection(Concepts)
+## Level(2)
+## KEYWORDS('sample', 'sampling', 'random sampling')
+## Date(2024-Jan-24)
+## Author(Malcolm Harper)
+## Institution(Champlain College Saint-Lambert)
+## TitleText1(Essential Statistics)
+## EditionText1(2)
+## AuthorText1(Moore)
+## Section1(7)
+## Problem1('1 2')
+## Language(en)
+## MO(1)
+## STATIC(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "parserPopUp.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+
+TEXT(beginproblem());
+
+
+###########################
+#  Setup
+
+Context("Numeric");
+
+$popup1 = PopUp(
+  ["?",
+  ["the 250,000 households contacted.",
+  "the 240,000 households that respond.",
+  "the 10,000 households that did not respond.",
+  "all US households.",],
+  ],
+  "the 240,000 households that respond.",
+);
+
+$popup2 = PopUp(
+  ["?",
+  ["the residents in the suburb that support the new recreation centre.",
+  "the 250,000 households contacted.",
+  "US households with phones.",
+  "all US households.",],
+  ],
+  "all US households.",
+);
+
+
+###########################
+#  Main text
+
+BEGIN_PGML
+Each month the US census bureau mails survey forms to 250,000 households
+asking questions about the people living in the household
+and about such things as motor vehicles and housing costs.
+Follow-up phone calls are made to households that don't return the form.
+In one month, reponses were obtained from 240,000 of the households contacted.
+
+The sample is [_]{$popup1}
+
+The population of interest is [_]{$popup2}
+
+END_PGML
+
+############################
+#  Answer evaluation
+
+$showPartialCorrectAnswers = 0;
+
+############################
+#  Solution
+
+BEGIN_PGML_SOLUTION
+The sample is the individuals that we have data about: _"[$popup1->correct_ans()]"_.
+
+The population is the individuals who we want to know about: _"[$popup2->correct_ans()]"_.
+
+END_PGML_SOLUTION
+
+COMMENT('MathObject version. Uses PGML.');
+COMMENT('STATIC');
+
+ENDDOCUMENT();

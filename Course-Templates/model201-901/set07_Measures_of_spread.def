@@ -1,0 +1,54 @@
+assignmentType      = default
+openDate          = 09/01/2023 at 12:00am EDT
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 09/08/2023 at 11:00pm EDT
+answerDate        = 09/09/2023 at 11:00pm EDT
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = 
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2
+problem_start
+problem_id = 1
+source_file = Library/CollegeOfIdaho/setStatistics_Ch02DescribingData/02Stats_08_DescrData/02Stats_08_DescrData.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/NAU/setStatistics/FiveNumFromPlot.pg
+value = 1
+max_attempts = 10
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = Template_201-901/library-edits/Library/NAU/setStatistics/FiveNum1.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 4
+source_file = Library/NAU/setStatistics/Intuitive_Std_Dev.pg
+value = 1
+max_attempts = 2
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+

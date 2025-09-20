@@ -5,20 +5,24 @@
 ## https://github.com/openwebwork/webwork-open-problem-library/blob/master/OpenProblemLibrary/FortLewis/Authoring/Templates/Misc/MultipleChoicePopup2_PGML.pg
 ## ENDDESCRIPTION
 
+## MH revised 2024-01 to suit new version of pg
+
 ## DBsubject(WeBWorK)
 ## DBchapter(template)
-## DBsection('radio button')
+## DBsection(radio button)
+## Level(2)
 ## KEYWORDS('multiple choice', 'template')
-## TitleText1('')
-## EditionText1('')
-## AuthorText1('')
-## Section1('')
-## Problem1('')
-## Date('2021-Jan-19')
-## Author('Malcolm Harper')
+## TitleText1()
+## EditionText1()
+## AuthorText1()
+## Section1()
+## Problem1()
+## Date(2021-Jan-19)
+## Author(Malcolm Harper)
 ## Institution('Champlain College Saint-Lambert')
-
+## Language(en)
 ## MO(1)
+## STATIC(1)
 
 ###########################
 #  Initialization
@@ -41,37 +45,45 @@ TEXT(beginproblem());
 
 Context("Numeric");
 
-$popup = PopUp(
-  ["?","Red","Blue","Green"],
+$popup1 = PopUp(
+  ["?",["Red","Blue","Green"]],
   "Blue",
 );
 
+# See also DropDown() available in pg 2.18, not available in pg 2.17
+# The inner [] indicate choices where the presentation order will be randomized.
+# See also DropDownTF()
+# https://openwebwork.github.io/pg-docs/sample-problems/Misc/MultipleChoicePopup.html
 
 ###########################
 #  Main text
 
 BEGIN_PGML
-My favorite color is 
+My favorite color is  [_]{$popup1}
 
-[@ $popup->menu() @]*
 END_PGML
 
 ############################
 #  Answer evaluation
 
-install_problem_grader(~~&std_problem_grader);
-
 $showPartialCorrectAnswers = 0;
 
-ANS( $popup->cmp() );
+############################
+#  Hint(s)
+
+BEGIN_PGML_HINT
+WHat did I say in class?
+END_PGML_HINT
 
 ############################
 #  Solution
 
 BEGIN_PGML_SOLUTION
-The correct answer is [$popup->correct_ans()].
+For some good reason my favourite colour is
+_"[$popup1->correct_ans()]"_.
 END_PGML_SOLUTION
 
 COMMENT('MathObject version. Uses PGML.');
+COMMENT('STATIC');
 
 ENDDOCUMENT();

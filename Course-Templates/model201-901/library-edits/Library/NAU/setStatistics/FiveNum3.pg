@@ -1,0 +1,78 @@
+##DESCRIPTION
+## Tagged by CTD
+
+## DBsubject(Statistics)
+## DBchapter(Exploratory data analysis/descriptive statistics)
+## DBsection(Summary statistics)
+## Date(8/15/2012)
+## Institution(NAU)
+## Author(C. Tyler Diggans)
+## MLT(stat-des-five-num)
+## Level(2)
+## KEYWORDS('five number summary')
+##ENDDESCRIPTION
+
+##########
+# Edited 2021-02-08
+# by Malcolm Harper, Champlain College Saint-Lambert
+# to add csv link to raw data
+# and for formatting consistency
+# Original OPL location: NAU/setStatistics/FiveNum3.pg
+
+DOCUMENT();     
+loadMacros(
+  "PGstandard.pl",
+  "extraAnswerEvaluators.pl",
+  "PGstatisticsmacros.pl",    # for five_point_summary() and insertDataLink()
+  "PGnauStats.pl",
+  "PGcourse.pl"
+);
+
+TEXT(&beginproblem) ;
+$showPartialCorrectAnswers = 1;
+
+for ($i = 0; $i < 9; $i++){
+  push @dat, random(4,50,1);
+}
+
+@sort_dat=num_sort(@dat);
+$Min=$sort_dat[0];
+$Max=$sort_dat[$#sort_dat];
+
+$datSize = $#sort_dat + 1;
+
+$c2=$#sort_dat/2;
+$M=$sort_dat[$c2];
+
+$c1=$c2/2;
+$Q1=($sort_dat[$c1]+$sort_dat[$c1-1])/2;
+$Q3=($sort_dat[$c2+$c1]+$sort_dat[$c1+$c2+1])/2;
+
+$DATA=join(", ", @dat);
+
+##########
+# csv data file link
+
+# Label dataset
+    push(@dat,"Data");
+
+$csvlink = insertDataLink($PG,'csv file',(~~@dat));
+
+BEGIN_TEXT
+$BR
+Data (\{$csvlink\}): \( $DATA \) 
+$PAR
+Consider the data set above.  Give the five number summary listing values in 
+numerical order: $BR $BR 
+\{ans_rule(5)\} , \{ans_rule(5)\} , \{ans_rule(5)\} , \{ans_rule(5)\} , \{ans_rule(5)\} .
+$BR$BR
+
+END_TEXT
+
+ANS(num_cmp($Min));
+ANS(num_cmp($Q1));
+ANS(num_cmp($M));
+ANS(num_cmp($Q3));
+ANS(num_cmp($Max));
+
+ENDDOCUMENT();

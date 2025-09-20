@@ -1,0 +1,110 @@
+## DESCRIPTION
+## Sampling multiple choice
+## ENDDESCRIPTION
+
+## DBsubject(Statistics)
+## DBchapter(Sample survey methods)
+## DBsection(Concepts)
+## Level(2)
+## KEYWORDS('sample', 'sampling', 'random sampling')
+## Date(2024-Jan-24)
+## Author(Malcolm Harper)
+## Institution(Champlain College Saint-Lambert)
+## TitleText1(Essential Statistics)
+## EditionText1(2)
+## AuthorText1(Moore)
+## Section1(7)
+## Problem1('4 5 6')
+## Language(en)
+## MO(1)
+## STATIC(1)
+
+###########################
+#  Initialization
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "parserPopUp.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+
+TEXT(beginproblem());
+
+
+###########################
+#  Setup
+
+Context("Numeric");
+
+$popup1 = PopUp(
+  ["?",
+  ["the 1200 voters receiving the questionnaire.",
+  "the 221 voters who returned questionnaires.",
+  "the 182 voters opposed to the bailout.",
+  "the voters in her consistuency.",],
+  ],
+  "the voters in her consistuency.",
+);
+
+$popup2 = PopUp(
+  ["?",
+  ["the 1200 voters receiving the questionnaire.",
+  "the 221 voters who returned questionnaires.",
+  "the 182 voters opposed to the bailout.",
+  "the voters in her consistuency.",],
+  ],
+  "the 221 voters who returned questionnaires.",
+);
+
+$popup3 = PopUp(
+  ["?",
+  ["a survey with little bias since people understand whether they support the bailout.",
+  "a survey with little bias since 1200 voters represent an important part of her constituency.",
+  "a survey with significant nonresponse.",],
+  "all of the above."
+  ],
+  "a survey with significant nonresponse.",
+);
+
+
+###########################
+#  Main text
+
+BEGIN_PGML
+An Ontario Member of Parliament wants to know how voters in her constituency
+feel about a government bailout of the auto industry.
+She mails questionnaires on the subject to a simple random sample of 1200 voters in her constituency.
+Of the 1200 questionnaires mailed, 221 were returned, and of those 182 were opposed to the bailout.
+
+The population is [_]{$popup1}
+
+The sample is [_]{$popup2}
+
+This is an example of [_]{$popup3}
+
+END_PGML
+
+############################
+#  Answer evaluation
+
+$showPartialCorrectAnswers = 0;
+
+############################
+#  Solution
+
+BEGIN_PGML_SOLUTION
+The population is the individuals she wants to know about: _"[$popup1->correct_ans()]"_.
+
+The sample is the individuals she collects information about: _"[$popup2->correct_ans()]"_.
+
+Only 221 of 1200 questionnaires were returned, a little more than one in six.  This is _"[$popup3->correct_ans()]"_.
+END_PGML_SOLUTION
+
+COMMENT('MathObject version. Uses PGML.');
+COMMENT('STATIC');
+
+ENDDOCUMENT();

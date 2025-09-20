@@ -1,0 +1,44 @@
+assignmentType      = default
+openDate          = 08/29/2023 at 12:00am EDT
+reducedScoringDate = 12/31/1969 at 07:00pm EST
+dueDate           = 09/01/2023 at 11:00pm EDT
+answerDate        = 09/05/2023 at 11:00pm EDT
+enableReducedScoring = N
+paperHeaderFile   = defaultHeader
+screenHeaderFile  = defaultHeader
+description       = 
+restrictProbProgression = 0
+emailInstructor   = 0
+
+problemListV2
+problem_start
+problem_id = 1
+source_file = Library/NewHampshire/NECAP/grade6/gr6-2007/n6-2007-10s.pg
+value = 1
+max_attempts = 2
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 2
+source_file = Library/UVA-Stat/setStat212-Homework02/stat212-HW02-08.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+problem_start
+problem_id = 3
+source_file = Template_201-901/library-bugs/Library/Piedmont/StevensStatistics/2-DescriptiveStatistics/2.5.19.pg
+value = 1
+max_attempts = -1
+showMeAnother = -1
+prPeriod = -1
+counts_parent_grade = 0
+att_to_open_children = 0 
+problem_end
+
