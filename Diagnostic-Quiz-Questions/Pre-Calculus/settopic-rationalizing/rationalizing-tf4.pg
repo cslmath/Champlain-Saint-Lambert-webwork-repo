@@ -31,7 +31,7 @@ $m = random(2,5,1);
 
 @possTopBottom = ("numerator","denominator");
 $i = random(0,1,1);
-$TopBottom = $possTopBottom[$j];
+$TopBottom = $possTopBottom[$i];
 
 
 @posstype = ("rationalized","not rationalized");
