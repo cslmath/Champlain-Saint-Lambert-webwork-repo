@@ -1,0 +1,79 @@
+##DESCRIPTION
+##  Linear algebra matrix application: closed Leontief economic model
+##ENDDESCRIPTION
+
+##KEYWORDS('Leontief', 'input-output', 'model','closed')
+
+## DBsubject('Linear Algebra')
+## DBchapter('Matrices')
+## DBsection('Applications')
+## Date('2023-Nov-9')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+
+########################################################################
+
+DOCUMENT();
+
+loadMacros(
+   "PGstandard.pl",     # Standard macros for PG language
+   "MathObjects.pl",
+   "PGML.pl",
+   "PGcourse.pl",      # Customization file for the course
+);
+
+# Print problem number and point value (weight) for the problem
+TEXT(beginproblem());
+
+# Show which answers are correct and which ones are incorrect
+$showPartialCorrectAnswers = 1;
+
+##############################################################
+#
+#  Setup
+#
+#
+Context("Numeric");
+$a11 = random(0.1,0.7,0.05);
+$a21 = 1;
+do {$a21 = random(0.1,0.7,0.05);} until (($a11+$a21)<0.8);
+$ans1 = 1 - ($a11 + $a21);
+$a12 = random(0.1,0.7,0.05);
+$a32 = 1;
+do {$a32 = random(0.1,0.7,0.05);} until (($a12+$a32)<0.8);
+$ans2 = 1 - ($a12 + $a32);
+$a23 = random(0.1,0.7,0.05);
+$a33 = 1;
+do {$a33 = random(0.1,0.7,0.05);} until (($a23+$a33)<0.8);
+$ans3 = 1 - ($a23 + $a33);
+
+##############################################################
+#
+#  Text
+#
+#
+
+BEGIN_PGML
+The given matrix below represents an input-output matrix (exchange matrix) for a *closed* Leontief economic model.
+Fill in the missing entries.
+
+[` A = \left[ \begin{matrix}  [$a11]       & [$a12]        & c \\ 
+                              [$a21]       & b & [$a23] \\
+                              a & [$a32]       & [$a33]
+                              \end{matrix} \right] \qquad
+`]
+
+[`a = `][_____]{$ans1}
+
+[`b = `][_____]{$ans2}
+
+[`c = `][_____]{$ans3}
+END_PGML
+
+BEGIN_PGML_SOLUTION
+In a closed Leontief economic model, the sum of the column entries is 1.  
+
+For example, in the first column:  [`a_{11}+a_{21}+a_{31} = 1`], thus [`a = 1 - ([$a11] + [$a21]) = [$ans1]`].
+END_PGML_SOLUTION
+
+ENDDOCUMENT();
