@@ -1,0 +1,72 @@
+## DESCRIPTION
+## Linear Algebra. Leontief input-output model
+## ENDDESCRIPTION
+
+## DBsubject('Linear Algebra')
+## DBchapter('Matrices')
+## DBsection('Determinants')
+## Date('2023')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+Context(Matrix);
+$showPartialCorrectAnswers = 1;
+
+$a11 = random(.05,.15,.05);
+$a21 = random(.25,.35,.05);
+$a12 = random(.50,.60,.05);
+$a22 = random(.15,.25,.05);
+
+$C = Matrix([[$a11,$a12],[$a21,$a22]]);
+$I = Matrix([[1,0],[0,1]]);
+$ImC = Matrix([
+           [1 - $a11, - $a12],
+           [-$a21, 1 - $a22]
+           ]);
+$b11 = $ImC->element(1,1);
+$b12 = $ImC->element(1,2);
+$b21 = $ImC->element(2,1);
+$b22 = $ImC->element(2,2);
+$B = Matrix([[$b22, -($b12)],[-($b21),$b11]]);
+
+$detImC = $ImC->det;
+$ImCinv = $ImC->inverse;
+$d1 = random(30,60,10);
+$d2 = random(25,45,10);
+$D = Matrix([ [$d1],[$d2] ]);
+$X = $ImCinv*$D;
+
+
+BEGIN_PGML
+Consider the Leontief open production model [`X=CX+D`] for an economy with two sectors, where the consumption matrix and final demand vector are:  
+[`C = [$C]`] and 
+[`D = [$D]`]
+
+Use an inverse matrix to determine the production level necessary to satisfy the final demand.  
+[`X=`][____]*{$X} 
+
+END_PGML
+
+BEGIN_PGML_SOLUTION
+[`X=CX+D \Rightarrow (I-C)X=D \Rightarrow X = (I-C)^{-1}D `]  
+The matrix [`(I-C) = [$I] - [$C] = [$ImC]`].  
+Its determinant is det[`(I-C) = ([$b11])([$b22]) - ([$b12])([$b21]) = [$detImC]`]  
+The inverse matrix [`(I-C)^{-1} = \frac{1}{[$detImC]} [$B] = [$ImCinv]`]  
+The production vector [`X = (I-C)^{-1}D = [$ImCinv][$D] = [$X]`]
+END_PGML_SOLUTION
+
+ENDDOCUMENT();       # This should be the last executable line in the problem.
