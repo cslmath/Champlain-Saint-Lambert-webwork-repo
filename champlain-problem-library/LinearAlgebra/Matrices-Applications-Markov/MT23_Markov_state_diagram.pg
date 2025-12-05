@@ -1,0 +1,97 @@
+##DESCRIPTION
+##  Linear Algebra: Markov chains state diagram
+##ENDDESCRIPTION
+
+##KEYWORDS('Markov', 'state', 'model')
+
+## DBsubject('Linear Algebra')
+## DBchapter('Matrices')
+## DBsection('Applications')
+## Date('2023-Nov-20')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+
+########################################################################
+
+DOCUMENT();
+
+loadMacros(
+   "PGstandard.pl",     # Standard macros for PG language
+   "MathObjects.pl",
+   "PGML.pl",
+   "PGtikz.pl",
+   "PGcourse.pl",      # Customization file for the course
+);
+
+# Print problem number and point value (weight) for the problem
+TEXT(beginproblem());
+
+# Show which answers are correct and which ones are incorrect
+$showPartialCorrectAnswers = 0;
+
+##############################################################
+#  Setup
+Context("Matrix");
+
+$graph_image = createTikZImage();
+$graph_image->tikzLibraries("arrows.meta");
+
+# Randomization
+$a11 = random(0.11,0.39,0.01);
+$a21 = random(0.21,0.40,0.01);
+$a31 = 1 - ($a11+$a21);
+$a12 = random(0.12,0.41,0.01);
+$a22 = random(0.22,0.42,0.01);
+$a32 = 1 - ($a12 + $a22);
+$a13 = random(0.13,0.43,0.01);
+$a23 = random(0.23,0.44,0.01);
+$a33 = 1 - ($a13 + $a23);
+$A = Matrix([[$a11,$a12,$a13],[$a21,$a22,$a23],[$a31,$a32,$a33]]);
+
+##############################################################
+#  Diagram
+$graph_image->BEGIN_TIKZ
+    \tikzset{>={Stealth[scale=1.5]}}
+    \draw[blue] (0,0) rectangle (1.5,1.5);
+    \draw[red] (3,0) rectangle (4.5,1.5);
+    \draw[black] (1.5,3) rectangle (3,4.5);
+    \draw[<-,blue] (3,0.5) -- (1.5,0.5);
+    \draw[->,blue] (0,1) -- (-0.5,1) -- (-0.5,0.5) -- (0,0.5);
+    \draw[<-,blue] (2,3) -- (1,1.5);
+    \draw[<-,red] (1.5,1) -- (3,1);
+    \draw[->,red] (4.5,1) -- (5,1) -- (5,0.5) -- (4.5,0.5);
+    \draw[<-,red] (2.5,3) -- (3.5,1.5);
+    \draw[<-,black]  (4,1.5) -- (3,3);
+    \draw[->,black] (2,4.5) -- (2,5) -- (2.5,5) -- (2.5,4.5);
+    \draw[<-,black] (0.5,1.5) -- (1.5,3);
+    \node[blue, scale=1.5] at (0.75,0.75) {\( B \)};
+    \node[red, scale=1.5] at (3.75,0.75) {\( C \)};
+    \node[black, scale=1.5] at (2.25,3.75) {\( A \)};
+    \node[black, scale=1] at (1.5,4.75) {\( $a11 \)};
+    \node[black, scale=1] at (0.6,2.5) {\( $a21 \)};
+    \node[black, scale=1] at (3.8,2.5) {?};
+    \node[blue, scale=1] at (1.85,2.2) {\( $a12 \)};
+    \node[blue, scale=1] at (-1,0.75) {?};
+    \node[blue, scale=1] at (2.25,0.25) {\( $a32 \)};
+    \node[red, scale=1] at (2.75,1.9) {\( $a13 \)};
+    \node[red, scale=1] at (2.25,1.25) {?};
+    \node[red, scale=1] at (5.5,0.75) {\( $a33 \)};
+END_TIKZ
+##############################################################
+#  Text
+
+BEGIN_PGML
+
+>> [@ image($graph_image, width => 400, tex_size => 600) @]* <<
+
+The transition diagram above represents a stochastic dynamical system with three states, [`A`], [`B`] and [`C`]. The diagram shows the probabilities (some but not all) of the system transitioning from one state to another. Fill in the entries in the corresponding stochastic matrix, [`M`], keeping the states in alphabetical order.  
+[`M = `][_____]*{$A}
+END_PGML
+
+BEGIN_PGML_SOLUTION
+Each entry [`m_{ij}`] gives the probability that the state [`j`] will change to state [`i`] in the next iteration, which means that each column of the stochastic matrix should be represented by the arrows going out of the corresponding state. Also, in a stochastic matrix, the entries in each column sum to 1.  
+
+Thus, [`M = [$A]`]
+END_PGML_SOLUTION
+
+ENDDOCUMENT();

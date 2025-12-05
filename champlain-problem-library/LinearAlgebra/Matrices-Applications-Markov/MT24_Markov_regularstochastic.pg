@@ -1,0 +1,102 @@
+##DESCRIPTION
+## Linear Algebra : Markov chains, stochastic matrix
+##ENDDESCRIPTION
+
+## DBsubject(Linear algebra)
+## DBchapter(Matrices)
+## DBsection(Markov chains)
+## Date(2024-May)
+## Author(Michele Titcombe)
+## Institution(Champlain College Saint-Lambert)
+########################################################################
+
+DOCUMENT();      
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGML.pl",
+  "parserRadioButtons.pl",
+  "contextFraction.pl",
+  "PGchoicemacros.pl",
+  "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+
+$showPartialCorrectAnswers = 0;
+
+Context("Numeric");
+$stochT = "The entries in each column of \(A\) sum to 1, and all entries of \(A\) are nonnegative";
+
+@stochF = ("The entries in each row of \(A\) sum to 1, and all entries of \(A\) are nonnegative",
+        "The entries in each column of \(A\) sum to 1, and all entries of \(A\) are negative",
+        "The entries in each row of \(A\) sum to 1, and all entries of \(A\) are positive",
+        "The entries in each column of \(A\) sum to 0,  and all entries of \(A\) are nonnegative",
+        "The entries in each row of \(A\) sum to 1, and no entry of \(A\) equals 1",
+           );
+$regularT = "The entries of \(A^k\), where \(k\) is some positive integer, are all positive";
+
+@regularF = ("The entries of \(A^k\), where \(k\) is some negative integer, are all positive",
+         "The entries of \(A^k\), where \(k\) is some real number, are all integers",
+         "The entries of \(kA\), where \(k\) is some positive integer, are all positive",
+        "The entries of \(A^k\), where \(k\) is some positive integer, are all negative",
+        "The entries of \(kA\), where \(k\) is some integer, are all positive",
+        );
+# incorrect answers to display:
+@slicei = NchooseK(scalar(@stochF),4);
+@Srandi = @stochF[@slicei];
+@slicei = NchooseK(scalar(@regularF),4);
+@Rrandi = @regularF[@slicei];
+
+$radio1 = RadioButtons([[$stochT,@Srandi],"None of the above"],0);  # the 0 is the index of the correct answer    
+$radio2 = RadioButtons([[$regularT,@Rrandi],"None of the above"],0);  # the 0 is the index of the correct answer    
+
+Context("Fraction");
+@sliceden = NchooseK(10,3); 
+@den = (5,7,11,13,17,19,23,29,31,37);
+$den1 = Compute("$den[$sliceden[0]]");
+$den2 = Compute("$den[$sliceden[1]]");
+$den3 = Compute("$den[$sliceden[2]]");
+
+$num11 = Compute(random(1,$den1-1));
+$num12 = Compute(random(1,$den2-1));
+$num21 = Compute($den1-$num11);
+$num22 = Compute($den2-$num12);
+
+$a11 = Compute("$num11/$den1");
+$a12 = Compute("$num12/$den2");
+$a21 = Compute("$num21/$den1");
+$a22 = Compute("$num22/$den2");
+
+Context("Matrix");
+
+$A = Matrix([[$a11,$a12],[$a21,$a22]]);  # Stochastic, regular
+
+BEGIN_PGML
+Given a regular stochastic matrix [`A = [$A]`].
+
+a. The matrix [`A`] is called _stochastic_ because:  
+[@ $radio1->buttons() @]*
+
+b. The stochastic matrix [`A`] is called _regular_ because:  
+[@ $radio2->buttons() @]*
+
+END_PGML
+
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+ANS( $radio2->cmp() );
+
+
+BEGIN_PGML_SOLUTION
+a. The matrix [`A`] is called _stochastic_ because:  
+  The entries in each column of [`A`] sum to 1, and all entries of [`A`] are nonnegative.  
+b. The stochastic matrix [`A`] is called _regular_ because:  
+   The entries of [`A^k`], where [`k`] is some positive integer, are all positive.  
+   In this example, [`k=1`] since [`A^1=[$A]`] has all positive entries.
+END_PGML_SOLUTION
+
+ENDDOCUMENT();

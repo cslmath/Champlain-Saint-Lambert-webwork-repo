@@ -1,0 +1,99 @@
+##DESCRIPTION
+##  Original problem: 
+##     /Library/WHFreeman/Holt_linear_algebra/Chaps_1-4/3.5.46.pg
+##  Modified by M.Titcombe:
+##     to ask for day 2 result (and put in PGML.)
+##ENDDESCRIPTION
+
+## DBsubject(Linear algebra)
+## DBchapter(Matrices)
+## DBsection(Markov chains)
+## Date(6/3/2013)
+## Author(Darwyn Cook)
+## Level(3)
+## MO(1)
+## TitleText1('Linear Algebra with Applications')
+## AuthorText1('Holt')
+## EditionText1('1')
+## Section1('3.5')
+## Problem1('46')
+
+########################################################################
+
+DOCUMENT();      
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "freemanMacros.pl",
+  "answerHints.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+
+# Print problem number and point value (weight) for the problem
+TEXT(beginproblem());
+
+# Show which answers are correct and which ones are incorrect
+$showPartialCorrectAnswers = 1;
+
+##############################################################
+#  Setup
+#
+Context("Matrix");
+$patworktoday = Compute(random(75,85));
+$pabsenttoday = Compute(random(50,65));
+
+$employees = Compute(random(1000,1200,10));
+$employeesatworktoday = Compute(int($employees*random(0.75,0.85,0.01)));
+
+$transition = Matrix([[$patworktoday/100,1-$pabsenttoday/100],[1-$patworktoday/100,$pabsenttoday/100]]);
+
+$state = Matrix( [[$employeesatworktoday],[$employees-$employeesatworktoday]]);
+
+$day1 = $transition*$state;
+$day2 = $transition*$day1;
+$day3 = $transition*$day2;
+$day4 = $transition*$day3;
+$day5 = $transition*$day4;
+$day5atwork = Compute(floor($day5->element(1,1))); 
+
+$day2atwork = Compute(floor($day2->element(1,1)));
+
+$a = Compute($transition->element(1,1));
+$b = Compute($transition->element(1,2));
+# Note: There is only one eigenvector with eigenvalue 1.
+$steadystate = Matrix( [[$b/(1-$a+$b)*$employees],[(1-$a)/(1-$a+$b)*$employees]]);
+$steadystateatwork = Compute(floor($steadystate->element(1,1)));
+
+##############################################################
+# Text
+BEGIN_PGML
+In an office complex of [$employees] employees, on any given day
+some are at work and the rest are absent. It is known that if an
+employee is at work today, there is an [$patworktoday]% chance that she will be at work tomorrow, and if the employee is absent today, there is a [$pabsenttoday]% chance that she will be absent tomorrow. Suppose that today there are [$employeesatworktoday] employees at work.
+
+a. Find the transition matrix for this scenario. (Assume the components of the state vector are listed in this order: \[number at work, number absent\]).  
+[_____]*{$transition}
+
+b. Predict the number that will be at work two days from now. (Round your answer down to the nearest integer.)  
+[__]{$day2atwork}
+
+c. Predict the number of employees that will be at work many days from now. (Round your answer down to the nearest integer.) Hint: find the steady-state vector.  
+[__]{$steadystateatwork}
+END_PGML
+
+BEGIN_PGML_SOLUTION
+a. Transition matrix:  
+[`A = [$transition]`]  
+
+b. Predict the number of employees at work two days from now:  
+[`A^2 [$state] = [$transition]^2 [$state] = [$day2]`],  
+so the model predicts that [$day2atwork] employees will be at work two days from now.  
+
+c. Predict the number of employees at work many days from now:  
+[`\mathbf{x} = [$steadystate]`]  
+is the steady-state vector (times the number of employees), which is the solution to [`\mathbf{x} = A\mathbf{x}`], so the model predicts that [$steadystateatwork] employees will be at work many days from now.
+END_PGML_SOLUTION
+
+ENDDOCUMENT();        
