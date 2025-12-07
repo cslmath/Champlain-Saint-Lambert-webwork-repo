@@ -1,0 +1,110 @@
+## DESCRIPTION
+## Linear Algebra
+## ENDDESCRIPTION
+
+## DBsubject(Linear algebra)
+## DBchapter(Matrices)
+## DBsection(Echelon form)
+## Date(2025-Oct-23)
+## Institution(Champlain Saint-Lambert)
+## Author(Michele Titcombe)
+## Level(3)
+## MO(1)
+## TitleText1('')
+## AuthorText1('')
+## EditionText1('')
+## Section1('')
+## Problem1('')
+## KEYWORDS('matrix' 'augmented' 'echelon')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGchoicemacros.pl",
+  "unionLists.pl",
+  "parserPopUp.pl",
+  "PGML.pl",
+  "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 0;
+
+Context('Matrix');
+
+$NO_SPACE = '@{}';
+
+$a = random(2,10,1)*random(-1,1,2);
+$b = random(2,10,1)*random(-1,1,2);
+$c = random(2,10,1)*random(-1,1,2);
+$d = random(2,10,1)*random(-1,1,2);
+$e = random(2,10,1)*random(-1,1,2);
+$f = random(2,10,1)*random(-1,1,2);
+$g = random(2,10,1)*random(-1,1,2);
+$h = random(2,10,1)*random(-1,1,2);
+$i = random(2,10,1)*random(-1,1,2);
+$j = random(2,10,1)*random(-1,1,2);
+$k = random(2,10,1)*random(-1,1,2);
+$l = random(2,10,1)*random(-1,1,2);
+$m = random(2,10,1)*random(-1,1,2);
+$n = random(2,10,1)*random(-1,1,2);
+$o = random(2,10,1)*random(-1,1,2);
+
+@matrices = (
+Matrix([[$a, 1, 1], [1, $c, $d], [0, 0, 1]]),
+Matrix([[1, $e, 1, 0], [0, 1, $f, $g], [0, 0, 0, 1]]),
+Matrix([[0, 1, 0, $h], [0, 0, 1, $i]]),
+Matrix([[1, 0, 1], [0, 1, $j], [0, 0, 1]]),
+Matrix([[1, 0, $k, 0], [0, 0, 0, 0], [0, 1, 0, $l], [0, 0, 1, 0]]),
+Matrix([[1, 0, 0, $m], [0, 1, 0, $n], [0, 0, 1, $o]])
+);
+
+@corans = ('Not in Echelon Form', 'Row Echelon Form',
+	   'Reduced Row Echelon Form', 'Row Echelon Form',
+   'Not in Echelon Form', 'Reduced Row Echelon Form',
+);
+
+$three = random(0,1,1);
+$fourth = random(0,2,1);
+@which = (3*$three, 3*$three+1, 3*$three+2, 3*(1-$three)+$fourth);
+
+@slice=NchooseK(4,4);
+
+@swhich = @which[@slice];
+
+@smatrices = @matrices[@swhich];
+@scorans = @corans[@swhich];
+
+foreach my $i (0..3) {
+$popup[$i] = PopUp(['Choose','Row Echelon Form','Reduced Row Echelon Form','Not in Echelon Form'],$scorans[$i]);
+}
+
+BEGIN_PGML
+Determine if each matrix is in row echelon form (only), reduced row echelon form, or not in echelon form.  
+
+a. [_]{$popup[0]}  [`[$smatrices[0]]`]  
+
+a. [_]{$popup[1]} [`[$smatrices[1]]`]  
+
+a. [_]{$popup[2]} [`[$smatrices[2]]`]  
+
+a. [_]{$popup[3]} [`[$smatrices[3]]`]
+END_PGML
+
+BEGIN_PGML_HINT
+Conditions:  
+1) If a row does not consist entirely of zeros, then the first nonzero number in the row is a 1. We call this a leading 1.  
+2) If there are rows that consist entirely of zeros, then they are grouped together at the bottom of the matrix.  
+3) In any two successive rows that do not consist entirely of zeros, the leading 1 in the lower row occurs farther to the right than the leading 1 in the higher row.  
+4) Each column that contains a leading 1 has zeros everywhere else in that column.  
+
+Reduced row echelon form: satisfies all four conditions.  
+
+Row echelon form: satisfies the first three conditions.
+END_PGML_HINT
+
+
+
+ENDDOCUMENT();       # This should be the last executable line in the problem.

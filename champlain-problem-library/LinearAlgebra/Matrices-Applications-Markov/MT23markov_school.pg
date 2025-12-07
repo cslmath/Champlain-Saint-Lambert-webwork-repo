@@ -1,0 +1,89 @@
+##DESCRIPTION
+##  Linear algebra: Markov chain 
+##  Original problem: 
+## /Library/WHFreeman/Holt_linear_algebra/Chaps_1-4/3.5.46.pg
+##  Modified by M.Titcombe to ask for day 2 result,
+##          and write in PGML.
+##ENDDESCRIPTION
+
+
+## DBsubject(Linear algebra)
+## DBchapter(Matrices)
+## DBsection(Markov chains)
+## Date(2023-Nov)
+## Author(Michele Titcombe)
+## Institution(Champlain College Saint-Lambert)
+## Level(3)
+## MO(1)
+
+########################################################################
+
+DOCUMENT();      
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGML.pl",
+  "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+Context("Matrix");
+$patschooltoday = Compute(random(75,85));
+$pabsenttoday = Compute(random(50,65));
+
+$students = Compute(random(1000,1200,10));
+$studentsatschooltoday = Compute(int($students*random(0.75,0.85,0.01)));
+
+$transition = Matrix([[$patschooltoday/100,1-$pabsenttoday/100],[1-$patschooltoday/100,$pabsenttoday/100]]);
+
+$state = Matrix( [[$studentsatschooltoday],[$students-$studentsatschooltoday]]);
+
+$day1 = $transition*$state;
+$day2 = $transition*$day1;
+$day2atschool = Compute(floor($day2->element(1,1)))->with(
+  tolType => 'absolute',
+  tolerance => 0.0001,
+);
+
+$a = Compute($transition->element(1,1));
+$b = Compute($transition->element(1,2));
+$steadystate = Matrix( [[$b/(1-$a+$b)*$students],[(1-$a)/(1-$a+$b)*$students]]);
+$steadystateatschool = Compute(floor($steadystate->element(1,1)))->with(
+  tolType => 'absolute',
+  tolerance => 0.0001,
+);
+
+BEGIN_PGML
+*Markov Chains*  
+In a college of [$students] students, on any given day some are at school and the rest are absent. It is known that if a
+student is at school today, there is a [$patschooltoday]% chance that she will be at school tomorrow, and if the student is absent today, there is a [$pabsenttoday]% chance that she will be absent tomorrow. Suppose that today there are [$studentsatschooltoday] students at school.  
+
+a. Find the transition matrix for this scenario. (Assume the components of the state vector are listed in this order: \[number at school, number absent\]).  
+[____]*{$transition}
+
+
+b. Predict the number of students that will be at school two days from now. (Round your answer down to the nearest integer.)  
+[_____]{$day2atschool}
+
+
+c. Predict the number of students that will be at school many days from now. (Round your answer down to the nearest integer.) Hint: find the steady-state vector.  
+[_____]{$steadystateatschool}
+END_PGML
+
+BEGIN_PGML_SOLUTION
+a. Transition matrix:  
+[`A = [$transition]`]  
+
+b. Predict the number of students at school two days from now:  
+[`A^2 [$state] = [$transition]^2 [$state] = [$day2]`],  
+so the model predicts that [$day2atschool] students will be at school two days from now.  
+
+c. Predict the number of students at school many days from now:  
+[`X = [$steadystate]`]  
+is the steady-state vector (times the number of students), which is the solution to [`X=AX`], so the model predicts that [$steadystateatschool] students will be at school many days from now.
+END_PGML_SOLUTION
+
+ENDDOCUMENT();        
