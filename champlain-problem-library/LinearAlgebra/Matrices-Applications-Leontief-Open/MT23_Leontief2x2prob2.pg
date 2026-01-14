@@ -1,0 +1,57 @@
+## DESCRIPTION
+## Linear Algebra. Leontief input-output model
+## ENDDESCRIPTION
+
+## DBsubject('Linear Algebra')
+## DBchapter('Matrices')
+## DBsection('Determinants')
+## Date('2023')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+Context(Matrix);
+$showPartialCorrectAnswers = 1;
+
+$a11 = random(.05,.15,.05);
+$a21 = random(.25,.35,.05);
+$a12 = random(.50,.60,.05);
+$a22 = random(.15,.25,.05);
+
+$C = Matrix([[$a11,$a12],[$a21,$a22]]);
+$ImC = Matrix([
+           [1 - $a11, - $a12],
+           [-$a21, 1 - $a22]
+           ]);
+
+$detImC = $ImC->det;
+$ImCinv = $ImC->inverse;
+$d1 = random(14,22,2);
+$d2 = random(11,17,2);
+$D = Matrix([ [$d1],[$d2] ]);
+$X = $ImCinv*$D;
+
+BEGIN_PGML
+Consider the Leontief open production model [`X=CX+D`] for an economy with two sectors, where the consumption matrix is: 
+[`C = [$C]`]
+
+Use an inverse matrix to determine the production level necessary to satisfy the final demand of [$d1] units of output of sector 1 and [$d2] units of output of sector 2.
+
+[`X=`][____]*{$X} 
+
+END_PGML
+
+ENDDOCUMENT();       # This should be the last executable line in the problem.

@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/270/setDerivatives10MaxMin/c3s4p5.pg
+source_file = Library/ma122DB/set8/s4_3_16.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/270/setDerivatives10MaxMin/sc4_3_10a.pg
+source_file = Library/ASU-topics/setSecondDerivative/sc4_3_10a.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/270/setDerivatives10MaxMin/osu_dr_10_1.pg
+source_file = Library/ASU-topics/setSecondDerivative/osu_dr_10_1.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -93,7 +93,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 9
-source_file = Library/ASU-topics/setCalculus/stef/stef4_3p6.pg
+source_file = Library/ASU-topics/setSecondDerivative/5-2-47.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/maCalcDB/setIntegrals19Area/ns6_1_1.pg
+source_file = Library/Rochester/setIntegrals19Area/ns6_1_1.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/maCalcDB/setIntegrals19Area/ns6_1_99.pg
+source_file = Library/Rochester/setIntegrals19Area/ns6_1_99.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/ma122DB/set13/s6_1_24.pg
+source_file = Library/UMN/calculusStewartCCC/s_6_1_prob02.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

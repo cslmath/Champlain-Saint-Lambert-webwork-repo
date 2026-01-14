@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/Rochester/setIntegrals22Average/osu_in_22_4.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C06S05-AveValue/6-5-01.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/Rochester/setIntegrals22Average/ur_in_22_2.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C06S05-AveValue/6-5-05.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -43,7 +43,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 4
-source_file = Library/Rochester/setIntegrals22Average/ur_in_22_3.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C06S05-AveValue/6-5-06.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/Rochester/setIntegrals22Average/ur_in_22_12.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C06S05-AveValue/6-5-04.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

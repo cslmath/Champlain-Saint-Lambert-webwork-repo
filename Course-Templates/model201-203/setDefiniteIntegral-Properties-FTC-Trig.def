@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/Rochester/setIntegrals3Definite/s4_4_41.pg
+source_file = Library/Indiana/Indiana_setIntegrals3Definite/s4_4_41.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/Rochester/setIntegrals3Definite/sc5_3_17.pg
+source_file = Library/Indiana/Indiana_setIntegrals3Definite/sc5_3_17.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/Rochester/setIntegrals22Average/ur_in_22_3.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C06S05-AveValue/6-5-06.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

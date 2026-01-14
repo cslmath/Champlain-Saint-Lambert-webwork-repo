@@ -1,0 +1,83 @@
+##DESCRIPTION
+##  Linear algebra matrix application: closed Leontief economic model
+##ENDDESCRIPTION
+
+##KEYWORDS('Leontief', 'input-output', 'model','closed')
+
+## DBsubject('Linear Algebra')
+## DBchapter('Matrices')
+## DBsection('Applications')
+## Date('2023-Nov-14')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+
+########################################################################
+
+DOCUMENT();
+
+loadMacros(
+   "PGstandard.pl",     # Standard macros for PG language
+   "MathObjects.pl",
+   "PGML.pl",
+   "draggableProof.pl",
+   "PGcourse.pl",      # Customization file for the course
+);
+
+# Print problem number and point value (weight) for the problem
+TEXT(beginproblem());
+
+# Show which answers are correct and which ones are incorrect
+$showPartialCorrectAnswers = 1;
+
+##############################################################
+#
+#  Setup
+#
+#
+Context("Numeric");
+
+$sourcelabel = "${BBOLD}Steps to choose from:${EBOLD} Drag these steps to the right column.";
+$targetlabel  =  "${BBOLD}Your solution:${EBOLD} Put the steps in order in this column and press the Submit Answers button.";
+$statements = [
+	'Find the input-output matrix \(A\)',
+	'Form the matrix \((I-A)\)',
+	'Use Gauss-Jordan elimination on the augmented matrix \([I-A\mid 0]\)',
+	'Express the general solution \(X\) in terms of the free variable(s)',
+ ];
+
+# These are extra statements that are not needed.
+ $extra = [
+ 'Find the determinant of the matrix \((I-A)\)',
+ 'Find \((I-A)^{-1}\)',
+ 'Find the demand vector \(D\)',
+ 'Multiply \((I-A)^{-1}D\) to find the solution \(X\)',
+ ];
+
+ $proof = DraggableProof(
+ 	$statements,
+ 	$extra,
+    SourceLabel => $sourcelabel,
+    TargetLabel =>  $targetlabel,
+ );
+
+##############################################################
+#
+#  Text
+#
+#
+
+BEGIN_PGML
+Basically, there are four steps to solve a *closed* Leontief economic model [`X=AX`]. Move the steps from the left to the right in the correct order.
+[@ $proof->Print @]*
+END_PGML
+ANS($proof->cmp);
+
+BEGIN_PGML_SOLUTION
+The correct order of steps are:
+- Find the input-output matrix [`A`].
+- Form the matrix [`(I-A)`].
+- Use Gauss-Jordan elimination on the augmented matrix [`[I-A\mid 0]`].
+- Express the general solution [`X`] in terms of the free variable(s).
+END_PGML_SOLUTION
+
+ENDDOCUMENT();

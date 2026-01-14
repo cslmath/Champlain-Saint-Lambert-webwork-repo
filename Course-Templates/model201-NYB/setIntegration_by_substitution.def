@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/Rochester/setIntegrals14Substitution/ur_in_14_13.pg
+source_file = Library/maCalcDB/setIntegrals5Trig/ur_in_5_1.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/Rochester/setIntegrals14Substitution/S05.05.Substitution.PTP12.pg
+source_file = Library/Utah/Calculus_II/set15_Practice/sc5_5_29a.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/Rochester/setIntegrals14Substitution/S05.05.Substitution.PTP06.pg
+source_file = Library/Rochester/setIntegrals14Substitution/sc5_5_20.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/Rochester/setIntegrals14Substitution/S05.05.Substitution.PTP01b.pg
+source_file = Library/Rochester/setIntegrals14Substitution/S05.05.Substitution.PTP01a.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -93,7 +93,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 9
-source_file = Library/Rochester/setIntegrals14Substitution/osu_in_14_6.pg
+source_file = Library/OSU/accelerated_calculus_and_analytic_geometry_i/hmwk5/prob6.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -133,7 +133,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 13
-source_file = Library/Rochester/setIntegrals14Substitution/S05.05.Substitution.PTP02b.pg
+source_file = Library/Rochester/setIntegrals14Substitution/S05.05.Substitution.PTP02a.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -143,7 +143,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 14
-source_file = Library/Rochester/setIntegrals14Substitution/osu_in_14_3.pg
+source_file = Library/OSU/accelerated_calculus_and_analytic_geometry_i/hmwk5/prob4.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -183,7 +183,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 18
-source_file = Library/Union/setIntSubstitution/an6_3_11.pg
+source_file = Library/Rochester/setIntegrals14Substitution/sc5_5_26.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -203,7 +203,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 20
-source_file = Library/maCalcDB/setIntegrals5Trig/c4s5p4.pg
+source_file = Library/Indiana/Indiana_setIntegrals5Trig/c4s5p4.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

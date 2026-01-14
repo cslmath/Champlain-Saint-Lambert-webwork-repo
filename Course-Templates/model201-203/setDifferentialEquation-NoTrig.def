@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/ma123DB/set6/s9_1_6.pg
+source_file = Library/Rochester/setDiffEQ1/e7_1_3.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1

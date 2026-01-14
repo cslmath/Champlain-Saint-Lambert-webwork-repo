@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/Rochester/setSeries9Taylor/benny_taylor3.pg
+source_file = Library/Indiana/Indiana_setSeries9Taylor/benny_taylor3.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/OSU/accelerated_calculus_and_analytic_geometry_ii/hmwk4/prob16.pg
+source_file = Library/Rochester/setSeries9Taylor/e8_7_6.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -43,7 +43,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 4
-source_file = Library/Rochester/setSeries8Power/eva8_5b.pg
+source_file = Library/Utah/Calculus_II/set9_Infinite_Series/set9_pr5.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -53,7 +53,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 5
-source_file = Library/Rochester/setSeries8Power/eva8_5a_2.pg
+source_file = Library/Indiana/Indiana_setSeries8Power/eva8_5a_2.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

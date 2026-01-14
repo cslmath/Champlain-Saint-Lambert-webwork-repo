@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/Rochester/setIntegrals20Volume/ur_in_20_4.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C06S03-VolumesShells/6-3-11a.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

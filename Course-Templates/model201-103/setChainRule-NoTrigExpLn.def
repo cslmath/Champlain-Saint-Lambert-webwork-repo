@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/ASU-topics/setChainRulePowerFunctions/3-6-29.pg
+source_file = Library/Union/setDervChainRule/3-6-29.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -83,7 +83,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 8
-source_file = Library/Utah/AP_Calculus_I/set3_Rates_of_Change_and_the_Chain_Rule/1210s4p5.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C03S05-ChainRule/3-5-01.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -93,7 +93,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 9
-source_file = Library/Utah/AP_Calculus_I/set3_Rates_of_Change_and_the_Chain_Rule/1210s4p11.pg
+source_file = Library/maCalcDB/setDerivatives2Formulas/ur_dr_2_12.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -103,7 +103,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 10
-source_file = Library/Utah/Calculus_I/set4_The_Derivative/1210s4p7.pg
+source_file = Library/maCalcDB/setDerivatives5ChainRule/s2_5_2f.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -113,7 +113,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 11
-source_file = Library/Utah/Calculus_I/set4_The_Derivative/1210s4p13.pg
+source_file = Library/Rochester/setDerivatives5ChainRule/s2_5_8_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -153,7 +153,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 15
-source_file = Library/Rochester/setDerivatives5ChainRule/s2_5_2f.pg
+source_file = Library/maCalcDB/setDerivatives5ChainRule/s2_5_2f.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -163,7 +163,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 16
-source_file = Library/Rochester/setDerivatives5ChainRule/s2_5_8.pg
+source_file = Library/Rochester/setDerivatives5ChainRule/s2_5_8_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

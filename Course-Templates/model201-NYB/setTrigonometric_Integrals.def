@@ -73,7 +73,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 7
-source_file = Library/Rochester/setIntegrals5Trig/c3s10p6.pg
+source_file = Library/Indiana/Indiana_setIntegrals5Trig/c4s5p1.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -83,7 +83,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 8
-source_file = Library/Rochester/setIntegrals5Trig/c4s5p1.pg
+source_file = Library/Indiana/Indiana_setIntegrals5Trig/c4s5p1.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -93,7 +93,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 9
-source_file = Library/Rochester/setIntegrals5Trig/c4s5p3.pg
+source_file = Library/Indiana/Indiana_setIntegrals5Trig/c4s5p3.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -103,7 +103,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 10
-source_file = Library/Rochester/setIntegrals5Trig/c4s5p4.pg
+source_file = Library/Indiana/Indiana_setIntegrals5Trig/c4s5p4.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -123,7 +123,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 12
-source_file = Library/Rochester/setIntegrals5Trig/sc5_5_97.pg
+source_file = Library/Indiana/Indiana_setIntegrals5Trig/sc5_5_97.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -133,7 +133,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 13
-source_file = Library/Rochester/setIntegrals5Trig/sc5_5_98.pg
+source_file = Library/ma123DB/set2/s7_2_13.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -143,7 +143,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 14
-source_file = Library/Rochester/setIntegrals5Trig/sc5_5_99.pg
+source_file = Library/Indiana/Indiana_setIntegrals5Trig/sc5_5_99.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -153,7 +153,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 15
-source_file = Library/Rochester/setIntegrals5Trig/sc5_5_100.pg
+source_file = Library/Indiana/Indiana_setIntegrals5Trig/sc5_5_100.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -173,7 +173,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 17
-source_file = Library/Rochester/setIntegrals5Trig/ur_in_5_2.pg
+source_file = Library/OSU/accelerated_calculus_and_analytic_geometry_i/hmwk8/prob7.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -183,7 +183,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 18
-source_file = Library/Rochester/setIntegrals5Trig/ur_in_5_3.pg
+source_file = Library/Indiana/Indiana_setIntegrals5Trig/ur_in_5_3.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -203,7 +203,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 20
-source_file = Library/Rochester/setIntegrals5Trig/ur_in_5_5.pg
+source_file = Library/Indiana/Indiana_setIntegrals5Trig/ur_in_5_5.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

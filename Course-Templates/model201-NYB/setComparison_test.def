@@ -103,7 +103,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 10
-source_file = Library/maCalcDB/setSeries6CompTests/benny_ser2.pg
+source_file = Library/Rochester/setSeries6CompTests/benny_ser2a.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

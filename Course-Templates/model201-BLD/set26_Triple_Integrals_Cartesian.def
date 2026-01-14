@@ -13,7 +13,7 @@ emailInstructor   = 0
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/272/setStewart15_7/problem_3.pg
+source_file = Library/Rochester/setVMultIntegrals5Triple/ur_vc_10_7.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1

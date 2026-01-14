@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/Rochester/setDerivatives6InverseTrig/sc3_6_25a.pg
+source_file = Library/maCalcDB/setDerivatives6InverseTrig/sc3_6_25_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -73,7 +73,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 7
-source_file = Library/OSU/accelerated_calculus_and_analytic_geometry_i/hmwk6/prob2.pg
+source_file = Library/Rochester/setDerivatives1/osu_dr_1_11.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -103,7 +103,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 10
-source_file = Library/270/setDerivatives6InverseTrig/sc3_6_33.pg
+source_file = Library/Utah/Calculus_II/set3_Transcendental_Functions/set3_pr2.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -113,7 +113,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 11
-source_file = Library/270/setDerivatives6InverseTrig/sc3_6_27.pg
+source_file = Library/Rochester/setDerivatives6InverseTrig/sc3_6_27.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -143,7 +143,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 14
-source_file = Library/Utah/AP_Calculus_I/set8_Exponentials_and_Logarithms/1220s8p2.pg
+source_file = Library/maCalcDB/setDerivatives6InverseTrig/sc3_6_32a_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

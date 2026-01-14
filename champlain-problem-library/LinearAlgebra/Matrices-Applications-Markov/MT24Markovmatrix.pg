@@ -1,0 +1,63 @@
+##DESCRIPTION
+##  Linear Algebra: matrix application, Markov transition matrix
+##ENDDESCRIPTION
+
+## DBsubject(Linear algebra)
+## DBchapter(Matrices)
+## DBsection(Markov chains)
+## Date(2024-May)
+## Author(Michele Titcombe)
+## Institution(Champlain College Saint-Lambert)
+
+########################################################################
+
+DOCUMENT();      
+
+loadMacros(
+  "PGstandard.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+Context("Matrix");
+$a11 = random(0.01,0.99,0.01);
+$a21 = 1 - $a11;
+do {$a12 = random(0.01,.99,0.01);}
+    until ($a12 != $a21);   # ensure different values of a12 and a21
+$a22 = 1 - $a12;
+
+$i = random(1,2,1);
+$j = 1;
+$aij = $a21;
+if ($i == 1){
+    $j = 2;
+    $aij = $a12;
+    }
+$ii = random(1,2,1);
+$aii = $a22;
+if ($ii == 1){$aii = $a11;}
+
+$transition = Matrix([[$a11,$a12],[$a21,$a22]]);
+
+BEGIN_PGML
+Consider a Markov process with transition matrix  
+[`` [$transition] ``]  
+where entry [`a_{ij}`] represents the probability that the system will be in state [`i`] at the next observation if previously the system had been in state [`j`].  
+
+a. What is the probability that the system remains in state [$ii] at the next observation?  
+[_____]{$aii}
+
+b. If the system was in state [$j] previously, what is the probability that the system will be in state [$i] at the next observation?  
+[_____]{$aij}
+END_PGML
+
+BEGIN_PGML_SOLUTION
+Row index [`i`] of the transition matrix corresponds to the later state, and column index [`j`] corresponds to the previous state.  
+a. The system was previously in state [$ii] and remains in state [$ii] at the next observation, which corresponds to entry [`a_{[$ii][$ii]}`] of the transition matrix. Thus, the probability that the system remains in state [$ii] at the next observation is [`[$aii]`].
+b. The transition from state [$j] (previous state) to state [$i] (later state) corresponds to entry [`a_{[$i][$j]}`] of the transition matrix. Thus, if the system was in state [$j] previously, the probability that the system will be in state [$i] at the next observation is [`[$aij]`].
+END_PGML_SOLUTION
+
+ENDDOCUMENT();        

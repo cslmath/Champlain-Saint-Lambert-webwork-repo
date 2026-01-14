@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/Rochester/setIntegrals3Definite/osu_in_3_3.pg
+source_file = Library/Union/setIntDefinite/osu_in_3_3.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/Rochester/setIntegrals3Definite/s4_4_20.pg
+source_file = Library/Indiana/Indiana_setIntegrals3Definite/s4_4_20.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -43,7 +43,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 4
-source_file = Library/Rochester/setIntegrals3Definite/S05.02.DefiniteIntegral.PTP18.pg
+source_file = Library/Rochester/setIntegrals0Theory/ur_in_0_13_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -53,7 +53,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 5
-source_file = Library/Rochester/setIntegrals3Definite/c4s4p5.pg
+source_file = Library/Union/setIntDefinite/c4s4p5.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -93,7 +93,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 9
-source_file = Library/Union/setIntSignedArea/sc5_2_24.pg
+source_file = Library/Rochester/setIntegrals0Theory/sc5_2_24_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -113,7 +113,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 11
-source_file = Library/Union/setIntSignedArea/sc5_2_28.pg
+source_file = Library/Rochester/setIntegrals0Theory/sc5_2_28_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -123,7 +123,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 12
-source_file = Library/270/setIntegrals3Definite/osu_in_3_5.pg
+source_file = Library/Rochester/setIntegrals3Definite/osu_in_3_5.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -243,7 +243,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 24
-source_file = Library/ASU-topics/setCalculusFundamentalTheorem/6-5-11.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C05S03-FundThmCalc/5-3-19.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1

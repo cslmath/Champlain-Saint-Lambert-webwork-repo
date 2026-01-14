@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/270/setDerivatives2Formulas/ns3_2_4.pg
+source_file = Library/ASU-topics/setProductQuotientRule/ns3_2_4.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/270/setDerivatives2Formulas/ns3_2_5.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C03S02-ProdQuotRules/3-2-20.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -93,7 +93,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 9
-source_file = Library/270/setDerivatives4Trig/s2_4_27a.pg
+source_file = Library/Union/setDervTrigonometric/s2_4_27a.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -103,7 +103,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 10
-source_file = Library/270/setDerivatives4Trig/s2_4_30.pg
+source_file = Library/Rochester/setDerivatives4Trig/s2_4_30.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -113,7 +113,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 11
-source_file = Library/270/setDerivatives4Trig/s2_4_24.pg
+source_file = Library/Union/setDervTrigonometric/s2_4_24.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -123,7 +123,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 12
-source_file = Library/270/setDerivatives4Trig/s2_4_26a.pg
+source_file = Library/Rochester/setDerivatives4Trig/s2_4_26a_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -133,7 +133,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 13
-source_file = Library/270/setDerivatives4Trig/s2_4_26.pg
+source_file = Library/Union/setDervTrigonometric/s2_4_26.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

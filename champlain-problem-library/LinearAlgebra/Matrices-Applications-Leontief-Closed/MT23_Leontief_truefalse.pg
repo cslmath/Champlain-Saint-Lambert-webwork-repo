@@ -1,0 +1,114 @@
+##DESCRIPTION
+##  Linear Algebra: Leontief closed model
+##ENDDESCRIPTION
+
+##KEYWORDS('Leontief', 'input-output', 'model')
+
+## DBsubject('Linear Algebra')
+## DBchapter('Matrices')
+## DBsection('Applications')
+## Date('2023-Nov-13')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+
+########################################################################
+
+DOCUMENT();
+
+loadMacros(
+   "PGstandard.pl",     # Standard macros for PG language
+   "MathObjects.pl",
+   "PGML.pl",
+   "PGchoicemacros.pl",
+   "PGcourse.pl",      # Customization file for the course
+);
+
+# Print problem number and point value (weight) for the problem
+TEXT(beginproblem());
+
+# Show which answers are correct and which ones are incorrect
+$showPartialCorrectAnswers = 0;
+
+##############################################################
+#  Setup
+Context("Numeric");
+$itype = random(0,1,1);
+@word = ("false","true");
+$typeword = $word[$itype];
+
+@corrAns = ();                  # initialize empty array
+
+# The full list of answers:
+@allT = ("The entries in each column of \(A\) sum to 1", 
+         "The model has at least one free variable",
+         "The model has infinitely many solutions",
+         "The model is equivalent to \( (I-A)X=0 \)",
+         );
+@allF = ("The entries in each row of \(A\) sum to 1",
+         "The model has no free variables", 
+         "The model has exactly one solution",
+         "The model has only the trivial solution \(X=0\)",
+         "The model is equivalent to \( X(I-A)=0 \)",
+         );
+
+# set conditions of correctness
+if ($itype == 1){ # true
+    @corrAns = @allT;  
+    @incorrAns = @allF;
+    }
+else {
+    @corrAns = @allF;
+    @incorrAns = @allT;
+}
+
+# Correct answers to display:
+#   $numc : how many correct answers to display
+#   @slicec : from the correct answers, choose a subset of indices
+#             e.g. if $numc = 2, 0 1 2 3 => 0 3, or 1 4, or 2 3, etc
+#   scalar(@corrAns) : total number of possible correct answers (usually 4)
+$numc = random(1,3,1);
+@slicec = NchooseK(4,$numc);  
+@randc = @corrAns[@slicec];
+
+# Incorrect answers to display (from @incorrAns array)
+$numi = 4 - $numc;   # the 4 is the number of choices to display
+@slicei = NchooseK(scalar(@incorrAns),$numi);
+@randi = @incorrAns[@slicei];
+
+# Display the question, and the choices:
+$quest = "Which of the following statements are $typeword? Select all that apply.";
+$multichoice = new_checkbox_multiple_choice();
+if ($numc != 0){  # at least one correct answer
+    $multichoice -> qa ( $quest, @randc,);
+    $multichoice -> extra( @randi, "None of the above",);
+    }
+else {            # no correct answers
+    $multichoice -> qa ( $quest, "None of the above",);
+    $multichoice -> extra( @randi, );
+}
+$multichoice -> makeLast("None of the above");
+
+
+##############################################################
+#
+#  Text
+#
+#
+
+BEGIN_PGML
+Consider a Leontief closed economic model [`X=AX`], where [`A`] is the input-output (exchange) matrix and [`X`] is the total production vector. Which of the following statements are [$typeword]? Select all that apply.
+
+[@ $multichoice->print_a() @]*  
+END_PGML
+
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( checkbox_cmp( $multichoice->correct_ans() ) );
+
+BEGIN_PGML_SOLUTION
+Correct answer(s): [@ $multichoice->correct_ans() @]*.  
+END_PGML_SOLUTION
+
+COMMENT("Randomization of false/true, how many correct appear, and the statement choices.");
+ENDDOCUMENT();

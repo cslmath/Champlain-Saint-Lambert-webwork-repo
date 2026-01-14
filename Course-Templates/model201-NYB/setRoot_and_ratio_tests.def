@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/maCalcDB/setSeries7AbsolutelyConvergent/eva8_3_2.pg
+source_file = Library/Rochester/setSeries7AbsolutelyConvergent/eva8_3_2BB.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/maCalcDB/setSeries7AbsolutelyConvergent/eva8_4a.pg
+source_file = Library/Rochester/setSeries7AbsolutelyConvergent/eva8_4aBB.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/Utah/Calculus_II/set8_Infinite_Series/set8_pr16.pg
+source_file = Library/Rochester/setSeries7AbsolutelyConvergent/eva8_3_2BB.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/maCalcDB/setSeries7AbsolutelyConvergent/eva8_3_2BB.pg
+source_file = Library/Rochester/setSeries7AbsolutelyConvergent/eva8_3_2BB.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -73,7 +73,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 7
-source_file = Library/OSU/accelerated_calculus_and_analytic_geometry_ii/hmwk3/prob20.pg
+source_file = Library/Rochester/setSeries7AbsolutelyConvergent/benny_ratio1.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -83,7 +83,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 8
-source_file = Library/OSU/accelerated_calculus_and_analytic_geometry_ii/hmwk3/prob21.pg
+source_file = Library/Rochester/setSeries7AbsolutelyConvergent/benny_root1.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

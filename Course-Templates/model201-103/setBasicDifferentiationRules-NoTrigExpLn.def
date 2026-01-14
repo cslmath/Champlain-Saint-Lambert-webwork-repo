@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/270/setDerivatives2Formulas/s2_2_7.pg
+source_file = Library/ma122DB/set3/s3_1_11.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/270/setDerivatives2Formulas/s2_2_15.pg
+source_file = Library/ma122DB/set3/s3_1_17.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/270/setDerivatives2Formulas/s2_2_17.pg
+source_file = Library/Union/setDervBasic/s2_2_17.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -43,7 +43,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 4
-source_file = Library/270/setDerivatives2Formulas/s2_2_22.pg
+source_file = Library/Union/setDervBasic/s2_2_22.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -73,7 +73,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 7
-source_file = Library/maCalcDB/setDerivatives2Formulas/s2_2_1.pg
+source_file = Library/Rochester/setDerivatives2Formulas/s2_2_1.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -83,7 +83,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 8
-source_file = Library/maCalcDB/setDerivatives2Formulas/s2_2_13.pg
+source_file = Library/Union/setDervProductQuotientRule/s2_2_13.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -113,7 +113,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 11
-source_file = Library/Union/setDervBasic/3-4-10.pg
+source_file = Library/ASU-topics/setDerivativeBasicFunctions/3-4-10.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -133,7 +133,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 13
-source_file = Library/Union/setDervBasic/3-4-14.pg
+source_file = Library/ASU-topics/setDerivativeBasicFunctions/3-4-14.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -143,7 +143,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 14
-source_file = Library/Union/setDervBasic/3-4-15.pg
+source_file = Library/ASU-topics/setDerivativeBasicFunctions/3-4-15.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -173,7 +173,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 17
-source_file = Library/Union/setDervBasic/3-4-34.pg
+source_file = Library/ASU-topics/setDerivativeBasicFunctions/3-4-34.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -303,7 +303,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 30
-source_file = Library/Rochester/setDerivatives2Formulas/s2_2_11b.pg
+source_file = Library/ASU-topics/setDerivativeBasicFunctions/s2_2_11b.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -313,7 +313,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 31
-source_file = Library/Rochester/setDerivatives2Formulas/s2_2_15.pg
+source_file = Library/ma122DB/set3/s3_1_17.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -333,7 +333,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 33
-source_file = Library/Rochester/setDerivatives1/ur_dr_1_1.pg
+source_file = Library/270/setDerivatives1/ur_dr_1_1.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

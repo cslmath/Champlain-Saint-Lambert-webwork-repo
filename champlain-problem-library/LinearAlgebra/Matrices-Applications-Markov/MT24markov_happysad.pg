@@ -1,0 +1,71 @@
+##DESCRIPTION
+##  Linear algebra: Markov chain
+##ENDDESCRIPTION
+
+## DBsubject(Linear algebra)
+## DBchapter(Matrices)
+## DBsection(Markov chains)
+## Date(2024-Apr-16)
+## Author(Michele Titcombe)
+## Institution(Champlain College Saint-Lambert)
+## Level(3)
+## MO(1)
+## TitleText1('Linear Algebra')
+## AuthorText1('Anton')
+## EditionText1('12 Custom')
+## Section1('10.4')
+## Problem1('7')
+
+########################################################################
+
+DOCUMENT();      
+
+loadMacros(
+  "PGstandard.pl",
+  "PGML.pl",
+  "MathObjects.pl",
+  "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+Context("Matrix");
+$happytoday = Compute(random(.75,.85));
+$sadtoday = Compute(random(.52,.65));
+
+$happypercent = $happytoday*100;
+$sadpercent = $sadtoday*100;
+
+$transition = Matrix([[$happytoday,1-$sadtoday],[1-$happytoday,$sadtoday]]);
+
+$a = Compute($transition->element(1,1));
+$b = Compute($transition->element(1,2));
+$steadystate = Matrix( [[$b/(1-$a+$b)],[(1-$a)/(1-$a+$b)]]);
+$steadystatehappy = $steadystate->element(1,1);
+
+$sshappypercent = $steadystatehappy*100;
+
+BEGIN_PGML
+*Markov Chains*  
+Fran is either happy or sad. If she is happy one day, then there is a [$happypercent]% chance that she is happy the next day. If she is sad one day, then there is a [$sadpercent]% chance that she is sad the next day.  
+
+a. Find the transition matrix for this scenario. (Assume the components of the state vector are listed in this order: \[happy, sad\]).  
+[____]*{$transition}
+
+b. Over the long term, the chances that Fran is happy on any given day is 
+[_____]{$sshappypercent}%. Hint: find the steady-state vector.  
+END_PGML
+
+
+BEGIN_PGML_SOLUTION
+a. Transition matrix:  
+[`[$transition]`]  
+
+b. Predict the chances that she is happy over the long term:  
+[`X = [$steadystate]`]  
+is the steady-state vector, which is the solution to [`X=AX`] where [`A`] is the transition matrix, so the model predicts that there is a [$sshappypercent]% chance that Fran is happy in the long term.
+END_PGML_SOLUTION
+
+
+ENDDOCUMENT();        

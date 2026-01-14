@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/UVA-Stew5e/setUVA-Stew5e-C04S04-LHop/4-4-10.pg
+source_file = Library/ma122DB/set8/s4_4_13.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -43,7 +43,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 4
-source_file = Library/UVA-Stew5e/setUVA-Stew5e-C04S04-LHop/4-4-09.pg
+source_file = Library/270/setDerivatives21LHospital/sc4_5_3.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/UVA-Stew5e/setUVA-Stew5e-C04S04-LHop/4-4-13.pg
+source_file = Library/UMN/calculusStewartCCC/s_4_5_prob01.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1

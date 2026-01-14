@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/Rochester/setDerivatives2_5Implicit/s2_6_13.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C03S06-ImplicitDiff/3-6-15.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -83,7 +83,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 8
-source_file = Library/maCalcDB/setDerivatives7Log/mec10.pg
+source_file = Library/Rochester/setDerivatives7Log/mec10.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

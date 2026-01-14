@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/Utah/Quantitative_Analysis/set7_Indefinite_Integrals/pr_12.pg
+source_file = Library/Utah/AP_Calculus_I/set4_Graphing_and_Maximum-Minimum_Problems/1210set8p11.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -153,7 +153,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 15
-source_file = Library/Utah/Quantitative_Analysis/set8_Indefinite_Integrals/pr_1.pg
+source_file = Library/Utah/Calculus_I/set8_The_Definite_Integral/1210set8p13.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -163,7 +163,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 16
-source_file = Library/Utah/Quantitative_Analysis/set8_Indefinite_Integrals/pr_2.pg
+source_file = Library/Indiana/Indiana_setDerivatives20Antideriv/s3_10_8.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -213,7 +213,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 21
-source_file = Library/ASU-topics/setAntiderivatives/6-1-87.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C04S10-Antiderivs/4-10-27l.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

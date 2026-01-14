@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/270/setDerivatives1/ur_dr_1_2.pg
+source_file = Library/Rochester/setDerivatives1/ur_dr_1_2.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/ASU-topics/setRateChange/3-2-73.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C02S03-CalcLimits/2-3-18d.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/ASU-topics/setRateChange/3-2-76.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C02S03-CalcLimits/2-3-18a.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -133,7 +133,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 13
-source_file = Library/Utah/Calculus_I/set2_Preliminaries/1210s2p24.pg
+source_file = Library/Union/setLimitConcepts/s1_3_36.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

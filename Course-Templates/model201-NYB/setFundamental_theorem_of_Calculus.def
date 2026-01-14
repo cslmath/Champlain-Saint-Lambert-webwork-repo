@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/Rochester/setIntegrals4FTC/c4s4p1.pg
+source_file = Library/ma122DB/set11/s5_3_3.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

@@ -193,7 +193,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 19
-source_file = Library/ma122DB/set12/s5_4_29.pg
+source_file = Library/Rochester/setIntegrals3Definite/osu_in_3_5.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

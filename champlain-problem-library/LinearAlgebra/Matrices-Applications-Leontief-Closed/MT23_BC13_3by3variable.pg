@@ -1,0 +1,133 @@
+## DESCRIPTION
+## Linear Algebra
+## MT Aug 2018 tagged and renamed
+## MT Nov 2023 modified for variable matrix entries, and to put in PGML and Matrix Context
+## ENDDESCRIPTION
+
+## DBsubject('Linear Algebra')
+## DBchapter('Matrices')
+## DBsection('Determinants')
+## Date('2013')
+## Author('Brendan Cordy')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "AnswerFormatHelp.pl",
+    "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+Context(Matrix);
+Context()->variables->add(t => 'Real');
+$showPartialCorrectAnswers = 1;
+
+# Exchange matrix E has the form:
+#    (1-a)/2   (1-b)/2  (1-c)/2 
+#       a         b        c
+#    (1-a)/2   (1-b)/2  (1-c)/2
+# where a, b and c are between 0 and 1
+#
+# General solution of (I-E)X=0 with parameter t is
+#  x1 = t
+#  x2 = kt, where scalar k = (a+c)/(1-b)
+#  x3 = t
+
+@val = (0.2,0.25,0.6,0.5);
+@text = ("1/5","1/4","3/5","1/2");
+@val2 = (0.4,0.375,0.2,0.25);
+@text2 = ("2/5","3/8","1/5","1/4");
+
+# column 1: choose 0.6 or 0.5 for pirate take of ninja
+$i21 = random(2,3,1);
+$a = $val[$i21];
+$i11 = $i21 - 2;
+$i31 = $i11;
+
+# column 3: choose 0.6 or 0.5 for pirate take of robot
+$i23 = random(2,3,1);
+$c = $val[$i23];
+$i13 = $i23 - 2;
+$i33 = $i13;
+
+# column 1, sum to 1
+$a11 = (1 - $a)/2;
+$a21 = $a;
+$a31 = (1 - $a)/2;
+
+# column 2, sum to 1
+$i22 = random(2,3,1);
+$b = $val2[$i22];
+$i12 = $i22 - 2;
+$i32 = $i22 - 2;
+$a12 = (1 - $b)/2;
+$a22 = $b;
+$a32 = (1 - $b)/2;
+
+# column 3, sum to 1
+$a13 = (1 - $c)/2;
+$a23 = $c;
+$a33 = (1 - $c)/2;
+
+$Ematrix = Matrix([
+    [ $a11, $a12, $a13 ],
+    [ $a21, $a22, $a23 ],
+    [ $a31, $a32, $a33 ],
+]);
+$Augmatrix = Matrix([
+    [ 1-$a11, -$a12, -$a13, 0 ],
+    [ -$a21, 1-$a22, -$a23, 0 ],
+    [ -$a31, -$a32, 1-$a33, 0 ],
+]);
+
+$k = Compute("($a + $c)/(1 - $b)");
+$t = Compute("t");
+$x2 = Compute("$k t");
+$Xmatrix = Matrix([
+                  [$t],
+                  [$x2],
+                  [$t]
+]);
+
+$c = random(5,10,1);
+$roboprod = $c*100000;
+@robodisp = ("500,000","600,000","700,000","800,000","900,000","1,000,000");
+$i = $c - 5;
+
+BEGIN_PGML
+*Closed Leontief economic model.*  
+Consider a closed economy of three isolated island nations: Ninjaland, Pirateland, and Robotland. Despite their long standing rivalries, these three nations engage in peaceful trade with each other, and the trade economy is in a stable state where each nation consumes exactly as much as it produces.
+
+Ninjaland consumes [$text[$i11]] of its own domestically produced goods, [$text2[$i12]] of Pirateland's production, and [$text[$i13]] of Robotland's production. 
+Pirateland consumes [$text2[$i22]] of its own domestically produced goods, [$text[$i21]] of Ninjaland's production, and [$text[$i23]] of Robotland's production (old habits die hard!). 
+Robotland consumes [$text[$i33]] of its own domestically produced goods, [$text2[$i32]] of Pirateland's production, and [$text[$i31]] of Ninjaland's production.
+
+a. Find the exchange matrix (input-output matrix) [`E`] for this economy. Keep the columns and rows in alphabetical order (Ninjaland, Pirateland, then Robotland).  
+[`E=`][_____]*{$Ematrix}
+
+b. Write the augmented matrix form of the closed Leontief equation [`(I-E)X =0`].  
+[____]*{$Augmatrix} 
+
+
+c. Use Gauss-Jordan elimination to find the general solution matrix  [`X`] of the closed Leontief equation [`(I-E)X =0`], whose  homogeneous system in augmented matrix form is your answer to part b. Use [`t`] as the parameter in the general solution.  
+[`X=`][_____]*{$Xmatrix} 
+
+d. Robotland is very particular about the amount of goods it produces. This year, Robotland will produce exactly $[$robodisp[$i]]  worth of goods. Therefore, in order to ensure that each nation produces exactly as much as it consumes this year, Ninjaland must produce $[_____]{$roboprod} worth of goods and Pirateland must produce $[_____]{$k*$roboprod} worth of goods.
+END_PGML
+
+BEGIN_PGML_SOLUTION
+a. [`E = [$Ematrix]`]  
+b. [`(I-E)X=0`] in augmented matrix form is [`[$Augmatrix]`]  
+c. [`X = [$Xmatrix]`]  
+d. Ninjaland must produce $[$roboprod] worth of goods and Pirateland must produce $[$k*$roboprod] worth of goods.
+END_PGML_SOLUTION
+
+ENDDOCUMENT();       # This should be the last executable line in the problem.

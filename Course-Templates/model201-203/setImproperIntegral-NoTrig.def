@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/Rochester/setIntegrals18Improper/sc5_9_3.pg
+source_file = Library/maCalcDB/setIntegrals18Improper/sc5_9_3.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -73,7 +73,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 7
-source_file = Library/Rochester/setIntegrals18Improper/sc5_9_5.pg
+source_file = Library/Union/setIntImproper/sc5_9_5.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -83,7 +83,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 8
-source_file = Library/Rochester/setIntegrals18Improper/sc5_9_11.pg
+source_file = Library/UMN/calculusStewartET/s_7_8_22.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -113,7 +113,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 11
-source_file = Library/Rochester/setIntegrals18Improper/ur_in_18_3.pg
+source_file = Library/Indiana/Indiana_setIntegrals18Improper/ur_in_18_3.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1

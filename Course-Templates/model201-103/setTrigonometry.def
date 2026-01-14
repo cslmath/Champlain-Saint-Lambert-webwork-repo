@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/Rochester/setTrig01Angles/ur_tr_1_4.pg
+source_file = Library/Union/setTrigBasicValues/ur_tr_1_4.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/Rochester/setTrig01Angles/srw6_1_55.pg
+source_file = Library/Rochester/setTrig09Laws/srw6_1_55.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/Rochester/setTrig01Angles/srw6_1_39.pg
+source_file = Library/Rochester/setTrig09Laws/srw6_1_39.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -43,7 +43,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 4
-source_file = Library/Rochester/setTrig01Angles/ur_tr_1_10.pg
+source_file = Library/Union/setTrigBasicValues/ur_tr_1_10.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -103,7 +103,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 10
-source_file = Library/Rochester/setDerivatives4Trig/s2_4_21.pg
+source_file = Library/Union/setDervTrigonometric/s2_4_21.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -123,7 +123,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 12
-source_file = Library/Rochester/setDerivatives4Trig/s2_4_25.pg
+source_file = Library/Union/setDervTrigonometric/s2_4_25.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -133,7 +133,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 13
-source_file = Library/Rochester/setDerivatives4Trig/s2_4_35.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C03S04-DerivsTrig/3-4-25.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -143,7 +143,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 14
-source_file = Library/Rochester/setDerivatives4Trig/ur_dr_4_1.pg
+source_file = Library/Rochester/instructiveProblems/OldProblems/ur_dr_4_1.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

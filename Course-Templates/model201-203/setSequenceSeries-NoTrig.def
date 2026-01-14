@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/Rochester/setSequences1Definitions/ns8_1_5.pg
+source_file = Library/Rochester/setAlgebra36SeqSeries/ns8_1_5.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/Rochester/setSequences2Limits/ns8_1_11.pg
+source_file = Library/OSU/accelerated_calculus_and_analytic_geometry_ii/hmwk1/prob1.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -123,7 +123,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 12
-source_file = Library/Rochester/setSeries4Geometric/ns8_2_13a.pg
+source_file = Library/Utah/Calculus_II/set7_Infinite_Series/set7_pr16.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -163,7 +163,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 16
-source_file = Library/Rochester/setSeries3Convergent/ns8_2_9b.pg
+source_file = Library/Rochester/setSeries3Convergent/ns8_2_9.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -183,7 +183,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 18
-source_file = Library/ma123DB/set10/s11_2_23.pg
+source_file = Library/Rochester/setSeries2Telescope/ns8_2_21.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
