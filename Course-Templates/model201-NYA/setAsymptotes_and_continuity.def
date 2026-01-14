@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/Rochester/setLimitsRates5Continuity/c1s5p5.pg
+source_file = Library/Union/setLimitContinuity/c1s5p5.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -43,7 +43,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 4
-source_file = Library/Rochester/setLimitsRates5Continuity/ur_lr_5_5.pg
+source_file = Library/maCalcDB/setLimitsRates5Continuity/ur_lr_5_5_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -53,7 +53,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 5
-source_file = Library/Rochester/setLimitsRates5Continuity/ur_lr_5_7.pg
+source_file = Library/Union/setLimitContinuity/ur_lr_5_7.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/Rochester/setLimitsRates5Continuity/ur_lr_5_8.pg
+source_file = Library/UMN/calculusStewartCCC/s_2_4_prob03.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -73,7 +73,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 7
-source_file = Library/maCalcDB/setLimitsRates5Continuity/c1s5p5.pg
+source_file = Library/Union/setLimitContinuity/c1s5p5.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -83,7 +83,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 8
-source_file = Library/maCalcDB/setLimitsRates5Continuity/c1s5p5_mo.pg
+source_file = Library/Union/setLimitContinuity/c1s5p5.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -113,7 +113,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 11
-source_file = Library/maCalcDB/setLimitsRates3Infinite/ur_lr_3_15.pg
+source_file = Library/Rochester/setLimitsRates3Infinite/ur_lr_3_15.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -123,7 +123,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 12
-source_file = Library/maCalcDB/setLimitsRates3Infinite/ur_lr_3_2.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C02S06-InfLimits/2-6-17b.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -133,7 +133,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 13
-source_file = Library/maCalcDB/setLimitsRates3Infinite/ur_lr_3_17.pg
+source_file = Library/Rochester/setLimitsRates3Infinite/ur_lr_3_17.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -153,7 +153,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 15
-source_file = Library/ma122DB/set2/s2_6_23.pg
+source_file = Library/Rochester/setLimitsRates3Infinite/ur_lr_3_4.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

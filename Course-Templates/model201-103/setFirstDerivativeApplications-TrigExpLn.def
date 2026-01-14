@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/270/setDerivatives10MaxMin/sc4_3_10.pg
+source_file = Library/Rochester/setDerivatives10MaxMin/sc4_3_10_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/ma123DB/set7/s9_4_3.pg
+source_file = Library/Rochester/setDiffEQ5ModelingWith1stOrder/ns7_5_3.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/Rochester/setIntegrals25RationalFunctions/nsAP_F_18.pg
+source_file = Library/ma123DB/set3/s7_4_2.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -123,7 +123,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 12
-source_file = Library/Rochester/setIntegrals25RationalFunctions/pril_pf_1.pg
+source_file = Library/ma123DB/set3/s7_4_18.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -163,7 +163,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 16
-source_file = Library/Rochester/setIntegrals25RationalFunctions/ur_in_25_4.pg
+source_file = Library/Rochester/setIntegrals25RationalFunctions/ur_in_25_13.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -183,7 +183,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 18
-source_file = Library/Rochester/setIntegrals25RationalFunctions/ur_in_25_15.pg
+source_file = Library/UMN/calculusStewartET/s_7_4_prob03.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -193,7 +193,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 19
-source_file = Library/ma123DB/set3/s7_4_16.pg
+source_file = Library/Rochester/setIntegrals25RationalFunctions/ur_in_25_13.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

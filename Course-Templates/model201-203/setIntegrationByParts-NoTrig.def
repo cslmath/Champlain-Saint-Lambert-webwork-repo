@@ -43,7 +43,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 4
-source_file = Library/ma123DB/set2/s7_1_9.pg
+source_file = Library/Rochester/setIntegrals15ByParts/sc5_6_7.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1

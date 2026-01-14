@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/Rochester/setDerivatives1/ur_dr_1_9.pg
+source_file = Library/Rochester/setDerivatives22Graphing/S04.03.DerivativesShapeGraph.PTP07.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

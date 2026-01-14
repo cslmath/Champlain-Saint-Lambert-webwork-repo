@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/Rochester/setIntegrals15ByParts/bennyparts1.pg
+source_file = Library/ma123DB/set2/s7_1_11.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -43,7 +43,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 4
-source_file = Library/Rochester/setIntegrals15ByParts/sc5_6_26.pg
+source_file = Library/Union/setIntByParts/sc5_6_26.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -53,7 +53,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 5
-source_file = Library/ma123DB/set2/s7_1_23.pg
+source_file = Library/UMN/calculusStewartET/s_7_1_29.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

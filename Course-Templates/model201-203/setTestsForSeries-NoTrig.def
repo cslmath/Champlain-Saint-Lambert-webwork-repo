@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/Rochester/setSeries4Geometric/ns8_2_9.pg
+source_file = Library/Rochester/setSeries3Convergent/ns8_2_9.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/Rochester/setSeries3Convergent/ns8_3_7.pg
+source_file = Library/maCalcDB/setSeries3Convergent/ns8_3_7.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1

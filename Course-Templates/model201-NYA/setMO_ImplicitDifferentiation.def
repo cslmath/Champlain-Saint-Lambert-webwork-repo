@@ -183,7 +183,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 18
-source_file = Library/maCalcDB/setDerivatives2_5Implicit/s2_6_14_mo.pg
+source_file = Library/ma122DB/set5/s3_6_20.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

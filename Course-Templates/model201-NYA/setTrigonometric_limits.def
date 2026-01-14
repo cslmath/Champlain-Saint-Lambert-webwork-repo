@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/Rochester/setDerivatives4Trig/s2_4_7.pg
+source_file = Library/Rochester/setDerivatives4Trig/s2_4_7_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/Rochester/setDerivatives4Trig/s2_4_8.pg
+source_file = Library/UMN/calculusStewartCCC/s_3_3_prob01.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/Rochester/setDerivatives4Trig/s2_4_8a.pg
+source_file = Library/maCalcDB/setDerivatives4Trig/s2_4_8a.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -43,7 +43,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 4
-source_file = Library/Rochester/setDerivatives4Trig/s2_4_12.pg
+source_file = Library/Rochester/setDerivatives4Trig/s2_4_12_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

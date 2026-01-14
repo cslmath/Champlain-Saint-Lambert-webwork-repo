@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/ASU-topics/setImproperIntegrals/sc5_9_21.pg
+source_file = Library/Rochester/setIntegrals18Improper/sc5_9_21.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/ASU-topics/setImproperIntegrals/ur_in_18_1.pg
+source_file = Library/Rochester/setIntegrals18Improper/ur_in_18_1.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -73,7 +73,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 7
-source_file = Library/Rochester/setIntegrals18Improper/osu_in_18_8.pg
+source_file = Library/Rochester/setIntegrals18Improper/S07.08.ImproperIntegrals.PTP16a.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -83,7 +83,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 8
-source_file = Library/Rochester/setIntegrals18Improper/sc5_9_3.pg
+source_file = Library/maCalcDB/setIntegrals18Improper/sc5_9_3.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

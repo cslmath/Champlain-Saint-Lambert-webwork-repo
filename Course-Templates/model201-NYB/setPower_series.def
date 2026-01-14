@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/Rochester/setSeries8Power/eva8_5a_2.pg
+source_file = Library/Indiana/Indiana_setSeries8Power/eva8_5a_2.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -103,7 +103,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 10
-source_file = Library/Rochester/setSeries8Power/eva8_5b.pg
+source_file = Library/Utah/Calculus_II/set9_Infinite_Series/set9_pr5.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -113,7 +113,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 11
-source_file = Library/Rochester/setSeries8Power/eva8_6a.pg
+source_file = Library/Indiana/Indiana_setSeries8Power/eva8_6a.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -123,7 +123,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 12
-source_file = Library/Rochester/setSeries8Power/eva8_6b.pg
+source_file = Library/Indiana/Indiana_setSeries8Power/eva8_6b.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -133,7 +133,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 13
-source_file = Library/Rochester/setSeries8Power/eva8_6b_a.pg
+source_file = Library/Indiana/Indiana_setSeries8Power/eva8_6h.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -153,7 +153,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 15
-source_file = Library/Rochester/setSeries8Power/eva8_6d.pg
+source_file = Library/OSU/accelerated_calculus_and_analytic_geometry_ii/hmwk4/prob5.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -173,7 +173,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 17
-source_file = Library/Rochester/setSeries8Power/eva8_6f.pg
+source_file = Library/Indiana/Indiana_setSeries8Power/eva8_6f.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -183,7 +183,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 18
-source_file = Library/Rochester/setSeries8Power/eva8_6g.pg
+source_file = Library/Indiana/Indiana_setSeries8Power/eva8_6g.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -203,7 +203,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 20
-source_file = Library/Rochester/setSeries8Power/eva8_6h.pg
+source_file = Library/Indiana/Indiana_setSeries8Power/eva8_6h.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

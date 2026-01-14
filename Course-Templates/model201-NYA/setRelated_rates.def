@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/Rochester/setDerivatives8RelatedRates/c2s8p4.pg
+source_file = Library/ma122DB/set6/s3_10_26.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -43,7 +43,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 4
-source_file = Library/Rochester/setDerivatives8RelatedRates/s2_8_2.pg
+source_file = Library/ma122DB/set6/s3_10_2.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -53,7 +53,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 5
-source_file = Library/Rochester/setDerivatives8RelatedRates/s2_8_3.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C03S10-RelatedRates/3-10-03.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -83,7 +83,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 8
-source_file = Library/UVA-Stew5e/setUVA-Stew5e-C03S10-RelatedRates/3-10-05.pg
+source_file = Library/Union/setDervRelatedRates/c2s8p5.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -93,7 +93,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 9
-source_file = Library/OSU/accelerated_calculus_and_analytic_geometry_i/hmwk1/prob18.pg
+source_file = Library/Rochester/setDerivatives3WordProblems/c2s3p2.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

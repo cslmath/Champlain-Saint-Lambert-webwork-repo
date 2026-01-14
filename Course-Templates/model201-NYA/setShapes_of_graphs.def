@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/Rochester/setDerivatives10MaxMin/osu_dr_10_1.pg
+source_file = Library/Rochester/setDerivatives10MaxMin/osu_dr_10_1_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/Rochester/setDerivatives10MaxMin/sc4_3_10.pg
+source_file = Library/Rochester/setDerivatives10MaxMin/sc4_3_10_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

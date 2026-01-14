@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/Rochester/setDerivatives9Approximations/s2_9_20.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C03S11-LinApprox/3-11-08.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/Rochester/setDerivatives9Approximations/s2_9_19.pg
+source_file = Library/ma122DB/set7/s3_11_9.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

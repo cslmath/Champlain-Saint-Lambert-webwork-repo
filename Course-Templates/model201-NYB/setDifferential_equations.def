@@ -73,7 +73,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 7
-source_file = Library/Rochester/setDiffEQ4Linear1stOrder/osu_de_4_14.pg
+source_file = Library/OSU/accelerated_calculus_and_analytic_geometry_i/hmwk7/prob9.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -133,7 +133,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 13
-source_file = Library/Rochester/setDiffEQ3Separable/ur_de_3_9.pg
+source_file = Library/maCalcDB/setDiffEQ3Separable/ur_de_3_9.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -143,7 +143,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 14
-source_file = Library/Rochester/setDiffEQ3Separable/ur_de_3_1.pg
+source_file = Library/maCalcDB/setDiffEQ3Separable/ur_de_3_1.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

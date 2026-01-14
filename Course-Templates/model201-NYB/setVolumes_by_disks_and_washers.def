@@ -43,7 +43,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 4
-source_file = Library/Rochester/setIntegrals20Volume/osu_in_20_11.pg
+source_file = Library/ma123DB/set1/s6_2_53.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -53,7 +53,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 5
-source_file = Library/Rochester/setIntegrals20Volume/ur_in_20_12.pg
+source_file = Library/ma123DB/set1/s6_2_12.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -83,7 +83,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 8
-source_file = Library/Rochester/setIntegrals20Volume/ur_in_20_1.pg
+source_file = Library/Utah/AP_Calculus_I/set11_Applications_of_Integration/p13-2.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -103,7 +103,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 10
-source_file = Library/Rochester/setIntegrals20Volume/sc6_2_14a.pg
+source_file = Library/ma123DB/set1/s6_3_3.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -153,7 +153,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 15
-source_file = Library/maCalcDB/setIntegrals20Volume/ns6_2_9.pg
+source_file = Library/Rochester/setIntegrals20Volume/ns6_2_9.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -163,7 +163,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 16
-source_file = Library/maCalcDB/setIntegrals20Volume/osu_in_20_6.pg
+source_file = Library/Rochester/setIntegrals20Volume/osu_in_20_6.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -173,7 +173,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 17
-source_file = Library/maCalcDB/setIntegrals20Volume/osu_in_20_1/osu_in_20_1.pg
+source_file = Library/Rochester/setIntegrals20Volume/osu_in_20_1/osu_in_20_1.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -183,7 +183,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 18
-source_file = Library/maCalcDB/setIntegrals20Volume/osu_in_20_2/osu_in_20_2.pg
+source_file = Library/Rochester/setIntegrals20Volume/osu_in_20_2/osu_in_20_2.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

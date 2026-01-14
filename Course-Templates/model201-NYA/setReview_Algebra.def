@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/maCalcDB/setAlgebra13Inequalities/srw1_8_29-sol.pg
+source_file = Library/Rochester/setAlgebra13Inequalities/srw1_8_29-sol.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/maCalcDB/setAlgebra13Inequalities/p10.pg
+source_file = Library/ASU-topics/setInequalities/p10.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/maCalcDB/setAlgebra13Inequalities/p18.pg
+source_file = Library/ASU-topics/setInequalities/zhu7.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -73,7 +73,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 7
-source_file = Library/maCalcDB/setAlgebra13Inequalities/p15.pg
+source_file = Library/Union/setAlgebraInequalities/p15.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -83,7 +83,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 8
-source_file = Library/maCalcDB/setAlgebra12EqnsOtherTypes/lh1-6_36.pg
+source_file = Library/Rochester/setAlgebra12EqnsOtherTypes/lh1-6_36.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -133,7 +133,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 13
-source_file = Library/maCalcDB/setAlgebra10QuadraticEqns/srw1_5_41.pg
+source_file = Library/Rochester/setAlgebra10QuadraticEqns/srw1_5_41.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -143,7 +143,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 14
-source_file = Library/maCalcDB/setAlgebra10QuadraticEqns/ur_ab_6_5.pg
+source_file = Library/Rochester/setAlgebra10QuadraticEqns/ur_ab_6_5.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

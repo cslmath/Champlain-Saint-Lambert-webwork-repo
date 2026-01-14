@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/Rochester/setIntegrals19Area/osu_in_19_15.pg
+source_file = Library/Union/setIntArea/osu_in_19_15.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/Rochester/setIntegrals19Area/S06.01.AreasBetweenCurves.PTP05.pg
+source_file = Library/Rochester/setIntegrals19Area/osu_in_19_14.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -43,7 +43,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 4
-source_file = Library/Rochester/setIntegrals19Area/sc6_1_14.pg
+source_file = Library/Indiana/Indiana_setIntegrals19Area/sc6_1_14.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -83,7 +83,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 8
-source_file = Library/Rochester/setIntegrals19Area/ns6_1_10.pg
+source_file = Library/Utah/AP_Calculus_I/set6_The_Integral/1220s1p22.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -93,7 +93,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 9
-source_file = Library/Rochester/setIntegrals19Area/ur_in_19_1.pg
+source_file = Library/UMN/calculusStewartCCC/s_6_1_39.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -123,7 +123,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 12
-source_file = Library/Rochester/setIntegrals19Area/sc6_1_7.pg
+source_file = Library/Union/setIntArea/sc6_1_7.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -143,7 +143,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 14
-source_file = Library/UVA-Stew5e/setUVA-Stew5e-C06S01-AreaBetCurves/6-1-14.pg
+source_file = Library/Rochester/setIntegrals19Area/sc6_1_9.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -153,7 +153,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 15
-source_file = Library/UVA-Stew5e/setUVA-Stew5e-C06S01-AreaBetCurves/6-1-10.pg
+source_file = Library/Union/setIntArea/ur_in_19_11.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -203,7 +203,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 20
-source_file = Library/ma122DB/set13/s6_1_24.pg
+source_file = Library/UMN/calculusStewartCCC/s_6_1_prob02.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

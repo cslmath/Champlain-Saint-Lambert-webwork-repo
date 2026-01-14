@@ -103,7 +103,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 10
-source_file = Library/maCalcDB/setTrigonometry4Inverse/osu_tr_4_2.pg
+source_file = Library/Rochester/setTrig06Inverses/osu_tr_4_2.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -113,7 +113,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 11
-source_file = Library/maCalcDB/setTrigonometry4Inverse/ur_tr_4_1.pg
+source_file = Library/ASU-topics/setTrigInverse/ur_tr_4_1.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -123,7 +123,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 12
-source_file = Library/Utah/Trigonometry/set11_Analytic_Trigonometry/p5/p5.pg
+source_file = Library/Union/setTrigTriangles/p4.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -133,7 +133,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 13
-source_file = Library/Union/setTrigEquations/srw7_5_67.pg
+source_file = Library/Rochester/setTrig08Equations/srw7_5_67.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -153,7 +153,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 15
-source_file = Library/Rochester/setTrig07Identity/p12.pg
+source_file = Library/ASU-topics/setTrigIdentities/p12.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

@@ -103,7 +103,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 10
-source_file = Library/UVA-Stew5e/setUVA-Stew5e-C05S04-IndefInts/5-4-18.pg
+source_file = Library/ASU-topics/setCalculusFundamentalTheorem/6-5-14.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -163,7 +163,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 16
-source_file = Library/Utah/Quantitative_Analysis/set7_Indefinite_Integrals/pr_12.pg
+source_file = Library/Utah/AP_Calculus_I/set4_Graphing_and_Maximum-Minimum_Problems/1210set8p11.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -173,7 +173,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 17
-source_file = Library/Utah/Quantitative_Analysis/set7_Indefinite_Integrals/pr_11.pg
+source_file = Library/Rochester/setDerivatives20Antideriv/s3_10_2func_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -183,7 +183,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 18
-source_file = Library/Utah/Quantitative_Analysis/set7_Indefinite_Integrals/pr_10.pg
+source_file = Library/Utah/AP_Calculus_I/set4_Graphing_and_Maximum-Minimum_Problems/1210set8p6.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -193,7 +193,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 19
-source_file = Library/Utah/Quantitative_Analysis/set8_Indefinite_Integrals/pr_1.pg
+source_file = Library/Utah/Calculus_I/set8_The_Definite_Integral/1210set8p13.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -203,7 +203,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 20
-source_file = Library/Utah/Quantitative_Analysis/set8_Indefinite_Integrals/pr_2.pg
+source_file = Library/Indiana/Indiana_setDerivatives20Antideriv/s3_10_8.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

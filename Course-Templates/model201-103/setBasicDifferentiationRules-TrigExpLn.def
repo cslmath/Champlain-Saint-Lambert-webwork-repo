@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/maCalcDB/setDerivatives2Formulas/d2.pg
+source_file = Library/Utah/Quantitative_Analysis/set4_Derivatives/pr_19.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/270/setDerivatives4Trig/s2_4_34.pg
+source_file = Library/Rochester/setDerivatives4Trig/s2_4_34_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/270/setDerivatives4Trig/s2_4_21.pg
+source_file = Library/Union/setDervTrigonometric/s2_4_21.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -43,7 +43,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 4
-source_file = Library/270/setDerivatives4Trig/s2_4_20.pg
+source_file = Library/Rochester/setDerivatives4Trig/s2_4_20.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -53,7 +53,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 5
-source_file = Library/270/setDerivatives7Log/mec5.pg
+source_file = Library/Rochester/setDerivatives7Log/mec5.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/270/setDerivatives7Log/mec1.pg
+source_file = Library/Utah/Quantitative_Analysis/set4_Derivatives/pr_15.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -73,7 +73,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 7
-source_file = Library/270/setDerivatives7Log/mec6.pg
+source_file = Library/Utah/Quantitative_Analysis/set4_Derivatives/pr_16.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -83,7 +83,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 8
-source_file = Library/270/setDerivatives2Formulas/d2.pg
+source_file = Library/Utah/Quantitative_Analysis/set4_Derivatives/pr_19.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -93,7 +93,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 9
-source_file = Library/270/setDerivatives13Higher/ur_dr_13_4.pg
+source_file = Library/ma122DB/set5/s3_7_14.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -103,7 +103,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 10
-source_file = Library/270/setDerivatives13Higher/ur_dr_13_2.pg
+source_file = Library/ma122DB/set5/s3_7_5.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

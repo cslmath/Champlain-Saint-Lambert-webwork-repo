@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/Rochester/setIntegrals14Substitution/S05.05.Substitution.PTP02b.pg
+source_file = Library/Rochester/setIntegrals14Substitution/S05.05.Substitution.PTP02a.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

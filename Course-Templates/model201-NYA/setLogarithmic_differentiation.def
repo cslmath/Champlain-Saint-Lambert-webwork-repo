@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/270/setDerivatives7Log/mec7.pg
+source_file = Library/Rochester/setDerivatives7Log/mec7_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

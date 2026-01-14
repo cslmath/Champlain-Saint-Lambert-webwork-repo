@@ -5,8 +5,8 @@ answerDate        = 12/31/2013 at 02:00am EST
 paperHeaderFile   = 
 screenHeaderFile  = 
 problemList       = 
-Library/maCalcDB/setVectors2DotProduct/UR_VC_1_8.pg, 1, -1 
-Library/maCalcDB/setVectors2DotProduct/UR_VC_1_14.pg, 1, -1 
+Library/Rochester/setVectors2DotProduct/UR_VC_1_8.pg, 1, -1 
+Library/Rochester/setVectors2DotProduct/UR_VC_1_14.pg, 1, -1 
 Library/Dartmouth/setStewartCh13S2/problem_3.pg, 1, -1 
 Library/Union/setMVvectors/an12_2_15.pg, 1, -1 
 Library/Union/setMVvectors/an12_2_19.pg, 1, -1 

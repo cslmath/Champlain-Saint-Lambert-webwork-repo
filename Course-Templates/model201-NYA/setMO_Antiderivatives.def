@@ -113,7 +113,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 11
-source_file = Library/Rochester/setDerivatives20Antideriv/s3_10_13func_mo.pg
+source_file = Library/ma122DB/set10/s4_10_12.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -123,7 +123,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 12
-source_file = Library/Rochester/setDerivatives20Antideriv/c3s10p5_mo.pg
+source_file = Library/ma122DB/set10/s4_10_22.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/ma122DB/set13/s6_5_5.pg
+source_file = Library/UMN/calculusStewartCCC/s_6_5_prob01.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

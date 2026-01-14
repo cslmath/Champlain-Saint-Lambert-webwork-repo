@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/ma123DB/set10/s11_1_36.pg
+source_file = Library/Rochester/setSequences2Limits/ur_sq_2_11.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -73,7 +73,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 7
-source_file = Library/maCalcDB/setSequences2Limits/ns8_1_25.pg
+source_file = Library/Rochester/setSequences2Limits/ns8_1_25.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -83,7 +83,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 8
-source_file = Library/maCalcDB/setSequences2Limits/ur_sq_2_20.pg
+source_file = Library/Utah/Calculus_II/set7_Infinite_Series/set7_pr6.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -93,7 +93,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 9
-source_file = Library/maCalcDB/setSequences2Limits/ur_sq_2_21.pg
+source_file = Library/OSU/accelerated_calculus_and_analytic_geometry_ii/hmwk1/prob13.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

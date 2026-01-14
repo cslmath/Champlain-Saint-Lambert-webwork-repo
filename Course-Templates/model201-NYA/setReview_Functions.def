@@ -53,7 +53,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 5
-source_file = Library/Rochester/setAlgebra16FunctionGraphs/2.pg
+source_file = Library/Rochester/setAlgebra15Functions/srw2_2_41_51.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/maCalcDB/setAlgebra16FunctionGraphs/c2s2p59_72/c2s2p59_72.pg
+source_file = Library/Rochester/setAlgebra16FunctionGraphs/c2s2p59_72/c2s2p59_72.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -73,7 +73,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 7
-source_file = Library/maCalcDB/setAlgebra16FunctionGraphs/c4s2p59_72/c4s2p59_72.pg
+source_file = Library/Rochester/setAlgebra16FunctionGraphs/c4s2p59_72/c4s2p59_72.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -93,7 +93,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 9
-source_file = Library/Utah/College_Algebra/set6_Polynomial_and_Rational_Functions/1050s6p5/1050s6p5.pg
+source_file = Library/Utah/Business_Algebra/set6_Linear_Equations_and_Functions/p05/p05.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -123,7 +123,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 12
-source_file = Library/Utah/Business_Algebra/set4_Quadratic_and_Other_Special_Functions/p10.pg
+source_file = Library/Utah/College_Algebra/set5_Functions_and_Their_Graphs/1050s5p14.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -153,7 +153,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 15
-source_file = Library/maCalcDB/setAlgebra17FunComposition/ns1_2_37.pg
+source_file = Library/Rochester/setAlgebra17FunComposition/ns1_2_37.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

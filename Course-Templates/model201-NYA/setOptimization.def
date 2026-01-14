@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/Rochester/setDerivatives10_5Optim/c3s8p3.pg
+source_file = Library/Rochester/setDerivatives10_5Optim/c3s8p3_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/Rochester/setDerivatives10_5Optim/dereco4.pg
+source_file = Library/ASU-topics/setOptimization/dereco4.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/Rochester/setDerivatives10_5Optim/s3_8_26.pg
+source_file = Library/Rochester/setDerivatives10_5Optim/s3_8_26_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -93,7 +93,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 9
-source_file = Library/Rochester/setDerivatives10_5Optim/S04.07.Optimization.PTP05.pg
+source_file = Library/Rochester/setDerivatives10_5Optim/c3s8p2_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -123,7 +123,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 12
-source_file = Library/Rochester/setDerivatives10_5Optim/c3s8p1.pg
+source_file = Library/Rochester/setDerivatives10_5Optim/c3s8p1_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -133,7 +133,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 13
-source_file = Library/Rochester/setDerivatives10_5Optim/nsc4_6_16.pg
+source_file = Library/Union/setDervOptimization/nsc4_6_16.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -143,7 +143,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 14
-source_file = Library/Rochester/setDerivatives10_5Optim/s3_8_6.pg
+source_file = Library/Union/setDervOptimization/s3_8_6.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

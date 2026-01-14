@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/Rochester/setDerivatives2Formulas/s2_2_13a.pg
+source_file = Library/Union/setDervProductQuotientRule/s2_2_13.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -143,7 +143,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 14
-source_file = Library/Union/setDervProductQuotientRule/d3.pg
+source_file = Library/Rochester/setDerivatives2Formulas/d3.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

@@ -53,7 +53,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 5
-source_file = Library/Dartmouth/setStewartCh15S2/problem_3.pg
+source_file = Library/272/setStewart14_2/problem_3.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -63,7 +63,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/Dartmouth/setMTWCh2S2/UR_VC_5_7.pg
+source_file = Library/ASU-topics/setCalculus/stef14_2p1.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1

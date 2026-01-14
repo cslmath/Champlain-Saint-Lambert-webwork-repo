@@ -12,12 +12,12 @@ Library/TCNJ/TCNJ_MatrixOperations/problem6.pg, 1, -1
 Library/TCNJ/TCNJ_MatrixOperations/problem8.pg, 1, -1 
 Library/TCNJ/TCNJ_MatrixOperations/problem7.pg, 1, -1 
 Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_1a.pg, 1, -1 
-Library/Rochester/setAlgebra34Matrices/sw7_4_17.pg, 1, -1 
+Library/Rochester/setAlgebra34Matrices/cubing_2x2.pg, 1, -1 
 Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_34.pg, 1, -1 
 Library/Rochester/setLinearAlgebra3Matrices/ur_la_3_25.pg, 1, -1 
-Library/maCalcDB/setLinearAlgebra4InverseMatrix/ur_la_4_1.pg, 1, -1 
+Library/Rochester/setLinearAlgebra4InverseMatrix/ur_la_4_1.pg, 1, -1 
 Library/Rochester/setAlgebra34Matrices/inverse2x2.pg, 1, -1 
 Library/Rochester/setLinearAlgebra4InverseMatrix/ur_la_4_11.pg, 1, -1 
-Library/maCalcDB/setLinearAlgebra4InverseMatrix/ur_la_4_8.pg, 1, -1 
+Library/Rochester/setLinearAlgebra4InverseMatrix/ur_la_4_8.pg, 1, -1 
 Template_201-105/setMatrix_Inverse/Anton_linearalgebra_1-4-7.pg, 1, -1 
 

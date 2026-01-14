@@ -13,7 +13,7 @@ emailInstructor   =
 problemListV2 
 problem_start
 problem_id = 1
-source_file = Library/270/setDerivatives5ChainRule/s2_5_4.pg
+source_file = Library/ma122DB/set5/s3_5_31c.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -23,7 +23,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 2
-source_file = Library/270/setDerivatives5ChainRule/ur_dr_5_15a.pg
+source_file = Library/ma122DB/set5/s3_5_16.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/270/setDerivatives5ChainRule/ur_dr_5_14.pg
+source_file = Library/Union/setDervChainRule/ur_dr_5_14.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -43,7 +43,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 4
-source_file = Library/270/setDerivatives5ChainRule/ur_dr_5_21.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C03S05-ChainRule/3-5-32g.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -53,7 +53,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 5
-source_file = Library/270/setDerivatives7Log/mec8.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C03S08-DerivLogs/3-8-18.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -63,7 +63,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 6
-source_file = Library/270/setDerivatives7Log/mec9.pg
+source_file = Library/ma122DB/set6/s3_8_36.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -73,7 +73,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 7
-source_file = Library/270/setDerivatives7Log/sc3_7_16.pg
+source_file = Library/ma122DB/set6/s3_8_20.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -83,7 +83,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 8
-source_file = Library/270/setDerivatives7Log/mec4.pg
+source_file = Library/Utah/Quantitative_Analysis/set4_Derivatives/pr_17.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -93,7 +93,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 9
-source_file = Library/maCalcDB/setDerivatives7Log/mec8.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C03S08-DerivLogs/3-8-18.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -103,7 +103,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 10
-source_file = Library/maCalcDB/setDerivatives7Log/sc3_7_4.pg
+source_file = Library/Rochester/setDerivatives7Log/sc3_7_4_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -113,7 +113,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 11
-source_file = Library/maCalcDB/setDerivatives7Log/osu_dr_7_3.pg
+source_file = Library/Rochester/setDerivatives7Log/osu_dr_7_3.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -173,7 +173,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 17
-source_file = Library/Rochester/setDerivatives5ChainRule/ur_dr_5_14.pg
+source_file = Library/Union/setDervChainRule/ur_dr_5_14.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -203,7 +203,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 20
-source_file = Library/OSU/accelerated_calculus_and_analytic_geometry_i/hmwk2/prob5.pg
+source_file = Library/UVA-Stew5e/setUVA-Stew5e-C03S05-ChainRule/3-5-27.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

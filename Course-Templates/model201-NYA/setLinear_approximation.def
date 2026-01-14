@@ -33,7 +33,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 3
-source_file = Library/Rochester/setDerivatives9Approximations/ur_dr_9_1.pg
+source_file = Library/Rochester/setDerivatives9Approximations/ur_dr_9_1_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -73,7 +73,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 7
-source_file = Library/maCalcDB/setDerivatives9Approximations/s2_9_35.pg
+source_file = Library/Rochester/setDerivatives9Approximations/s2_9_35.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -83,7 +83,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 8
-source_file = Library/maCalcDB/setDerivatives9Approximations/c2s9p6.pg
+source_file = Library/Rochester/setDerivatives9Approximations/c2s9p6_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -93,7 +93,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 9
-source_file = Library/maCalcDB/setDerivatives9Approximations/s2_9_38.pg
+source_file = Library/Rochester/setDerivatives9Approximations/s2_9_38_mo.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -103,7 +103,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 10
-source_file = Library/maCalcDB/setDerivatives9Approximations/s2_9_36.pg
+source_file = Library/ma122DB/set7/s3_11_7.pg
 value = 1
 max_attempts = -1
 showMeAnother = 
@@ -113,7 +113,7 @@ att_to_open_children =
 problem_end
 problem_start
 problem_id = 11
-source_file = Library/maCalcDB/setDerivatives9Approximations/s2_9_Y.pg
+source_file = Library/Rochester/setDerivatives9Approximations/s2_9_22.pg
 value = 1
 max_attempts = -1
 showMeAnother = 

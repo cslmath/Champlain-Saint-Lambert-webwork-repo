@@ -143,7 +143,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 14
-source_file = Library/FortLewis/Basic-skills-pretest/Skill-Assessment-11-alternate/Skill-Assessment-11-alternate.pg
+source_file = Library/FortLewis/Basic-skills-pretest/Skill-Assessment-11.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
