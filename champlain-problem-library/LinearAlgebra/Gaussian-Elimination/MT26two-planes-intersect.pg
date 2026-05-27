@@ -1,0 +1,70 @@
+## DESCRIPTION
+## Linear Algebra
+## ENDDESCRIPTION
+
+## DBsubject(Linear algebra)
+## DBchapter(Systems of linear equations)
+## DBsection(Systems with 3 variables)
+## Date(2026-Mar-22)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## MLT(3infsol)
+## Level(2)
+## MO(1)
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "PGML.pl",
+  "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+Context('Matrix')->variables->are(t=>'Real');
+
+$a = random(2,5,1) * random(-1,1,2);
+$b = random(2,5,1) * random(-1,1,2);
+$c = non_zero_random(-9,9,1);
+$d = random(3,6,1);
+$emd = random(-1,1,2);
+$e = $d + $emd;
+$f = non_zero_random(-9,9,1);
+
+$augM = Matrix([[1,1,$a,$c], [$d,$e,$b,$f]]);
+
+$k = $a - $emd * ($b - $a*$d);
+$l = $emd * ($b - $a*$d);
+$m = $c - $emd * ($f - $c*$d);
+$n = $emd * ($f - $c*$d);
+
+$rrefM = Matrix([[1,0,$k,$m], [0,1,$l,$n]]);
+ 
+$xans = Formula("$m + (-$k)t")->reduce();
+$yans = Formula("$n + (-$l)t")->reduce();
+$zans = Formula("t");
+
+BEGIN_PGML
+Find parametric equations for the line of intersection of the two planes
+[` x + y + [$a]z = [$c] `] and [`[$d]x + [$e]y + [$b]z = [$f] `].  
+
+a. Fill in the augmented matrix of the system of linear equations (put the planes in the same order as given).  
+[___]*{$augM} 
+
+b. Use Gauss-Jordan elimination to obtain the reduced row-echelon form:  
+[___]*{$rrefM}
+
+c. Let [`z=t`] be the free parameter. The line of intersection of the two given planes has parametric equations:  
+>> [`x = `][___]{$xans},  [` y = `][___]{$yans}, [` z = t`], where [`t \in \mathbb{R}`].<<
+END_PGML
+
+BEGIN_PGML_SOLUTION
+a. Augmented matrix:  [`[$augM]`]  
+
+b. Reduced-row echelon form: [`[$rrefM]`]  
+
+c. Parametric equations of the line of intersection:
+[` x = [$xans],  y = [$yans], z = t `], where [`t \in \mathbb{R}`].
+END_PGML_SOLUTION
+ENDDOCUMENT();
