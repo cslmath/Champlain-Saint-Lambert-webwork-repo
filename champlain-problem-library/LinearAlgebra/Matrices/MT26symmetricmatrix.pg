@@ -1,0 +1,79 @@
+## DESCRIPTION
+## Linear Algebra: symmetric matrix
+## ENDDESCRIPTION
+
+## DBsubject(Linear algebra)
+## DBchapter(Matrices)
+## DBsection(Transpose and trace)
+## Date(2026-Apr-2)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Level(2)
+## MO(1)
+## TitleText1('')
+## AuthorText1('')
+## EditionText1('')
+## Section1('')
+## Problem1('')
+## KEYWORDS('linear algebra','matrix','symmetric')
+
+######################################
+#  Initialization
+
+DOCUMENT() ;        
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "parserVectorUtils.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 0;
+#######################################
+#  Setup
+
+Context('Matrix')->variables->are(a=>'Real',b=>'Real',c=>'Real');
+
+$a = non_zero_random(-9,9,1);
+$b = non_zero_random(-9,9,1);
+$c = non_zero_random(-9,9,1);
+
+$a11 = random(-9,9,1);
+$a22 = random(-9,9,1);
+$a33 = random(-9,9,1);
+
+# Other entries satisfy: 
+#       $a31 = $a13 = b-c
+#       $a12 = $a21 = a+b
+#       $a23 = c-a = $a32
+$a13 = Compute("$b - $c");
+$a21 = Compute("$a + $b");
+$a32 = Compute("$c - $a");
+
+$A = Matrix([
+[$a11 , 'a+b' , $a13 ],
+[$a21 , $a22 , 'c-a' ],
+['b-c' , $a32 , $a33 ],
+]);
+
+BEGIN_PGML
+Find the values of [`a`], [`b`], and [`c`] if the given matrix is 
+symmetric:  
+[`A = [$A]`].
+
+Values: [` a =`][___]{$a}, 
+[` b =`][___]{$b}, 
+[` c =`][___]{$c}
+END_PGML
+BEGIN_PGML_HINT
+A symmetric matrix satisfies the condition [`A = A^T`]. Thus, the entries must satisfy [`a_{ij} = a_{ji}`].  
+END_PGML_HINT
+BEGIN_PGML_SOLUTION
+[`a_{12} = a_{21} \Rightarrow a+b = [$a21]`]  
+[`a_{31} = a_{13} \Rightarrow b-c = [$a13]`]  
+[`a_{23} = a_{32} \Rightarrow c-a = [$a32]`]  
+Thus, [`a = [$a], b = [$b], c = [$c]`].
+END_PGML_SOLUTION
+
+ENDDOCUMENT();

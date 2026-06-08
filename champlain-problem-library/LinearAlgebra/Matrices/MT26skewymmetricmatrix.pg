@@ -1,0 +1,98 @@
+## DESCRIPTION
+## Linear Algebra: skew symmetric matrix
+## ENDDESCRIPTION
+
+## DBsubject(Linear algebra)
+## DBchapter(Matrices)
+## DBsection(Transpose and trace)
+## Date(2026-Apr-2)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Level(2)
+## MO(1)
+## TitleText1('')
+## AuthorText1('')
+## EditionText1('')
+## Section1('')
+## Problem1('')
+## KEYWORDS('linear algebra','matrix','symmetric')
+
+######################################
+#  Initialization
+
+DOCUMENT() ;        
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "parserVectorUtils.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 0;
+#######################################
+#  Setup
+
+Context('Matrix')->variables->are(a=>'Real', b=>'Real', c=>'Real', d=>'Real', k=>'Real', m=>'Real', q=>'Real');
+
+$q = random(2,9,1);
+$a12 = non_zero_random(-9,9,1);
+$a23 = non_zero_random(-9,9,1);
+$a31 = non_zero_random(-9,9,1);
+
+$a = Compute("-3*$q");
+$b = Compute("-1*$a");
+$c = Compute("2*$b");
+$d = Compute("-$a31");
+$k = Compute("-$a12");
+$m = Compute("-1*$a23 - $k");
+$a33 = Formula("a + 3*$q");
+
+$A = Matrix([
+['a+b' , $a12 , 'd' ],
+['k' , '2b-c' , $a23 ],
+[$a31 , 'm+k' , $a33 ],
+]);
+
+$Aans = Matrix([
+    [$a+$b, $a12, $d ],
+    [$k , 2*$b-$c, $a23],
+    [$a31, $m+$k, $a+3*$q]
+    ]);
+    
+$negA = -$Aans;
+$AansT = $Aans->transpose;
+
+BEGIN_PGML
+Find the values of the scalars if the given matrix is skew
+symmetric:  
+[`A = [$A]`].
+
+Values: [` a =`][___]{$a}, 
+[` b =`][___]{$b}, 
+[` c =`][___]{$c}, 
+[` d =`][___]{$d}, 
+[` k =`][___]{$k}, 
+[` m =`][___]{$m}.
+
+END_PGML
+BEGIN_PGML_HINT
+A skew symmetric matrix satisfies the condition [`- A = A^T`]. Thus, the entries must satisfy [`- a_{ij} = a_{ji}`].  
+END_PGML_HINT
+BEGIN_PGML_SOLUTION
+In a skew symmetric matrix, the main diagonal entries must all equal zero:  
+[`a_{33} = 0 \Rightarrow a + [$q] = 0 \Rightarrow a = [$a]`]  
+[`a_{11} = 0 \Rightarrow a+b = 0 \Rightarrow b = -a = [$b]`]  
+[`a_{22} = 0 \Rightarrow 2b - c = 0 \Rightarrow c = 2b \Rightarrow c = [$c]`]
+
+Off-diagonal entries satisfy:  
+[`a_{13} = -a_{31} \Rightarrow d  = [$d]`]  
+[`a_{21} = -a_{12} \Rightarrow k = [$k]`]  
+[`a_{32} = -a_{23} \Rightarrow m+k = -[$a23] \Rightarrow m = -k - [$a23] = [$m]`]
+
+The resulting matrix is skew symmetric, satisfying [`-A = A^T`]:  
+[` A = [$Aans] `]  
+[` -A = [$negA]  =  A^T = [$AansT] `]
+END_PGML_SOLUTION
+
+ENDDOCUMENT();

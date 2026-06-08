@@ -1,0 +1,71 @@
+## DESCRIPTION
+## Linear Algebra: symmetric matrix
+## ENDDESCRIPTION
+
+## DBsubject(Linear algebra)
+## DBchapter(Matrices)
+## DBsection(Transpose and trace)
+## Date(2026-Apr-2)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Level(2)
+## MO(1)
+## TitleText1('')
+## AuthorText1('')
+## EditionText1('')
+## Section1('')
+## Problem1('')
+## KEYWORDS('linear algebra','matrix','symmetric')
+
+######################################
+#  Initialization
+
+DOCUMENT() ;        
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "parserVectorUtils.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+#######################################
+#  Setup
+
+Context('Matrix')->variables->are(k=>'Real');
+
+$a11 = random(-9,-1,1);
+$a22 = random(2,9,1);
+$a33 = random(2,9,1);
+
+$A = Matrix([
+[$a11 , 0 , 0 ],
+[0 , $a22 , 0 ],
+[0 , 0 , $a33 ],
+]);
+
+$Ainv = $A -> inverse;
+$A2 = $A**2;
+$Am3 = $Ainv**3;
+
+BEGIN_PGML
+Given the diagonal matrix:  
+[`A = [$A]`].
+
+Find the following matrices:
+a. [` A^{-1} =`][___]*{$Ainv}  
+b. [` A^{2} = `][___]*{$A2}  
+c. [` A^{-3} = `][___]*{$Am3}   
+END_PGML
+BEGIN_PGML_SOLUTION
+a. If [`A`] is a diagonal matrix with nonzero entries [`d_{ii}`]. Then the inverse exists, and [`A^{-1}`] is also a diagonal matrix whose diagonal entries are [`1/d_{ii}`].  
+[` A^{-1} = [$Ainv]`]  
+b. Positive powers of a diagonal matrix: [`A^k`], where [`k`] is a positive integer, is also a diagonal matrix, whose diagonal entries are
+[`(d_{ii})^k`].  
+[` A^2 = [$A2]`]  
+c. Negative powers of an invertible diagonal matrix: [`A^k`], where [`k`] is a negative integer, is also a diagonal matrix, whose diagonal entries are [`(1/d_{ii})^k`].  
+[` A^{-3} = [$Am3]`]
+END_PGML_SOLUTION
+
+ENDDOCUMENT();
