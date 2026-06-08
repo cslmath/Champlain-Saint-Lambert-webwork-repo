@@ -1,5 +1,7 @@
 ##DESCRIPTION
 ##  Linear Algebra: Leontief model diagram
+##  Update: M.Titcombe 2026-May: add definition a_ij to text
+##  Reference: Linear Algebra, copyright 2025 zyBooks.com, Alan Bass, Heather Berrier, Chris Chan and Ron Siu.)  
 ##ENDDESCRIPTION
 
 ##KEYWORDS('Leontief', 'input-output', 'model')
@@ -7,9 +9,14 @@
 ## DBsubject('Linear Algebra')
 ## DBchapter('Matrices')
 ## DBsection('Applications')
-## Date('2023-Nov-15')
+## Date('Update 2026-May-25, Original: 2023-Nov-15')
 ## Author('Michele Titcombe')
 ## Institution('Champlain College Saint-Lambert')
+## TitleText1(Linear Algebra)
+## EditionText1(2025)
+## AuthorText1(Bass, Berrier, Chan, Siu)
+## Section1(2.9)
+## Problem1(Participation 2.9.2)
 
 ########################################################################
 
@@ -86,7 +93,8 @@ BEGIN_PGML
 >> [@ image($graph_image, width => 400, tex_size => 600) @]* <<
 
 The diagram above represents a simple closed economy with three sectors. Fill in the entries in the corresponding input-output matrix.  
-[`A = `][_____]*{$A}
+[`A = `][_____]*{$A}  
+Note: Each entry [`a_{ij}`] gives the proportion of output produced by sector [`i`] and consumed by sector [`j`], which means that each column is represented by the arrows going out of the corresponding sector in the diagram.  
 END_PGML
 
 ############################
@@ -94,7 +102,9 @@ END_PGML
 
 
 BEGIN_PGML_SOLUTION
-Each entry [`a_{ij}`] gives the proportion of output produced by sector [`i`] and consumed by sector [`j`], which means that each column of the input-output matrix should be represented by the arrows going out of the corresponding sector. 
+Each entry [`a_{ij}`] gives the proportion of output produced by sector [`i`] and consumed by sector [`j`], which means that each column of the input-output matrix should be represented by the arrows going out of the corresponding sector.  
+Using this definition, the input-output matrix is:  
+[`A = [$A]`]
 END_PGML_SOLUTION
 
 ENDDOCUMENT();
