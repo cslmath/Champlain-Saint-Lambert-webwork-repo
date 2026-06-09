@@ -1,0 +1,91 @@
+## DESCRIPTION
+## Linear Algebra: triangular
+## ENDDESCRIPTION
+
+## DBsubject(Linear algebra)
+## DBchapter(Matrices)
+## DBsection(Inverses)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2026-Apr-2)
+## Level(2)
+## TitleText1('')
+## AuthorText1('')
+## EditionText1('')
+## Section1('')
+## Problem1('')
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGchoicemacros.pl",
+  "PGunion.pl",
+  "PGML.pl",
+  "PGcourse.pl",
+);
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 0;
+
+Context('Matrix');
+# create invertible matrices: non-zero entries on main diagonal
+
+# upper triangular
+$A = Matrix([
+[non_zero_random(-9,9,1),non_zero_random(-9,9,1)],
+[0,non_zero_random(-9,9,1)],
+]);
+
+# lower triangular
+$B = Matrix([
+[non_zero_random(-9,9,1),0],
+[non_zero_random(-9,9,1),random(-9,9,1)],
+]);
+
+# create non invertible matrices
+# singular upper triangular
+$C = Matrix([[0,non_zero_random(-9,9,1)],
+             [0,non_zero_random(-9,9,1)]]);
+# singular lower triangular
+$D = Matrix([[0,0],
+            [non_zero_random(-9,9,1),non_zero_random(-9,9,1)],
+            ]);
+
+# Create and use pop up lists 
+$tf = new_select_list();
+$tf->rf_print_q(~~&pop_up_list_print_q);
+
+# Specify choices presented to students
+$tf->ra_pop_up_list( 
+[ No_answer => "Choose", "Invertible"=>"Invertible", "Not invertible"=>"Not invertible"] );
+
+# Questions and answers
+Context()->texStrings;
+$tf -> qa ( 
+"\( $A \) $BR",
+"Invertible",
+"\( $B \) $BR",
+"Invertible",
+"\( $C \) $BR",
+"Not invertible",
+"\( $D \) $BR",
+"Not invertible",
+);
+
+# How many questions to use
+$tf->choose(4);
+
+BEGIN_PGML
+By inspection, determine whether the given triangular matrices are invertible.  
+[@ $tf-> print_q @]*
+END_PGML
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS(str_cmp($tf->ra_correct_ans));
+
+BEGIN_PGML_SOLUTION
+A triangular matrix is not invertible if any of its diagonal entries is 0. 
+END_PGML_SOLUTION
+
+ENDDOCUMENT();

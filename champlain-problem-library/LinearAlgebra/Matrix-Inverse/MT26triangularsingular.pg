@@ -1,0 +1,86 @@
+## DESCRIPTION
+## Linear Algebra: symmetric matrix
+## ENDDESCRIPTION
+
+## DBsubject(Linear algebra)
+## DBchapter(Matrices)
+## DBsection(Transpose and trace)
+## Date(2026-Apr-2)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Level(2)
+## MO(1)
+## TitleText1('')
+## AuthorText1('')
+## EditionText1('')
+## Section1('')
+## Problem1('')
+## KEYWORDS('linear algebra','matrix','symmetric')
+
+######################################
+#  Initialization
+
+DOCUMENT() ;        
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "parserVectorUtils.pl",
+  "PGML.pl",
+  "PGcourse.pl"
+);
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 0;
+#######################################
+#  Setup
+
+Context('Matrix')->variables->are(k=>'Real',r=>'Real',m=>'Real');
+
+$a = non_zero_random(-9,-1,1);
+$b = non_zero_random(-9,9,1);
+$d = non_zero_random(-9,9,1);
+$fk = Formula("$a*k + $b")->reduce();
+$k = Compute("-1*$b/$a");
+
+$D = Matrix([
+[non_zero_random(-9,9,1) , 0 , 0 ],
+[0 , $fk , 0 ],
+[0 , 0 , non_zero_random(-9,9,1) ],
+]);
+
+$fr = Formula("$d*r - $a")->reduce();
+$r = Compute("$a/$d");
+
+$U = Matrix([
+[non_zero_random(-9,9,1), non_zero_random(-9,9,1), non_zero_random(-9,9,1) ],
+[0 , non_zero_random(-9,9,1) , non_zero_random(-9,9,1) ],
+[0 , 0 , $fr ],
+]);
+
+$fm = Formula("$d + $b*m")->reduce();
+$m = Compute("-1*$d/$b");
+
+$L = Matrix([
+[$fm, 0, 0 ],
+[non_zero_random(-9,9,1) , non_zero_random(-9,9,1), 0 ],
+[non_zero_random(-9,9,1), non_zero_random(-9,9,1) , non_zero_random(-9,9,1) ],
+]);
+
+BEGIN_PGML
+Given the matrices, with scalars [`k`], [`r`] and [`m`]:  
+[`` A = [$D]  \ \  B = [$U]  \ \  C = [$L] ``]  
+
+a. If the matrix [`A`] is singular, then [` k =`][___]{$k}  
+b. If the matrix [`B`] is invertible, then [` r \ne `][___]{$r}  
+c. If the matrix [`C`] is singular, then [`m = `][___]{$m}  
+END_PGML
+BEGIN_PGML_HINT
+A triangular matrix is singular (not invertible) if any entry on the main diagonal equals 0. 
+END_PGML_HINT
+BEGIN_PGML_SOLUTION
+A triangular matrix is singular if any entry along the main diagonal equals 0. A triangular matrix is invertible if all entries on the main diagonal are nonzero. 
+a. [`A`] is a diagonal matrix, hence it is a triangular matrix. Thus, [`A`] is singular if [`a_{22} = 0 \Rightarrow [$a]k + [$b] = 0 \Rightarrow k = [$k]`].  
+b. [`B`] is an upper triangular matrix. [`B`] is invertible if all the entries on the diagonal are nonzero. Thus, [`B`] is invertible if [`b_{33}\ne 0 \Rightarrow r \ne [$r]`].  
+c. [`C`] is an lower triangular matrix. [`C`] is singular if any entry on the diagonal is zero. Thus, [`C`] is singular if [`c_{11} =  0 \Rightarrow m = [$m]`].  
+END_PGML_SOLUTION
+
+ENDDOCUMENT();
