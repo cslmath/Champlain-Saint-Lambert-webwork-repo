@@ -1,0 +1,65 @@
+## DESCRIPTION
+## Linear Algebra. Leontief input-output model
+## ENDDESCRIPTION
+
+## DBsubject('Linear Algebra')
+## DBchapter('Matrices')
+## DBsection('Determinants')
+## Date('2023')
+## Author('Michele Titcombe')
+## Institution('Champlain College Saint-Lambert')
+## TitleText1('')
+## EditionText1('')
+## AuthorText1('')
+## Section1('')
+## Problem1('')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+Context(Matrix);
+$showPartialCorrectAnswers = 1;
+
+$a11 = random(.05,.15,.5);
+$a21 = random(.25,.35,.5);
+$a31 = random(.25,.35,.5);
+$a12 = random(.50,.60,.5);
+$a22 = random(.15,.25,.5);
+$a32 = random(.10,.20,.5);
+$a13 = random(.50,.60,.5);
+$a23 = 0;
+$a33 = random(.10,.20,.5);
+$C = Matrix([
+           [$a11, $a12, $a13],
+           [$a21, $a22, $a23],
+           [$a31, $a32, $a33],
+           ]);
+$I = Matrix([[1,0,0],[0,1,0],[0,0,1]]); 
+$ImC = $I - $C;
+
+$detImC = $ImC->det;
+$ImCinv = $ImC->inverse;
+
+BEGIN_PGML
+Consider an open economy that is divided into three sectors. For each unit of output,  
+- Sector 1 requires [$a11] units from itself, [$a21] units from sector 2, and [$a31] units from sector 3.  
+- Sector 2 requires [$a22] units from itself, [$a12] units from sector 1, and [$a32] units from sector 3.  
+- Sector 3 requires [$a33] units from itself, [$a13] units from sector 1, and [$a23] units from sector 2.
+ 
+Construct the consumption matrix for this economy. Note: column [`j`] is the consumption of Sector [`j`].  
+[`C = `][____]*{$C}
+END_PGML
+
+BEGIN_PGML_SOLUTION
+Column [`j`] is the consumption of Sector [`j`].  
+By this definition, the consumption matrix is:  
+[`C = [$C]`]
+END_PGML_SOLUTION
+
+ENDDOCUMENT();       # This should be the last executable line in the problem.
