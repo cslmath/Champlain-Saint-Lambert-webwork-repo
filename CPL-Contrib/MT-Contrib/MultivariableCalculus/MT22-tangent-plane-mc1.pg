@@ -1,0 +1,103 @@
+## DESCRIPTION
+## Calculus: multivariable local extrema multiple choice
+## ENDDESCRIPTION
+
+DOCUMENT();
+
+loadMacros(
+  "PGstandard.pl",
+  "MathObjects.pl",
+  "PGgraphmacros.pl",
+  "PGML.pl",
+  "parserRadioButtons.pl",
+  "PGchoicemacros.pl",  # needed for NchooseK
+  "PGcourse.pl",
+);
+
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+Context("Numeric");
+Context()->variables->add(y=>"Real",z=>"Real");
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+$showc = random(0,9,1);
+$numc = 1; 
+if ($showc == 0){$numc = 0;}
+
+# Set parameters
+$a = non_zero_random(-9,9);
+do {$b = non_zero_random(-9,9);} until (abs($b) != $a);
+## point and partials
+$fab = non_zero_random(-9,9,1);
+$fxab = non_zero_random(-9,9,1);
+do {
+    $fyab = non_zero_random(-9,9,1);
+    $c = $fab - $fxab*($a) - $fyab*($b);      
+    } 
+until (($c != 0) && ($c != $fab));
+
+$mfab = -1*($fab);
+$mfxab = -1*($fxab);
+$mfyab = -1*($fyab);
+$mc = -1*$c;
+
+$tplane1 = Compute("$f + $fxab(x-$a) + $fyab(y-$b)")->TeX;
+if ($fxab < 0){  # for the display
+    $lhs = Compute(" $mfxab x + $mfyab y + z ")->reduce()->TeX;
+    $rhs = $c;
+    }
+else {
+    $lhs = Compute(" $fxab x + $fyab y - z ")->reduce()->TeX;
+    $rhs = $mc;
+    }
+
+# all answers to display
+#$noneString = "None of the above";
+
+@allAns = (
+ "\(f($a,$b) = $fab \) and \(\nabla f($a,$b) = \langle $fxab, $fyab \rangle \)",
+ "\(f($a,$b) = $fab\) and \(\nabla f($a,$b) = \langle $mfxab, $mfyab \rangle \)",
+ "\(f($a,$b) = $c \) and \(\nabla f($a,$b) = \langle $fxab, $fyab \rangle \)",
+ "\(f($a,$b) = $c \) and \(\nabla f($a,$b) = \langle $mfxab, $mfyab \rangle \)",
+ "\(f($a,$b) = $mc \) and \(\nabla f($a,$b) = \langle $fxab, $fyab \rangle \)",
+ "\(f($a,$b) = $mc \) and \(\nabla f($a,$b) = \langle $mfxab, $mfyab \rangle \)",
+ "\(f($a,$b) = $mfab\) and \(\nabla f($a,$b) = \langle $fxab, $fyab \rangle \)",
+ "\(f($a,$b) = $mfab\) and \(\nabla f($a,$b) = \langle $mfxab, $mfyab \rangle \)",
+);
+$correct = $allAns[0];
+@incorrAns = @allAns[1..$#allAns];
+
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+
+BEGIN_PGML
+Suppose that the tangent plane to [`f(x,y)`] at the point [`\big([$a], [$b],f([$a],[$b])\big)`] is: [`[$lhs] = [$rhs]`].
+
+Select the correct option, if any, for [`f([$a],[$b])`] and [`\nabla f([$a],[$b])`].  
+[@ $radio1->buttons() @]*
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();

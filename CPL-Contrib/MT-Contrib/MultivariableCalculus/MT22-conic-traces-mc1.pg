@@ -1,0 +1,89 @@
+## DESCRIPTION
+##  Calculus 3 : quiz question, multiple choice
+##  Trace of quadric surface that is a conic section 
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "PGchoicemacros.pl",
+    "parserRadioButtons.pl",
+    "PGcourse.pl",
+  );
+#TEXT(beginproblem());
+TEXT();                         # So no problem number given 
+$showPartialCorrectAnswers = 0; # set to 0 because multiple choice
+
+Context("Numeric");
+# Set parameters:
+$a = random(2,9,1);
+@var = qw(x y z);
+$iv = random(0,$#var,1);
+$tracevar = $var[$iv];
+$hvar = $var[0]; # x horiz
+$vvar = $var[2]; # z vertic
+if ($iv == 0){$hvar = $var[1];} # y horiz, z already vertic
+if ($iv == 2){$vvar = $var[1];} # y vertic, x already horiz
+
+$numc = 1; # <- always display correct
+
+    $assume = "assume the convention that $vvar is on the vertical axis";
+@traceform = ("the trace is a circle",
+          "the trace is an ellipse (but not a circle)",
+          "the trace is a hyperbola that opens to the left and right ($assume)",
+              "the trace is a hyperbola that opens up and down ($assume)",
+              "the trace is a single point",
+              "the trace is a pair of intersecting lines",
+              );
+$it = random(0,$#traceform,1);
+$type = $traceform[$it];
+
+# The full list of answers of three categories (at least 4 in each)
+@allAns = ("\(b = $a\) and \(c>0\)",  # a + ; circle
+    "\(b>0\), \(b \ne $a\) and \(c>0\)", # ellipse
+    "\(b<0\) and \(c>0\)",  # hyperbola left-right
+    "\(b<0\) and \(c<0\)",  # hyperbola up-down
+    "\(b>0\) and \(c=0\)",  # single point
+    "\(b<0\) and \(c=0\)",  # intersecting lines
+    "\(b>0\) and \(c<0\)",  # extra (no trace)
+           );
+$correct = $allAns[$it];
+
+# Use map and grep to extract the correct answer, and 
+#   create an array of incorrects.
+@corrAns = ($correct); 
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+    
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+
+BEGIN_PGML
+Suppose that [` [$a][$hvar]^2 + b[$vvar]^2 = c `] is the [`[$tracevar]=0`] trace of a quadric surface, where [`b`] and [`c`] are scalars, and [`b\ne 0`].
+
+Select the option, if any, stating the conditions on [`b`] and [`c`] that must be satisfied if [$type].  
+[@ $radio1->buttons() @]*  
+END_PGML
+############################
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*  
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();
