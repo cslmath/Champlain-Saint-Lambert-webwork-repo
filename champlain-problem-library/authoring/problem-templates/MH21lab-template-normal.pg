@@ -21,12 +21,12 @@
 
 DOCUMENT();
 loadMacros(
-"PGstandard.pl",
-"MathObjects.pl",
-"PGnumericalmacros.pl",     # required by PGstatisticsmacros.pl
-"PGstatisticsmacros.pl",    # provides normal_prob()
-"PGML.pl",
-"PGcourse.pl",
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "PGnumericalmacros.pl",     # required by PGstatisticsmacros.pl
+    "PGstatisticsmacros.pl",    # provides normal_prob()
+    "PGML.pl",
+    "PGcourse.pl",
 );
 
 TEXT(beginproblem());
@@ -42,13 +42,12 @@ $mean = random(400, 450, 5);
 $sdev = random(26, 29, 1);
 #$sdev = 28;
 
-
-$a = int($mean-$sdev*random(1.4,1.6,0.05));
+$a = int($mean - $sdev * random(1.4, 1.6, 0.05));
 #$a = $mean - 1.5*$sdev;
-$b = int($mean+$sdev*random(1.4,1.6,0.05));
+$b = int($mean + $sdev * random(1.4, 1.6, 0.05));
 #$b = $mean + 1.5*$sdev;
 
-$c = int(($mean+0.9*$sdev)/5 +1)*5;
+$c = int(($mean + 0.9 * $sdev) / 5 + 1) * 5;
 #$c = 450;
 
 ##########
@@ -57,20 +56,10 @@ $c = int(($mean+0.9*$sdev)/5 +1)*5;
 sub proportion {
     my $a = $_[0];
     my $b = $_[1];
-    
-    return Compute(normal_prob($a,$b,mean=>$mean,deviation=>$sdev))
-        ->cmp(tolType => 'absolute',tolerance => 0.002,);
+
+    return Compute(normal_prob($a, $b, mean => $mean, deviation => $sdev))
+        ->cmp(tolType => 'absolute', tolerance => 0.002,);
 }
-
-$ansd = Compute(
-    sprintf("%0.0f",
-        normal_distr($d/100-0.5, mean=>$mean, deviation=>$sdev)
-    )
-    )->cmp(tolType => 'absolute',tolerance => 0.5,);
-
-$ansd1 = Compute(
-    normal_distr($d/100-0.5, mean=>$mean, deviation=>$sdev)
-    )->cmp(tolType => 'absolute',tolerance => 0.005,);
 
 ###########################
 #  Main text

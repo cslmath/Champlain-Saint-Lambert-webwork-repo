@@ -24,12 +24,12 @@
 
 DOCUMENT();
 loadMacros(
-"PGstandard.pl",
-"MathObjects.pl",
-"PGessaymacros.pl",
-"PGstatisticsmacros.pl",    # for five_point_summary() and insertDataLink()
-"PGML.pl",
-"PGcourse.pl",
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "PGessaymacros.pl",
+    "PGstatisticsmacros.pl",    # for five_point_summary() and insertDataLink()
+    "PGML.pl",
+    "PGcourse.pl",
 );
 
 # make sure we're in the context we want
@@ -41,32 +41,55 @@ $showPartialCorrectAnswers = 1;
 
 COMMENT('No randomization.');
 
-@none =     (12.9, 15.9, 15.9, 15.9, 16.0, 16.1, 16.1, 16.5, 16.5, 16.6, 17.8,
-             18.5, 18.5, 18.5, 18.9, 18.9, 19.1, 19.5, 19.5, 19.7, 21.9, 25.5);
-@lemon =    (15.9, 15.9, 15.9, 15.9, 16.1, 16.3, 17.2, 17.5, 17.5, 18.0, 18.5,
-             18.5, 18.6, 18.7, 18.9, 18.9, 18.9, 19.0, 19.2, 19.5, 21.5, 25.9);
-@lavender = (16.3, 18.5, 18.5, 18.5, 18.5, 18.5, 18.5, 19.2, 19.2, 19.5, 19.8,
-             19.8, 20.2, 20.8, 21.1, 21.3, 21.9, 22.8, 22.8, 23.5, 24.9, 24.9);
+@none = (
+    12.9, 15.9, 15.9, 15.9, 16.0, 16.1, 16.1, 16.5,
+    16.5, 16.6, 17.8, 18.5, 18.5, 18.5, 18.9, 18.9,
+    19.1, 19.5, 19.5, 19.7, 21.9, 25.5
+);
+@lemon = (
+    15.9, 15.9, 15.9, 15.9, 16.1, 16.3, 17.2, 17.5,
+    17.5, 18.0, 18.5, 18.5, 18.6, 18.7, 18.9, 18.9,
+    18.9, 19.0, 19.2, 19.5, 21.5, 25.9
+);
+@lavender = (
+    16.3, 18.5, 18.5, 18.5, 18.5, 18.5, 18.5, 19.2,
+    19.2, 19.5, 19.8, 19.8, 20.2, 20.8, 21.1, 21.3,
+    21.9, 22.8, 22.8, 23.5, 24.9, 24.9
+);
 
 ##########
 # csv data file link
 
 # Label datasets
-    push(@none,"None");
-    push(@lemon,"Lemon");
-    push(@lavender,"Lavender");
+push(@none,     "None");
+push(@lemon,    "Lemon");
+push(@lavender, "Lavender");
 
-$csvlink = insertDataLink($PG,'Effects of Odours on Sales Data',(~~@none,~~@lemon,~~@lavender));
+$csvlink = insertDataLink(
+    $PG,
+    'Effects of Odours on Sales Data',
+    (~~@none, ~~@lemon, ~~@lavender)
+);
+
+pop(@none);
+pop(@lemon);
+pop(@lavender);
+
+# Prior to WW 2.20 labels were popped off the arrays by insertDataLink()
+#
+# With WW 2.20 the labels are longer popped off the arrays,
+# non-numerics in the data will cause errors in the statistics functions.
+# Pop any labels off the arrays after the datafile is created.
 
 ##########
 # Answers
 
-$none5nummanual = List(12.9, 16.1, 18.15, 19.1, 25.5);
-$lemon5nummanual = List(15.9, 16.3, 18.5, 18.9, 25.9);
-$lavender5nummanual = List(16.3, 18.5, 19.8, 21.9, 24.9);
+$none5nummanual     = List(12.9, 16.1, 18.15, 19.1, 25.5);
+$lemon5nummanual    = List(15.9, 16.3, 18.5,  18.9, 25.9);
+$lavender5nummanual = List(16.3, 18.5, 19.8,  21.9, 24.9);
 
-$none5nummacro = List(five_point_summary(@none));
-$lemon5nummacro = List(five_point_summary(@lemon));
+$none5nummacro     = List(five_point_summary(@none));
+$lemon5nummacro    = List(five_point_summary(@lemon));
 $lavender5nummacro = List(five_point_summary(@lavender));
 
 # $none5nummacro = $none5nummanual;

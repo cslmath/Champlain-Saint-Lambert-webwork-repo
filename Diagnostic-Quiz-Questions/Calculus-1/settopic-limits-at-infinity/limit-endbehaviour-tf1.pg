@@ -5,6 +5,7 @@
 ## Institution: Champlain College Saint-Lambert
 ## Authors: Svetla Vassileva, Michele Titcombe
 ## WeBWorK Diagnostic Test Project, Winter 2021 - Winter 2022
+## M.Titcombe: bug fix 2026-Oct.
 ## ENDDESCRIPTION
 #
 
@@ -24,20 +25,18 @@ $showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
 Context("Numeric");
 # Set parameters
 $a = random(2,10,1)*random(-1,1,2);
-$pm = "+";
-if ($a < 0){$pm = "-";}  # for display
 $c = random(2,10,1);
 $d = random(2,10,1);
 $n = random(4,8,1);  # n greater than 3
 #   Three cases: 1) same leading coefficient, different degree
 #                2) same degree, different leading coeff
 #                3) same leading coefficient and same degree
-$i = random(0,2,1);  
+$i = random(0,2,1);
 @poly = ("$a x^{$n}- $d x^3 + $c x",
-         "$c x $pm $a x^{$n} - $d x^3",
-         "$c x - $d x^3 $pm $a x^{$n}", 
-         "- $d x^3 + $c x $pm $a x^{$n} ",
-         "- $d x^3 $pm $a x^{$n} + $c x", 
+        "$c x + $a x^{$n} - $d x^3", # j=1 fix ??
+        "$c x - $d x^3 + $a x^{$n}",   # j=2 fix ??
+        "- $d x^3 + $c x + $a x^{$n} ",
+         "- $d x^3 + $a x^{$n} + $c x", 
          );
 $j = random(0,$#poly,1);
 $disppoly = $poly[$j];

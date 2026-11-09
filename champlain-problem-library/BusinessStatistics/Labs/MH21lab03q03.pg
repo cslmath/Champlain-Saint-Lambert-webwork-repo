@@ -24,13 +24,13 @@
 
 DOCUMENT();
 loadMacros(
-"PGstandard.pl",
-"MathObjects.pl",
-"niceTables.pl",
-"PGessaymacros.pl",
-"PGstatisticsmacros.pl",    # for mean and sd
-"PGML.pl",
-"PGcourse.pl",
+    "PGstandard.pl",
+    "MathObjects.pl",
+    "niceTables.pl",
+    "PGessaymacros.pl",
+    "PGstatisticsmacros.pl",    # for mean and sd
+    "PGML.pl",
+    "PGcourse.pl",
 );
 
 TEXT(beginproblem());
@@ -44,47 +44,58 @@ $showPartialCorrectAnswers = 1;
 
 COMMENT('No randomization (yet).');
 
-@bobs =  (93, 14, 59, 105, 22, 21, 34, 21, 34, 12, 88, 19);
+@bobs = (93, 14, 59, 105, 22, 21, 34, 21, 34, 12, 88, 19);
 
-@dougs = (53, 32, 38,  78, 43, 65, 31, 55, 67, 35, 60, 42);
+@dougs = (53, 32, 38, 78, 43, 65, 31, 55, 67, 35, 60, 42);
 
 ##########
 # csv data file link
 
 # Label datasets
-    push(@bobs,"Bob's");
-    push(@dougs,"Doug's");
 
-$csvlink = insertDataLink($PG,"Refrigerator Repair Data",(~~@bobs,~~@dougs,));
-# labels get popped back off during this operation
+push(@bobs,  "Bob's");
+push(@dougs, "Doug's");
+
+$csvlink = insertDataLink($PG, "Refrigerator Repair Data", (~~@bobs, ~~@dougs,));
+
+pop(@bobs);
+pop(@dougs);
+
+# Prior to WW 2.20 labels were popped off the arrays by insertDataLink()
+#
+# With WW 2.20 the labels are longer popped off the arrays,
+# non-numerics in the data will cause errors in the statistics functions.
+# Pop any labels off the arrays after the datafile is created.
 
 ##########
 # Answers
 
-$answidth = 5;
-$anstol = 0.05;
+$answidth    = 5;
+$anstol      = 0.05;
 $cmpbobsmean = Compute(stats_mean(@bobs))
-    -> cmp(tolType => "absolute",tolerance => $anstol,);
-$cmpbobssd = Compute(stats_sd(@bobs))
-    -> cmp(tolType => "absolute",tolerance => $anstol,);
+    ->cmp(tolType => "absolute", tolerance => $anstol,);
+$cmpbobssd =
+    Compute(stats_sd(@bobs))->cmp(tolType => "absolute", tolerance => $anstol,);
 $cmpdougsmean = Compute(stats_mean(@dougs))
-    -> cmp(tolType => "absolute",tolerance => $anstol,);
+    ->cmp(tolType => "absolute", tolerance => $anstol,);
 $cmpdougssd = Compute(stats_sd(@dougs))
-    -> cmp(tolType => "absolute",tolerance => $anstol,);
+    ->cmp(tolType => "absolute", tolerance => $anstol,);
 $anstable = DataTable(
     [
-        [[' ',headerrow => 1], 'Mean','Standard Deviation'],
-        ["Bob's Fridge Repair",
+        [ [ ' ', headerrow => 1 ], 'Mean', 'Standard Deviation' ],
+        [
+            "Bob's Fridge Repair",
             PGML('[__]{$cmpbobsmean}{$answidth}'),
             PGML('[__]{$cmpbobssd}{$answidth}'),
-            ],
-        ["Dougs's Fridge Repair",
+        ],
+        [
+            "Dougs's Fridge Repair",
             PGML('[__]{$cmpdougsmean}{$answidth}'),
             PGML('[__]{$cmpdougssd}{$answidth}'),
-            ],
+        ],
     ],
     caption => 'Repair Time Summary',
-    );
+);
 
 $bobsmean = stats_mean(@bobs);
 

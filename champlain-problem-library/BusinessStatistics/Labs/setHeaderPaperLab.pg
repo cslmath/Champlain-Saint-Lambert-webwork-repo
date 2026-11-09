@@ -3,16 +3,14 @@
 &DOCUMENT;
 
 loadMacros(
-"PG.pl",
-"PGbasicmacros.pl",
-"PGchoicemacros.pl",
-"PGanswermacros.pl"
+    "PG.pl",             "PGbasicmacros.pl",
+    "PGchoicemacros.pl", "PGanswermacros.pl"
 );
 
-$dateTime = $formatedDueDate;
-$instructor = 'Malcolm Harper';
-$course = protect_underbar($courseName);
-$setNumber = protect_underbar($setNumber);
+$dateTime      = $formatedDueDate;
+$instructor    = 'Malcolm Harper';
+$course        = protect_underbar($courseName);
+$setNumber     = protect_underbar($setNumber);
 $sectionNumber = protect_underbar($sectionNumber);
 
 TEXT(EV2(<<EOT));
@@ -33,7 +31,7 @@ $BEGIN_ONE_COLUMN
 
 This is the WeBWorK part of ${BBOLD}Lab Assignment $setNumber${EBOLD}
 for $studentName. ${BR}
-It is due on : ${BBOLD}$formatedDueDate${EBOLD}.
+It is due on : ${BBOLD}$formattedDueDate${EBOLD}.
 
 \vspace{2ex}
 
@@ -56,7 +54,7 @@ For numerical answers, if you are sure that your answer is correct, but WeBWorK 
 $END_ONE_COLUMN
 EOT
 
-&ENDDOCUMENT;
+&ENDDOCUMENT();
 
 
 

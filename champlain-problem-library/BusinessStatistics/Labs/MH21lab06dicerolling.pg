@@ -4,13 +4,10 @@
 DOCUMENT();
 
 loadMacros(
-  "PGstandard.pl",
-  "MathObjects.pl",
-  "PGchoicemacros.pl",
-  "niceTables.pl",
-  "weightedGrader.pl",
-  "PGML.pl",
-  "PGcourse.pl"
+    "PGstandard.pl",     "MathObjects.pl",
+    "PGchoicemacros.pl", "niceTables.pl",
+    "weightedGrader.pl", "PGML.pl",
+    "PGcourse.pl"
 );
 
 install_weighted_grader();
@@ -26,35 +23,48 @@ Context("Numeric");
 
 $showPartialCorrectAnswers = 1;
 
+# The size of the dice, $n1 and $n2 can be randomized withnin reason.
+
 $n1 = 8;    # shown on the horizontal
 $n2 = 4;    # shown on the vertical
+
+# Part (a)
+
+# Outcomes counting table
 
 @table2;
 @answers2;
 
-$table2[0][0] = ['2nd die',b=>1];
-$table2[$n2+1][3] = ['1st die',b=>1];
-
-foreach  my $r (0..$n2-1){
-    $i = $n2 - $r;
+foreach my $r (0 .. $n2 - 1) {
+    $i             = $n2 - $r;
+    $table2[$r][0] = '';
     $table2[$r][1] = $i;
-    foreach my $j (1 .. $n1){
-        push @{$table2[$r]}, labeled_ans_rule("$i.$j",1);
+    foreach my $j (1 .. $n1) {
+        push @{ $table2[$r] }, labeled_ans_rule("$i.$j", 1);
     }
-    push @answers2, ($i+1 .. $i+$n2);
+    push @answers2, ($i + 1 .. $i + $n2);
 }
-$table2[$n2] = [ ('','') , ( 1 .. $n1) ];
+
+# label the rows and columns
+$table2[0][0] = [ '2nd die', b => 1 ];
+$table2[$n2] = [ ('', ''), (1 .. $n1) ];
+$table2[ $n2 + 1 ] =
+    [ '', '', '', [ '1st die', b => 1 ], '', '', '', '', '', '' ];
+
+# Part (b)
+
+# Probability table
 
 @tableb;
-$tableb[0] = [['Outcome',b=>1], (1+1 .. $n1+$n2)];
-$tableb[1][0] = ['Probability',b=>1];
-foreach my $j (2 .. $n1+$n2){
-    push @{$tableb[1]}, labeled_ans_rule("b.$j",2);
+$tableb[0] = [ [ 'Outcome', b => 1 ], (1 + 1 .. $n1 + $n2) ];
+$tableb[1][0] = [ 'Probability', b => 1 ];
+foreach my $j (2 .. $n1 + $n2) {
+    push @{ $tableb[1] }, labeled_ans_rule("b.$j", 2);
 }
 
 # Part (c)
 
-$eventA = random(8,10,1);
+$eventA = random(8, 10, 1);
 # $eventB = random(5,7,1);
 
 ############################
@@ -63,7 +73,7 @@ $eventA = random(8,10,1);
 BEGIN_PGML
 *Part (a)*
 
-Complete the table below by writing the sums when you roll a $n1-sided die and a $n2-sided die.
+Complete the table below by writing the sums when you roll a [$n1]-sided die and a [$n2]-sided die.
 
 [@
 DataTable(
@@ -89,37 +99,48 @@ DataTable(
 
 What is the probability of the event  
 _A = The sum is larger than [$eventA]? [______]{name=>"partc"}_
+
 END_PGML
 
 ############################
 # Answer Evaluation
 
+# Using the weighted grader:
+
 $weightparta = 1;
 
-foreach my $d2 (1 .. $n2 ) {
-    foreach my $d1 ( 1 .. $n1 ) {
-        NAMED_WEIGHTED_ANS( "$d2.$d1", num_cmp($d1+$d2), $weightparta/($n1*$n2) );
+foreach my $d2 (1 .. $n2) {
+    foreach my $d1 (1 .. $n1) {
+        NAMED_WEIGHTED_ANS(
+            "$d2.$d1",
+            num_cmp($d1 + $d2),
+            $weightparta / ($n1 * $n2)
+        );
     }
 }
 
 $weightpartb = 2;
 
-foreach my $d2 (1 .. $n2 ) {
-    foreach my $d1 ( 1 .. $n1 ) {
-        $probb[$d1+$d2] += 1;
+foreach my $d2 (1 .. $n2) {
+    foreach my $d1 (1 .. $n1) {
+        $probb[ $d1 + $d2 ] += 1;
     }
 }
-foreach my $sum (1+1 .. $n1+$n2){
-    NAMED_WEIGHTED_ANS( "b.$sum", Compute($probb[$sum]/($n1*$n2))->cmp(), $weightpartb/($n1+$n2-1) );
+foreach my $sum (1 + 1 .. $n1 + $n2) {
+    NAMED_WEIGHTED_ANS(
+        "b.$sum",
+        Compute($probb[$sum] / ($n1 * $n2))->cmp(),
+        $weightpartb / ($n1 + $n2 - 1)
+    );
 }
-        
+
 $weightpartc = 2;
-$probc = 0;
-foreach my $sum ($eventA+1 .. $n1+$n2){
+$probc       = 0;
+foreach my $sum ($eventA + 1 .. $n1 + $n2) {
     $probc += $probb[$sum];
 }
 
-NAMED_WEIGHTED_ANS( "partc", num_cmp($probc/($n1*$n2)), $weightpartc );
+NAMED_WEIGHTED_ANS("partc", num_cmp($probc / ($n1 * $n2)), $weightpartc);
 
 COMMENT('MathObject version. Uses PGML.');
 

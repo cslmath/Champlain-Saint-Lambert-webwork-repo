@@ -18,65 +18,55 @@
 ## Section1('Supplementary exercises p.117')
 ## Problem1('30')
 
-DOCUMENT(); 
+DOCUMENT();
 
-loadMacros("PG.pl",
-           "PGbasicmacros.pl",
-           "PGchoicemacros.pl",
-           "PGanswermacros.pl",
-           "PGmatrixmacros.pl",
-	   "MathObjects.pl"
-           );
-
-TEXT(beginproblem());
+loadMacros(
+    'PGstandard.pl',     'PGML.pl',
+    'PG.pl',             'PGchoicemacros.pl',
+    'PGmatrixmacros.pl', 'PGcourse.pl'
+);
 
 $showPartialCorrectAnswers = 1;
 
 Context("Numeric");
-Context()->variables->add(t=>"Real");
+Context()->variables->add(t => "Real");
 
-$c = random(2,6);
+$c  = random(2, 6);
 $c2 = Compute("$c^2");
-$a = random(-$c2-6,-$c2-1);
-$d = Compute("-$c2-$a"); # should be >0
-$ans1 = Compute("t^2 + $d");
+$a  = random(-$c2 - 6, -$c2 - 1);
+$d  = Compute("-$c2-$a");           # should be >0
+
 $ans2 = Compute("0");
+$ans3 = Compute("0");
 
 $det = Compute("t^2+$d");
 
-Context()->texStrings;
-BEGIN_TEXT
+BEGIN_PGML
 Consider the system of equations
-$BR
-\[
+  
+[```
 \begin{array}{rcl}
-$c x- t x + $a y &=& 0, \\
-x - $c y - t y &=& 0.
+[$c] x- t x + [$a] y &=& 0, \\
+x - [$c] y - t y &=& 0.
 \end{array}
-\]
-$BR
-Find an expression for the determinant of the coefficient matrix \(A\) of this system.
-$BR
-$BR
-$BCENTER
-\(\text{det}(A)\) = \{ans_rule{5}\}
-$ECENTER
-$BR
-Use your previous answer to give the solutions for \(x\) and \(y\) of this system for all real values of \(t\).
-$BR
-$BR
-$BCENTER
-\(x =\) \{ans_rule{5}\} and  \(y =\) \{ans_rule{5}\}
-$ECENTER
+```]
+  
+Find an expression for the determinant of the coefficient matrix [`A`] of this system.
+  
+>>
+[`\text{det}(A)`] = [_]{$det}{5}
+<<
+  
+Use your previous answer to give the solutions for [`x`] and [`y`] of this system for all real values of [`t`].
+  
+>>
+[`x =`] [_]{$ans3}{5} and  [`y =`] [_]{$ans2}{5} and  [`y =`] 
+<<
 
+END_PGML
 
+# ANS($det->cmp());
+# ANS($ans2->cmp());
+# ANS($ans3->cmp());
 
-END_TEXT
-
-Context()->normalStrings;
-
-ANS($ans1->cmp());
-ANS($ans2->cmp());
-ANS($ans2->cmp());
-
-ENDDOCUMENT() ;
+ENDDOCUMENT();
