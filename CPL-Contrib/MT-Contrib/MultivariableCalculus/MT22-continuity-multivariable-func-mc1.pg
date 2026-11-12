@@ -1,0 +1,95 @@
+## DESCRIPTION
+##   Calculus 3: continuity multivariable function  multiple choice
+## ENDDESCRIPTION
+
+DOCUMENT();
+  loadMacros(
+    "PGstandard.pl",
+    "PGML.pl",
+    "MathObjects.pl",
+    "parserRadioButtons.pl",
+    "PGchoicemacros.pl",
+    "PGcourse.pl",
+  );
+DOCUMENT();
+
+#TEXT(beginproblem());
+TEXT(); # So no problem number given 
+$showPartialCorrectAnswers = 0;   # set to 0 because multiple choice
+
+# Show the correct answer more often than not
+#    $numc : number of correct answers to show (1 or 0 in multiple choice)
+#    $showc : only if this equals 0 will the correct answer not appear
+#$showc = random(0,9,1);
+$numc = 1;  # <- always show correct answer
+#if ($showc == 0){$numc = 0;}
+
+# Set parameters
+$b = list_random(2,3,5,7,11,13);
+do {$c = list_random(2,3,5,7,11,13);} until ($c != $b);
+$a = list_random(2,3,5,6,7,10,14,15,19);
+@allDenom = ("x^2 + y^2 - $a",
+             "\sqrt{x^2 + y^2 - $a}",
+             "\sqrt{$a - x^2 - y^2}",
+             "(x^2 + y^2 - $a)^{-1/2}",
+             "($a - x^2 - y^2)^{-1/2}", 
+             "\sqrt{x^2 + y^2 + $a}",
+             );
+@allAns = ("All of \( \mathbb{R}^2 \) except for a circle of radius \( \sqrt{$a} \)",
+      "All points outside a circle of radius \( \sqrt{$a} \) (not including the circle)",
+      "All points inside a circle of radius \( \sqrt{$a} \) (not including the circle)",
+      "All points outside a circle of radius \( \sqrt{$a} \) (including the circle)",
+      "All points inside a circle of radius \( \sqrt{$a} \) (including the circle)",
+      "All of \( \mathbb{R}^2 \)",
+    "All of \( \mathbb{R}^2 \) except for a circle of radius \( $a \)",
+      "All points outside a circle of radius \( $a \) (not including the circle)",
+      "All points inside a circle of radius \( $a \) (not including the circle)",
+      "All points outside a circle of radius \( $a \) (including the circle)",
+      "All points inside a circle of radius \( $a \) (including the circle)",
+           );
+$ix = random(0,5,1);
+
+$denom = $allDenom[$ix];
+$correct = $allAns[$ix];
+# Answer arrays
+#    @allAns: array of all possible answers (at least 5: 1 correct, 4 incorrect)
+#    @corrAns: array (1 element) containing correct answer
+#    @incorrAns: array of @allAns after correct is extracted (correctness
+#                depends on something in the code)
+#    @slicei = indices of subset of incorrects
+#    @randi = random subset of incorrects (3 or 4 elements)
+
+# Use map and grep to extract the correct answer, and 
+#   create an array of incorrects.
+@corrAns = ($correct); 
+%yes = map{$_=>1} @corrAns;
+@incorrAns = grep(!defined $yes{$_}, @allAns);
+    
+if ($numc == 1){ # show correct answer
+    @slicei = NchooseK(scalar(@incorrAns),3); # choose 3 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons(
+    [[$correct,@randi],
+    "None of the above"],0);  # correct index 0
+    }
+else { # don't show the correct answer
+    @slicei = NchooseK(scalar(@incorrAns),4); # choose 4 incorrect to show
+    @randi = @incorrAns[@slicei];
+    $radio1 = RadioButtons([[@randi,],"None of the above"],4);  # correct index 4
+    }
+#########################################################
+
+BEGIN_PGML
+Select the option, if any, that describes the set of points at which the given  function is continuous:   [`f(x,y) = \dfrac{[$b]x+[$c]y}{[$denom]}`]  
+[@ $radio1->buttons() @]*  
+END_PGML
+#  Answer evaluation
+install_problem_grader(~~&std_problem_grader);
+ANS( $radio1->cmp() );
+
+BEGIN_PGML_SOLUTION
+Correct answer: [@ $radio1->correct_ans() @]*
+END_PGML_SOLUTION
+
+COMMENT("Diagnostic test question. Do not assign for homework.");
+ENDDOCUMENT();
