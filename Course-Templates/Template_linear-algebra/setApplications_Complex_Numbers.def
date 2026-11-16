@@ -13,7 +13,7 @@ emailInstructor   = 0
 problemListV2
 problem_start
 problem_id = 1
-source_file = MT26-SN4/MT26complexaddsubt1.pg
+source_file = champlainLibrary/LinearAlgebra/Matrices-Applications-Complex-Numbers/MT26complexaddsubt1.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -24,7 +24,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 2
-source_file = MT26-SN4/MT26complexscalarmult1.pg
+source_file = champlainLibrary/LinearAlgebra/Matrices-Applications-Complex-Numbers/MT26complexscalarmult1.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -35,7 +35,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 3
-source_file = MT26-SN4/MT26complexconjugate1.pg
+source_file = champlainLibrary/LinearAlgebra/Matrices-Applications-Complex-Numbers/MT26complexconjugate1.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -46,7 +46,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 4
-source_file = MT26-SN4/MT26complexscalarmult2.pg
+source_file = champlainLibrary/LinearAlgebra/Matrices-Applications-Complex-Numbers/MT26complexscalarmult2.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -57,7 +57,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 5
-source_file = MT26-SN4/MT26complexconjugate2.pg
+source_file = champlainLibrary/LinearAlgebra/Matrices-Applications-Complex-Numbers/MT26complexconjugate2.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -68,7 +68,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 6
-source_file = MT26-SN4/MT26complexmultiply1.pg
+source_file = champlainLibrary/LinearAlgebra/Matrices-Applications-Complex-Numbers/MT26complexmultiply1.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -79,7 +79,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 7
-source_file = MT26-SN4/MT26modulus1.pg
+source_file = champlainLibrary/LinearAlgebra/Matrices-Applications-Complex-Numbers/MT26modulus1.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -90,7 +90,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 8
-source_file = MT26-SN4/MT26complexReIm1.pg
+source_file = champlainLibrary/LinearAlgebra/Matrices-Applications-Complex-Numbers/MT26complexReIm1.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -101,7 +101,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 9
-source_file = MT26-SN4/MT26complexmultiply2.pg
+source_file = champlainLibrary/LinearAlgebra/Matrices-Applications-Complex-Numbers/MT26complexmultiply2.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -112,7 +112,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 10
-source_file = MT26-SN4/MT26complexdivide1.pg
+source_file = champlainLibrary/LinearAlgebra/Matrices-Applications-Complex-Numbers/MT26complexdivide1.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -123,7 +123,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 11
-source_file = MT26-SN4/MT26multiplydivide1.pg
+source_file = champlainLibrary/LinearAlgebra/Matrices-Applications-Complex-Numbers/MT26multiplydivide1.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
@@ -134,7 +134,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id = 12
-source_file = MT26-SN4/MT26multiplydivide2.pg
+source_file = champlainLibrary/LinearAlgebra/Matrices-Applications-Complex-Numbers/MT26multiplydivide2.pg
 value = 1
 max_attempts = -1
 showMeAnother = -1
