@@ -156,7 +156,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id           = 14
-source_file          = MT26-SN4/MT23_Leontief3x3.pg
+source_file          = champlainLibrary/LinearAlgebra/Matrices-Applications-Leontief-Open/MT23_Leontief3x3.pg
 value                = 1
 max_attempts         = -1
 showMeAnother        = -1

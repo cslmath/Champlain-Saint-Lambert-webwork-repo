@@ -178,7 +178,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id           = 16
-source_file          = MT26-SN4/MT26symmetricmatrix.pg
+source_file          = champlainLibrary/LinearAlgebra/Matrices/MT26symmetricmatrix.pg
 value                = 1
 max_attempts         = -1
 showMeAnother        = -1
@@ -189,7 +189,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id           = 17
-source_file          = MT26-SN4/MT26skewymmetricmatrix.pg
+source_file          = champlainLibrary/LinearAlgebra/Matrices/MT26skewymmetricmatrix.pg
 value                = 1
 max_attempts         = -1
 showMeAnother        = -1
@@ -200,7 +200,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id           = 18
-source_file          = MT26-SN4/MT26triangular.pg
+source_file          = champlainLibrary/LinearAlgebra/Matrix-Inverse/MT26triangular.pg
 value                = 1
 max_attempts         = -1
 showMeAnother        = -1
@@ -211,7 +211,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id           = 19
-source_file          = MT26-SN4/MT26diagonalpowers.pg
+source_file          = champlainLibrary/LinearAlgebra/Matrices/MT26diagonalpowers.pg
 value                = 1
 max_attempts         = -1
 showMeAnother        = -1
@@ -222,7 +222,7 @@ att_to_open_children = 0
 problem_end
 problem_start
 problem_id           = 20
-source_file          = MT26-SN4/MT26triangularsingular.pg
+source_file          = champlainLibrary/LinearAlgebra/Matrix-Inverse/MT26triangularsingular.pg
 value                = 1
 max_attempts         = -1
 showMeAnother        = -1
