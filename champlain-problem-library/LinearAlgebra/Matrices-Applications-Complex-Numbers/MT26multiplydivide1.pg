@@ -1,0 +1,70 @@
+## DESCRIPTION
+##   Complex numbers as matrices: multiply
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(Arithmetic)
+## DBsection(Conversion to a + bi form)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2026-04-29)
+## MLT(graph)
+## Level(2)
+## KEYWORDS('Complex', 'Plane')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+  "PGstandard.pl",
+  "PGchoicemacros.pl",
+  "PGgraphmacros.pl",
+  "PGcomplexmacros.pl",
+  "contextLimitedComplex.pl",
+  "PGML.pl",
+  "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+# create the complex numbers randomly  
+$a=non_zero_random( -9, 9, 1);
+$b=non_zero_random( -9, 9, 1);
+do {$b=non_zero_random( -9, 9, 1);} until ($b != $a);
+$c=non_zero_random( -9, 9, 1);
+do {$c=non_zero_random( -9, 9, 1);} 
+   until (($c != $a) and ($c != $b));
+$d=non_zero_random( -9, 9, 1);
+do {$d=non_zero_random( -9, 9, 1);} 
+   until (($d != $a) and ($d != $b) and ($d != $c));
+$pa = ($a)*($c)-($b)*($d);
+$pb = ($a)*($d)+($b)*($c);
+
+Context("Matrix");
+$zmat = Matrix([[$a, -1*$b],[$b, $a]]);
+$wmat = Matrix([[$c, -1*$d],[$d, $c]]);
+$zwmat = Matrix([[$pa, -1*$pb],[$pb, $pa]]);
+
+
+Context('LimitedComplex-cartesian-strict');
+$z = Compute("$a + $b*i");
+$w = Compute("$c + $d*i");
+$zw = $z*$w;
+
+BEGIN_PGML
+Given the complex numbers: [`z = [$z]`] and [`w = [$w]`].  
+
+a. Find the product [`zw`] in standard form:  
+[` zw = `][___]{$zw}  
+
+b. Now, complete the following to find the same product with the complex numbers expressed as matrices:  
+[`z w = [$zmat]`][___]*{$wmat} = [___]*{$zwmat}
+END_PGML
+
+BEGIN_PGML_HINT
+A complex number in standard form [`z=a+bi`], where [`i^2=-1`], can be expressed as a matrix:  
+[` \begin{bmatrix} a & -b \\ b & a \end{bmatrix} `]  
+END_PGML_HINT
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.
+

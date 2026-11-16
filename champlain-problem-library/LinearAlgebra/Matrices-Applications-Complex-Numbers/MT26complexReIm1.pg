@@ -1,0 +1,76 @@
+## DESCRIPTION
+##   Complex numbers as vectors: Real & imaginary parts
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(Arithmetic)
+## DBsection(Conversion to a + bi form)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2026-04-28)
+## MLT(graph)
+## Level(2)
+## KEYWORDS('Complex', 'Plane')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+  "PGstandard.pl",
+  "PGchoicemacros.pl",
+  "PGgraphmacros.pl",
+  "PGcomplexmacros.pl",
+  "contextLimitedComplex.pl",
+  "parserPopUp.pl",
+  "PGML.pl",
+  "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+# create the complex numbers randomly  
+$a=non_zero_random( -9, 9, 1);
+$b=non_zero_random( -9, -1, 1);  # one negative imaginary part
+do {$b=non_zero_random( -9, -1, 1);} until ($b != $a);
+
+$popupR = PopUp([ '?', 'Projection onto the Imaginary axis',
+                        'Projection onto the Real axis',
+                        'Reflection about the Imaginary axis',
+                        'Reflection about the Real axis'],
+                        'Projection onto the Real axis');
+$popupI = PopUp([ '?', 'Projection onto the Imaginary axis',
+                        'Projection onto the Real axis',
+                        'Reflection about the Imaginary axis',
+                        'Reflection about the Real axis'],
+                        'Projection onto the Imaginary axis');
+
+Context("Matrix");
+$zvec = Matrix([[$a],[$b]]);
+#$zvecT = $zvec->transpose;
+#$zmat = Matrix([[$a, -1*$b],[$b, $a]]);
+$projRmat = Matrix([[1,0],[0,0]]);
+$projImat = Matrix([[0,0],[0,1]]);
+$Rez = Matrix([[$a],[0]]);
+$Imz = Matrix([[0],[$b]]);
+
+Context('LimitedComplex-cartesian-strict');
+Context()->functions->enable("sqrt");
+$z = Compute("$a + $b*i");
+
+BEGIN_PGML
+Given the complex number: [`z = [$z]`], where [`i^2=-1`] 
+a. Express the real part [`\text{Re}(z) `] and the imaginary part [`\text{Im}(z)`]  as images under a linear transformation on the complex number [`z`] written as a column vector.  
+[`\text{Re}(z) = `][___]*{$projRmat}[___]*{$zvec} [`=`] [___]*{$Rez}  
+[`\text{Im}(z) = `][___]*{$projImat}[___]*{$zvec} [`=`] [___]*{$Imz}  
+b. The geometric effect of [`\text{Re}(z)`] is [___]{$popupR}
+c. The geometric effect of [`\text{Im}(z)`] is [___]{$popupI}.
+END_PGML
+
+BEGIN_PGML_HINT
+1. A complex number in standard form [`z=a+bi`], where [`i^2=-1`], can be expressed as a column vector:  [`\begin{bmatrix} a\\ b \end{bmatrix}`]  
+2. If  [`z=a+bi`], then [`\text{Re}(z)=a`] and [`\text{Im}(z)=b`].
+
+END_PGML_HINT
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.
+

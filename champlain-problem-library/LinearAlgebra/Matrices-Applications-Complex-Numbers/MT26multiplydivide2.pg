@@ -1,0 +1,73 @@
+## DESCRIPTION
+##   Complex numbers as matrices: divide
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(Arithmetic)
+## DBsection(Conversion to a + bi form)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2026-04-29)
+## MLT(graph)
+## Level(2)
+## KEYWORDS('Complex', 'Plane')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+  "PGstandard.pl",
+  "PGchoicemacros.pl",
+  "PGgraphmacros.pl",
+  "PGcomplexmacros.pl",
+  "contextLimitedComplex.pl",
+  "PGML.pl",
+  "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+# create the complex numbers randomly  
+$a=non_zero_random( -9, 9, 1);
+$b=non_zero_random( -9, 9, 1);
+do {$b=non_zero_random( -9, 9, 1);} until ($b != $a);
+$c=non_zero_random( -9, 9, 1);
+do {$c=non_zero_random( -9, 9, 1);}
+    until (($c != $a) and ($c != $b));
+$d=non_zero_random( -9, 9, 1);
+do {$d=non_zero_random( -9, 9, 1);} 
+    until (($d != $a) and ($d != $b) and ($d != $c));
+$pa = ($a)*($c)-($b)*($d);
+$pb = ($a)*($d)+($b)*($c);
+
+Context("Matrix");
+$zmat = Matrix([[$a, -1*$b],[$b, $a]]);
+$wmat = Matrix([[$c, -1*$d],[$d, $c]]);
+$zwmat = Matrix([[$pa, -1*$pb],[$pb, $pa]]);
+$winvmat = $wmat->inverse;
+$zoverwmat = $zmat*$winvmat;
+
+Context('LimitedComplex-cartesian');
+$z = Compute("$a + $b*i");
+$w = Compute("$c + $d*i");
+$zoverw = $z/$w;
+
+
+BEGIN_PGML
+Given the complex numbers: [`z = [$z]`] and [`w = [$w]`].  
+
+a. Find the quotient [`z/w`] in standard form:  
+[` z/w = `][___]{$zoverw}  
+
+b. Now, complete the following to find the same quotient with the complex numbers expressed as matrices:  
+[`z / w = z w^{-1} = [$zmat]`][___]*{$winvmat} = [___]*{$zoverwmat}
+END_PGML
+
+BEGIN_PGML_HINT
+1. A complex number in standard form [`z=a+bi`], where [`i^2=-1`], can be expressed as a matrix:  
+[` \begin{bmatrix} a & -b \\ b & a \end{bmatrix} `]  
+2. The complex number [`w^{-1}`] can be expressed as the inverse matrix of [`w = c + di`] in matrix form. 
+END_PGML_HINT
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.
+

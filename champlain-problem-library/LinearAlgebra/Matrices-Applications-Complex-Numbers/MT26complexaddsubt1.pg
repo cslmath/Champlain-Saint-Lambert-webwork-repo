@@ -1,0 +1,77 @@
+## DESCRIPTION
+##   Complex numbers as vectors and matrices: Addition / Subtraction
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(Arithmetic)
+## DBsection(Conversion to a + bi form)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2026-04-26)
+## MLT(graph)
+## Level(2)
+## KEYWORDS('Complex', 'Plane')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+  "PGstandard.pl",
+  "PGchoicemacros.pl",
+  "PGgraphmacros.pl",
+  "PGcomplexmacros.pl",
+  "contextLimitedComplex.pl",
+  "PGML.pl",
+  "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+# create the complex numbers randomly  
+$a=non_zero_random( -9, 9, 1);
+$b=non_zero_random( -9, 9, 1);
+do {$b=non_zero_random( -9, 9, 1);} until ($b != $a);
+$c=non_zero_random( -9, 9, 1);
+do {$c=non_zero_random( -9, 9, 1);} until (($c != $b) and ($c != $b));
+$d=non_zero_random( -9, 9, 1);
+do {$d = non_zero_random( -9, 9, 1);} 
+    until (($d != $b) and ($d != $c) and ($d != $a));
+
+Context("Matrix");
+$zvec = Matrix([[$a],[$b]]);
+$wvec = Matrix([[$c],[$d]]);
+$zmat = Matrix([[$a, -1*$b],[$b, $a]]);
+$wmat = Matrix([[$c, -1*$d],[$d, $c]]);
+# Separate variables for duplicate answers
+$zvec2 = Matrix([[$a],[$b]]);
+$wvec2 = Matrix([[$c],[$d]]);
+$zmat2 = Matrix([[$a, -1*$b],[$b, $a]]);
+$wmat2 = Matrix([[$c, -1*$d],[$d, $c]]);
+
+Context('LimitedComplex-cartesian-strict');
+Context()->functions->enable("sqrt");
+$z = Compute("$a + $b*i");
+$w = Compute("$c + $d*i");
+
+BEGIN_PGML
+Given the complex numbers: [`z = [$z]`] and [`w = [$w]`].  
+a. Express the sum [`z+w`] and the difference [`z-w`] in standard form.  
+* [`z+w = `][___]{$z+$w}  
+* [`z - w = `][___]{$z-$w}  
+b. Express the sum [`z+w`] and the difference [`z-w`] using column vectors.  
+*  [`z+ w`] : [___]*{$zvec} [`+`] [___]*{$wvec} [`=`] [___]*{$zvec+$wvec}  
+*  [`\,\,z- w`] : [___]*{$zvec2} [`-`] [___]*{$wvec2} [`=`] [___]*{$zvec2-$wvec2}  
+d. Express the sum [`z+w`] and the difference [`z-w`] using matrices.  
+* [`z + w`] : [___]*{$zmat} [`+`] [___]*{$wmat} = [___]*{$zmat+$wmat}  
+* [`\,\,z - w`] : [___]*{$zmat2} [`-`] [___]*{$wmat2} = [___]*{$zmat2-$wmat2}  
+END_PGML
+
+BEGIN_PGML_HINT
+A complex number in standard form [`z=a+bi`], where [`i^2=-1`], can be expressed as:  
+- a column vector:  [`\begin{bmatrix} a\\ b \end{bmatrix}`]  
+
+- a matrix: [` \begin{bmatrix} a & -b \\ b & a \end{bmatrix} `]  
+END_PGML_HINT
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.
+

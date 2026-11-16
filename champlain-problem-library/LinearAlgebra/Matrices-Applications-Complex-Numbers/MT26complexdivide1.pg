@@ -1,0 +1,94 @@
+## DESCRIPTION
+##   Complex numbers as vectors: Multiplication / divide by i
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(Arithmetic)
+## DBsection(Conversion to a + bi form)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2026-04-29)
+## MLT(graph)
+## Level(2)
+## KEYWORDS('Complex', 'Plane')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+  "PGstandard.pl",
+  "PGchoicemacros.pl",
+  "PGgraphmacros.pl",
+  "PGcomplexmacros.pl",
+  "contextLimitedComplex.pl",
+  "parserPopUp.pl",
+  "PGML.pl",
+  "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+
+# create the complex numbers in polar form randomly
+$rz=random( 2, 9, 1);  # positive only
+$tz=Compute("pi/6");  # not random
+$rw = random( 2, 9, 1);
+do {$rw=non_zero_random( 2, 9, 1);} until ($rw != $rz);
+@angles=("pi/4","pi/3");
+@denoms=("4","3");
+$ia = random(0,1,1); 
+$tw=Compute("$angles[$ia]"); # choice of two
+$den=$denoms[$ia];
+$a = $rz*cos($tz);
+$b = $rz*sin($tz);
+$c = $rw*cos($tw);
+$d = $rw*sin($tw);
+$Rezw = $a*$c - $b*$d;
+$Imzw = $a*$d + $b*$c;
+$Rezoverw = ($a*$c + $b*$d)/($c*$c + $d*$d);
+$Imzoverw = ($b*$c - $a*$d)/($c*$c + $d*$d);
+
+Context("Matrix");
+$zvec = Matrix([[$a],[$b]]);
+$wvec = Matrix([[$c],[$d]]);
+
+$dilrw = Matrix([$rw,0],[0,$rw]);
+$rottw = Matrix([[cos($tw),-1*sin($tw)],[sin($tw),cos($tw)]]);
+$contrw = Matrix([1/$rw,0],[0,1/$rw]);
+$rotmintw = Matrix([[cos($tw),sin($tw)],[-1*sin($tw),cos($tw)]]);
+
+$zwvec = Matrix([[$Rezw],[$Imzw]]);
+$zoverwvec = Matrix([[$Rezoverw],[$Imzoverw]]); 
+
+Context('LimitedComplex');
+#Context('Complex');
+Context()->functions->enable("sqrt");
+$z = Compute("$a + $b*i");
+$w = Compute("$c + $d*i");
+$zw = $z*$w;
+$zoverw = $z/$w;
+
+BEGIN_PGML
+A complex number [`z=a+bi`] in polar form  is [`z=re^{i\theta} = (r\cos\theta) + (r\sin\theta)i`], where [`r^2 = a^2 + b^2`] and [`\tan\theta = b/a`] and [`i^2=-1`].  
+
+Given the complex numbers in polar form: [`z = [$rz]e^{i(\pi/6)}`] and [`w= [$rw]e^{i(\pi/[$den])}`].
+
+The effect on [`z`] of *dividing* by [`w`] can be expressed as the image under a composite linear transformation on the complex number [`z`]:  
+
+a. contraction by a factor of [___]{1/$rw}, and rotation clockwise by an angle [___]{$tw} radians.  
+
+b. The contraction matrix and the rotation matrix for dividing by [`w`]
+are:  
+Contraction: [`C = `] [___]*{$contrw}  Rotation: [`R_{-} = `][___]*{$rotmintw}
+
+c. Express the quotient [`z/w`] as the image under the composite transformation (dilation, clockwise rotation) on the complex number [`z`] written as a column vector:  
+ [` z/w = C R_{-} `][___]*{$zvec} = [___]*{$zoverwvec} 
+END_PGML
+
+
+BEGIN_PGML_HINT
+A complex number in polar form [`z=r e^{i\theta}`] can be expressed as a column vector:  [`\begin{bmatrix} r\cos\theta \\ r\sin\theta \end{bmatrix}`]  
+END_PGML_HINT
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.
+
