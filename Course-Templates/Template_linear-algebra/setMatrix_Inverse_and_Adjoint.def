@@ -1,0 +1,288 @@
+assignmentType          = default
+openDate                = 01/21/2026 at 11:59pm EST
+reducedScoringDate      = 12/31/1969 at 07:00pm EST
+dueDate                 = 01/21/2026 at 11:59pm EST
+answerDate              = 01/21/2026 at 11:59pm EST
+enableReducedScoring    = N
+paperHeaderFile         = defaultHeader
+screenHeaderFile        = defaultHeader
+description             = inverse 2x2 and 3x3, properties, invertibility, solve linear system using inverse, solve matrix equation, inverse of special forms (permutation, triangular, diagonal),  elementary matrices, adjoint matrix, minors, cofactors, determinant
+restrictProbProgression = 0
+emailInstructor         = 0
+
+problemListV2
+problem_start
+problem_id           = 1
+source_file          = Library/Rochester/setLinearAlgebra4InverseMatrix/ur_la_4_1.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 2
+source_file          = Library/Rochester/setAlgebra34Matrices/inverse2x2.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 3
+source_file          = Library/Rochester/setLinearAlgebra4InverseMatrix/ur_la_4_11.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 4
+source_file          = champlainLibrary/LinearAlgebra/Matrix-Inverse/CF11Anton_linearalgebra_1-4-12.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 5
+source_file          = champlainLibrary/LinearAlgebra/Matrix-Inverse/CF11Anton_linearalgebra_1-4-7.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 6
+source_file          = Library/WHFreeman/Holt_linear_algebra/Chaps_1-4/3.3.51.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 7
+source_file          = Library/Rochester/setLinearAlgebra4InverseMatrix/ur_la_4_8.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 8
+source_file          = Library/WHFreeman/Holt_linear_algebra/Chaps_1-4/3.3.54.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 9
+source_file          = Library/ASU-topics/set119MatrixAlgebra/p13.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 10
+source_file          = Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_2.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 11
+source_file          = Library/Rochester/setLinearAlgebra4InverseMatrix/ur_la_4_4.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 12
+source_file          = Library/TCNJ/TCNJ_MatrixInverse/problem6.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 13
+source_file          = Library/TCNJ/TCNJ_MatrixInverse/problem2.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 14
+source_file          = Library/Rochester/setAlgebra34Matrices/inverse3x3.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 15
+source_file          = Library/TCNJ/TCNJ_MatrixInverse/problem3.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 16
+source_file          = Library/Rochester/setLinearAlgebra4InverseMatrix/ur_la_4_5.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 17
+source_file          = Library/TCNJ/TCNJ_MatrixInverse/problem13.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 18
+source_file          = Library/TCNJ/TCNJ_MatrixInverse/problem14.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 19
+source_file          = Library/TCNJ/TCNJ_MatrixInverse/problem15.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 20
+source_file          = Library/Rochester/setLinearAlgebra4InverseMatrix/ur_la_4_2.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 21
+source_file          = Library/TCNJ/TCNJ_MatrixOperations/problem6.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 22
+source_file          = Library/TCNJ/TCNJ_MatrixOperations/problem8.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 23
+source_file          = Library/TCNJ/TCNJ_MatrixOperations/problem7.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 24
+source_file          = Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_24.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 25
+source_file          = Library/Rochester/setLinearAlgebra6Determinants/ur_la_6_25.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end

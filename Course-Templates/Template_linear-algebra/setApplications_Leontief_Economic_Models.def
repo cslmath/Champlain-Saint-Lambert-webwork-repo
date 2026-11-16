@@ -1,0 +1,178 @@
+assignmentType          = default
+openDate                = 05/26/2026 at 11:59pm EDT
+reducedScoringDate      = 12/31/1969 at 07:00pm EST
+dueDate                 = 06/02/2026 at 11:59pm EDT
+answerDate              = 06/04/2026 at 11:59pm EDT
+enableReducedScoring    = N
+paperHeaderFile         = defaultHeader
+screenHeaderFile        = defaultHeader
+description             = closed economy, open economy, economic sectors, exchange matrix, input-output matrix, general solution, consumption matrix, production vector, demand vector
+restrictProbProgression = 0
+emailInstructor         = 0
+
+problemListV2
+problem_start
+problem_id           = 1
+source_file          = champlainLibrary/LinearAlgebra/Matrices-Applications-Leontief-Closed/BC13_3by3.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 2
+source_file          = champlainLibrary/LinearAlgebra/Matrices-Applications-Leontief-Open/BC13ConsumptionMatrix.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 3
+source_file          = champlainLibrary/LinearAlgebra/Matrices-Applications-Leontief-Open/BC13_2by2Production.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 4
+source_file          = champlainLibrary/LinearAlgebra/Matrices-Applications-Leontief-Open/BC13_3by3Production.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 5
+source_file          = champlainLibrary/LinearAlgebra/Matrices-Applications-Leontief-Closed/MT23_BC13_3by3variable.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 6
+source_file          = champlainLibrary/LinearAlgebra/Matrices-Applications-Leontief-Closed/MT23_Leontief_truefalse.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 7
+source_file          = champlainLibrary/LinearAlgebra/Matrices-Applications-Leontief-Closed/MT23_closedLeontief1.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 8
+source_file          = champlainLibrary/LinearAlgebra/Matrices-Applications-Leontief-Closed/MT23_closedLeontief_steps.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 9
+source_file          = champlainLibrary/LinearAlgebra/Matrices-Applications-Leontief-Closed/MT23closedleontief3x3.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 10
+source_file          = champlainLibrary/LinearAlgebra/Matrices-Applications-Leontief-Open/MT23_Leontief2x2.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 11
+source_file          = champlainLibrary/LinearAlgebra/Matrices-Applications-Leontief-Open/MT23_Leontief2x2prob2.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 12
+source_file          = champlainLibrary/LinearAlgebra/Matrices-Applications-Leontief-Open/MT23_openLeontief_steps.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 13
+source_file          = champlainLibrary/LinearAlgebra/Matrices-Applications-Leontief-Open/MT23modify_BC13_2by2Production.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 14
+source_file          = MT26-SN4/MT23_Leontief3x3.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 15
+source_file          = champlainLibrary/LinearAlgebra/Matrices-Applications-Leontief-Closed/MT23_Leontief_diagram.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 1
+problem_end

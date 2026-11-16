@@ -1,0 +1,167 @@
+assignmentType          = default
+openDate                = 05/29/2026 at 11:59pm EDT
+reducedScoringDate      = 12/31/1969 at 07:00pm EST
+dueDate                 = 06/05/2026 at 11:59pm EDT
+answerDate              = 06/07/2026 at 11:59pm EDT
+enableReducedScoring    = N
+paperHeaderFile         = defaultHeader
+screenHeaderFile        = defaultHeader
+description             = standard matrix, inverse transformation, properties (linearity, homogeneity), image, matrix operators (reflection, projection, rotation)
+restrictProbProgression = 0
+emailInstructor         = 0
+
+problemListV2
+problem_start
+problem_id           = 1
+source_file          = ContribDir/Michigan/linalg/matrices/prob_3_3_021.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 2
+source_file          = ContribDir/Michigan/linalg/matrices/prob_3_3_024.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 3
+source_file          = Library/Hope/Multi1/04-01-Linear-transformations/Lin_trans_16.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 4
+source_file          = Library/TCNJ/TCNJ_MatrixLinearTransformation/problem9.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 5
+source_file          = Library/TCNJ/TCNJ_IntroLinearTransformations/problem1.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 6
+source_file          = Library/Rochester/setLinearAlgebra14TransfOfRn/ur_la_14_17.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 7
+source_file          = Library/Rochester/setLinearAlgebra14TransfOfRn/ur_la_14_16.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 8
+source_file          = Library/Rochester/setLinearAlgebra14TransfOfRn/ur_la_14_30.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 9
+source_file          = Library/Rochester/setLinearAlgebra14TransfOfRn/ur_la_14_4.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 10
+source_file          = Library/TCNJ/TCNJ_MatrixLinearTransformation/problem10.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 11
+source_file          = Library/Rochester/setLinearAlgebra14TransfOfRn/ur_la_14_15.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 12
+source_file          = Library/Rochester/setLinearAlgebra4InverseMatrix/ur_Ch2_2_1.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 13
+source_file          = Library/TCNJ/TCNJ_MatrixLinearTransformation/problem5.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 14
+source_file          = Library/TCNJ/TCNJ_MatrixLinearTransformation/problem6.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
