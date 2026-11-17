@@ -1,0 +1,288 @@
+assignmentType          = default
+openDate                = 01/21/2026 at 11:59pm EST
+reducedScoringDate      = 12/31/1969 at 07:00pm EST
+dueDate                 = 01/21/2026 at 11:59pm EST
+answerDate              = 01/21/2026 at 11:59pm EST
+enableReducedScoring    = N
+paperHeaderFile         = defaultHeader
+screenHeaderFile        = defaultHeader
+description             = Vector norm, unit vector, standard unit vectors, length, distance, direction.
+restrictProbProgression = 0
+emailInstructor         = 0
+
+problemListV2
+problem_start
+problem_id           = 1
+source_file          = Library/Rochester/setVectors2DotProduct/UR_VC_1_8.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 2
+source_file          = Library/Union/setMVvectors/an12_2_15.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 3
+source_file          = Library/Union/setMVvectors/vectors-1.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 4
+source_file          = Library/Union/setMVvectors/an12_2_31.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 5
+source_file          = Library/Michigan/Chap13Sec1/Q33.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 6
+source_file          = Library/Michigan/Chap13Sec1/Q31.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 7
+source_file          = Library/Michigan/Chap13Sec1/Q01.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 8
+source_file          = Library/Michigan/Chap13Sec1/Q21.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 9
+source_file          = Library/Hope/Multi1/01-02-Vector-operations/Vectors-14.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 10
+source_file          = Library/UMN/calculusStewartET/s_12_2_26.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 11
+source_file          = Library/WHFreeman/Rogawski_Calculus_Early_Transcendentals_Second_Edition/12_Vector_Geometry/12.2_Vectors_in_Three_Dimensions/12.2.27.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 12
+source_file          = Library/Michigan/Chap13Sec1/Q39.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 13
+source_file          = Library/BentleyUniversity/MathematicsOfComputerGraphics/setMoCG-Ch2/2-12-NoUnitVector2D.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 14
+source_file          = Library/Rochester/setVectors2DotProduct/UR_VC_1_14.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 15
+source_file          = Library/Hope/Multi1/01-02-Vector-operations/Vectors-10.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 16
+source_file          = Library/272/setStewart12_2/problem_2a.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 17
+source_file          = Library/UMN/calculusStewartET/s_12_2_25.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 18
+source_file          = Library/272/setStewart12_1/problem_2.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 19
+source_file          = Library/UMN/calculusStewartET/s_12_2_22.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 20
+source_file          = Library/Michigan/Chap13Sec2/Q09.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 21
+source_file          = Library/UMN/calculusStewartET/s_12_1_prob03.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 22
+source_file          = Library/Union/setMVvectors/vectors-2.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 23
+source_file          = Library/Hope/Multi1/01-02-Vector-operations/Vectors-24.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 24
+source_file          = Library/FortLewis/Calc3/13-1-Displacement-vectors/HGM4-13-1-25-Displacement-vectors/HGM4-13-1-25-Displacement-vectors.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 25
+source_file          = Library/Michigan/Chap13Sec2/Q13.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end

@@ -1,0 +1,178 @@
+assignmentType          = default
+openDate                = 01/21/2026 at 11:59pm EST
+reducedScoringDate      = 12/31/1969 at 07:00pm EST
+dueDate                 = 01/21/2026 at 11:59pm EST
+answerDate              = 01/21/2026 at 11:59pm EST
+enableReducedScoring    = N
+paperHeaderFile         = defaultHeader
+screenHeaderFile        = defaultHeader
+description             = various word problems: ages, chemical reaction, polynomial, temperature grid, sales, nutrition, temperature measure, stocks, coins, mixtures
+restrictProbProgression = 0
+emailInstructor         = 0
+
+problemListV2
+problem_start
+problem_id           = 1
+source_file          = Library/Rochester/setLinearAlgebra2SystemsApplications/ur_la_2_1.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 2
+source_file          = Library/Rochester/setLinearAlgebra2SystemsApplications/ur_la_2_5.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 3
+source_file          = Library/Rochester/setLinearAlgebra2SystemsApplications/ur_la_2_2.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 4
+source_file          = Library/Rochester/setLinearAlgebra2SystemsApplications/ur_la_2_3.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 5
+source_file          = Library/Rochester/setLinearAlgebra2SystemsApplications/ur_la_2_6.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 6
+source_file          = Library/Rochester/setLinearAlgebra2SystemsApplications/ur_la_2_4.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 7
+source_file          = Library/CollegeOfIdaho/setAlgebra_03_02_ProblemSolvingBusinessApp/32IntAlg_07_ProblemSolving.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 8
+source_file          = Library/WHFreeman/Holt_linear_algebra/Chaps_1-4/holt_01_04_025.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 9
+source_file          = Library/WHFreeman/Holt_linear_algebra/Chaps_1-4/2.1.46.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 10
+source_file          = Library/WHFreeman/Holt_linear_algebra/Chaps_1-4/holt_01_01_067.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 11
+source_file          = Library/ASU-topics/set119LinearSystems/p27.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 12
+source_file          = Library/Rochester/setLinearAlgebra2SystemsApplications/ur_la_2_8.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 13
+source_file          = Library/ASU-topics/set119LinearSystems/p9.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 14
+source_file          = Library/ASU-topics/setSystems2Variables/jj5.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end
+problem_start
+problem_id           = 15
+source_file          = Library/CollegeOfIdaho/setAlgebra_03_02_ProblemSolvingBusinessApp/32IntAlg_08_ProblemSolving.pg
+value                = 1
+max_attempts         = -1
+showMeAnother        = -1
+showHintsAfter       = -2
+prPeriod             = -1
+counts_parent_grade  = 0
+att_to_open_children = 0
+problem_end

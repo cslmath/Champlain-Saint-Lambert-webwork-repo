@@ -1,0 +1,74 @@
+## DESCRIPTION
+##   Complex numbers as vectors and matrices: Conjugate
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(Arithmetic)
+## DBsection(Conversion to a + bi form)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2026-04-26)
+## MLT(graph)
+## Level(2)
+## KEYWORDS('Complex', 'Plane')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+  "PGstandard.pl",
+  "PGchoicemacros.pl",
+  "PGgraphmacros.pl",
+  "PGcomplexmacros.pl",
+  "contextLimitedComplex.pl",
+  "parserPopUp.pl",
+  "PGML.pl",
+  "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+# create the complex numbers randomly  
+$a=non_zero_random( -9, 9, 1);
+$b=non_zero_random( -9, -1, 1);  # one negative imaginary part
+do {$b=non_zero_random( -9, -1, 1);} until ($b != $a);
+$c=non_zero_random( -9, 9, 1); 
+do {$c=non_zero_random( -9, 9, 1);} until (($c != $a) and ($c != $b));
+$d=non_zero_random( 1, 9, 1); # one positive imaginary part
+do {$d=non_zero_random( 1, 9, 1);} 
+until (($d != $a) and ($d != $b) and ($d != $c));
+
+$popup = PopUp([ '?', 'determinant','negative','transpose'], 'transpose');
+
+Context("Matrix");
+$z1mat = Matrix([[$a, -1*$b],[$b, $a]]);
+$z2mat = Matrix([[$c, -1*$d],[$d, $c]]);
+$z1barmat = $z1mat->transpose;
+$z2barmat = $z2mat->transpose;
+$refl = Matrix([[1,0],[0,-1]]);
+
+Context('LimitedComplex-cartesian-strict');
+Context()->functions->enable("sqrt");
+$z1 = Compute("$a + $b*i");
+$z2 = Compute("$c + $d*i");
+$z1bar = Compute("$a - $b*i");
+$z2bar = Compute("$c - $d*i");
+BEGIN_PGML
+
+Given the complex numbers: [`z_1 = [$z1]`] and [`z_2 = [$z2]`].  
+a. Express each complex number and its complex conjugate as matrices:  
+[`z_1 = `] [___]*{$z1mat} and [`\overline{z_1} = `] [___]*{$z1barmat}  
+[`z_2 = `] [___]*{$z2mat} and [`\overline{z_2} = `] [___]*{$z2barmat}  
+
+b. The complex conjugate matrix is the [____]{$popup} of the complex 
+number matrix.  
+END_PGML
+
+BEGIN_PGML_HINT
+1. A complex number in standard form [`z=a+bi`], where [`i^2=-1`], can be expressed as a matrix :  [`\begin{bmatrix} a & -b \\ b & a \end{bmatrix}`]  
+
+2. The *complex conjugate* of [`z=a+bi`] is  [`\overline{z} = \overline{a+bi} = a-bi`].  
+END_PGML_HINT
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.
+
