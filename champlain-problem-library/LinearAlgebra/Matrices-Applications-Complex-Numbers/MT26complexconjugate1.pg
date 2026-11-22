@@ -1,0 +1,82 @@
+## DESCRIPTION
+##   Complex numbers as vectors and matrices: Conjugate
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(Arithmetic)
+## DBsection(Conversion to a + bi form)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2026-04-28)
+## MLT(graph)
+## Level(2)
+## KEYWORDS('Complex', 'Plane')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+  "PGstandard.pl",
+#  "PGchoicemacros.pl",
+#  "PGgraphmacros.pl",
+  "PGcomplexmacros.pl",
+  "contextLimitedComplex.pl",
+  "parserPopUp.pl",
+  "PGML.pl",
+  "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+# create the complex numbers randomly  
+$a=non_zero_random( -9, 9, 1);
+$b=non_zero_random( -9, -1, 1);  # one negative imaginary part
+do {$b=non_zero_random( -9, -1, 1);} until ($b != $a);
+$c=non_zero_random( -9, 9, 1); 
+do {$c=non_zero_random( -9, 9, 1);} until (($c != $a) and ($c != $b));
+$d=non_zero_random( 1, 9, 1); # one positive imaginary part
+do {$d=non_zero_random( 1, 9, 1);} 
+    until (($d != $a) and ($d != $b) and ($d != $c));
+
+$popup = PopUp([ '?', 'determinant','negative','transpose'], 'transpose');
+$popupv = PopUp([ '?', 
+         'Projection onto the Imaginary axis',  
+         'Projection onto the Real axis',
+         'Reflection about the Imaginary axis',
+         'Reflection about the Real axis'], 'Reflection about the Real axis');
+
+Context("Matrix");
+$zvec = Matrix([[$a],[$b]]);
+$wvec = Matrix([[$c],[$d]]);
+$refl = Matrix([[1,0],[0,-1]]);
+$zbarvec = Matrix([[$a],[-1*$b]]);
+$wbarvec = Matrix([[$c],[-1*$d]]);
+# Separate variable for duplicate answer
+$refl2 = Matrix([[1,0],[0,-1]]);
+
+Context('LimitedComplex-cartesian-strict');
+Context()->functions->enable("sqrt");
+$z = Compute("$a + $b*i");
+$w = Compute("$c + $d*i");
+$zbar = Compute("$a - $b*i");
+$wbar = Compute("$c - $d*i");
+
+BEGIN_PGML
+Given the complex numbers: [`z = [$z]`] and [`w = [$w]`].  
+a. Express the complex conjugates, [`\overline{z}`] and [`\overline{w}`], as  the images under a linear transformation on the complex numbers, [`z`] and [`w`], written as column vectors.  
+[`\overline{z} = `]  [___]*{$refl} [___]*{$zvec} [`=`]  [___]*{$zbarvec}  
+[`\overline{w} = `]  [___]*{$refl2} [___]*{$wvec} [`=`]  [___]*{$wbarvec}  
+b. The geometric effect of complex conjugation is: [___]{$popupv}
+c. In standard form:  
+[`\overline{z} = \overline{[$z]} = `]  [___]*{$zbar}  
+[`\overline{w} = \overline{[$w]} = `]  [___]*{$wbar}  
+END_PGML
+
+BEGIN_PGML_HINT
+1. A complex number in standard form [`z=a+bi`], where [`i^2=-1`], can be expressed as a column vector:  [`\begin{bmatrix} a\\ b \end{bmatrix}`]  
+
+2. The *complex conjugate* of [`z=a+bi`] is  [`\overline{z} = \overline{a+bi} = a-bi`].  
+END_PGML_HINT
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.
+

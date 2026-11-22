@@ -1,0 +1,66 @@
+## DESCRIPTION
+##   Complex numbers as vectors: Modulus / real & imaginary parts
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(Arithmetic)
+## DBsection(Conversion to a + bi form)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2026-04-28)
+## MLT(graph)
+## Level(2)
+## KEYWORDS('Complex', 'Plane')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+  "PGstandard.pl",
+  "PGchoicemacros.pl",
+  "PGgraphmacros.pl",
+  "PGcomplexmacros.pl",
+  "contextLimitedComplex.pl",
+  "parserPopUp.pl",
+  "PGML.pl",
+  "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+# create the complex numbers randomly  
+$a=non_zero_random( -9, 9, 1);
+$b=non_zero_random( -9, -1, 1);  # one negative imaginary part
+do {$b=non_zero_random( -9, -1, 1);} until ($b != $a);
+$zabs = Compute("sqrt(($a)^2+($b)^2)");
+$zabssq = Compute("($a)^2 + ($b)^2");
+
+$popup = PopUp([ '?','determinant','square root of the determinant','square root of the trace','trace'], 'square root of the determinant');
+
+Context("Matrix");
+$zvec = Matrix([[$a],[$b]]);
+$zvecT = $zvec->transpose;
+$zmat = Matrix([[$a, -1*$b],[$b, $a]]);
+
+Context('LimitedComplex-cartesian-strict');
+Context()->functions->enable("sqrt");
+$z = Compute("$a + $b*i");
+
+BEGIN_PGML
+Given the complex number: [`z = [$z]`], where [`i^2=-1`] 
+a. Express the modulus [`|z|`] as the square root of a matrix product [`z^T z`] where the complex number [`z`] is written as a column vector.  
+[`|z| = \bigg(`] [___]*{$zvecT}[___]*{$zvec} [`\bigg)^{1/2} =`]  [___]{$zabs} 
+b. Express the complex number [`z`] as a matrix and find the determinant:  
+[`\det(Z) = \det`][___]*{$zmat} [`=`] [___]{$zabssq}  
+Thus, modulus [`|z|`] equals the [___]{$popup} of the matrix [`Z`].
+END_PGML
+
+BEGIN_PGML_HINT
+1. A complex number in standard form [`z=a+bi`], where [`i^2=-1`], can be expressed as:  
+- a column vector:  [`\begin{bmatrix} a\\ b \end{bmatrix}`]  
+- a matrix: [`\begin{bmatrix} a & -b \\ b & a \end{bmatrix}`]  
+2. The *modulus* (absolute value) of a complex number [`z=a+bi`], where [`i^2=-1`], is [`|z| = \sqrt{a^2 + b^2}`].
+END_PGML_HINT
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.
+

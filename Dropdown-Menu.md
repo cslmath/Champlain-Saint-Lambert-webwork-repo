@@ -46,6 +46,7 @@
   - LinearAlgebra/Gaussian-Elimination
   - LinearAlgebra/Linear-Programming-Geometric
   - LinearAlgebra/Matrices
+  - LinearAlgebra/Matrices-Applications-Complex-Numbers
   - LinearAlgebra/Matrices-Applications-Cryptography
   - LinearAlgebra/Matrices-Applications-Graphs
   - LinearAlgebra/Matrices-Applications-Leontif-Closed
@@ -70,4 +71,3 @@
   - VectorCalculus/Vector-Functions-Derivatives
   - VectorCalculus/Vector-Functions-Space-Curves
   - VectorCalculus/Vectors-Dot-Product
-

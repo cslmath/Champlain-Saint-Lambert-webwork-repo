@@ -1,0 +1,66 @@
+## DESCRIPTION
+##   Complex numbers as vectors and matrices: Scalar multiplicaton
+## ENDDESCRIPTION
+
+## DBsubject(Complex analysis)
+## DBchapter(Arithmetic)
+## DBsection(Conversion to a + bi form)
+## Institution(Champlain College Saint-Lambert)
+## Author(Michele Titcombe)
+## Date(2026-04-26)
+## MLT(graph)
+## Level(2)
+## KEYWORDS('Complex', 'Plane')
+
+DOCUMENT();        # This should be the first executable line in the problem.
+
+loadMacros(
+  "PGstandard.pl",
+  "PGchoicemacros.pl",
+  "PGgraphmacros.pl",
+  "PGcomplexmacros.pl",
+  "contextLimitedComplex.pl",
+  "PGML.pl",
+  "PGcourse.pl",
+);
+
+TEXT(beginproblem());
+$showPartialCorrectAnswers = 1;
+
+# create the complex numbers randomly  
+$a=non_zero_random( -9, 9, 1);
+$b=non_zero_random( -9, 9, 1);
+do {$b=non_zero_random( -9, 9, 1);} until ($b != $a);
+$c=non_zero_random( -9, 9, 1);
+do {$c=non_zero_random( -9, 9, 1);} until (($c != $b) and ($c != $b));
+$d=non_zero_random( -9, 9, 1);
+do {$d = non_zero_random( -9, 9, 1);} 
+    until (($d != $b) and ($d != $c) and ($d != $a));
+$kd=random(2,9,1);
+$kc=random(0.1,0.9,0.1);
+
+Context("Matrix");
+$z1vec = Matrix([[$a],[$b]]);
+$z2vec = Matrix([[$c],[$d]]);
+$dilmat = Matrix([[$kd, 0 ],[0, $kd]]);
+$contmat = Matrix([[$kc, 0],[0, $kc]]);
+
+Context('LimitedComplex-cartesian-strict');
+Context()->functions->enable("sqrt");
+$z1 = Compute("$a + $b*i");
+$z2 = Compute("$c + $d*i");
+
+BEGIN_PGML
+Given the complex numbers: [`z_1 = [$a] + [$b] i`] and [`z_2 = [$c] + [$d] i`].  
+
+Express the scalar multiples, [`[$kd]z_1`] and [`[$kc]z_2`], as the images under the linear transformation of dilation (contraction) on the complex numbers [`z_1`] and [`z_2`], written as column vectors.  
+a. Dilation: [`[$kd]z_1 = `]  [___]*{$dilmat} [___]*{$z1vec}  [`=`] [___]*{$kd*$z1vec}  
+b. Contraction: [` [$kc]z_2 = `]  [___]*{$contmat} [___]*{$z2vec} [`=`] [___]*{$kc*$z2vec}
+END_PGML
+
+BEGIN_PGML_HINT
+A complex number in standard form [`z=a+bi`], where [`i^2=-1`], can be expressed as a column vector:  [`\begin{bmatrix} a\\ b \end{bmatrix}`]  
+END_PGML_HINT
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.
+
